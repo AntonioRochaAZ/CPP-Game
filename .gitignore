@@ -1,0 +1,7 @@
+lib
+include
+.vscode
+build
+assets/aseprite
+**/.DS_Store
+others
