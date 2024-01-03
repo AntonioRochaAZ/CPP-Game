@@ -8,16 +8,20 @@
 #include <array>
 #include <cmath>
 
+// Forward declarations (so they can be recognized when
+// referrenced) before the actual definitions:
 class Component;
 class Entity;
+class Manager;
 
 // In the next line: "std::size_t is the unsigned integer type of
 // the result of the sizeof operator as well as the sizeof...
 // operator and the alignof operator(since C++11)."
 // (https://en.cppreference.com/w/cpp/types/size_t)
 using ComponentID = std::size_t;
+using Group = std::size_t;
 
-inline ComponentID getComponentTypeID(){
+inline ComponentID getNewComponentTypeID(){
     /*
     The "inline" keyword here is an optimization. Since this
     function is small and will be called often, using "inline"
@@ -34,7 +38,7 @@ inline ComponentID getComponentTypeID(){
     (template <typename T> inline ComponentID
     getComponentTypeID() noexcept).
     */
-    static ComponentID lastID = 0;
+    static ComponentID lastID = 0u; // The u makes it unsigned.
     lastID++;
     return lastID;
 }
@@ -78,7 +82,7 @@ inline ComponentID getComponentTypeID() noexcept{
     the ID of component classes by hardcoding them.
     */
     static_assert (std::is_base_of<Component, T>::value, "");
-    static ComponentID typeID = getComponentTypeID();
+    static ComponentID typeID = getNewComponentTypeID();
     return typeID;
 }
 
@@ -87,6 +91,10 @@ inline ComponentID getComponentTypeID() noexcept{
 //
 // Max amount of components an entity is capable of holding.
 constexpr ComponentID max_components = 32;
+// Maximum number of groups/layers. Each entity can be member of
+// multiple layers. Groups can be used for render layers as well
+// as collision layers later on.
+constexpr Group max_groups = 32;
 
 /*
 "The class template bitset represents a fixed-size sequence of
@@ -112,6 +120,8 @@ std::size_t (here renamed as ComponentID), in practice a value.
 This value defines the "size" of the bitset "vector".
 */
 using ComponentBitSet = std::bitset<max_components>;
+// Bitset for checking if an entity is part of a group.
+using GroupBitSet = std::bitset<max_groups>;
 
 /* Definition of std::array:
 template <typename T, std::size_t N> struct array;
@@ -159,6 +169,8 @@ class Component{
 
 class Entity{
     private:
+        // Reference to the manager the entity is attached to.
+        Manager& manager;
         // The "active" bool will be used for checking if we
         // should remove the entity from the game (if it is false
         // it will be removed).
@@ -176,8 +188,14 @@ class Entity{
         // Bitset array containing information of which
         // component types the entity has:
         ComponentBitSet component_bitset;
+        // Bitset array containing information of which
+        // groups the entity is part of:
+        GroupBitSet group_bitset;
 
     public:
+        // Constructor with a manager passed. The "manager"
+        // member is initialized as the user_manager passed.
+        Entity(Manager& user_manager) : manager(user_manager){}
         void update(){
             for (auto& c: components) c->update();
         }
@@ -188,12 +206,15 @@ class Entity{
         bool is_active() const { return active; }
         void destroy(){ active = false; }
         
+
         template <typename T> bool has_component() const{
             // When we query this function with object type T, it
             // will return whether the entity has it or not.
             return component_bitset[getComponentTypeID<T>()];
         }
-        
+        bool has_group(Group group){
+            return group_bitset[group];
+        }
         /*
         In the next lines we have "...", when looking at this
         website: "https://en.cppreference.com/w/cpp/language/template_parameters"
@@ -231,6 +252,7 @@ class Entity{
         We can see it since in the very first line we define a T*
         pointer called c, taking mArgs as input to create the T instance.
         
+
         */
         // "the idea is to do something like:
         // entity.getComponent<Transform>().setXpos()"
@@ -278,6 +300,10 @@ class Entity{
             // Return the value of the component as a reference.
             return *c;
         }
+        void add_group(Group group);
+        void del_group(Group group){
+            group_bitset[group] = false;
+        }
 
         /*
         This next template returns the entity's component
@@ -319,6 +345,10 @@ class Manager{
     private:
         // Vector of entities:
         std::vector< std::unique_ptr<Entity> > entity_vector;
+        // An array containing the vector of entities of each
+        // group. We can think of it as a python list with 32
+        // entries, each one being a list of entity pointers.
+        std::array< std::vector<Entity*>, max_groups > grouped_entities;
 
     public:
         void update(){
@@ -338,9 +368,39 @@ class Manager{
             this->refresh();
         }
         void render(){
-            for (auto& e: entity_vector) e->render();
+            // for (auto& e: entity_vector) e->render();
+            for (auto& e_vec : grouped_entities){
+                // Go through the entity groups in order
+                for (auto& e : e_vec){
+                    // Render the entities
+                    e->render();
+                }
+            }
         }
         void refresh(){
+            
+            // Analogous to the next line statement (which is
+            // more detailed).
+            // Here, i is initialized with direct initialization.
+            // I don't know why he's specified unsigned integer.
+            for (auto i(0u); i < max_groups; i++){
+                // We initialize variable v as entry i of the
+                // group_entities member. Because we use auto,
+                // the type will be understood directly from the
+                // initialized value. Note it is a referrence.
+                auto& v(grouped_entities[i]);
+                // We do as below: we remove entries of the
+                // vector (so, Entity pointers) that aren't
+                // active OR that are not part of the group.
+                v.erase(
+                    std::remove_if(std::begin(v), std::end(v),
+                    [i](Entity* mEntity){
+                        return !mEntity->is_active() || !mEntity->has_group(i);
+                    }),
+                    std::end(v)
+                );
+            }
+            
             /*
             The following lines have been modified from the
             tutorial for readability.
@@ -377,8 +437,23 @@ class Manager{
             );
         }
 
+        void add_to_group(Entity* entity, Group group){
+            // THIS FUNCTION IS CALLED BY Entity's "add_group"
+            // method, and shouldn't be called directly
+            // (otherwise it will not update Entity's
+            // group_bitset member).
+            // We add entity to the group
+            grouped_entities[group].emplace_back(entity);
+        }
+
+        // Function for getting the vector of entities in a
+        // group.
+        std::vector<Entity*>& get_group(Group group){
+            return grouped_entities[group];
+        }
+
         Entity& addEntity(){
-            Entity* e = new Entity();
+            Entity* e = new Entity(*this);
             std::unique_ptr<Entity> uPtr{e};
             entity_vector.emplace_back(std::move(uPtr));
             return *e;

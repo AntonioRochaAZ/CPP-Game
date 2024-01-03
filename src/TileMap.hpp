@@ -27,7 +27,7 @@ class TileMap{
         static int nb_width_tiles;
         static int nb_height_tiles;
 
-        SDL_Rect src_rect, dst_rect;
+        // SDL_Rect src_rect, dst_rect;
         // Block types:
         std::vector<SDL_Texture*> type_texture;
         // SDL_Texture* stone; //0

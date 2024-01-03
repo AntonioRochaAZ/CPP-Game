@@ -1,7 +1,7 @@
 SRC_DIR = src
 BUILD_DIR = build/debug
 CC = g++
-SRC_FILES = $(wildcard $(SRC_DIR)/*.cpp)
+SRC_FILES = $(wildcard $(SRC_DIR)/*.cpp $(SRC_DIR)/ECS/*.cpp)
 OBJ_NAME = play
 INCLUDE_PATHS = -I include
 LIBRARY_PATHS = -L lib

@@ -14,6 +14,13 @@ std::vector<Collider*> Game::collider_vector;
 auto& player(manager.addEntity());
 //auto& wall(manager.addEntity());
 
+enum group_labels : std::size_t{
+    MapGroup,
+    ColliderGroup,
+    EnemyGroup,
+    PlayerGroup
+};
+
 Game::Game(){};
 Game::~Game(){};
 
@@ -68,12 +75,14 @@ int Game::init(const char* title, int x, int y, int width, int height, bool full
 
     player.addComponent<Transform>();
     player.addComponent<Sprite>("assets/test.bmp");
+    player.addComponent<KeyboardController>();
+    player.addComponent<Collider>("Player");
+    player.add_group(PlayerGroup);
+
     player.getComponent<Sprite>().init();
     player.getComponent<Transform>().set_position(0, 0);
     player.getComponent<Transform>().set_height(100);
     player.getComponent<Transform>().set_width(100);
-    player.addComponent<KeyboardController>();
-    player.addComponent<Collider>("Player");
 
     /*
     wall.addComponent<Transform>();
@@ -113,6 +122,12 @@ void Game::update(){
     }
 };
 
+// Declaring variable tiles which will be of type
+// std::vector<Entity*>
+auto& tile_vector(manager.get_group(MapGroup));
+auto& player_vector(manager.get_group(PlayerGroup));
+auto& enemy_vector(manager.get_group(EnemyGroup));
+
 // Render the window:
 void Game::render(){
 
@@ -131,7 +146,7 @@ void Game::render(){
     //tile_map->render();
     manager.render();
     // Small bypass to ensure the player shows up in the screen:
-    player.getComponent<Sprite>().render();
+    // player.getComponent<Sprite>().render();
     // Not sure why this is necessary, but should be the last:
     SDL_RenderPresent(renderer);
     // Delay so we can se the window (3000ms = 3s):
@@ -142,6 +157,7 @@ void Game::add_tile(int x, int y, int w, int h, int id){
     auto& tile(manager.addEntity());
     tile.addComponent<Tile>(x, y, w, h, id);
     tile.getComponent<Tile>().init();
+    tile.add_group(MapGroup);
 };
 
 // Destroy objects

@@ -23,10 +23,10 @@ class Tile : public Component{
 
             switch (tile_id){
                 case 0:
-                    path = "assets/stone0.bmp";
+                    path = (char*)"assets/stone0.bmp";
                     break;
                 case 1:
-                    path = "assets/stone1.bmp";
+                    path = (char*)"assets/stone1.bmp";
                     break;
                 default:
                     break;

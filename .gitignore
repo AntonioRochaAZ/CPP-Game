@@ -1,6 +1,7 @@
 lib
 include
 .vscode
+.idea
 build
 assets/aseprite
 **/.DS_Store
