@@ -9,7 +9,7 @@ class TileMap{
         TileMap();
         ~TileMap();
 
-        static void load_map(std::string path, int x0, int y0, int w, int h);
+        static void load_map(std::string name, std::string path, int x0, int y0, int w, int h);
 
         //void init(int wd_width, int wd_height, int tl_width, int tl_height);
 

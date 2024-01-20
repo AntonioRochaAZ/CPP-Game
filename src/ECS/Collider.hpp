@@ -5,33 +5,36 @@
 
 class Collider : public Component{
 
-public:
-    // "Problem": we consider our objects as rectangles for the
-    // moment.
-    // "AABB" Collision (episode 11 of tutorial).
-    SDL_Rect collider;
-    std::string tag;    // Will be useful to define what to do
-
-
-    Collider(){};
-    Collider(std::string user_tag){tag = user_tag;};
+private:
+    std::string tag;        // Will be useful to define what to do
     Transform* transform;
 
-    SDL_Rect& rect(){return collider;}
-    void init() override {
-        if (!entity->has_component<Transform>()){
-            entity->addComponent<Transform>();
-        }
-        transform = &entity->getComponent<Transform>();
+public:
+    SDL_Rect collider;
+    // TODO: "Problem": we consider our objects as rectangles for the
+    // moment.
+    // "AABB" Collision (episode 11 of tutorial).
 
-        Game::collider_vector.push_back(this);
-    }
+    // Constructors: ----------------------------------------------------------
+    Collider(){};
+    Collider(std::string user_tag){tag = user_tag;};
+    Collider(std::string user_tag, int w, int h){
+        tag = user_tag;
+        collider.w = w;
+        collider.h = h;
+    };
 
-    void update() override {
-        collider.x = transform->position[0];
-        collider.y = transform->position[1];
-        collider.w = transform->width;
-        collider.h = transform->height;
-    }
+    // Base class methods: ----------------------------------------------------
+    void init() override;
+    void update() override;
+    
+    // Collider dimensions: ---------------------------------------------------
+    void set_width(int w){ collider.w = w;}
+    void set_height(int h){ collider.h = h;}
 
+    // Get rekt- I mean, get the collider's rect:
+    SDL_Rect& get_rect(){return collider;}
+
+    // Get tag:
+    std::string get_tag() const {return tag;}
 };

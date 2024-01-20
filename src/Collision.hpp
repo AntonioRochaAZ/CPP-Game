@@ -17,7 +17,7 @@ class Collision{
         }
         static bool collider_AABB(const Collider& CA, const Collider& CB){
             if(rect_AABB(CA.collider, CB.collider)){
-                std::cout << CA.tag << " hit: " << CB.tag << "\n";
+                std::cout << CA.get_tag() << " hit: " << CB.get_tag() << "\n";
                 return true;
             }else{
                 return false;

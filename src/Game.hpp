@@ -25,7 +25,7 @@ public:
 
     bool running(){return is_running;};         // To tell if the game is still running.
 
-    static void add_tile(int x, int y, int w, int h, int id);
+    static void add_tile(int x, int y, int w, int h, int id, std::string name);
     static SDL_Renderer* renderer;
     static SDL_Event event;
     static std::vector<Collider*> collider_vector;

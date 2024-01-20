@@ -171,6 +171,7 @@ class Entity{
     private:
         // Reference to the manager the entity is attached to.
         Manager& manager;
+        std::string name;   // A name to identify the entity
         // The "active" bool will be used for checking if we
         // should remove the entity from the game (if it is false
         // it will be removed).
@@ -195,7 +196,13 @@ class Entity{
     public:
         // Constructor with a manager passed. The "manager"
         // member is initialized as the user_manager passed.
-        Entity(Manager& user_manager) : manager(user_manager){}
+        Entity(Manager& user_manager) :
+            manager(user_manager){}
+        Entity(Manager& user_manager, std::string mName) :
+            manager(user_manager)
+            {name = mName;}
+        std::string get_name(){return name;}
+        void set_name(std::string mName){name = mName;}
         void update(){
             for (auto& c: components) c->update();
         }
@@ -452,8 +459,8 @@ class Manager{
             return grouped_entities[group];
         }
 
-        Entity& addEntity(){
-            Entity* e = new Entity(*this);
+        Entity& addEntity(std::string mName = "None"){
+            Entity* e = new Entity(*this, mName);
             std::unique_ptr<Entity> uPtr{e};
             entity_vector.emplace_back(std::move(uPtr));
             return *e;

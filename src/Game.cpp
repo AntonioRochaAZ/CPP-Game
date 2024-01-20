@@ -11,7 +11,7 @@ SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
 std::vector<Collider*> Game::collider_vector;
 
-auto& player(manager.addEntity());
+auto& player(manager.addEntity("Player 1"));
 //auto& wall(manager.addEntity());
 
 enum group_labels : std::size_t{
@@ -71,18 +71,18 @@ int Game::init(const char* title, int x, int y, int width, int height, bool full
     //player = new GameObject("assets/test.bmp", 0, 0);
     //enemy = new GameObject("assets/test2.bmp", 100, 100);
 
-    TileMap::load_map("assets/map_1.txt", 0, 0, 10, 10);
+    TileMap::load_map("Background", "assets/map_1.txt", 0, 0, 10, 10);
 
     player.addComponent<Transform>();
-    player.addComponent<Sprite>("assets/test.bmp");
+    player.addComponent<Sprite>("assets/player.bmp", 2, 1500);
     player.addComponent<KeyboardController>();
     player.addComponent<Collider>("Player");
     player.add_group(PlayerGroup);
 
-    player.getComponent<Sprite>().init();
+    //player.getComponent<Sprite>().init();
     player.getComponent<Transform>().set_position(0, 0);
-    player.getComponent<Transform>().set_height(100);
-    player.getComponent<Transform>().set_width(100);
+    player.getComponent<Sprite>().set_height(170);
+    player.getComponent<Sprite>().set_width(80);
 
     /*
     wall.addComponent<Transform>();
@@ -153,8 +153,8 @@ void Game::render(){
     // SDL_Delay(3000);
 };
 
-void Game::add_tile(int x, int y, int w, int h, int id){
-    auto& tile(manager.addEntity());
+void Game::add_tile(int x, int y, int w, int h, int id, std::string name){
+    Entity& tile(manager.addEntity(name));
     tile.addComponent<Tile>(x, y, w, h, id);
     tile.getComponent<Tile>().init();
     tile.add_group(MapGroup);

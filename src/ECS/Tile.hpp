@@ -2,6 +2,7 @@
 #include "ECS.hpp"
 #include "Transform.hpp"
 #include "Sprite.hpp"
+// #include "Components.hpp"
 #include "SDL2/SDL.h"
 
 class Tile : public Component{
@@ -11,7 +12,7 @@ class Tile : public Component{
 
         SDL_Rect tile_rect;
         int tile_id;
-        char* path;
+        std::string path;
 
         Tile() = default;
         Tile(float x, float y, int w, int h, int id){
@@ -23,10 +24,10 @@ class Tile : public Component{
 
             switch (tile_id){
                 case 0:
-                    path = (char*)"assets/stone0.bmp";
+                    path = "assets/stone0.bmp";
                     break;
                 case 1:
-                    path = (char*)"assets/stone1.bmp";
+                    path = "assets/stone1.bmp";
                     break;
                 default:
                     break;
@@ -35,7 +36,7 @@ class Tile : public Component{
 
         void init(){
             entity->addComponent<Transform>(
-                tile_rect.x, tile_rect.y, tile_rect.w, tile_rect.h);
+                tile_rect.x, tile_rect.y);
             transform = &entity->getComponent<Transform>();
             
             entity->addComponent<Sprite>(path);

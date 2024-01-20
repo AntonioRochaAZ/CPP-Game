@@ -4,6 +4,7 @@
 #include <cmath>
 #include "Game.hpp"
 #include <fstream> // Reading files
+#include <sstream> // ostringstream definition
 
 using map_shape = std::vector< std::vector<int> >;
 
@@ -14,18 +15,25 @@ TileMap::TileMap(){
     };
 }
 
-void TileMap::load_map(std::string path, int x0, int y0, int w, int h){
+void TileMap::load_map(std::string name, std::string path, int x0, int y0, int w, int h){
     char tile;
     std::ifstream map_file;
     int tile_width = 100;
     int tile_height = 100;
+
+    std::ostringstream full_name;
+    std::string final_name;
+
     map_file.open(path);
         for (int y=0; y<h; y++){
             for (int x=0; x<w; x++){
                 map_file.get(tile);     // A number.
+                full_name.str("");      // Resetting to be empty
+                full_name << name << " TileMap " << " - (" << x << "," << y << ")";
+                final_name = full_name.str();
                 // atoi turns a string into an int.
                 // std::cout << "Tile " << y*10 + x << ": " << tile;
-                Game::add_tile(x0 + x*tile_width, y0 + y*tile_height, tile_width, tile_height, atoi(&tile));
+                Game::add_tile(x0 + x*tile_width, y0 + y*tile_height, tile_width, tile_height, atoi(&tile), final_name);
                 map_file.ignore();      // A comma.
             }
             std::cout << "\n";
