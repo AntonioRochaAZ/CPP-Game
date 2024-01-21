@@ -19,6 +19,8 @@ std::tuple<SDL_Texture*, int, int> TextureManager::load_texture_and_get_size(std
     return {texture, width, height};
 };
 
-void TextureManager::draw(SDL_Texture* texture_object, SDL_Rect src, SDL_Rect dst){
-    SDL_RenderCopy(Game::renderer, texture_object, &src, &dst);
+void TextureManager::draw(
+    SDL_Texture* texture_object, SDL_Rect src, SDL_Rect dst, SDL_RendererFlip flip)
+    {
+    SDL_RenderCopyEx(Game::renderer, texture_object, &src, &dst, 0.0, NULL, flip);
 }

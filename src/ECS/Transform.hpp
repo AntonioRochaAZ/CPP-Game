@@ -16,13 +16,13 @@ class Transform : public Component{
         // Default (no arguments):
         Transform():
             position(vec(0.0, 0.0)),
-            speed(3),
+            speed(10),
             velocity(vec(0.0, 0.0))
             //acceleration(vec(0.0, 0.0))
         {};
         // Setting position:
         Transform(float x, float y):
-            speed(3), 
+            speed(10), 
             velocity(vec(0.0, 0.0))
         {
             set_position(x, y);
@@ -46,6 +46,7 @@ class Transform : public Component{
         // Velocity vector:
         float get_vx(){ return velocity[0]; }
         float get_vy(){ return velocity[1]; }
+        vec get_velocity(){ return velocity; }
         void set_vx(float x){ velocity[0] = x; }
         void set_vy(float y){ velocity[1] = y; }
         void set_velocity(float x, float y){ velocity = vec(x, y); }

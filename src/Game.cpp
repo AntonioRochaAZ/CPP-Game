@@ -74,15 +74,20 @@ int Game::init(const char* title, int x, int y, int width, int height, bool full
     TileMap::load_map("Background", "assets/map_1.txt", 0, 0, 10, 10);
 
     player.addComponent<Transform>();
-    player.addComponent<Sprite>("assets/player.bmp", 2, 1500);
+    // player.addComponent<Sprite>("assets/player.bmp", 2, 1500);
+    player.addComponent<Sprite>("assets/player.bmp", true);
     player.addComponent<KeyboardController>();
     player.addComponent<Collider>("Player");
     player.add_group(PlayerGroup);
 
     //player.getComponent<Sprite>().init();
     player.getComponent<Transform>().set_position(0, 0);
-    player.getComponent<Sprite>().set_height(170);
-    player.getComponent<Sprite>().set_width(80);
+    Animation idle_animation(2, 1500, 8, 17);
+    Animation walk_animation(5, 100, 9, 17);
+    player.getComponent<Sprite>().add_animation(idle_animation, "Idle");
+    player.getComponent<Sprite>().add_animation(walk_animation, "Walk");
+    player.getComponent<Sprite>().set_animation("Idle");
+    player.getComponent<Sprite>().set_scale(10);
 
     /*
     wall.addComponent<Transform>();
