@@ -1,40 +1,43 @@
 #pragma once
+#include "ECS/ECS.hpp"
+#include "ECS/Transform.hpp"
+#include "ECS/Sprite.hpp"
 #include "Game.hpp"
+#include "SDL2/SDL.h"
 #include <vector>
+#include <stdexcept>    // Exception throwing
 
 using map_shape = std::vector<std::vector<int>>;
 
-class TileMap{
-    public:
-        TileMap();
-        ~TileMap();
-
-        static void load_map(std::string name, std::string path, int x0, int y0, int w, int h);
-
-        //void init(int wd_width, int wd_height, int tl_width, int tl_height);
-
-        //void load_map(map_shape &map_array);
-        //void render();
-
+class TileMap : public Manager{
+    // We create this as a Manager child class because it acts as one.
     private:
+        std::string name;
 
-        static int window_width;
-        static int window_height;
-        
-        static int tile_width;
-        static int tile_height;
+        // Texture related:
+        std::string texture_path;       // The path to the texture
+        int sprite_width, sprite_height;    // Dimensions of the tiles in the .bmp file
+        int nb_ids, ids_per_row;    // Number of textures (total) and how many per row.
 
-        static int nb_width_tiles;
-        static int nb_height_tiles;
+        // Game window related:
+        int x0, y0;                         // Where to start drawing the tile map
+        int tile_width, tile_height;        // Dimensions of the tiles in the game window
+        int nb_xtiles, nb_ytiles;           // Nb of tiles in each dimension (in the screen)
 
-        // SDL_Rect src_rect, dst_rect;
-        // Block types:
-        std::vector<SDL_Texture*> type_texture;
-        // SDL_Texture* stone; //0
-        // SDL_Texture* grass; //1
-        // SDL_Texture* water; //2
-
-        // 2D integer array containing the 
         // map grid information:
         map_shape map;
+        std::vector< std::array<int, 2> > texture_pos;   // [id][0] = x, [id][1] = y
+
+    public:
+        // Call order:
+        TileMap(std::string mName) : name(mName), x0(0), y0(0) {};
+        void init(int sw, int sh, int ni, int ipr, std::string mPath = "assets/textures.bmp");
+        void set_dst_size(int tw, int th);
+        void setup(int x_tiles, int y_tiles);
+        void load_map(std::string path);
+
+        // Setting up some variables:
+        void set_position(int x, int y);
+
+        // TODO: add possibility to update other map variables.
 };

@@ -15,7 +15,12 @@ The game is 2D and has an "8-bit" style. The assets in this
 repository are original and were made in
 [Aseprite](https://www.aseprite.org/).
 
-I try to extensively document (comment) what I learn along the way in this repository.
+I try to extensively document (comment) what I learn along the
+way in this repository.
+
+### Current state of development
+
+![Current state of development](assets/current.gif)
 
 ### Libraries/Requirements
 

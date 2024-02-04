@@ -8,6 +8,13 @@
 #include <array>
 #include <cmath>
 
+enum group_labels : std::size_t{
+    MapGroup,
+    ColliderGroup,
+    EnemyGroup,
+    PlayerGroup
+};
+
 // Forward declarations (so they can be recognized when
 // referrenced) before the actual definitions:
 class Component;
@@ -168,7 +175,7 @@ class Component{
 };
 
 class Entity{
-    private:
+    protected:
         // Reference to the manager the entity is attached to.
         Manager& manager;
         std::string name;   // A name to identify the entity
@@ -201,13 +208,15 @@ class Entity{
         Entity(Manager& user_manager, std::string mName) :
             manager(user_manager)
             {name = mName;}
+        virtual ~Entity(){};
+        
         std::string get_name(){return name;}
         void set_name(std::string mName){name = mName;}
-        void update(){
+        virtual void update(){
             for (auto& c: components) c->update();
         }
-        void render(){
-            for (auto& c: components) c->render(); 
+        virtual void render(){
+            for (auto& c: components) c->render();
             // This is where we'll add rendering related to the entity.
         }
         bool is_active() const { return active; }
@@ -344,12 +353,15 @@ class Entity{
         }
 };
 
+// TODO: in the addEntity, should delete the "new" entities at
+// some point... Instead, create smart pointers directly, and
+// then return them instead of regular pointers.
 class Manager{
     /*
     This class serves to manage all entities present in the game
     at each frame. It will delete entities that are not active.
     */
-    private:
+    protected:
         // Vector of entities:
         std::vector< std::unique_ptr<Entity> > entity_vector;
         // An array containing the vector of entities of each
@@ -461,8 +473,13 @@ class Manager{
 
         Entity& addEntity(std::string mName = "None"){
             Entity* e = new Entity(*this, mName);
+            return addEntity(e);
+        }
+        // Overloading:
+        Entity& addEntity(Entity* e){
             std::unique_ptr<Entity> uPtr{e};
             entity_vector.emplace_back(std::move(uPtr));
             return *e;
         }
+        // virtual ~Manager(){};
 };

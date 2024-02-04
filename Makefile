@@ -5,7 +5,7 @@ SRC_FILES = $(wildcard $(SRC_DIR)/*.cpp $(SRC_DIR)/ECS/*.cpp)
 OBJ_NAME = play
 INCLUDE_PATHS = -I include
 LIBRARY_PATHS = -L lib
-COMPILER_FLAGS = -std=c++11 -Wall -O0 -g
+COMPILER_FLAGS = -std=c++14 -Wall -O3 -g
 LINKER_FLAGS = -l SDL2
 
 all:

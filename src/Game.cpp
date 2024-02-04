@@ -6,6 +6,7 @@
 
 //Map* tile_map;
 Manager manager;
+TileMap background = TileMap("Background");
 
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
@@ -13,13 +14,6 @@ std::vector<Collider*> Game::collider_vector;
 
 auto& player(manager.addEntity("Player 1"));
 //auto& wall(manager.addEntity());
-
-enum group_labels : std::size_t{
-    MapGroup,
-    ColliderGroup,
-    EnemyGroup,
-    PlayerGroup
-};
 
 Game::Game(){};
 Game::~Game(){};
@@ -70,8 +64,19 @@ int Game::init(const char* title, int x, int y, int width, int height, bool full
     //tile_map->init(width, height, 100, 100);
     //player = new GameObject("assets/test.bmp", 0, 0);
     //enemy = new GameObject("assets/test2.bmp", 100, 100);
+    
 
-    TileMap::load_map("Background", "assets/map_1.txt", 0, 0, 10, 10);
+    // std::cout << "Getting to TileMap" << std::endl;
+    // TileMap background = TileMap("Background");
+    std::cout << "Constructed TileMap" << std::endl;
+    background.init(10, 10, 2, 10, "assets/textures.bmp");
+    std::cout << "Inited TileMap" << std::endl;
+    background.set_dst_size(100, 100);
+    std::cout << "Set TileMap dst size" << std::endl;
+    background.setup(10, 10);
+    std::cout << "Setup TileMap" << std::endl;
+    background.load_map("assets/map_1.txt");
+    std::cout << "Loaded TileMap" << std::endl;
 
     player.addComponent<Transform>();
     // player.addComponent<Sprite>("assets/player.bmp", 2, 1500);
@@ -119,6 +124,8 @@ void Game::handle_events(){
 
 void Game::update(){
     update_counter++;
+
+    background.update();
     manager.update();
 
     for (auto cl : collider_vector){
@@ -149,6 +156,7 @@ void Game::render(){
     // By passing NULL to the latter two terms, we'll use all
     // images and also use all of the window.
     //tile_map->render();
+    background.render();
     manager.render();
     // Small bypass to ensure the player shows up in the screen:
     // player.getComponent<Sprite>().render();
@@ -158,12 +166,12 @@ void Game::render(){
     // SDL_Delay(3000);
 };
 
-void Game::add_tile(int x, int y, int w, int h, int id, std::string name){
-    Entity& tile(manager.addEntity(name));
-    tile.addComponent<Tile>(x, y, w, h, id);
-    tile.getComponent<Tile>().init();
-    tile.add_group(MapGroup);
-};
+// void Game::add_tile(int x, int y, int w, int h, int id, std::string name){
+//     Entity& tile(manager.addEntity(name));
+//     tile.addComponent<Tile>(x, y, w, h, id);
+//     tile.getComponent<Tile>().init();
+//     tile.add_group(MapGroup);
+// };
 
 // Destroy objects
 void Game::clean(){

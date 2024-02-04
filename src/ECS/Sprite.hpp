@@ -31,6 +31,7 @@ class Sprite : public Component{
 
         // Constructors & destructors -----------------------------------------
         Sprite(std::string path, bool is_animated=false);   // Defined in Sprite.cpp file (long)
+        
         // Destructor:
         ~Sprite(){SDL_DestroyTexture(texture);}
 
@@ -47,10 +48,25 @@ class Sprite : public Component{
 
         // Size related -------------------------------------------------------
         // Getting and setting width and height:
-        int get_width(){ return dst_rect.w; }       // Actual size on the screen
-        int get_height(){ return dst_rect.h; }
-        void set_width(int w){ dst_rect.w = w; }    // Actual size on the screen
-        void set_height(int h){ dst_rect.h = h; }
+        // NOTE: dst_rect's position is SET in the update method,
+        // according to the Transform object. To change it,
+        // one must change the Transform's position instead of
+        // trying to change it here.
+        int get_dst_width(){ return dst_rect.w; }       // Actual size on the screen
+        int get_dst_height(){ return dst_rect.h; }
+        void set_dst_width(int w){ dst_rect.w = w; }    // Actual size on the screen
+        void set_dst_height(int h){ dst_rect.h = h; }
+        int get_dst_x(){ return dst_rect.x; }
+        int get_dst_y(){ return dst_rect.y; }
+        // Setting SOURCE info:
+        void set_src_width(int w){ src_rect.w = w; }    // Actual size on the screen
+        void set_src_height(int h){ src_rect.h = h; }
+        void set_src_x(int x){ src_rect.x = x; }    // Actual size on the screen
+        void set_src_y(int y){ src_rect.y = y; }
+        int get_src_x(){ return src_rect.x; }
+        int get_src_y(){ return src_rect.y; }
+        int get_src_width(){ return src_rect.w; }
+        int get_src_height(){ return src_rect.h; }
         // Getting and setting scale:
         int get_xscale();   // Defined in Sprite.cpp file (exception handling)
         int get_yscale();   // Defined in Sprite.cpp file (exception handling)

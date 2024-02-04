@@ -1,96 +1,113 @@
 #include "TileMap.hpp"
 #include "TextureManager.hpp"
-#include <vector>
 #include <cmath>
-#include "Game.hpp"
 #include <fstream> // Reading files
 #include <sstream> // ostringstream definition
+#include <memory>
 
 using map_shape = std::vector< std::vector<int> >;
 
-TileMap::TileMap(){
-    type_texture = {
-        TextureManager::load_texture("assets/stone0.bmp"),   // 0
-        TextureManager::load_texture("assets/stone1.bmp")   // 0
-    };
-}
-
-void TileMap::load_map(std::string name, std::string path, int x0, int y0, int w, int h){
-    char tile;
-    std::ifstream map_file;
-    int tile_width = 100;
-    int tile_height = 100;
-
-    std::ostringstream full_name;
-    std::string final_name;
-
-    map_file.open(path);
-        for (int y=0; y<h; y++){
-            for (int x=0; x<w; x++){
-                map_file.get(tile);     // A number.
-                full_name.str("");      // Resetting to be empty
-                full_name << name << " TileMap " << " - (" << x << "," << y << ")";
-                final_name = full_name.str();
-                // atoi turns a string into an int.
-                // std::cout << "Tile " << y*10 + x << ": " << tile;
-                Game::add_tile(x0 + x*tile_width, y0 + y*tile_height, tile_width, tile_height, atoi(&tile), final_name);
-                map_file.ignore();      // A comma.
+// Call order: ------------------------------------------------------------
+void TileMap::init(int sw, int sh, int ni, int ipr, std::string mPath){
+    // Load texture file and set some variables up.
+    sprite_width = sw; sprite_height = sh;
+    nb_ids = ni; ids_per_row = ipr;
+    texture_path = mPath;
+    // Setting texture_pos:
+    for (int id = 0; id < nb_ids; id++){
+        texture_pos.emplace_back(
+            std::array<int, 2>{
+                (id % ids_per_row) * sprite_width,
+                (id / ids_per_row) * sprite_height
             }
-            std::cout << "\n";
+        );
+    }
+};
+void TileMap::set_dst_size(int tw, int th){ tile_width = tw;  tile_height = th; }
+void TileMap::setup(int xtiles, int ytiles){
+    // Sets up the entity_vector
+
+    nb_xtiles = xtiles; nb_ytiles = ytiles;
+    std::ostringstream full_name;   // String we can concatenate variables (composing the name)
+    std::string final_name;         // The final string.
+
+    // Adding Tile entities to the entity_vector
+    for (int y = 0; y < nb_ytiles; y ++){
+        // std::vector< std::unique_ptr<Tile> > vec;
+        std::vector<int> map_line;
+        for (int x = 0; x < nb_xtiles; x++){
+            // Getting the tile name for debugging:
+            full_name.str("");      // Resetting to be empty
+            full_name << "TileMap: " << name  << " - (" << x << "," << y << ")";
+            final_name = full_name.str();
+            Entity& e = this->addEntity(final_name);
+            e.add_group(MapGroup);
+            e.addComponent<Transform>(
+                x0 + x * tile_width, 
+                y0 + y * tile_height);
+            e.addComponent<Sprite>(texture_path);
+            e.getComponent<Sprite>().set_src_height(sprite_height);
+            e.getComponent<Sprite>().set_src_width(sprite_width);
+            e.getComponent<Sprite>().set_dst_height(tile_height);
+            e.getComponent<Sprite>().set_dst_width(tile_width);
+            map_line.emplace_back(-1);
+        }
+        map.emplace_back(map_line);
+    }
+}
+void TileMap::load_map(std::string path){
+    std::ifstream map_file;         // File type
+    map_file.open(path);
+    if (!map_file.is_open()){
+        std::cout << "ERROR: Could not open map file:";
+        throw std::invalid_argument(path);
+    }
+        for (int y = 0; y < nb_ytiles; y++){
+                // Read line:
+                std::string line;      
+
+                // Checking for errors:
+                if (map_file.eof()){
+                    throw std::runtime_error(
+                        "Error in TileMap::load_map: trying to read more lines than there lines in the text file.");
+                }
+
+                // Reading the line into variable "line":
+                if (!std::getline(map_file, line)){
+                    throw std::runtime_error(
+                        "Error in TileMap::load_map: error when reading line.");
+                }
+
+                std::stringstream ss(line);      // A variable we can tokenize
+                std::string token;               // The numbers, as a string
+                
+                for (int x = 0; x < nb_xtiles; x++){
+
+                    if (!ss.good()){
+                        throw std::runtime_error(
+                            "Error in TileMap::load_map: trying to read more tokens than there tokens/line in the text file.");
+                    }
+
+                    // Getting the number as a str:
+                    std::getline(ss, token, ',');
+                    // Turning it into an int:
+                    int id;
+                    std::istringstream(token) >> id;
+
+                    // Update tile source position according to id:
+                    Sprite& s = entity_vector[nb_xtiles*y + x]->getComponent<Sprite>();
+                    s.set_src_x(texture_pos[id][0]);
+                    s.set_src_y(texture_pos[id][1]);
+                    map[x][y] = id;
+                }
+                // map_file.get(tile);     // A number.
+                // // atoi turns a string into an int.
+                // // std::cout << "Tile " << y*10 + x << ": " << tile;
+                // Game::add_tile(x0 + x*tile_width, y0 + y*tile_height, tile_width, tile_height, atoi(&tile), final_name);
+                // map_file.ignore();      // A comma.
+            // }
         }
     map_file.close();
 }
 
-/*
-void TileMap::init(int wd_width, int wd_height, int tl_width, int tl_height){
-    // Saving size information:
-    window_width = wd_width;
-    window_height = wd_height;
-    tile_width = tl_width;
-    tile_height = tl_height;
-    // Calculating the number of tiles:
-    nb_width_tiles = ceil(window_width/tile_width);
-    nb_height_tiles = ceil(window_height/tile_height);
-    // Initializing the map 2D vector with 0s
-    map = std::vector<std::vector<int>>(nb_height_tiles, std::vector<int>(nb_width_tiles, 0));
-    // for (int row = 0; row < nb_height_tiles; row ++){
-    //     for (int column = 0; column < nb_width_tiles; column ++){
-    //         std::cout << map[row][column] << ", ";
-    //     }
-    //     std::cout << "\n";
-    // }
-    // Define source and destination rectangles:
-    src_rect.w = dst_rect.w = tl_width;
-    src_rect.h = dst_rect.h = tl_height;
-    // These next ones will be changed dynamically when drawing:
-    src_rect.x = src_rect.y = 0;
-    dst_rect.x = dst_rect.y = 0;
-};
-
-void TileMap::load_map(map_shape &map_array){
-    for (int row = 0; row < nb_height_tiles; row++){
-        for (int column = 0; row < nb_width_tiles; column++){
-            map[row][column] = map_array[row][column];
-        };
-    };
-};
-
-void TileMap::render(){
-    int type;
-    for (int row = 0; row < nb_height_tiles; row++){
-        for (int column = 0; column < nb_width_tiles; column++){
-            type = map[row][column];
-            dst_rect.x = column*tile_width;
-            dst_rect.y = row*tile_height;
-            TextureManager::draw(type_texture[ type ], src_rect, dst_rect);
-        };
-    };
-};
-
-*/
-
-TileMap::~TileMap(){
-    // If it does not work, turn the type_texture vector into a
-    // vector of texture pointers?
-    for (auto& tex : type_texture) SDL_DestroyTexture(tex);
-}
+void TileMap::set_position(int x, int y){ x0 = x;  y0 = y; }
