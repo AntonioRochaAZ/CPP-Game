@@ -86,17 +86,19 @@ void Sprite::add_animation(Animation animation, std::string animation_name){
     animation_map.emplace(animation_name, animation);
 }
 void Sprite::set_animation(std::string animation_name){
-    current_animation = animation_name;
-    // Set animation variables according to which animation to play:
-    frames = animation_map[animation_name].frames;
-    animation_period = animation_map[animation_name].animation_period;
-    // Set source rectangle variables:
-    src_rect.w = animation_map[animation_name].sprite_width;
-    src_rect.h = animation_map[animation_name].sprite_height;
-    src_rect.y = animation_map[animation_name].src_height;
-    // Update destination_rects:
-    dst_rect.w = scale_x * src_rect.w;
-    dst_rect.h = scale_y * src_rect.h;
+    if(animated){
+        current_animation = animation_name;
+        // Set animation variables according to which animation to play:
+        frames = animation_map[animation_name].frames;
+        animation_period = animation_map[animation_name].animation_period;
+        // Set source rectangle variables:
+        src_rect.w = animation_map[animation_name].sprite_width;
+        src_rect.h = animation_map[animation_name].sprite_height;
+        src_rect.y = animation_map[animation_name].src_height;
+        // Update destination_rects:
+        dst_rect.w = scale_x * src_rect.w;
+        dst_rect.h = scale_y * src_rect.h;
+    }
 }
 // Overloading:
 void Sprite::set_animation(int an_index){

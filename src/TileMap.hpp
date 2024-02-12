@@ -1,7 +1,6 @@
 #pragma once
 #include "ECS/ECS.hpp"
-#include "ECS/Transform.hpp"
-#include "ECS/Sprite.hpp"
+#include "ECS/Components.hpp"
 #include "Game.hpp"
 #include "SDL2/SDL.h"
 #include <vector>
@@ -29,6 +28,10 @@ class TileMap : public Manager{
         std::vector< std::array<int, 2> > texture_pos;   // [id][0] = x, [id][1] = y
 
     public:
+
+        // So we can keep track of the player's movement (update map rendering).
+        Entity* tile_player;
+
         // Call order:
         TileMap(std::string mName) : name(mName), x0(0), y0(0) {};
         void init(int sw, int sh, int ni, int ipr, std::string mPath = "assets/textures.bmp");
@@ -38,6 +41,8 @@ class TileMap : public Manager{
 
         // Setting up some variables:
         void set_position(int x, int y);
+
+        void update_tracking();
 
         // TODO: add possibility to update other map variables.
 };

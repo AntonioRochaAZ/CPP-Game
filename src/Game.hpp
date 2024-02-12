@@ -29,10 +29,11 @@ public:
     static SDL_Renderer* renderer;
     static SDL_Event event;
     static std::vector<Collider*> collider_vector;
+    static bool tracking_player;
 
 private:
-    int update_counter = 0;
     bool is_running;
+    int update_counter = 0;
     SDL_Window* window;
 
 };

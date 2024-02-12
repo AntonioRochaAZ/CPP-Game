@@ -46,6 +46,9 @@ void TileMap::setup(int xtiles, int ytiles){
                 x0 + x * tile_width, 
                 y0 + y * tile_height);
             e.addComponent<Sprite>(texture_path);
+            e.addComponent<KeyboardController>(false);
+
+            e.getComponent<Transform>().set_speed(0.0);
             e.getComponent<Sprite>().set_src_height(sprite_height);
             e.getComponent<Sprite>().set_src_width(sprite_width);
             e.getComponent<Sprite>().set_dst_height(tile_height);
@@ -111,3 +114,20 @@ void TileMap::load_map(std::string path){
 }
 
 void TileMap::set_position(int x, int y){ x0 = x;  y0 = y; }
+
+void TileMap::update_tracking(){
+    // There will be a problem if entity vector is empty! TODO
+    if(!Game::tracking_player){
+        for (auto& e: entity_vector){
+            e->getComponent<Transform>().set_speed(
+               -1 * tile_player->getComponent<Transform>().get_speed());
+        }
+        tile_player->getComponent<Transform>().set_speed(0.0);
+    }else{
+        tile_player->getComponent<Transform>().set_speed(
+            -1 * entity_vector[0]->getComponent<Transform>().get_speed());
+        for (auto& e: entity_vector){
+            e->getComponent<Transform>().set_speed(0.0);
+        }
+    }
+}

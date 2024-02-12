@@ -11,6 +11,7 @@ TileMap background = TileMap("Background");
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
 std::vector<Collider*> Game::collider_vector;
+bool Game::tracking_player = true;
 
 auto& player(manager.addEntity("Player 1"));
 //auto& wall(manager.addEntity());
@@ -85,6 +86,8 @@ int Game::init(const char* title, int x, int y, int width, int height, bool full
     player.addComponent<Collider>("Player");
     player.add_group(PlayerGroup);
 
+    background.tile_player = &player;
+
     //player.getComponent<Sprite>().init();
     player.getComponent<Transform>().set_position(0, 0);
     Animation idle_animation(2, 1500, 8, 17);
@@ -114,7 +117,24 @@ void Game::handle_events(){
     
     SDL_PollEvent(&event);
     switch (event.type){
-        case SDL_QUIT: 
+        case SDL_KEYDOWN:
+            switch (event.key.keysym.sym){
+                case SDLK_p:
+                    Game::tracking_player = false;
+                    background.update_tracking();
+                    break;
+                case SDLK_l:
+                    Game::tracking_player = true;
+                    background.update_tracking();
+                    break;
+                case SDLK_ESCAPE:
+                    is_running = false;
+                    break;
+                default:
+                    break;
+            }
+            break;
+        case SDL_QUIT:
             is_running = false;
             break;
         default:

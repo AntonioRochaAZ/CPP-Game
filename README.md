@@ -19,6 +19,8 @@ I try to extensively document (comment) what I learn along the
 way in this repository.
 
 ### Current state of development
+> You can now toggle whether the camera should follow the player or not with the
+> P and L keys. You can also exit the game by clicking ESC.
 
 ![Current state of development](assets/current.gif)
 

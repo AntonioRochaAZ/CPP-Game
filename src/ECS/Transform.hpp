@@ -50,6 +50,7 @@ class Transform : public Component{
         void set_vx(float x){ velocity[0] = x; }
         void set_vy(float y){ velocity[1] = y; }
         void set_velocity(float x, float y){ velocity = vec(x, y); }
+        void set_velocity(vec v){velocity = v;}
         
         //void set_acceleration(float x, float y){
         //    velocity = vec(x, y);

@@ -5,6 +5,14 @@
 
 class KeyboardController : public Component{
     public:
+
+        bool reverse_sprite;
+
+        KeyboardController() :
+            reverse_sprite(true){};
+        KeyboardController(bool mReverse_sprite) :
+            reverse_sprite(mReverse_sprite){};
+
         Transform* transform;
         Sprite* sprite;
 
@@ -12,6 +20,7 @@ class KeyboardController : public Component{
             transform = &entity->getComponent<Transform>();
             sprite = &entity->getComponent<Sprite>();
         }
+
         void update() override{
             // Check if a key is pressed:
             if (Game::event.type == SDL_KEYDOWN){
@@ -23,7 +32,9 @@ class KeyboardController : public Component{
                 case SDLK_a:
                     transform->set_vx(-1.0);
                     sprite->set_animation("Walk");
-                    sprite->sprite_flip = SDL_FLIP_HORIZONTAL;
+                    if (reverse_sprite){
+                        sprite->sprite_flip = SDL_FLIP_HORIZONTAL;
+                    }
                     break;
                 case SDLK_s:
                     transform->set_vy(1.0);
@@ -32,7 +43,10 @@ class KeyboardController : public Component{
                 case SDLK_d:
                     transform->set_vx(1.0);
                     sprite->set_animation("Walk");
-                    sprite->sprite_flip = SDL_FLIP_NONE;
+                    if (reverse_sprite){
+                        // Adding the if just to avoid problems.
+                        sprite->sprite_flip = SDL_FLIP_NONE;
+                    }
                     break;
                 default:
                     break;
