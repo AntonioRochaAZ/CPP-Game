@@ -38,7 +38,7 @@ class Transform : public Component{
         void set_x(float x){ position[0] = x; }
         void set_y(float y){ position[1] = y; }
         void set_position(float x, float y){ position = vec(x, y); }
-        
+        vec get_position(){return position;}
         // Velocity related: --------------------------------------------------
         // Speed:
         float get_speed(){ return speed; }

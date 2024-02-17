@@ -65,28 +65,12 @@ int Game::init(const char* title, int x, int y, int width, int height, bool full
     //tile_map->init(width, height, 100, 100);
     //player = new GameObject("assets/test.bmp", 0, 0);
     //enemy = new GameObject("assets/test2.bmp", 100, 100);
-    
-
-    // std::cout << "Getting to TileMap" << std::endl;
-    // TileMap background = TileMap("Background");
-    std::cout << "Constructed TileMap" << std::endl;
-    background.init(10, 10, 2, 10, "assets/textures.bmp");
-    std::cout << "Inited TileMap" << std::endl;
-    background.set_dst_size(100, 100);
-    std::cout << "Set TileMap dst size" << std::endl;
-    background.setup(10, 10);
-    std::cout << "Setup TileMap" << std::endl;
-    background.load_map("assets/map_1.txt");
-    std::cout << "Loaded TileMap" << std::endl;
 
     player.addComponent<Transform>();
     // player.addComponent<Sprite>("assets/player.bmp", 2, 1500);
     player.addComponent<Sprite>("assets/player.bmp", true);
     player.addComponent<KeyboardController>();
-    player.addComponent<Collider>("Player");
     player.add_group(PlayerGroup);
-
-    background.tile_player = &player;
 
     //player.getComponent<Sprite>().init();
     player.getComponent<Transform>().set_position(0, 0);
@@ -96,6 +80,19 @@ int Game::init(const char* title, int x, int y, int width, int height, bool full
     player.getComponent<Sprite>().add_animation(walk_animation, "Walk");
     player.getComponent<Sprite>().set_animation("Idle");
     player.getComponent<Sprite>().set_scale(10);
+    player.addComponent<Collider>(
+        player.get_name(), player.getComponent<Sprite>().get_dst_width(),
+        player.getComponent<Sprite>().get_dst_height());
+    player.getComponent<Collider>().init();
+
+        // std::cout << "Getting to TileMap" << std::endl;
+    // TileMap background = TileMap("Background");
+    background.init(10, 10, 2, 10, "assets/textures.bmp");
+    background.set_dst_size(100, 100);
+    background.setup(10, 10);
+    background.load_map("assets/map_1.txt");
+
+    background.tile_player = &player;
 
     /*
     wall.addComponent<Transform>();
@@ -148,10 +145,26 @@ void Game::update(){
     background.update();
     manager.update();
 
+    // Sometimes we get a bouncing effect, despite still holding the button.
+    // Though some time later we get back. We also get stuck sometimes...
+
+    // I think the best thing is to do this predictively ? Looking ahead if we
+    // are going to hit something.
+
     for (auto cl : collider_vector){
-        Collision::collider_AABB(player.getComponent<Collider>(), *cl);
-        //player.getComponent<Transform>().velocity = -1 * player.getComponent<Transform>().velocity;
+        if (player.getComponent<Collider>().get_tag() != cl->get_tag()){
+            if(Collision::collider_AABB(player.getComponent<Collider>(), *cl)){
+                // We've collided with something: take a step back:
+                player.getComponent<Transform>().set_velocity(-1 * player.getComponent<Transform>().get_velocity());
+                player.getComponent<Transform>().update();
+                // Make the velocity zero:
+                //player.getComponent<Transform>().set_vx(0.0);
+                //player.getComponent<Transform>().set_vy(0.0);
+                break;
+            }
+        }
     }
+
 };
 
 // Declaring variable tiles which will be of type

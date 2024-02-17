@@ -1,9 +1,13 @@
 #include "TileMap.hpp"
 #include "TextureManager.hpp"
+
 #include <cmath>
 #include <fstream> // Reading files
 #include <sstream> // ostringstream definition
 #include <memory>
+// So we can use the switch statement with strings:
+#include <unordered_map>
+
 
 using map_shape = std::vector< std::vector<int> >;
 
@@ -38,7 +42,7 @@ void TileMap::setup(int xtiles, int ytiles){
         for (int x = 0; x < nb_xtiles; x++){
             // Getting the tile name for debugging:
             full_name.str("");      // Resetting to be empty
-            full_name << "TileMap: " << name  << " - (" << x << "," << y << ")";
+            full_name << "TileMap: " << name << " - (" << x << "," << y << ")";
             final_name = full_name.str();
             Entity& e = this->addEntity(final_name);
             e.add_group(MapGroup);
@@ -60,26 +64,51 @@ void TileMap::setup(int xtiles, int ytiles){
 }
 void TileMap::load_map(std::string path){
     std::ifstream map_file;         // File type
+    std::string line;              // Variable used for reading lines.
+
+    std::unordered_map<std::string, int> cases = {
+        {"tex", 1},
+        {"col", 2},
+    };
+
+    auto get_line = [&]() -> std::string {
+        /* Checks if we've reached the end of a file we're working on before
+        we should. This function will throw runtime errors if so. The path is
+        only used to aid debugging.
+
+        I tried to make this general and save it in a utils.hpp file,
+        but it did not work because of the ifstream variable:
+        "error: call to implicitly-deleted copy constructor of 'std::ifstream'
+        (aka 'basic_ifstream<char>'"
+        I'll try to fix this eventually.
+        */
+            // Checking for errors:
+            if (map_file.eof()){
+                std::cout << "ERROR WHEN READING FILE: " << path;
+                throw std::runtime_error(
+                    "Error when reading file: EOS reached.");
+            }
+            // Reading the line into variable "line":
+            if (!std::getline(map_file, line)){
+                std::cout << "ERROR WHEN READING FILE: " << path;
+                throw std::runtime_error(
+                    "Error when reading line.");
+        }
+        return line;
+    };
+
     map_file.open(path);
     if (!map_file.is_open()){
         std::cout << "ERROR: Could not open map file:";
         throw std::invalid_argument(path);
     }
+    // Loop for reading through file's lines:
+    while (std::getline(map_file, line)) {
+    switch (cases[line.substr(0, 3)]) {
+    case 1: // Texture information
         for (int y = 0; y < nb_ytiles; y++){
-                // Read line:
-                std::string line;      
-
-                // Checking for errors:
-                if (map_file.eof()){
-                    throw std::runtime_error(
-                        "Error in TileMap::load_map: trying to read more lines than there lines in the text file.");
-                }
-
-                // Reading the line into variable "line":
-                if (!std::getline(map_file, line)){
-                    throw std::runtime_error(
-                        "Error in TileMap::load_map: error when reading line.");
-                }
+                // Read line and check for errors:
+                line = get_line();
 
                 std::stringstream ss(line);      // A variable we can tokenize
                 std::string token;               // The numbers, as a string
@@ -109,7 +138,48 @@ void TileMap::load_map(std::string path){
                 // Game::add_tile(x0 + x*tile_width, y0 + y*tile_height, tile_width, tile_height, atoi(&tile), final_name);
                 // map_file.ignore();      // A comma.
             // }
-        }
+        } // closing case tex
+        break;
+    case 2: // collision information.
+        for (int y = 0; y < nb_ytiles; y++){
+                // Read line and check for errors:
+                line = get_line();
+
+                std::stringstream ss(line);      // A variable we can tokenize
+                std::string token;               // The numbers, as a string
+
+                for (int x = 0; x < nb_xtiles; x++){
+
+                    if (!ss.good()){
+                        throw std::runtime_error(
+                            "Error in TileMap::load_map: trying to read more tokens than there tokens/line in the text file.");
+                    }
+
+                    // Getting the number as a str:
+                    std::getline(ss, token, ',');
+                    // Turning it into an int:
+                    int id;
+                    std::istringstream(token) >> id;
+
+                    // add collision if id is 1:
+                    if (id == 1){
+                        std::string local_name = entity_vector[nb_xtiles*y + x]->get_name();
+                        entity_vector[nb_xtiles*y + x]->addComponent<Collider>(
+                            local_name, tile_width, tile_height);
+                        entity_vector[nb_xtiles*y + x]->getComponent<Collider>().init();
+                    }
+                }
+                // map_file.get(tile);     // A number.
+                // // atoi turns a string into an int.
+                // // std::cout << "Tile " << y*10 + x << ": " << tile;
+                // Game::add_tile(x0 + x*tile_width, y0 + y*tile_height, tile_width, tile_height, atoi(&tile), final_name);
+                // map_file.ignore();      // A comma.
+            // }
+        } // closing case col
+    default: // Can't interpret it:
+        continue; // Do nothing, just cycle.
+    } // closing switch
+    } // closing while loop.
     map_file.close();
 }
 

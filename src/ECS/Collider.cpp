@@ -12,8 +12,3 @@ void Collider::init(){
     // Add to the Game's list of colliders:
     Game::collider_vector.push_back(this);
 }
-
-void Collider::update(){
-    collider.x = transform->get_x();
-    collider.y = transform->get_y();
-}
