@@ -4,13 +4,14 @@
 // DEFINITIONS:------------------------------------------------------------------------------
 // Constructors:
 Sprite::Sprite(std::string path,  bool is_animated):
+    destroy_texture(true),
     animated(false),
     frames(0),
     animation_period(0),
     nb_animations(0)
 {
     animated = is_animated;
-    set_texture(path);              // sets texture, image_width and image_height
+    std::tie(texture, image_width, image_height) = AssetManager::load_texture(path);
 
     // Initializing source rect:
     src_rect.x = src_rect.y = 0;
@@ -22,6 +23,36 @@ Sprite::Sprite(std::string path,  bool is_animated):
     dst_rect.w = image_width;
     dst_rect.h = image_height;
 
+    // Since we have passed a path, we must destroy the SDL_Texture
+    // in the end:
+    // (Now initialized before-hand):
+    //destroy_texture = true;
+};
+
+Sprite::Sprite(TexTup texture_tuple, bool is_animated):
+    destroy_texture(false),
+    animated(false),
+    frames(0),
+    animation_period(0),
+    nb_animations(0)
+{
+    animated = is_animated;
+    std::tie(texture, image_width, image_height) = texture_tuple;
+
+    // Initializing source rect:
+    src_rect.x = src_rect.y = 0;
+    src_rect.w = image_width;
+    src_rect.h = image_height;
+
+    // Initializing destination rect:
+    // Position will come in the init() method
+    dst_rect.w = image_width;
+    dst_rect.h = image_height;
+
+    // Since we have passed the actual Texture pointer, we mustn't
+    // destroy the texture in the destructor.
+    // (Now initialized before-hand):
+    //destroy_texture = false;
 };
 
 // Base class methods: ------------------------------------------------
@@ -53,9 +84,6 @@ void Sprite::render(){
 }
 
 // Texture and animation related: -------------------------------------
-void Sprite::set_texture(std::string path){
-    std::tie(texture, image_width, image_height) = TextureManager::load_texture_and_get_size(path);
-};
 void Sprite::add_animation(Animation animation, std::string animation_name){
     // Animations should be added in the order they appear in the image.
     // Error handling:

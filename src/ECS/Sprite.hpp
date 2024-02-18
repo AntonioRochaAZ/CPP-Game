@@ -3,10 +3,14 @@
 #include "ECS.hpp"
 #include "Transform.hpp"
 #include "SDL2/SDL.h"
-#include "../TextureManager.hpp"
 #include <cstdlib> // So we can halt execution
 #include "Animation.hpp"
 #include <map>
+#include "../Game.hpp"
+    // This last include is so that we can use asset manager's functions.
+    // Might become deprecated in the future when we remove Sprite's possibility
+    // to load textures, and only allow passing pre-loaded textures by an
+    // asset manager.
 
 class Sprite : public Component{
     private:    
@@ -17,6 +21,8 @@ class Sprite : public Component{
         // Image related
         int image_width, image_height;      // Image shape
         int scale_x, scale_y;
+        bool destroy_texture;
+
         // Animation:
         bool animated;                      // Whether it is animated
         int frames;                         // How many frames in the animation
@@ -31,9 +37,10 @@ class Sprite : public Component{
 
         // Constructors & destructors -----------------------------------------
         Sprite(std::string path, bool is_animated=false);   // Defined in Sprite.cpp file (long)
-        
+        Sprite(TexTup texture_tuple, bool is_animated=false);   // Defined in Sprite.cpp file (long)
+
         // Destructor:
-        ~Sprite(){SDL_DestroyTexture(texture);}
+        ~Sprite(){ if(destroy_texture){SDL_DestroyTexture(texture);} }
 
         // Base class methods: ------------------------------------------------
         void init() override;       // Defined in Sprite.cpp file (long)
@@ -41,7 +48,6 @@ class Sprite : public Component{
         void render() override;     // Defined in Sprite.cpp file (long)
 
         // Texture and animation related: -------------------------------------
-        void set_texture(std::string path); // Defined in Sprite.cpp file (conciseness)
         void add_animation(Animation animation, std::string animation_name);
         void set_animation(std::string animation_name);
         void set_animation(int an_index);   // Overloading

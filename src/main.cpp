@@ -1,7 +1,6 @@
 //#include <iostream>
 //#include <SDL2/SDL.h>
 #include "Game.hpp"
-#include "TextureManager.hpp"
 
 Game *game = nullptr;
 

@@ -1,5 +1,4 @@
 #include "Game.hpp"
-#include "TextureManager.hpp"
 #include "TileMap.hpp"
 #include "ECS/Components.hpp"
 #include "Collision.hpp"
@@ -15,6 +14,9 @@ bool Game::tracking_player = true;
 
 auto& player(manager.addEntity("Player 1"));
 //auto& wall(manager.addEntity());
+
+std::unique_ptr<AssetManager> Game::assets = \
+    std::make_unique<AssetManager>(&manager);
 
 Game::Game(){};
 Game::~Game(){};
@@ -58,17 +60,9 @@ int Game::init(const char* title, int x, int y, int width, int height, bool full
     // renderer, r, g, b, alpha (255 is opaque, 0 is transparent)
     SDL_SetRenderDrawColor(renderer, 0, 255, 120, 255);
 
-    // To create a texture we have to first have a surface, but
-    // we can get rid of it later
-    //background = new GameObject("assets/arena.bmp", 0, 0);
-    //tile_map = new Map();
-    //tile_map->init(width, height, 100, 100);
-    //player = new GameObject("assets/test.bmp", 0, 0);
-    //enemy = new GameObject("assets/test2.bmp", 100, 100);
-
+    Game::assets->add_texture("player", "assets/player.bmp");
     player.addComponent<Transform>();
-    // player.addComponent<Sprite>("assets/player.bmp", 2, 1500);
-    player.addComponent<Sprite>("assets/player.bmp", true);
+    player.addComponent<Sprite>(Game::assets->get_tuple("player"), true);
     player.addComponent<KeyboardController>();
     player.add_group(PlayerGroup);
 
@@ -85,24 +79,13 @@ int Game::init(const char* title, int x, int y, int width, int height, bool full
         player.getComponent<Sprite>().get_dst_height());
     player.getComponent<Collider>().init();
 
-        // std::cout << "Getting to TileMap" << std::endl;
-    // TileMap background = TileMap("Background");
-    background.init(10, 10, 2, 10, "assets/textures.bmp");
+    Game::assets->add_texture("tiles", "assets/textures.bmp");
+    background.init(10, 10, 2, 10, Game::assets->get_tuple("tiles"));
     background.set_dst_size(100, 100);
     background.setup(10, 10);
     background.load_map("assets/map_1.txt");
 
     background.tile_player = &player;
-
-    /*
-    wall.addComponent<Transform>();
-    wall.addComponent<Sprite>("assets/stone.bmp");
-    wall.getComponent<Sprite>().init();
-    wall.getComponent<Transform>().set_position(700, 800);
-    wall.getComponent<Transform>().set_height(300);
-    wall.getComponent<Transform>().set_width(20);
-    wall.addComponent<Collider>("Wall");
-    */
 
     // Ok, it is running now:
     is_running = true;

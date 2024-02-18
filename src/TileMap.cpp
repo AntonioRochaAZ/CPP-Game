@@ -1,5 +1,4 @@
 #include "TileMap.hpp"
-#include "TextureManager.hpp"
 
 #include <cmath>
 #include <fstream> // Reading files
@@ -12,11 +11,14 @@
 using map_shape = std::vector< std::vector<int> >;
 
 // Call order: ------------------------------------------------------------
-void TileMap::init(int sw, int sh, int ni, int ipr, std::string mPath){
+void TileMap::init(int sw, int sh, int ni, int ipr,
+    std::tuple<SDL_Texture*, int, int> texture_tuple){
+
     // Load texture file and set some variables up.
+    std::tie(texture, image_width, image_height) = texture_tuple;
     sprite_width = sw; sprite_height = sh;
     nb_ids = ni; ids_per_row = ipr;
-    texture_path = mPath;
+
     // Setting texture_pos:
     for (int id = 0; id < nb_ids; id++){
         texture_pos.emplace_back(
@@ -27,6 +29,7 @@ void TileMap::init(int sw, int sh, int ni, int ipr, std::string mPath){
         );
     }
 };
+
 void TileMap::set_dst_size(int tw, int th){ tile_width = tw;  tile_height = th; }
 void TileMap::setup(int xtiles, int ytiles){
     // Sets up the entity_vector
@@ -49,7 +52,8 @@ void TileMap::setup(int xtiles, int ytiles){
             e.addComponent<Transform>(
                 x0 + x * tile_width, 
                 y0 + y * tile_height);
-            e.addComponent<Sprite>(texture_path);
+            std::tuple<SDL_Texture*, int, int> texture_tuple = {texture, image_width, image_height};
+            e.addComponent<Sprite>(texture_tuple, false);
             e.addComponent<KeyboardController>(false);
 
             e.getComponent<Transform>().set_speed(0.0);
