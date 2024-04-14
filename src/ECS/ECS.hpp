@@ -1,5 +1,4 @@
 #pragma once
-
 #include <iostream>
 #include <vector>
 #include <memory>
@@ -12,7 +11,8 @@ enum group_labels : std::size_t{
     MapGroup,
     ColliderGroup,
     EnemyGroup,
-    PlayerGroup
+    ProjectileGroup,
+    PlayerGroup,
 };
 
 // Forward declarations (so they can be recognized when
@@ -175,7 +175,8 @@ class Component{
 };
 
 class Entity{
-    protected:
+    public:
+    //protected:
         // Reference to the manager the entity is attached to.
         Manager& manager;
         std::string name;   // A name to identify the entity
@@ -200,7 +201,7 @@ class Entity{
         // groups the entity is part of:
         GroupBitSet group_bitset;
 
-    public:
+    //public:
         // Constructor with a manager passed. The "manager"
         // member is initialized as the user_manager passed.
         Entity(Manager& user_manager) :
@@ -411,6 +412,7 @@ class Manager{
                 // We do as below: we remove entries of the
                 // vector (so, Entity pointers) that aren't
                 // active OR that are not part of the group.
+                // TODO: DELETE THOSE POINTERS! (?)
                 v.erase(
                     std::remove_if(std::begin(v), std::end(v),
                     [i](Entity* mEntity){

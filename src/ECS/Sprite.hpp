@@ -28,7 +28,6 @@ class Sprite : public Component{
         int frames;                         // How many frames in the animation
         int animation_period;               // ms/frame
         int nb_animations;                  // Total number of animations.
-        std::string current_animation;      // Which animation to render.
         std::map<std::string, Animation> animation_map;    // Like a python dict.
 
     public:
@@ -51,6 +50,8 @@ class Sprite : public Component{
         void add_animation(Animation animation, std::string animation_name);
         void set_animation(std::string animation_name);
         void set_animation(int an_index);   // Overloading
+        std::string current_animation;      // Which animation to render
+        int current_frame;                   // The frame of the animation we are at (starts at 0)
 
         // Size related -------------------------------------------------------
         // Getting and setting width and height:

@@ -27,6 +27,10 @@ class Transform : public Component{
         {
             set_position(x, y);
         }
+        Transform(vec pos, float spd, vec vel):
+            position(pos),
+            speed(spd),
+            velocity(vel){}
 
         // Base class methods: ------------------------------------------------
         // void init() override {};

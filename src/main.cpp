@@ -16,7 +16,7 @@ int main(int argc, const char * argv[]) {
     int frame_time;                     //
 
     game = new Game();
-    game->init("Test", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, window_width, window_height, fullscreen);
+    game->init("Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, window_width, window_height, fullscreen);
     while (game->running()){
 
         frame_start = SDL_GetTicks(); // How much time (in ms) since we started SDL.

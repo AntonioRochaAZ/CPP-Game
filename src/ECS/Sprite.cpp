@@ -74,7 +74,8 @@ void Sprite::update(){
             std::cout << some_name;
             throw std::runtime_error(" ");
         }
-        src_rect.x = src_rect.w * static_cast<int>((SDL_GetTicks() / animation_period) % frames);
+        current_frame = static_cast<int>((SDL_GetTicks() / animation_period) % frames);
+        src_rect.x = src_rect.w * current_frame;
     }
     dst_rect.x = transform->get_x();
     dst_rect.y = transform->get_y();

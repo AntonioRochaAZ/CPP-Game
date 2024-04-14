@@ -1,8 +1,16 @@
+# Project related:
 lib
 include
 .vscode
 .idea
 build
-assets/aseprite
+build/debug/*.dSYM  # Just in case.
+
+# Mac OS related:
 **/.DS_Store
-others
+
+# Aseprite related:
+assets/aseprite
+
+# Unused source files:
+src/utils.hpp

@@ -16,7 +16,7 @@ class Collider; // Forward declaration of the Collider class.
 
 class AssetManager{
 public:
-    AssetManager(Manager* m) : manager(m) {};
+    AssetManager(){};
     ~AssetManager();
 
     void add_texture(std::string id, std::string path);
@@ -34,7 +34,6 @@ private:
     std::map< std::string, SDL_Texture* > texture_map;
     std::map< std::string, int > width_map;
     std::map< std::string, int > height_map;
-    Manager* manager;
 
 };
 

@@ -1,3 +1,4 @@
+// DEFINITION OF ASSETMANAGER CLASS IS IN GAME.HPP (AVOID CICULAR INCLUDES!)
 #include <tuple>
 #include "Game.hpp"
 
@@ -13,8 +14,9 @@ AssetManager::~AssetManager(){
 }
 
 void AssetManager::add_texture(std::string id, std::string path){
-    SDL_Texture* tmpTexture;
-    int tmpW, tmpH;
+    // Adds textures to the map members (texture_map, width_map, height_map).
+    SDL_Texture* tmpTexture; int tmpW, tmpH;
+
     std::tie(tmpTexture, tmpW, tmpH) = AssetManager::load_texture(path);
     texture_map.emplace(id, tmpTexture);
     width_map.emplace(id, tmpW);

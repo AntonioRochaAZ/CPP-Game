@@ -16,7 +16,7 @@ auto& player(manager.addEntity("Player 1"));
 //auto& wall(manager.addEntity());
 
 std::unique_ptr<AssetManager> Game::assets = \
-    std::make_unique<AssetManager>(&manager);
+    std::make_unique<AssetManager>();
 
 Game::Game(){};
 Game::~Game(){};
@@ -24,9 +24,7 @@ Game::~Game(){};
 // Initialize
 int Game::init(const char* title, int x, int y, int width, int height, bool fullscreen){
     int window_flags = 0;   // Window creation flags
-
-    // Initialize is_running as false:
-    is_running = false;
+    is_running = false;     // Initialize is_running as false:
 
     // Initialization check of SDL:
     if(SDL_Init(SDL_INIT_EVERYTHING) != 0){
@@ -61,6 +59,7 @@ int Game::init(const char* title, int x, int y, int width, int height, bool full
     SDL_SetRenderDrawColor(renderer, 0, 255, 120, 255);
 
     Game::assets->add_texture("player", "assets/player.bmp");
+    Game::assets->add_texture("projectile1", "assets/projectile1-still.bmp");
     player.addComponent<Transform>();
     player.addComponent<Sprite>(Game::assets->get_tuple("player"), true);
     player.addComponent<KeyboardController>();
@@ -100,12 +99,20 @@ void Game::handle_events(){
         case SDL_KEYDOWN:
             switch (event.key.keysym.sym){
                 case SDLK_p:
-                    Game::tracking_player = false;
-                    background.update_tracking();
+                    if (Game::tracking_player){
+                        // This condition must be met, otherwise
+                        // will have a bug where neither the map not
+                        // the player doesn't move
+                        Game::tracking_player = false;
+                        background.update_tracking();
+                    }
                     break;
                 case SDLK_l:
-                    Game::tracking_player = true;
-                    background.update_tracking();
+                    if (!Game::tracking_player){
+                        // This condition is necessary (see SDLK_p comment)
+                        Game::tracking_player = true;
+                        background.update_tracking();
+                    }
                     break;
                 case SDLK_ESCAPE:
                     is_running = false;
@@ -153,8 +160,9 @@ void Game::update(){
 // Declaring variable tiles which will be of type
 // std::vector<Entity*>
 auto& tile_vector(manager.get_group(MapGroup));
-auto& player_vector(manager.get_group(PlayerGroup));
 auto& enemy_vector(manager.get_group(EnemyGroup));
+auto& projectile_vector(manager.get_group(ProjectileGroup));
+auto& player_vector(manager.get_group(PlayerGroup));
 
 // Render the window:
 void Game::render(){
