@@ -9,6 +9,7 @@
 #include <string>
 #include <eigen3/Eigen/Dense>
 #include "ECS/ECS.hpp"
+#include "SDL2/SDL_ttf.h"
 
 using TexTup = std::tuple<SDL_Texture*, int, int>;
 
@@ -26,6 +27,11 @@ public:
     // From the old TextureManager definition:
     static TexTup load_texture(std::string texture_file);
 
+    // Font management:
+    void add_font(std::string id, std::string path, int font_size);
+    TTF_Font* get_font(std::string id);
+
+
 private:
 
     // I would like to use a shared pointer instead of a regular pointer here,
@@ -34,6 +40,9 @@ private:
     std::map< std::string, SDL_Texture* > texture_map;
     std::map< std::string, int > width_map;
     std::map< std::string, int > height_map;
+
+    // Font map:
+    std::map< std::string, TTF_Font* > font_map;
 
 };
 

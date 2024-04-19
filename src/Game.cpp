@@ -2,6 +2,7 @@
 #include "TileMap.hpp"
 #include "ECS/Components.hpp"
 #include "Collision.hpp"
+#include <sstream>
 
 //Map* tile_map;
 Manager manager;
@@ -13,6 +14,8 @@ std::vector<Collider*> Game::collider_vector;
 bool Game::tracking_player = true;
 
 auto& player(manager.addEntity("Player 1"));
+auto& label(manager.addEntity("TestLabel"));
+
 //auto& wall(manager.addEntity());
 
 std::unique_ptr<AssetManager> Game::assets = \
@@ -31,6 +34,11 @@ int Game::init(const char* title, int x, int y, int width, int height, bool full
         std::cout << "SDL Initialization problem.";
         return 1;
     };
+
+    if(TTF_Init() != 0){
+        std::cout << "SDL_TTF initialization error.";
+        return 1;
+    }
 
     // Window creation:
     if(fullscreen){
@@ -86,6 +94,11 @@ int Game::init(const char* title, int x, int y, int width, int height, bool full
 
     background.tile_player = &player;
 
+    // Font:
+    Game::assets->add_font("andale", "assets/fonts/andale_mono.ttf", 16);
+    SDL_Color white = { 255, 255, 255, 255 };
+    label.addComponent<UILabel>(0, 0, 4000, 2000, "Hello there", "andale", white);
+
     // Ok, it is running now:
     is_running = true;
     return 0;
@@ -131,6 +144,12 @@ void Game::handle_events(){
 
 void Game::update(){
     update_counter++;
+
+    // Label updating (debugging):
+    std::stringstream ss;
+    ss << "Player position: " << player.getComponent<Transform>().get_x() << \
+        ", " << player.getComponent<Transform>().get_y();
+    label.getComponent<UILabel>().set_text(ss.str(), "andale");
 
     background.update();
     manager.update();
@@ -182,6 +201,7 @@ void Game::render(){
     //tile_map->render();
     background.render();
     manager.render();
+    label.render();
     // Small bypass to ensure the player shows up in the screen:
     // player.getComponent<Sprite>().render();
     // Not sure why this is necessary, but should be the last:

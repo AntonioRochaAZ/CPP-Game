@@ -43,3 +43,14 @@ TexTup AssetManager::load_texture(std::string texture_file){
     SDL_FreeSurface(tmp_surface);
     return {texture, width, height};
 };
+
+
+// Font Management:
+void AssetManager::add_font(std::string id, std::string path, int font_size){
+    font_map.emplace(id, TTF_OpenFont(path.c_str(), font_size));
+}
+
+
+TTF_Font* AssetManager::get_font(std::string id){
+    return font_map[id];
+}
