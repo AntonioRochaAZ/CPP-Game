@@ -2,8 +2,8 @@ Transform
 =========
 
 Component defining the position of an Entity on screen. Other components
-such as the :ref:`Sprite </src/ecs/components/sprite.rst>` and the 
-:ref:`KeyboardController </src/ecs/components/KeyboardController.rst>` may 
+such as the :cpp:class:`Sprite` and the 
+:cpp:class:`KeyboardController` may 
 depend on this Component.
 
 .. warning::

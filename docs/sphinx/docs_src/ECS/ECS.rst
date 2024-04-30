@@ -7,13 +7,13 @@ Component and Manager classes.
 
 The Manager class handles the updating, rendering and deletion of Entities. Entities
 are grouped according to the groups defined in the 
-:ref:`group_labels </src/ecs/ecs.rst#_CPPv412group_labels>` enum, and groups
+:cpp:enum:`group_labels` enum, and groups
 are rendered in order. The addition of the entity to a group must be done manually.
 
 .. note::
     As of now, an Entity can be part of multiple groups, which may lead to repetitive
     rendering of the same Entity. 
-    :ref:`Manager::render </src/ecs/ecs.rst#_CPPv4N7Manager6renderEv>` could eventually 
+    :cpp:member:`Manager::render` could eventually 
     be changed so this won't happen.
 
 Entities contain Components, which define things like their positioning, their sprites

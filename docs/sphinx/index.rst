@@ -10,9 +10,9 @@ Welcome to CPP Game's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   Entity Component System (ECS) <src/ECS/ECS.rst>
-   Game class <src/Game.rst>
-   TileMap class <src/TileMap.rst>
+   Entity Component System (ECS) <docs_src/ECS/ECS.rst>
+   Game class <docs_src/Game.rst>
+   TileMap class <docs_src/TileMap.rst>
 
 
 Indices and tables
