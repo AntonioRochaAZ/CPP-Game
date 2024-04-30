@@ -8,6 +8,47 @@ to stick to the tutorial, but to give my own touches along the
 way. For a repository exactly as the tutorial's, see [the tutorial's
 repository](https://github.com/carlbirch/BirchEngine).
 
+The game is 2D and has an "8-bit" style. The assets in this
+repository are original and are made in [Aseprite](https://www.aseprite.org/).
+
+## Current state of development
+> You can now toggle whether the camera should follow the player or not with the
+> P and L keys. You can also exit the game by clicking ESC. You can shoot projectiles
+> with K.
+
+![Current state of development](assets/current.gif)
+
+## Libraries/Requirements
+
+The [SDL2 library](https://www.libsdl.org/) is used, as stated in
+the tutorial. The tutorial also uses SDL2_image. At the start of development, I could
+not download it, so I have circumvented its use by using bitmap (.bmp) images, which
+are supported by the SDL2 library. After updating my OS, I have managed to install
+SDL2_image, so it *might* be used in the future. Finally, SDL2_ttf is used for text.
+
+To set up SDL2 and SDL2_image on MacOS, I've used [the following tutorial](https://www.youtube.com/watch?v=Dyz9O7s7B8w&t=1002s&ab_channel=IndependentPixels). 
+This helped me define the Makefile, as well as the *include* and *lib* folders 
+(not included in this repository, but referenced in the Makefile).
+
+For setting up SDL2_ttf, that process didn't quite work. The shortcut for SDL2_ttf's *lib* 
+folder worked fine, but, to get it to work, I had to copy the SDL2_ttf.h file into the 
+include/SDL2 folder (since it tried including SDL2.h, which is only included in that folder).
+
+The Makefile used for compilation is provided.
+
+## Documentation
+
+I try to extensively document (and comment) what I learn along the
+way in this repository. [Documentation can be found here](https://antoniorochaaz.github.io/CPP-Game/).
+
+I use [Doxygen](https://www.doxygen.nl/) to document the code (generating xml files), and then [Sphinx](https://www.sphinx-doc.org/en/master/)
+to generate the HTML files from the xml files. To connect the two, Sphinx's extension [Breathe](https://breathe.readthedocs.io/en/latest/) is used. 
+I was inspired by [this article](https://devblogs.microsoft.com/cppblog/clear-functional-c-documentation-with-sphinx-breathe-doxygen-cmake/) for
+this integration. However, the use of CMake seemed too complex and generated too many redundant files. To generate my documentation I use the
+command ``make documentation``, defined in the Makefile.
+
+## Notes and TODOs
+
 > Note:
     This is a *work in progress*. I've finished watching the referenced tutorial, but will likely
     study SDL2 more in-depth to better understand how it works.
@@ -18,42 +59,15 @@ repository](https://github.com/carlbirch/BirchEngine).
 
 > **KNOWN BUGS:**
     - Segmentation fault when launching the executable by double clicking (instead of using the command line).
-    - Segmentation faults when creating too many projectiles at once. Probably due to a memory leak in the *Manager* object.
-    - Multiple other small bugs that will be fleshed out in the future.
+      It comes from Game::init, but must still be debugged.
+    - Collision rubber bands player.
+    - Collision recognized when camera follows player, but player can go through objects.
 
-To set up SDL2 and SDL2_image on MacOS, I've used [the following tutorial](https://www.youtube.com/watch?v=Dyz9O7s7B8w&t=1002s&ab_channel=IndependentPixels). This helped me define the make file, as well as the *include* and *lib* folders (not included in this repository, but referenced in the make file).
-
-For setting up SDL2_ttf, that process didn't quite work. The shortcut for SDL2_ttf's *lib* folder worked fine, but,
-to get it to work, I had to copy the SDL2_ttf.h file into the include/SDL2 folder (since it tried including SDL2.h, which
-is only included in that folder).
-
-The game is 2D and has an "8-bit" style. The assets in this
-repository are original and were made in
-[Aseprite](https://www.aseprite.org/).
-
-I try to extensively document (and comment) what I learn along the
-way in this repository.
-
-### Current state of development
-> You can now toggle whether the camera should follow the player or not with the
-> P and L keys. You can also exit the game by clicking ESC. You can shoot with K
-> (but shooting multiple shots at once will result in segmentation fault as of now).
-
-![Current state of development](assets/current.gif)
-
+> Note:
+    Folder *assets/fonts* is not provided, because I am not sure if the font I am using can be shared (Andale Mono,
+    taken directly from MacOS's font catalog).
+ 
 ### TODOs
 
 - Review all code, searching for bugs, memory leaks, optimizations,
   restructuring possibilities (some ideas in mind).
-- In this process, also add extensive documentation, using something
-  like doxygen and sphinx for generating HTML pages.
-
-### Libraries/Requirements
-
-The [SDL2 library](https://www.libsdl.org/) is used, as stated in
-the tutorial. The tutorial also uses SDL2_image. At the start of development, I could
-not download it, so I have circumvented its use by using bitmap (.bmp) images, which
-are supported by the SDL2 library. After updating my OS, I have managed to install
-SDL2_image, so it might be used in the future. Finally, SDL2_ttf is used for text.
-
-The Makefile used for compilation in VSCode is provided.

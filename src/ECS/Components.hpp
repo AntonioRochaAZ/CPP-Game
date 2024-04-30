@@ -1,7 +1,7 @@
 #pragma once
 #include "ECS.hpp"
-#include "Transform.hpp"
-#include "Sprite.hpp"
-#include "KeyboardController.hpp"
-#include "Collider.hpp"
-#include "UILabel.hpp"
+#include "Components/Transform.hpp"
+#include "Components/Sprite.hpp"
+#include "Components/KeyboardController.hpp"
+#include "Components/Collider.hpp"
+#include "Components/UILabel.hpp"

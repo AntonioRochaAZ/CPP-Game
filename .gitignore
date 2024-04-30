@@ -15,3 +15,9 @@ assets/aseprite
 
 # Unused source files:
 src/utils.hpp
+
+# Documentation related:
+docs/doxygen/xml
+docs/sphinx/_build
+docs/sphinx/_static
+docs/sphinx/_templates

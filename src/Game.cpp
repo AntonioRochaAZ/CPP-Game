@@ -4,24 +4,25 @@
 #include "Collision.hpp"
 #include <sstream>
 
+
 //Map* tile_map;
 Manager manager;
 TileMap background = TileMap("Background");
 
+/// Definition of Game object's static variables:
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
 std::vector<Collider*> Game::collider_vector;
 bool Game::tracking_player = true;
+Game::AssetManager Game::assets = Game::AssetManager();
 
 auto& player(manager.addEntity("Player 1"));
 auto& label(manager.addEntity("TestLabel"));
-
 //auto& wall(manager.addEntity());
 
-std::unique_ptr<AssetManager> Game::assets = \
-    std::make_unique<AssetManager>();
 
 Game::Game(){};
+
 Game::~Game(){};
 
 // Initialize
@@ -66,17 +67,18 @@ int Game::init(const char* title, int x, int y, int width, int height, bool full
     // renderer, r, g, b, alpha (255 is opaque, 0 is transparent)
     SDL_SetRenderDrawColor(renderer, 0, 255, 120, 255);
 
-    Game::assets->add_texture("player", "assets/player.bmp");
-    Game::assets->add_texture("projectile1", "assets/projectile1-still.bmp");
-    player.addComponent<Transform>();
-    player.addComponent<Sprite>(Game::assets->get_tuple("player"), true);
+    Game::assets.add_texture("player", "assets/player.bmp");
+    Game::assets.add_texture("projectile1", "assets/projectile1-still.bmp");
     player.addComponent<KeyboardController>();
+    player.addComponent<Transform>(vec(0.0, 0.0), 10, vec(0.0, 0.0));
+    player.addComponent<Sprite>(Game::assets.get_tuple("player"), true);
+    player.getComponent<KeyboardController>().init();   // Force it to get the Transform and Sprite pointers.
     player.add_group(PlayerGroup);
 
     //player.getComponent<Sprite>().init();
     player.getComponent<Transform>().set_position(0, 0);
-    Animation idle_animation(2, 1500, 8, 17);
-    Animation walk_animation(5, 100, 9, 17);
+    Sprite::Animation idle_animation(2, 1500, 8, 17);
+    Sprite::Animation walk_animation(5, 100, 9, 17);
     player.getComponent<Sprite>().add_animation(idle_animation, "Idle");
     player.getComponent<Sprite>().add_animation(walk_animation, "Walk");
     player.getComponent<Sprite>().set_animation("Idle");
@@ -86,8 +88,8 @@ int Game::init(const char* title, int x, int y, int width, int height, bool full
         player.getComponent<Sprite>().get_dst_height());
     player.getComponent<Collider>().init();
 
-    Game::assets->add_texture("tiles", "assets/textures.bmp");
-    background.init(10, 10, 2, 10, Game::assets->get_tuple("tiles"));
+    Game::assets.add_texture("tiles", "assets/textures.bmp");
+    background.init(10, 10, 2, 10, Game::assets.get_tuple("tiles"));
     background.set_dst_size(100, 100);
     background.setup(10, 10);
     background.load_map("assets/map_1.txt");
@@ -95,7 +97,7 @@ int Game::init(const char* title, int x, int y, int width, int height, bool full
     background.tile_player = &player;
 
     // Font:
-    Game::assets->add_font("andale", "assets/fonts/andale_mono.ttf", 16);
+    Game::assets.add_font("andale", "assets/fonts/andale_mono.ttf", 16);
     SDL_Color white = { 255, 255, 255, 255 };
     label.addComponent<UILabel>(0, 0, 4000, 2000, "Hello there", "andale", white);
 
@@ -160,7 +162,7 @@ void Game::update(){
     // I think the best thing is to do this predictively ? Looking ahead if we
     // are going to hit something.
 
-    for (auto cl : collider_vector){
+    for (Collider* cl : collider_vector){
         if (player.getComponent<Collider>().get_tag() != cl->get_tag()){
             if(Collision::collider_AABB(player.getComponent<Collider>(), *cl)){
                 // We've collided with something: take a step back:
@@ -225,3 +227,5 @@ void Game::clean(){
     is_running = false; //Just in case
     //delete tile_map;
 };
+
+

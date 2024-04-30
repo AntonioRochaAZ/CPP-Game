@@ -2,7 +2,8 @@
 #include <tuple>
 #include "Game.hpp"
 
-AssetManager::~AssetManager(){
+// Image Management: ------------------------------------------------------------------------------
+Game::AssetManager::~AssetManager(){
     // Destroy all texture pointers.
     for (auto& t : texture_map){
         // Here we are looping through the pairs "t" of the map. We must pass
@@ -11,46 +12,32 @@ AssetManager::~AssetManager(){
         // the entries of t.
         SDL_DestroyTexture(t.second);
     }
+
+    // Destroys all Font pointers:
+    for (auto& f : font_map){
+        TTF_CloseFont(f.second);
+    }
 }
 
-void AssetManager::add_texture(std::string id, std::string path){
-    // Adds textures to the map members (texture_map, width_map, height_map).
-    SDL_Texture* tmpTexture; int tmpW, tmpH;
+void Game::AssetManager::add_texture(std::string id, std::string path){
+    SDL_Surface* tmp_surface;   ///< Temporary surface (used to create texture).
 
-    std::tie(tmpTexture, tmpW, tmpH) = AssetManager::load_texture(path);
-    texture_map.emplace(id, tmpTexture);
-    width_map.emplace(id, tmpW);
-    height_map.emplace(id, tmpH);
+    tmp_surface = SDL_LoadBMP(path.c_str());    // Load image as surface.
+    width_map.emplace(id, tmp_surface->w);      // Save width/height into maps.
+    height_map.emplace(id, tmp_surface->h);
+    texture_map.emplace(id, 
+        SDL_CreateTextureFromSurface(Game::renderer, tmp_surface)
+    );                                          // Load texture and save it into map.
+    SDL_FreeSurface(tmp_surface);               // Free surface.
 }
 
-SDL_Texture* AssetManager::get_texture(std::string id){
-    return texture_map[id];
-}
+SDL_Texture* Game::AssetManager::get_texture(std::string id){ return texture_map[id]; }
 
-TexTup AssetManager::get_tuple(std::string id){
-    return {texture_map[id], width_map[id], height_map[id]};
-}
+TexTup Game::AssetManager::get_tuple(std::string id){
+    return {texture_map[id], width_map[id], height_map[id]}; }
 
+// Font Management: -------------------------------------------------------------------------------
+void Game::AssetManager::add_font(std::string id, std::string path, int font_size){
+    font_map.emplace(id, TTF_OpenFont(path.c_str(), font_size)); }
 
-
-// From the old Texture Manager definition:
-TexTup AssetManager::load_texture(std::string texture_file){
-    int width, height;
-    SDL_Surface* tmp_surface = SDL_LoadBMP(texture_file.c_str());
-    width = tmp_surface->w;
-    height = tmp_surface->h;
-    SDL_Texture* texture = SDL_CreateTextureFromSurface(Game::renderer, tmp_surface);
-    SDL_FreeSurface(tmp_surface);
-    return {texture, width, height};
-};
-
-
-// Font Management:
-void AssetManager::add_font(std::string id, std::string path, int font_size){
-    font_map.emplace(id, TTF_OpenFont(path.c_str(), font_size));
-}
-
-
-TTF_Font* AssetManager::get_font(std::string id){
-    return font_map[id];
-}
+TTF_Font* Game::AssetManager::get_font(std::string id){ return font_map[id]; }
