@@ -15,7 +15,7 @@ class Transform : public Component{
             ///< Velocity vector (pixel/tick, pixel/tick). It is normalized when
             ///< adjusting the position, and the speed member is used for the
             ///< magnitude.
-        //vec acceleration;   // (pixel/frame**2, pixel/frame**2)
+        //vec acceleration;   ///< (pixel/tick**2, pixel/tick**2)
 
     public:
         // Constructors: ------------------------------------------------------

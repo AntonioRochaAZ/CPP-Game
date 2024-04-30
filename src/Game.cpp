@@ -73,6 +73,9 @@ int Game::init(const char* title, int x, int y, int width, int height, bool full
     player.addComponent<Transform>(vec(0.0, 0.0), 10, vec(0.0, 0.0));
     player.addComponent<Sprite>(Game::assets.get_tuple("player"), true);
     player.getComponent<KeyboardController>().init();   // Force it to get the Transform and Sprite pointers.
+    Game::assets.add_font("andale", "assets/fonts/andale_mono.ttf", 16);
+    SDL_Color red = { 255, 0, 0, 255 };
+    player.addComponent<UILabel>(20.0, -30.0, 4000, 2000, "P1", "andale", red);
     player.add_group(PlayerGroup);
 
     //player.getComponent<Sprite>().init();
@@ -97,9 +100,9 @@ int Game::init(const char* title, int x, int y, int width, int height, bool full
     background.tile_player = &player;
 
     // Font:
-    Game::assets.add_font("andale", "assets/fonts/andale_mono.ttf", 16);
     SDL_Color white = { 255, 255, 255, 255 };
-    label.addComponent<UILabel>(0, 0, 4000, 2000, "Hello there", "andale", white);
+    label.addComponent<Transform>();
+    label.addComponent<UILabel>(0.0, 0.0, 4000, 2000, "Hello there", "andale", white);
 
     // Ok, it is running now:
     is_running = true;

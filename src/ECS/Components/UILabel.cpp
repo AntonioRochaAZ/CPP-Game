@@ -14,9 +14,14 @@ void UILabel::set_text(std::string mText, std::string mFont_id){
     texture = SDL_CreateTextureFromSurface(Game::renderer, surface);
     SDL_FreeSurface(surface);   // Does this delete the pointer?
 
-    SDL_QueryTexture(texture, nullptr, nullptr, &position.w, &position.h);
+    SDL_QueryTexture(texture, nullptr, nullptr, &dst_rect.w, &dst_rect.h);
+}
+
+void UILabel::update(){
+    dst_rect.x = static_cast<int>(transform->get_x() + shift[0]);
+    dst_rect.y = static_cast<int>(transform->get_y() + shift[1]);
 }
 
 void UILabel::render(){
-    SDL_RenderCopy(Game::renderer, texture, nullptr, &position);
+    SDL_RenderCopy(Game::renderer, texture, nullptr, &dst_rect);
 }
