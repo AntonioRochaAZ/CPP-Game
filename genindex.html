@@ -1,0 +1,699 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="#" /><link rel="search" title="Search" href="search.html" />
+
+    <link rel="shortcut icon" href="_static/icon.ico"/><!-- Generated with Sphinx 6.2.1 and Furo 2024.01.29 --><title>Index - CPP Game</title>
+<link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=369552022d0b975c8e74270ce6eabe0fb7978f24" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">CPP Game</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  
+  <span class="sidebar-brand-text">CPP Game</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="docs_src/ECS/ECS.html">Entity Component System (ECS)</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Entity Component System (ECS)</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="docs_src/ECS/Components.html">Components</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Components</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="docs_src/ECS/Components/Transform.html">Transform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docs_src/ECS/Components/Sprite.html">Sprite</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docs_src/ECS/Components/KeyboardController.html">KeyboardController</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docs_src/ECS/Components/Collider.html">Collider</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docs_src/ECS/Components/UILabel.html">UILabel</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="docs_src/ECS/Entities.html">Entities</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="docs_src/Game.html">Game class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs_src/TileMap.html">TileMap class</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          
+<section class="genindex-section">
+  <h1 id="index">Index</h1>
+  <div class="genindex-jumpbox"><a href="#C"><strong>C</strong></a> | <a href="#E"><strong>E</strong></a> | <a href="#G"><strong>G</strong></a> | <a href="#K"><strong>K</strong></a> | <a href="#M"><strong>M</strong></a> | <a href="#S"><strong>S</strong></a> | <a href="#T"><strong>T</strong></a> | <a href="#U"><strong>U</strong></a> | <a href="#V"><strong>V</strong></a></div>
+</section>
+<section id="C" class="genindex-section">
+  <h2>C</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="docs_src/ECS/Components/Collider.html#_CPPv48Collider">Collider (C++ class)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Collider.html#_CPPv4N8Collider8ColliderENSt6stringE">Collider::Collider (C++ function)</a>, <a href="docs_src/ECS/Components/Collider.html#_CPPv4N8Collider8ColliderENSt6stringEii">[1]</a>, <a href="docs_src/ECS/Components/Collider.html#_CPPv4N8Collider8ColliderEv">[2]</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Collider.html#_CPPv4NK8Collider7get_tagEv">Collider::get_tag (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Collider.html#_CPPv4N8Collider6heightE">Collider::height (C++ member)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Collider.html#_CPPv4N8Collider4initEv">Collider::init (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Collider.html#_CPPv4N8Collider10set_heightEi">Collider::set_height (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Collider.html#_CPPv4N8Collider9set_widthEi">Collider::set_width (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Collider.html#_CPPv4N8Collider3tagE">Collider::tag (C++ member)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Collider.html#_CPPv4N8Collider9transformE">Collider::transform (C++ member)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="docs_src/ECS/Components/Collider.html#_CPPv4N8Collider5widthE">Collider::width (C++ member)</a>
+</li>
+        <li><a href="docs_src/ECS/ECS.html#_CPPv49Component">Component (C++ class)</a>
+</li>
+        <li><a href="docs_src/ECS/ECS.html#_CPPv4N9Component6entityE">Component::entity (C++ member)</a>
+</li>
+        <li><a href="docs_src/ECS/ECS.html#_CPPv4N9Component4initEv">Component::init (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/ECS.html#_CPPv4N9Component6renderEv">Component::render (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/ECS.html#_CPPv4N9Component6updateEv">Component::update (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/ECS.html#_CPPv4N9ComponentD0Ev">Component::~Component (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/ECS.html#_CPPv414ComponentArray">ComponentArray (C++ type)</a>
+</li>
+        <li><a href="docs_src/ECS/ECS.html#_CPPv415ComponentBitSet">ComponentBitSet (C++ type)</a>
+</li>
+        <li><a href="docs_src/ECS/ECS.html#_CPPv411ComponentID">ComponentID (C++ type)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="E" class="genindex-section">
+  <h2>E</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="docs_src/ECS/ECS.html#_CPPv46Entity">Entity (C++ class)</a>
+</li>
+        <li><a href="docs_src/ECS/ECS.html#_CPPv4N6Entity6activeE">Entity::active (C++ member)</a>
+</li>
+        <li><a href="docs_src/ECS/ECS.html#_CPPv4N6Entity9add_groupE5Group">Entity::add_group (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/ECS.html#_CPPv4I0DpEN6Entity12addComponentER1TDpRR5TArgs">Entity::addComponent (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/ECS.html#_CPPv4N6Entity15component_arrayE">Entity::component_array (C++ member)</a>
+</li>
+        <li><a href="docs_src/ECS/ECS.html#_CPPv4N6Entity16component_bitsetE">Entity::component_bitset (C++ member)</a>
+</li>
+        <li><a href="docs_src/ECS/ECS.html#_CPPv4N6Entity10componentsE">Entity::components (C++ member)</a>
+</li>
+        <li><a href="docs_src/ECS/ECS.html#_CPPv4N6Entity9del_groupE5Group">Entity::del_group (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/ECS.html#_CPPv4N6Entity7destroyEv">Entity::destroy (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/ECS.html#_CPPv4N6Entity6EntityER7Manager">Entity::Entity (C++ function)</a>, <a href="docs_src/ECS/ECS.html#_CPPv4N6Entity6EntityER7ManagerNSt6stringE">[1]</a>
+</li>
+        <li><a href="docs_src/ECS/ECS.html#_CPPv4N6Entity8get_nameEv">Entity::get_name (C++ function)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="docs_src/ECS/ECS.html#_CPPv4I0ENK6Entity12getComponentER1Tv">Entity::getComponent (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/ECS.html#_CPPv4N6Entity12group_bitsetE">Entity::group_bitset (C++ member)</a>
+</li>
+        <li><a href="docs_src/ECS/ECS.html#_CPPv4I0ENK6Entity13has_componentEbv">Entity::has_component (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/ECS.html#_CPPv4N6Entity9has_groupE5Group">Entity::has_group (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/ECS.html#_CPPv4NK6Entity9is_activeEv">Entity::is_active (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/ECS.html#_CPPv4N6Entity7managerE">Entity::manager (C++ member)</a>
+</li>
+        <li><a href="docs_src/ECS/ECS.html#_CPPv4N6Entity4nameE">Entity::name (C++ member)</a>
+</li>
+        <li><a href="docs_src/ECS/ECS.html#_CPPv4N6Entity6renderEv">Entity::render (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/ECS.html#_CPPv4N6Entity8set_nameENSt6stringE">Entity::set_name (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/ECS.html#_CPPv4N6Entity6updateEv">Entity::update (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/ECS.html#_CPPv4N6EntityD0Ev">Entity::~Entity (C++ function)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="G" class="genindex-section">
+  <h2>G</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="docs_src/Game.html#_CPPv44Game">Game (C++ class)</a>, <a href="docs_src/TileMap.html#_CPPv44Game">[1]</a>
+</li>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game12AssetManagerE">Game::AssetManager (C++ class)</a>, <a href="docs_src/TileMap.html#_CPPv4N4Game12AssetManagerE">[1]</a>
+</li>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game12AssetManager8add_fontENSt6stringENSt6stringEi">Game::AssetManager::add_font (C++ function)</a>, <a href="docs_src/TileMap.html#_CPPv4N4Game12AssetManager8add_fontENSt6stringENSt6stringEi">[1]</a>
+</li>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game12AssetManager11add_textureENSt6stringENSt6stringE">Game::AssetManager::add_texture (C++ function)</a>, <a href="docs_src/TileMap.html#_CPPv4N4Game12AssetManager11add_textureENSt6stringENSt6stringE">[1]</a>
+</li>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game12AssetManager12AssetManagerEv">Game::AssetManager::AssetManager (C++ function)</a>, <a href="docs_src/TileMap.html#_CPPv4N4Game12AssetManager12AssetManagerEv">[1]</a>
+</li>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game12AssetManager8font_mapE">Game::AssetManager::font_map (C++ member)</a>, <a href="docs_src/TileMap.html#_CPPv4N4Game12AssetManager8font_mapE">[1]</a>
+</li>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game12AssetManager8get_fontENSt6stringE">Game::AssetManager::get_font (C++ function)</a>, <a href="docs_src/TileMap.html#_CPPv4N4Game12AssetManager8get_fontENSt6stringE">[1]</a>
+</li>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game12AssetManager11get_textureENSt6stringE">Game::AssetManager::get_texture (C++ function)</a>, <a href="docs_src/TileMap.html#_CPPv4N4Game12AssetManager11get_textureENSt6stringE">[1]</a>
+</li>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game12AssetManager9get_tupleENSt6stringE">Game::AssetManager::get_tuple (C++ function)</a>, <a href="docs_src/TileMap.html#_CPPv4N4Game12AssetManager9get_tupleENSt6stringE">[1]</a>
+</li>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game12AssetManager10height_mapE">Game::AssetManager::height_map (C++ member)</a>, <a href="docs_src/TileMap.html#_CPPv4N4Game12AssetManager10height_mapE">[1]</a>
+</li>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game12AssetManager11texture_mapE">Game::AssetManager::texture_map (C++ member)</a>, <a href="docs_src/TileMap.html#_CPPv4N4Game12AssetManager11texture_mapE">[1]</a>
+</li>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game12AssetManager9width_mapE">Game::AssetManager::width_map (C++ member)</a>, <a href="docs_src/TileMap.html#_CPPv4N4Game12AssetManager9width_mapE">[1]</a>
+</li>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game12AssetManagerD0Ev">Game::AssetManager::~AssetManager (C++ function)</a>, <a href="docs_src/TileMap.html#_CPPv4N4Game12AssetManagerD0Ev">[1]</a>
+</li>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game6assetsE">Game::assets (C++ member)</a>, <a href="docs_src/TileMap.html#_CPPv4N4Game6assetsE">[1]</a>
+</li>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game5cleanEv">Game::clean (C++ function)</a>, <a href="docs_src/TileMap.html#_CPPv4N4Game5cleanEv">[1]</a>
+</li>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game15collider_vectorE">Game::collider_vector (C++ member)</a>, <a href="docs_src/TileMap.html#_CPPv4N4Game15collider_vectorE">[1]</a>
+</li>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game5eventE">Game::event (C++ member)</a>, <a href="docs_src/TileMap.html#_CPPv4N4Game5eventE">[1]</a>
+</li>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game4GameEv">Game::Game (C++ function)</a>, <a href="docs_src/TileMap.html#_CPPv4N4Game4GameEv">[1]</a>
+</li>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game13handle_eventsEv">Game::handle_events (C++ function)</a>, <a href="docs_src/TileMap.html#_CPPv4N4Game13handle_eventsEv">[1]</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game4initEPKciiiib">Game::init (C++ function)</a>, <a href="docs_src/TileMap.html#_CPPv4N4Game4initEPKciiiib">[1]</a>
+</li>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game10is_runningE">Game::is_running (C++ member)</a>, <a href="docs_src/TileMap.html#_CPPv4N4Game10is_runningE">[1]</a>
+</li>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game6renderEv">Game::render (C++ function)</a>, <a href="docs_src/TileMap.html#_CPPv4N4Game6renderEv">[1]</a>
+</li>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game8rendererE">Game::renderer (C++ member)</a>, <a href="docs_src/TileMap.html#_CPPv4N4Game8rendererE">[1]</a>
+</li>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game7runningEv">Game::running (C++ function)</a>, <a href="docs_src/TileMap.html#_CPPv4N4Game7runningEv">[1]</a>
+</li>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game15tracking_playerE">Game::tracking_player (C++ member)</a>, <a href="docs_src/TileMap.html#_CPPv4N4Game15tracking_playerE">[1]</a>
+</li>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game6updateEv">Game::update (C++ function)</a>, <a href="docs_src/TileMap.html#_CPPv4N4Game6updateEv">[1]</a>
+</li>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game14update_counterE">Game::update_counter (C++ member)</a>, <a href="docs_src/TileMap.html#_CPPv4N4Game14update_counterE">[1]</a>
+</li>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game6windowE">Game::window (C++ member)</a>, <a href="docs_src/TileMap.html#_CPPv4N4Game6windowE">[1]</a>
+</li>
+        <li><a href="docs_src/Game.html#_CPPv4N4GameD0Ev">Game::~Game (C++ function)</a>, <a href="docs_src/TileMap.html#_CPPv4N4GameD0Ev">[1]</a>
+</li>
+        <li><a href="docs_src/ECS/ECS.html#_CPPv4I0E18getComponentTypeID11ComponentIDv">getComponentTypeID (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/ECS.html#_CPPv421getNewComponentTypeIDv">getNewComponentTypeID (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/ECS.html#_CPPv45Group">Group (C++ type)</a>
+</li>
+        <li><a href="docs_src/ECS/ECS.html#_CPPv412group_labels">group_labels (C++ enum)</a>
+</li>
+        <li><a href="docs_src/ECS/ECS.html#_CPPv4N12group_labels13ColliderGroupE">group_labels::ColliderGroup (C++ enumerator)</a>
+</li>
+        <li><a href="docs_src/ECS/ECS.html#_CPPv4N12group_labels10EnemyGroupE">group_labels::EnemyGroup (C++ enumerator)</a>
+</li>
+        <li><a href="docs_src/ECS/ECS.html#_CPPv4N12group_labels8MapGroupE">group_labels::MapGroup (C++ enumerator)</a>
+</li>
+        <li><a href="docs_src/ECS/ECS.html#_CPPv4N12group_labels11PlayerGroupE">group_labels::PlayerGroup (C++ enumerator)</a>
+</li>
+        <li><a href="docs_src/ECS/ECS.html#_CPPv4N12group_labels15ProjectileGroupE">group_labels::ProjectileGroup (C++ enumerator)</a>
+</li>
+        <li><a href="docs_src/ECS/ECS.html#_CPPv411GroupBitSet">GroupBitSet (C++ type)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="K" class="genindex-section">
+  <h2>K</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="docs_src/ECS/Components/KeyboardController.html#_CPPv418KeyboardController">KeyboardController (C++ class)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/KeyboardController.html#_CPPv4N18KeyboardController4initEv">KeyboardController::init (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/KeyboardController.html#_CPPv4N18KeyboardController18KeyboardControllerEb">KeyboardController::KeyboardController (C++ function)</a>, <a href="docs_src/ECS/Components/KeyboardController.html#_CPPv4N18KeyboardController18KeyboardControllerEv">[1]</a>
+</li>
+        <li><a href="docs_src/ECS/Components/KeyboardController.html#_CPPv4N18KeyboardController10projectileE">KeyboardController::projectile (C++ member)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="docs_src/ECS/Components/KeyboardController.html#_CPPv4N18KeyboardController14reverse_spriteE">KeyboardController::reverse_sprite (C++ member)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/KeyboardController.html#_CPPv4N18KeyboardController6spriteE">KeyboardController::sprite (C++ member)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/KeyboardController.html#_CPPv4N18KeyboardController9transformE">KeyboardController::transform (C++ member)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/KeyboardController.html#_CPPv4N18KeyboardController6updateEv">KeyboardController::update (C++ function)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="M" class="genindex-section">
+  <h2>M</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="docs_src/ECS/ECS.html#_CPPv47Manager">Manager (C++ class)</a>
+</li>
+        <li><a href="docs_src/ECS/ECS.html#_CPPv4N7Manager12add_to_groupEP6Entity5Group">Manager::add_to_group (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/ECS.html#_CPPv4N7Manager9addEntityENSt6stringE">Manager::addEntity (C++ function)</a>, <a href="docs_src/ECS/ECS.html#_CPPv4N7Manager9addEntityEP6Entity">[1]</a>
+</li>
+        <li><a href="docs_src/ECS/ECS.html#_CPPv4N7Manager13entity_vectorE">Manager::entity_vector (C++ member)</a>
+</li>
+        <li><a href="docs_src/ECS/ECS.html#_CPPv4N7Manager9get_groupE5Group">Manager::get_group (C++ function)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="docs_src/ECS/ECS.html#_CPPv4N7Manager16grouped_entitiesE">Manager::grouped_entities (C++ member)</a>
+</li>
+        <li><a href="docs_src/ECS/ECS.html#_CPPv4N7Manager7refreshEv">Manager::refresh (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/ECS.html#_CPPv4N7Manager6renderEv">Manager::render (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/ECS.html#_CPPv4N7Manager6updateEv">Manager::update (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/ECS.html#_CPPv414max_components">max_components (C++ member)</a>
+</li>
+        <li><a href="docs_src/ECS/ECS.html#_CPPv410max_groups">max_groups (C++ member)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="S" class="genindex-section">
+  <h2>S</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="docs_src/ECS/Components/Sprite.html#_CPPv46Sprite">Sprite (C++ class)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Sprite.html#_CPPv4N6Sprite13add_animationEN6Sprite9AnimationENSt6stringE">Sprite::add_animation (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Sprite.html#_CPPv4N6Sprite8animatedE">Sprite::animated (C++ member)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Sprite.html#_CPPv4N6Sprite9AnimationE">Sprite::Animation (C++ struct)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Sprite.html#_CPPv4N6Sprite9Animation9AnimationEiiii">Sprite::Animation::Animation (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Sprite.html#_CPPv4N6Sprite9Animation16animation_periodE">Sprite::Animation::animation_period (C++ member)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Sprite.html#_CPPv4N6Sprite9Animation6framesE">Sprite::Animation::frames (C++ member)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Sprite.html#_CPPv4N6Sprite9Animation5indexE">Sprite::Animation::index (C++ member)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Sprite.html#_CPPv4N6Sprite9Animation13sprite_heightE">Sprite::Animation::sprite_height (C++ member)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Sprite.html#_CPPv4N6Sprite9Animation12sprite_widthE">Sprite::Animation::sprite_width (C++ member)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Sprite.html#_CPPv4N6Sprite9Animation5src_yE">Sprite::Animation::src_y (C++ member)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Sprite.html#_CPPv4N6Sprite13animation_mapE">Sprite::animation_map (C++ member)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Sprite.html#_CPPv4N6Sprite16animation_periodE">Sprite::animation_period (C++ member)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Sprite.html#_CPPv4N6Sprite17current_animationE">Sprite::current_animation (C++ member)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Sprite.html#_CPPv4N6Sprite13current_frameE">Sprite::current_frame (C++ member)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Sprite.html#_CPPv4N6Sprite8dst_rectE">Sprite::dst_rect (C++ member)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Sprite.html#_CPPv4N6Sprite6framesE">Sprite::frames (C++ member)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Sprite.html#_CPPv4N6Sprite14get_dst_heightEv">Sprite::get_dst_height (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Sprite.html#_CPPv4N6Sprite13get_dst_widthEv">Sprite::get_dst_width (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Sprite.html#_CPPv4N6Sprite9get_dst_xEv">Sprite::get_dst_x (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Sprite.html#_CPPv4N6Sprite9get_dst_yEv">Sprite::get_dst_y (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Sprite.html#_CPPv4N6Sprite14get_src_heightEv">Sprite::get_src_height (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Sprite.html#_CPPv4N6Sprite13get_src_widthEv">Sprite::get_src_width (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Sprite.html#_CPPv4N6Sprite9get_src_xEv">Sprite::get_src_x (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Sprite.html#_CPPv4N6Sprite9get_src_yEv">Sprite::get_src_y (C++ function)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="docs_src/ECS/Components/Sprite.html#_CPPv4N6Sprite10get_xscaleEv">Sprite::get_xscale (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Sprite.html#_CPPv4N6Sprite10get_yscaleEv">Sprite::get_yscale (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Sprite.html#_CPPv4N6Sprite12image_heightE">Sprite::image_height (C++ member)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Sprite.html#_CPPv4N6Sprite11image_widthE">Sprite::image_width (C++ member)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Sprite.html#_CPPv4N6Sprite4initEv">Sprite::init (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Sprite.html#_CPPv4N6Sprite13nb_animationsE">Sprite::nb_animations (C++ member)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Sprite.html#_CPPv4N6Sprite6renderEv">Sprite::render (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Sprite.html#_CPPv4N6Sprite7scale_xE">Sprite::scale_x (C++ member)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Sprite.html#_CPPv4N6Sprite7scale_yE">Sprite::scale_y (C++ member)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Sprite.html#_CPPv4N6Sprite13set_animationENSt6stringE">Sprite::set_animation (C++ function)</a>, <a href="docs_src/ECS/Components/Sprite.html#_CPPv4N6Sprite13set_animationEi">[1]</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Sprite.html#_CPPv4N6Sprite14set_dst_heightEi">Sprite::set_dst_height (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Sprite.html#_CPPv4N6Sprite13set_dst_widthEi">Sprite::set_dst_width (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Sprite.html#_CPPv4N6Sprite9set_scaleEf">Sprite::set_scale (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Sprite.html#_CPPv4N6Sprite14set_src_heightEi">Sprite::set_src_height (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Sprite.html#_CPPv4N6Sprite13set_src_widthEi">Sprite::set_src_width (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Sprite.html#_CPPv4N6Sprite9set_src_xEi">Sprite::set_src_x (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Sprite.html#_CPPv4N6Sprite9set_src_yEi">Sprite::set_src_y (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Sprite.html#_CPPv4N6Sprite10set_xscaleEf">Sprite::set_xscale (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Sprite.html#_CPPv4N6Sprite10set_yscaleEf">Sprite::set_yscale (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Sprite.html#_CPPv4N6Sprite6SpriteE6TexTupb">Sprite::Sprite (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Sprite.html#_CPPv4N6Sprite11sprite_flipE">Sprite::sprite_flip (C++ member)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Sprite.html#_CPPv4N6Sprite8src_rectE">Sprite::src_rect (C++ member)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Sprite.html#_CPPv4N6Sprite7textureE">Sprite::texture (C++ member)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Sprite.html#_CPPv4N6Sprite9transformE">Sprite::transform (C++ member)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Sprite.html#_CPPv4N6Sprite6updateEv">Sprite::update (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Sprite.html#_CPPv4N6SpriteD0Ev">Sprite::~Sprite (C++ function)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="T" class="genindex-section">
+  <h2>T</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="docs_src/Game.html#_CPPv46TexTup">TexTup (C++ type)</a>, <a href="docs_src/TileMap.html#_CPPv46TexTup">[1]</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Transform.html#_CPPv49Transform">Transform (C++ class)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Transform.html#_CPPv4N9Transform12get_positionEv">Transform::get_position (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Transform.html#_CPPv4N9Transform9get_speedEv">Transform::get_speed (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Transform.html#_CPPv4N9Transform12get_velocityEv">Transform::get_velocity (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Transform.html#_CPPv4N9Transform6get_vxEv">Transform::get_vx (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Transform.html#_CPPv4N9Transform6get_vyEv">Transform::get_vy (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Transform.html#_CPPv4N9Transform5get_xEv">Transform::get_x (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Transform.html#_CPPv4N9Transform5get_yEv">Transform::get_y (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Transform.html#_CPPv4N9Transform8positionE">Transform::position (C++ member)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="docs_src/ECS/Components/Transform.html#_CPPv4N9Transform12set_positionE3vec">Transform::set_position (C++ function)</a>, <a href="docs_src/ECS/Components/Transform.html#_CPPv4N9Transform12set_positionEff">[1]</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Transform.html#_CPPv4N9Transform9set_speedEf">Transform::set_speed (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Transform.html#_CPPv4N9Transform12set_velocityE3vec">Transform::set_velocity (C++ function)</a>, <a href="docs_src/ECS/Components/Transform.html#_CPPv4N9Transform12set_velocityEff">[1]</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Transform.html#_CPPv4N9Transform6set_vxEf">Transform::set_vx (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Transform.html#_CPPv4N9Transform6set_vyEf">Transform::set_vy (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Transform.html#_CPPv4N9Transform5set_xEf">Transform::set_x (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Transform.html#_CPPv4N9Transform5set_yEf">Transform::set_y (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Transform.html#_CPPv4N9Transform5speedE">Transform::speed (C++ member)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Transform.html#_CPPv4N9Transform9TransformE3vecf3vec">Transform::Transform (C++ function)</a>, <a href="docs_src/ECS/Components/Transform.html#_CPPv4N9Transform9TransformEff">[1]</a>, <a href="docs_src/ECS/Components/Transform.html#_CPPv4N9Transform9TransformEv">[2]</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Transform.html#_CPPv4N9Transform6updateEv">Transform::update (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Transform.html#_CPPv4N9Transform8velocityE">Transform::velocity (C++ member)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="U" class="genindex-section">
+  <h2>U</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="docs_src/ECS/Components/UILabel.html#_CPPv47UILabel">UILabel (C++ class)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/UILabel.html#_CPPv4N7UILabel6colourE">UILabel::colour (C++ member)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/UILabel.html#_CPPv4N7UILabel7font_idE">UILabel::font_id (C++ member)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/UILabel.html#_CPPv4N7UILabel8positionE">UILabel::position (C++ member)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/UILabel.html#_CPPv4N7UILabel6renderEv">UILabel::render (C++ function)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="docs_src/ECS/Components/UILabel.html#_CPPv4N7UILabel8set_textENSt6stringENSt6stringE">UILabel::set_text (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/UILabel.html#_CPPv4N7UILabel4textE">UILabel::text (C++ member)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/UILabel.html#_CPPv4N7UILabel7textureE">UILabel::texture (C++ member)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/UILabel.html#_CPPv4N7UILabel7UILabelEiiiiNSt6stringENSt6stringER9SDL_Color">UILabel::UILabel (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/UILabel.html#_CPPv4N7UILabelD0Ev">UILabel::~UILabel (C++ function)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="V" class="genindex-section">
+  <h2>V</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="docs_src/ECS/Components/KeyboardController.html#_CPPv43vec">vec (C++ type)</a>, <a href="docs_src/ECS/Components/Transform.html#_CPPv43vec">[1]</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, Antonio ROCHA
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/scripts/furo.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    </body>
+</html>

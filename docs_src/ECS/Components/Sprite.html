@@ -1,0 +1,602 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="KeyboardController" href="KeyboardController.html" /><link rel="prev" title="Transform" href="Transform.html" />
+
+    <link rel="shortcut icon" href="../../../_static/icon.ico"/><!-- Generated with Sphinx 6.2.1 and Furo 2024.01.29 -->
+        <title>Sprite - CPP Game</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=369552022d0b975c8e74270ce6eabe0fb7978f24" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand">CPP Game</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
+  
+  
+  <span class="sidebar-brand-text">CPP Game</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../ECS.html">Entity Component System (ECS)</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Entity Component System (ECS)</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current has-children"><a class="reference internal" href="../Components.html">Components</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Components</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="Transform.html">Transform</a></li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">Sprite</a></li>
+<li class="toctree-l3"><a class="reference internal" href="KeyboardController.html">KeyboardController</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Collider.html">Collider</a></li>
+<li class="toctree-l3"><a class="reference internal" href="UILabel.html">UILabel</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Entities.html">Entities</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../Game.html">Game class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../TileMap.html">TileMap class</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="sprite">
+<h1>Sprite<a class="headerlink" href="#sprite" title="Permalink to this heading">#</a></h1>
+<p>Component used for handling Entity’s sprites (textures an animations). Although
+texture loading and their memory management are now completely handled by the
+<a class="reference internal" href="../../Game.html#_CPPv4N4Game6assetsE" title="Game::assets"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">Game::assets</span></code></a> (class of type
+<a class="reference internal" href="../../Game.html#_CPPv4N4Game12AssetManagerE" title="Game::AssetManager"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">Game::AssetManager</span></code></a>), this
+component will keep pointers to the textures involved, and will structure
+and handle adding and setting animations.</p>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv46Sprite">
+<span class="target" id="class_sprite"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Sprite</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><a class="reference internal" href="../ECS.html#_CPPv49Component" title="Component"><span class="n"><span class="pre">Component</span></span></a><a class="headerlink" href="#_CPPv46Sprite" title="Permalink to this definition">#</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite6SpriteE6TexTupb">
+<span class="target" id="class_sprite_1aa65273d1d6eecc2029b26f7850d38a82"></span><span class="sig-name descname"><span class="n"><span class="pre">Sprite</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="../../Game.html#_CPPv46TexTup" title="TexTup"><span class="n"><span class="pre">TexTup</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">texture_tuple</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">is_animated</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite6SpriteE6TexTupb" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Defined in Sprite.cpp file (long) </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6SpriteD0Ev">
+<span class="target" id="class_sprite_1a8accab430f9d90ae5117b57d67e32b84"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~Sprite</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6SpriteD0Ev" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite4initEv">
+<span class="target" id="class_sprite_1aeaf5c7aa5aeff1b0a4da9e66430f1c42"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">init</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N6Sprite4initEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Defined in Sprite.cpp file (long) </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite6updateEv">
+<span class="target" id="class_sprite_1a7ad75ce20bf33f41036ae65f1aa0801a"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">update</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N6Sprite6updateEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Defined in Sprite.cpp file (long) </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite6renderEv">
+<span class="target" id="class_sprite_1afcb31d26c6aa72ede7751ae57cbe3c13"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">render</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N6Sprite6renderEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Defined in Sprite.cpp file (long) </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite13add_animationEN6Sprite9AnimationENSt6stringE">
+<span class="target" id="class_sprite_1ad7f304e05efe81202a63efc1c476e21a"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add_animation</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv46Sprite" title="Sprite"><span class="n"><span class="pre">Sprite</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N6Sprite9AnimationE" title="Sprite::Animation"><span class="n"><span class="pre">Animation</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">animation</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">animation_name</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite13add_animationEN6Sprite9AnimationENSt6stringE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Adds an animation to the animation_map member. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite13set_animationENSt6stringE">
+<span class="target" id="class_sprite_1a702db61f2ec8e8e6c1a2a8b1dacaca54"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_animation</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">animation_name</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite13set_animationENSt6stringE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Changes current animation (reaches into the animation_map member). </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite13set_animationEi">
+<span class="target" id="class_sprite_1a6ca9a33087a98c04f81856f9367fbb54"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_animation</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">an_index</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite13set_animationEi" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Overloading. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite13get_dst_widthEv">
+<span class="target" id="class_sprite_1a1c2d3ebe1140aafce860fab977b4651d"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_dst_width</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite13get_dst_widthEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Gets actual width on the screen. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite14get_dst_heightEv">
+<span class="target" id="class_sprite_1a14e5a698912eb88453dd8a1c67bc032c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_dst_height</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite14get_dst_heightEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Gets actual height on the screen. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite13set_dst_widthEi">
+<span class="target" id="class_sprite_1a1948a12b2f8079edc58f67d1198fcc32"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_dst_width</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">w</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite13set_dst_widthEi" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Sets actual width on the screen. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite14set_dst_heightEi">
+<span class="target" id="class_sprite_1a2c9e98959a6d821e4df809dc85078cb3"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_dst_height</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">h</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite14set_dst_heightEi" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Sets actual height on the screen. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite9get_dst_xEv">
+<span class="target" id="class_sprite_1aa85a38a9eb5e833275aeee5b7507e19d"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_dst_x</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite9get_dst_xEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Gets X position on screen (pixels). </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite9get_dst_yEv">
+<span class="target" id="class_sprite_1a9fe55db9cbd31a2c2fde3d12b809576f"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_dst_y</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite9get_dst_yEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Gets Y position on screen (pixels). </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite13set_src_widthEi">
+<span class="target" id="class_sprite_1a60f89255be081831ce89099195ccd598"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_src_width</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">w</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite13set_src_widthEi" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Sets the width we want to get from the SOURCE texture. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite14set_src_heightEi">
+<span class="target" id="class_sprite_1a7585ba4b94bf731201a6bc692d4238b6"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_src_height</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">h</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite14set_src_heightEi" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Sets the height we want to get from the SOURCE texture. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite9set_src_xEi">
+<span class="target" id="class_sprite_1aecb202e21867f51e1eeacf63d19b7fc6"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_src_x</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">x</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite9set_src_xEi" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Sets the X position in the SOURCE texture. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite9set_src_yEi">
+<span class="target" id="class_sprite_1a6f408314538e11420267a0c44fdfac19"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_src_y</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">y</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite9set_src_yEi" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Sets the Y position in the SOURCE texture. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite9get_src_xEv">
+<span class="target" id="class_sprite_1af3fbc5df61c060f80b5a9850f9c614c8"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_src_x</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite9get_src_xEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Gets the X position from the SOURCE texture. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite9get_src_yEv">
+<span class="target" id="class_sprite_1ae4fb91c9349e23ac853661bb1958cc10"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_src_y</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite9get_src_yEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Gets the Y position from the SOURCE texture. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite13get_src_widthEv">
+<span class="target" id="class_sprite_1a146408d2633d5109557ad65ac34cd09d"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_src_width</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite13get_src_widthEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Gets the width we are using for the SOURCE texture. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite14get_src_heightEv">
+<span class="target" id="class_sprite_1a95c4c27fd022011597037d1d3bde04c8"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_src_height</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite14get_src_heightEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Gets the height we are using for the SOURCE texture. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite10get_xscaleEv">
+<span class="target" id="class_sprite_1a9c06ddf1115b41e286fcf6731a3dda1c"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_xscale</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite10get_xscaleEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Defined in Sprite.cpp file (exception handling) </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite10get_yscaleEv">
+<span class="target" id="class_sprite_1a6a6d01fb7fdee495f54d0d627ccc8629"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_yscale</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite10get_yscaleEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Defined in Sprite.cpp file (exception handling) </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite10set_xscaleEf">
+<span class="target" id="class_sprite_1a4a7cba34a110dfa88e121749a4bad2e7"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_xscale</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">sclx</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite10set_xscaleEf" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite10set_yscaleEf">
+<span class="target" id="class_sprite_1acacdbb7bffcfd768e7c4feeba233daee"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_yscale</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">scly</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite10set_yscaleEf" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite9set_scaleEf">
+<span class="target" id="class_sprite_1a78114b0727f80933c75ca53868a5a074"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_scale</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">scale</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite9set_scaleEf" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite11sprite_flipE">
+<span class="target" id="class_sprite_1a2989301662ce292a08e38f18202a57a9"></span><span class="n"><span class="pre">SDL_RendererFlip</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sprite_flip</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">SDL_FLIP_NONE</span></span><a class="headerlink" href="#_CPPv4N6Sprite11sprite_flipE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Whether to flip the texture. Will be dealt with by the <a class="reference internal" href="KeyboardController.html#class_keyboard_controller"><span class="std std-ref">KeyboardController</span></a> <a class="reference internal" href="../ECS.html#class_component"><span class="std std-ref">Component</span></a>, when the player turns around, for example. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite17current_animationE">
+<span class="target" id="class_sprite_1aeec64602ab19bb4500779c16a5cf2491"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">current_animation</span></span></span><a class="headerlink" href="#_CPPv4N6Sprite17current_animationE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Current animation being rendered. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite13current_frameE">
+<span class="target" id="class_sprite_1a8eec8f007b36cd1ae4bfce07e8418d4e"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">current_frame</span></span></span><a class="headerlink" href="#_CPPv4N6Sprite13current_frameE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>The frame of the animation we are at (starts at 0). </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite9transformE">
+<span class="target" id="class_sprite_1a0abb6be39cdb7359d85a62c469bb1dd4"></span><a class="reference internal" href="Transform.html#_CPPv49Transform" title="Transform"><span class="n"><span class="pre">Transform</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">transform</span></span></span><a class="headerlink" href="#_CPPv4N6Sprite9transformE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Sets the same scale for both x and y axes. </p>
+<p><a class="reference internal" href="../ECS.html#class_entity"><span class="std std-ref">Entity</span></a>’s <a class="reference internal" href="Transform.html#class_transform"><span class="std std-ref">Transform</span></a> component. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite7textureE">
+<span class="target" id="class_sprite_1a531ed274733d916261f49e1a2cbb6ba9"></span><span class="n"><span class="pre">SDL_Texture</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">texture</span></span></span><a class="headerlink" href="#_CPPv4N6Sprite7textureE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Pointer to the Texture used. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite8src_rectE">
+<span class="target" id="class_sprite_1a7862d89036581bc6ee0c0a0d1f7a9c78"></span><span class="n"><span class="pre">SDL_Rect</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">src_rect</span></span></span><a class="headerlink" href="#_CPPv4N6Sprite8src_rectE" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite8dst_rectE">
+<span class="target" id="class_sprite_1a285128a4a229878a7ebfc53b07145e84"></span><span class="n"><span class="pre">SDL_Rect</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dst_rect</span></span></span><a class="headerlink" href="#_CPPv4N6Sprite8dst_rectE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Rendering rectangles (source and destination). </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite11image_widthE">
+<span class="target" id="class_sprite_1a61966212e1c8c4e49bffdff3b4e7325d"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">image_width</span></span></span><a class="headerlink" href="#_CPPv4N6Sprite11image_widthE" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite12image_heightE">
+<span class="target" id="class_sprite_1a74f10073c5be4526a26d979f64123692"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">image_height</span></span></span><a class="headerlink" href="#_CPPv4N6Sprite12image_heightE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Image shape (source). </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite7scale_xE">
+<span class="target" id="class_sprite_1a854215a9c380be896860e908b97d11d0"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">scale_x</span></span></span><a class="headerlink" href="#_CPPv4N6Sprite7scale_xE" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite7scale_yE">
+<span class="target" id="class_sprite_1a794d994249ab290985684a863e7b5ddc"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">scale_y</span></span></span><a class="headerlink" href="#_CPPv4N6Sprite7scale_yE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Scale of the rendering: size on screen/size of the source (<code class="docutils literal notranslate"><span class="pre">scale_x</span> <span class="pre">=</span> <span class="pre">dst_rect.w/src_rect.w</span></code> and <code class="docutils literal notranslate"><span class="pre">scale_y</span> <span class="pre">=</span> <span class="pre">dst_rect.h/src_rect.h</span></code>). </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite8animatedE">
+<span class="target" id="class_sprite_1a3bc24227d1d49ebd4f4b77ff7a907d4b"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">animated</span></span></span><a class="headerlink" href="#_CPPv4N6Sprite8animatedE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Whether the sprite is is animated. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite6framesE">
+<span class="target" id="class_sprite_1ae3caf94012a175dc8a348c293144624f"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">frames</span></span></span><a class="headerlink" href="#_CPPv4N6Sprite6framesE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>How many frames in the current animation. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite16animation_periodE">
+<span class="target" id="class_sprite_1a23a6e9330d1786f70c3875a9fb47c128"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">animation_period</span></span></span><a class="headerlink" href="#_CPPv4N6Sprite16animation_periodE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>The period of the current animation being played (ms/frame). </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite13nb_animationsE">
+<span class="target" id="class_sprite_1ab5a86fc14d20fe253331a8691e2da65a"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nb_animations</span></span></span><a class="headerlink" href="#_CPPv4N6Sprite13nb_animationsE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Total number of animations. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite13animation_mapE">
+<span class="target" id="class_sprite_1a7ede083628724074c6c0ad810ef0a1cb"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">map</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv46Sprite" title="Sprite"><span class="n"><span class="pre">Sprite</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N6Sprite9AnimationE" title="Sprite::Animation"><span class="n"><span class="pre">Animation</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">animation_map</span></span></span><a class="headerlink" href="#_CPPv4N6Sprite13animation_mapE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Map translating animation names to animation objects. </p>
+</dd></dl>
+
+</div>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite9AnimationE">
+<span class="target" id="struct_sprite_1_1_animation"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Animation</span></span></span><a class="headerlink" href="#_CPPv4N6Sprite9AnimationE" title="Permalink to this definition">#</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;Sprite.hpp&gt;</em></div>
+<p>Useful struct for structuring <a class="reference internal" href="#struct_sprite_1_1_animation"><span class="std std-ref">Animation</span></a> information. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite9Animation9AnimationEiiii">
+<span class="target" id="struct_sprite_1_1_animation_1a10b72417de8ec742589ba06a2eb3b730"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Animation</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">f</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">t</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">w</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">h</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite9Animation9AnimationEiiii" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Constructor </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f</strong> – frames member. </p></li>
+<li><p><strong>t</strong> – animation_period member (ms/frame). </p></li>
+<li><p><strong>w</strong> – sprite_width member (pixels). </p></li>
+<li><p><strong>h</strong> – sprite_height member (pixels). </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite9Animation6framesE">
+<span class="target" id="struct_sprite_1_1_animation_1ad6b6e98c2acc19dc5638c5d490793a73"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">frames</span></span></span><a class="headerlink" href="#_CPPv4N6Sprite9Animation6framesE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Number of frames in the animation. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite9Animation16animation_periodE">
+<span class="target" id="struct_sprite_1_1_animation_1a3aa682fb06b447c0833573b33767c1d7"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">animation_period</span></span></span><a class="headerlink" href="#_CPPv4N6Sprite9Animation16animation_periodE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Period of each frame in miliseconds. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite9Animation12sprite_widthE">
+<span class="target" id="struct_sprite_1_1_animation_1ace2c21951dddd8dda01ae838acf7ed4f"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sprite_width</span></span></span><a class="headerlink" href="#_CPPv4N6Sprite9Animation12sprite_widthE" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite9Animation13sprite_heightE">
+<span class="target" id="struct_sprite_1_1_animation_1a5a901cc377c94f35127e640ef478082b"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sprite_height</span></span></span><a class="headerlink" href="#_CPPv4N6Sprite9Animation13sprite_heightE" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite9Animation5indexE">
+<span class="target" id="struct_sprite_1_1_animation_1a41195d29544e510027b07b7be2de4725"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">index</span></span></span><a class="headerlink" href="#_CPPv4N6Sprite9Animation5indexE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>The animation index (for when the <a class="reference internal" href="../ECS.html#class_entity"><span class="std std-ref">Entity</span></a> has multiple animations). This member is set up by the <a class="reference internal" href="#class_sprite"><span class="std std-ref">Sprite</span></a> component when an animation is added through <a class="reference internal" href="#class_sprite_1ad7f304e05efe81202a63efc1c476e21a"><span class="std std-ref">Sprite::add_animation</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite9Animation5src_yE">
+<span class="target" id="struct_sprite_1_1_animation_1aaf77a943ede1f7f9b5ff7b6dd4d66f7d"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">src_y</span></span></span><a class="headerlink" href="#_CPPv4N6Sprite9Animation5src_yE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>The height (in pixels) at which we start “reading” the animation from the texture source file. This member is set up by the <a class="reference internal" href="#class_sprite"><span class="std std-ref">Sprite</span></a> component when an animation is added through <a class="reference internal" href="#class_sprite_1ad7f304e05efe81202a63efc1c476e21a"><span class="std std-ref">Sprite::add_animation</span></a>. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="KeyboardController.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">KeyboardController</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="Transform.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Transform</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, Antonio ROCHA
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/scripts/furo.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    </body>
+</html>
