@@ -30,7 +30,7 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 html_title = 'CPP Game'
 html_theme = 'furo'
 html_static_path = ['_static']
-html_favicon = '../../assets/icon.ico'
+html_favicon = 'docs_assets/icon.ico'
 
 # BREATHE:
 
