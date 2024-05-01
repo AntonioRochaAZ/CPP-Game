@@ -1,5 +1,6 @@
 #include "Sprite.hpp"
 #include <stdexcept>    // Exception throwing
+#include "../../utils.hpp"  // map id checking.
 
 // DEFINITIONS:------------------------------------------------------------------------------
 // Constructors:
@@ -87,30 +88,25 @@ void Sprite::add_animation(Sprite::Animation animation, std::string animation_na
     // Add it to the map:
     animation_map.emplace(animation_name, animation);
 }
+
 void Sprite::set_animation(std::string animation_name){
     if(animated){
-        std::map<std::string, Sprite::Animation>::iterator anim_iter = \
-            animation_map.find(animation_name);
-
-        if (anim_iter != animation_map.end()){
-            Sprite::Animation& local_animation = anim_iter->second;
-
-            current_animation = animation_name;
-            // Set animation variables according to which animation to play:
-            frames = local_animation.frames;
-            animation_period = local_animation.animation_period;
-            // Set source rectangle variables:
-            src_rect.w = local_animation.sprite_width;
-            src_rect.h = local_animation.sprite_height;
-            src_rect.y = local_animation.src_y;
-            // Update destination_rects:
-            dst_rect.w = scale_x * src_rect.w;
-            dst_rect.h = scale_y * src_rect.h;
-        }else{
-            std::cout << "ERROR: animation_name passed to Sprite::set_animation is unknown." << std::endl;
-            std::cout << "Entity: " << entity->name << " animation_name: " << animation_name << std::endl;
-            throw std::invalid_argument(animation_name);
-        }
+        check_map_id<std::string, Sprite::Animation>(animation_map, animation_name, "set_animation, animation_map");
+        
+        Sprite::Animation& local_animation = animation_map.find(animation_name)->second;
+            ///< Here we pass by the iterator to avoid issues with not having a default
+            ///< constructor for the Animation class.
+        current_animation = animation_name;
+        // Set animation variables according to which animation to play:
+        frames = local_animation.frames;
+        animation_period = local_animation.animation_period;
+        // Set source rectangle variables:
+        src_rect.w = local_animation.sprite_width;
+        src_rect.h = local_animation.sprite_height;
+        src_rect.y = local_animation.src_y;
+        // Update destination_rects:
+        dst_rect.w = scale_x * src_rect.w;
+        dst_rect.h = scale_y * src_rect.h;
     }
 }
 // Overloading:

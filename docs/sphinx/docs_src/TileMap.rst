@@ -12,4 +12,4 @@ a list of entites (each individual block).
     for it to be more general (or not, calculations may be quicker in the TileMap)
     because of symmetry etc.
 
-.. doxygenfile :: Game.hpp
+.. doxygenfile:: TileMap.hpp

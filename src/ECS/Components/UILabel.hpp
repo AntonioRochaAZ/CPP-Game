@@ -57,4 +57,8 @@ public:
     void update() override; 
         ///< Updates dst_rect's position according to the transform's (defined in UILabel.cpp).
     void render() override;
+
+    /** Function for hooking up this component to another Entity's transform. This can be
+        useful if we want to have multiple text boxes following a same Entity. */
+    void set_transform(Transform* t){ transform = t; }
 };

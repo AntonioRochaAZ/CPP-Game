@@ -71,6 +71,3 @@ command ``make documentation``, defined in the Makefile.
 
 - Review all code, searching for bugs, memory leaks, optimizations,
   restructuring possibilities (some ideas in mind).
-- Add a resolution to when we try to reach the entry of a map that
-  doesn't exist (currently gives undefined behaviour). Search for
-  all maps in implementations. AssetManager has a few.

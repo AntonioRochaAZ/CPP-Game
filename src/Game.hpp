@@ -69,12 +69,20 @@ public:
             ///< Get a texture from the \ref AssetManager::texture_map "texture_map".
         TexTup get_tuple(std::string id);  
             ///< Get complete information from a texture (SDL_Texture* object, width and height).
+        void destroy_texture(std::string id);
+            ///< Destroy a texture based on its ID. This can be called when a given texture is
+            ///< no longer used. This will also remove the map entry (necessary to avoid issues in
+            ///< the destructor).
 
         // FONT MANAGEMENT ------------------------------------------------------------------
         void add_font(std::string id, std::string path, int font_size);
             ///< Add a new font to the \ref AssetManager::font_map "font_map", under the ID "id".
         TTF_Font* get_font(std::string id);
             ///< Get a font object from its ID.
+        void destroy_font(std::string id);
+            ///< Close a font based on its ID. This can be called when a given font is
+            ///< no longer used. This will also remove the map entry (necessary to avoid issues in
+            ///< the destructor).
     };
 
     static AssetManager assets;   
