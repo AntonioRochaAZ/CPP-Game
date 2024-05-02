@@ -45,7 +45,9 @@ TexTup Game::AssetManager::get_tuple(std::string id){
 
 void Game::AssetManager::destroy_texture(std::string id){
     check_map_id<std::string, SDL_Texture*>(texture_map, id, "destroy_texture, texture_map");
-    SDL_DestroyTexture(texture_map[id]); texture_map.erase(id); }
+    SDL_DestroyTexture(texture_map[id]); 
+    texture_map.erase(id); width_map.erase(id); height_map.erase(id);
+}
 
 // Font Management: -------------------------------------------------------------------------------
 void Game::AssetManager::add_font(std::string id, std::string path, int font_size){
