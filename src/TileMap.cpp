@@ -170,7 +170,6 @@ void TileMap::load_map(std::string path){
                         std::string local_name = entity_vector[nb_xtiles*y + x]->get_name();
                         entity_vector[nb_xtiles*y + x]->addComponent<Collider>(
                             local_name, tile_width, tile_height);
-                        entity_vector[nb_xtiles*y + x]->getComponent<Collider>().init();
                     }
                 }
                 // map_file.get(tile);     // A number.

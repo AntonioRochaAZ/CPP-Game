@@ -13,7 +13,7 @@
 SDL_Texture pointer, the texture's width and its height, respectively. */
 using TexTup = std::tuple<SDL_Texture*, int, int>;
 
-class Collider; // Forward declaration of the Collider class.
+class Collider; // Forward declaration of the Collider class (otherwise, circular import).
 
 /** Game class definition, used for running the game and handling events. Most functions are
 defined in Game.cpp. */

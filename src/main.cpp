@@ -13,6 +13,13 @@ int main(int argc, const char* argv[]) {
     constexpr int frame_delay = 1000/FPS;   // Max time between frames
     Uint32 frame_start;                 //
     int frame_time;                     //
+    
+    /* Trying parallelism.
+    #pragma omp parallel for
+    for(int i = 0; i < 10; i++){
+        std::cout << "Thread nb. " << omp_get_thread_num() << "i:" << i << std::endl;
+    }*/
+    
 
     game = new Game();
     // TODO: Segmentation fault when clicking the executable comes from game->init instruction below:

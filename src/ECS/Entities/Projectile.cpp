@@ -1,4 +1,5 @@
 #include "Projectile.hpp"
+#include "../Components/Collider.hpp"
 #include "../Components/Transform.hpp"
 #include "../Components/Sprite.hpp"
 #include "../../Game.hpp"
@@ -9,11 +10,19 @@ Projectile::Projectile(Manager& man, std::string name, std::string sprite_name, 
     Entity(man, name), range(rng), distance(0), flying_animation(fly){
     // Animation charging(4, 20, 6, 3), flying(1, 10000, 6, 3);
     
+    this->addComponent<Collider>(name, 10, 10, DESTROY_ON_COLLISION);   // temporary width and height
     this->addComponent<Transform>(position, speed, velocity);
     this->addComponent<Sprite>(Game::assets.get_tuple(sprite_name), true);
     //this->getComponent<Sprite>().add_animation(charging, "Charging");
+
+    this->getComponent<Collider>().get_transform();
+    this->getComponent<Collider>().set_width(this->getComponent<Sprite>().get_dst_width());
+    this->getComponent<Collider>().set_height(this->getComponent<Sprite>().get_dst_height());
+    
     this->getComponent<Sprite>().add_animation(flying_animation, "Flying");
     this->getComponent<Sprite>().set_animation("Flying");
+
+
 };
 /*
 void Projectile::set_trajectory(Transform* ref_transform, int rng, float spd, vec vel){

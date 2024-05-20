@@ -60,8 +60,9 @@ command ``make documentation``, defined in the Makefile.
 > **KNOWN BUGS:**
     - Segmentation fault when launching the executable by double clicking (instead of using the command line).
       It comes from Game::init, but must still be debugged.
-    - Collision rubber bands player.
-    - Collision recognized when camera follows player, but player can go through objects.
+    - Collision recognized when camera follows player, but game crashes (it can't calculate how to avoid it because the player's velocity is zero.).
+    - When the camera is following the player, projectiles go up and down with it. This has to do with
+      the camera implementation (Projectiles don't have a KeyboardController).
 
 > Note:
     Folder *assets/fonts* is not provided, because I am not sure if the font I am using can be shared (Andale Mono,
@@ -71,3 +72,13 @@ command ``make documentation``, defined in the Makefile.
 
 - Review all code, searching for bugs, memory leaks, optimizations,
   restructuring possibilities (some ideas in mind).
+- Check if it really is useful to keep pointers to components inside
+  of other components, when we can simply reference other components
+  using ``component->entity->getComponent<OtherComponent>()``. Sure,
+  it is more verbose.
+- Move Collision handling to Collision.hpp.
+- Must think about the best
+  camera implementation.
+- Optimize rendering (stop rendering objects off-screen)
+- Make updating independent of FPS.
+- Create function for changing order of component updates (currently a mess).
