@@ -1,26 +1,32 @@
 #include "KeyboardController.hpp"
 #include "Collider.hpp"
+#include "../../utils.hpp"
 
 void KeyboardController::update(){
     // Check if a key is pressed:
     if (Game::event.type == SDL_KEYDOWN){
-        switch (Game::event.key.keysym.sym){
-        case SDLK_w:
+        // Check if the key is bound:
+        bool key_is_bound = check_map_id<int, std::size_t>(
+                key_bind_map, Game::event.key.keysym.sym, "", false);    // Message unnecessary since we'll not halt execution
+        if (key_is_bound){  // If so, go to switch statement:
+        std::size_t pressed_key = key_bind_map[Game::event.key.keysym.sym];
+        switch (pressed_key){
+        case UP_BUTTON:
             transform->set_vy(-1.0);
             sprite->set_animation("Walk");
             break;
-        case SDLK_a:
+        case LEFT_BUTTON:
             transform->set_vx(-1.0);
             sprite->set_animation("Walk");
             if (reverse_sprite){
                 sprite->sprite_flip = SDL_FLIP_HORIZONTAL;
             }
             break;
-        case SDLK_s:
+        case DOWN_BUTTON:
             transform->set_vy(1.0);
             sprite->set_animation("Walk");
             break;
-        case SDLK_d:
+        case RIGHT_BUTTON:
             transform->set_vx(1.0);
             sprite->set_animation("Walk");
             if (reverse_sprite){
@@ -28,7 +34,7 @@ void KeyboardController::update(){
                 sprite->sprite_flip = SDL_FLIP_NONE;
             }
             break;
-        case SDLK_k:
+        case ATTACK_B_BUTTON:
             if (!projectile && entity->has_group(PlayerGroup)){   
                 // For some reason, multiple projectiles were being created,
                 // resulting in segmentation fault. I've added this bool for the
@@ -49,28 +55,35 @@ void KeyboardController::update(){
             break;
         default:
             break;
-    }}
+        }}
+    }
     // Check if a key is released:
     if (Game::event.type == SDL_KEYUP){
-        switch (Game::event.key.keysym.sym){
-        case SDLK_w:
+        // Check if the key is bound:
+        bool key_is_bound = check_map_id<int, std::size_t>(
+                key_bind_map, Game::event.key.keysym.sym, "", false);    // Message unnecessary since we'll not halt execution
+        if (key_is_bound){  // If so, go to switch statement:
+        std::size_t pressed_key = key_bind_map[Game::event.key.keysym.sym];
+        switch (pressed_key){
+        case UP_BUTTON:
             transform->set_vy(0.0);
             break;
-        case SDLK_a:
+        case LEFT_BUTTON:
             transform->set_vx(0.0);
             break;
-        case SDLK_s:
+        case DOWN_BUTTON:
             transform->set_vy(0.0);
             break;
-        case SDLK_d:
+        case RIGHT_BUTTON:
             transform->set_vx(0.0);
             break;
-        case SDLK_k:
+        case ATTACK_B_BUTTON:
             projectile=false;
             break;
         default:
             break;
-    }}
+        }}
+    }
     if (transform->get_velocity().norm() == 0){
         sprite->set_animation("Idle");
     }

@@ -3,7 +3,11 @@
 #include "ECS/Components.hpp"
 #include "Collision.hpp"
 #include <sstream>
+#include "ECS/Components/KeyboardController.hpp"
+#include "utils.hpp"
 
+// From KeyboardController.hpp:
+std::map<int, std::size_t> key_bind_map;
 
 //Map* tile_map;
 Manager manager;
@@ -63,6 +67,18 @@ int Game::init(const char* title, int x, int y, int width, int height, bool full
         std::cout << "Renderer creation problem.";
         return 3;
     };
+
+    // Set key maps up:
+    key_bind_map.emplace(SDLK_w, UP_BUTTON);
+    key_bind_map.emplace(SDLK_s, DOWN_BUTTON);
+    key_bind_map.emplace(SDLK_a, LEFT_BUTTON);
+    key_bind_map.emplace(SDLK_d, RIGHT_BUTTON);
+    key_bind_map.emplace(SDLK_j, ATTACK_A_BUTTON);
+    key_bind_map.emplace(SDLK_k, ATTACK_B_BUTTON);
+    key_bind_map.emplace(SDLK_p, CAMERA_TOGGLE_BUTTON);
+    key_bind_map.emplace(SDLK_ESCAPE, QUIT_BUTTON);
+    std::cout << key_bind_map[SDLK_k] << std::endl;
+
     // Change color of the renderer (black by default)
     // renderer, r, g, b, alpha (255 is opaque, 0 is transparent)
     SDL_SetRenderDrawColor(renderer, 0, 255, 120, 255);
@@ -105,7 +121,7 @@ int Game::init(const char* title, int x, int y, int width, int height, bool full
     SDL_Color white = { 255, 255, 255, 255 };
     label.addComponent<Transform>();
     label.addComponent<UILabel>(0.0, 0.0, 4000, 2000, "Hello there", "andale", white);
-
+    
     // Ok, it is running now:
     is_running = true;
     return 0;
@@ -115,31 +131,34 @@ int Game::init(const char* title, int x, int y, int width, int height, bool full
 void Game::handle_events(){
     
     SDL_PollEvent(&event);
+    bool key_is_bound;
     switch (event.type){
         case SDL_KEYDOWN:
-            switch (event.key.keysym.sym){
-                case SDLK_p:
+            // Check if the key is bound:
+            key_is_bound = check_map_id<int, std::size_t>(
+                    key_bind_map, event.key.keysym.sym, "", false);    // Message unnecessary since we'll not halt execution
+            if (key_is_bound){  // If so, go to switch statement:
+            std::size_t pressed_key = key_bind_map[event.key.keysym.sym];
+            switch (pressed_key){
+                case CAMERA_TOGGLE_BUTTON:
                     if (Game::tracking_player){
                         // This condition must be met, otherwise
                         // will have a bug where neither the map not
                         // the player doesn't move
                         Game::tracking_player = false;
                         background.update_tracking();
-                    }
-                    break;
-                case SDLK_l:
-                    if (!Game::tracking_player){
+                    }else{
                         // This condition is necessary (see SDLK_p comment)
                         Game::tracking_player = true;
                         background.update_tracking();
                     }
                     break;
-                case SDLK_ESCAPE:
+                case QUIT_BUTTON:
                     is_running = false;
                     break;
                 default:
                     break;
-            }
+            }}
             break;
         case SDL_QUIT:
             is_running = false;

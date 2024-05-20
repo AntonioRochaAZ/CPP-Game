@@ -19,13 +19,19 @@
         ``std::cout << "Function and map names: " << message << "; ID: " << id << std::endl;``
 */
 template <typename T1, typename T2>
-void check_map_id(std::map<T1, T2> map, T1 id, std::string message){
+bool check_map_id(std::map<T1, T2> map, T1 id, std::string message, bool halt_execution = true){
 
     typename std::map< T1, T2 >::iterator map_iter = map.find(id);
 
     if (map_iter == map.end()){
-        std::cout << "ERROR: ID passed to Map is unknown.\n";
-        std::cout << "Function and map names: " << message << "; ID: " << id << std::endl; 
-        throw std::invalid_argument(id);
+        if (halt_execution){
+            std::cout << "ERROR: ID passed to Map is unknown.\n";
+            std::cout << "Function and map names: " << message << "; ID: " << id << std::endl; 
+            throw std::invalid_argument("utils.hpp: check_map_id");
+        }else{
+            return false;
+        }
+    }else{
+        return true;
     }
 };

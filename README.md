@@ -12,8 +12,8 @@ The game is 2D and has an "8-bit" style. The assets in this
 repository are original and are made in [Aseprite](https://www.aseprite.org/).
 
 ## Current state of development
-> You can now toggle whether the camera should follow the player or not with the
-> P and L keys. You can also exit the game by clicking ESC. You can shoot projectiles
+> You can now toggle whether the camera should follow the player or not with
+> P. You can also exit the game by clicking ESC. You can shoot projectiles
 > with K.
 
 ![Current state of development](assets/current.gif)
