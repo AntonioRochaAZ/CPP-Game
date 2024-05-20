@@ -168,6 +168,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="docs_src/Game.html">Game class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs_src/TileMap.html">TileMap class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs_src/utils.html">Utils</a></li>
 </ul>
 
 </div>
@@ -204,23 +205,37 @@
           
 <section class="genindex-section">
   <h1 id="index">Index</h1>
-  <div class="genindex-jumpbox"><a href="#C"><strong>C</strong></a> | <a href="#E"><strong>E</strong></a> | <a href="#G"><strong>G</strong></a> | <a href="#K"><strong>K</strong></a> | <a href="#M"><strong>M</strong></a> | <a href="#S"><strong>S</strong></a> | <a href="#T"><strong>T</strong></a> | <a href="#U"><strong>U</strong></a> | <a href="#V"><strong>V</strong></a></div>
+  <div class="genindex-jumpbox"><a href="#C"><strong>C</strong></a> | <a href="#E"><strong>E</strong></a> | <a href="#G"><strong>G</strong></a> | <a href="#K"><strong>K</strong></a> | <a href="#M"><strong>M</strong></a> | <a href="#P"><strong>P</strong></a> | <a href="#S"><strong>S</strong></a> | <a href="#T"><strong>T</strong></a> | <a href="#U"><strong>U</strong></a> | <a href="#V"><strong>V</strong></a></div>
 </section>
 <section id="C" class="genindex-section">
   <h2>C</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="docs_src/utils.html#_CPPv4I00E12check_map_idvNSt3mapI2T12T2EE2T1NSt6stringE">check_map_id (C++ function)</a>
+</li>
         <li><a href="docs_src/ECS/Components/Collider.html#_CPPv48Collider">Collider (C++ class)</a>
 </li>
-        <li><a href="docs_src/ECS/Components/Collider.html#_CPPv4N8Collider8ColliderENSt6stringE">Collider::Collider (C++ function)</a>, <a href="docs_src/ECS/Components/Collider.html#_CPPv4N8Collider8ColliderENSt6stringEii">[1]</a>, <a href="docs_src/ECS/Components/Collider.html#_CPPv4N8Collider8ColliderEv">[2]</a>
+        <li><a href="docs_src/ECS/Components/Collider.html#_CPPv4N8Collider8ColliderENSt6stringE">Collider::Collider (C++ function)</a>, <a href="docs_src/ECS/Components/Collider.html#_CPPv4N8Collider8ColliderENSt6stringENSt6size_tENSt6size_tE">[1]</a>, <a href="docs_src/ECS/Components/Collider.html#_CPPv4N8Collider8ColliderENSt6stringEii">[2]</a>, <a href="docs_src/ECS/Components/Collider.html#_CPPv4N8Collider8ColliderENSt6stringEiiNSt6size_tE">[3]</a>, <a href="docs_src/ECS/Components/Collider.html#_CPPv4N8Collider8ColliderEv">[4]</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Collider.html#_CPPv4N8Collider9get_shapeEv">Collider::get_shape (C++ function)</a>
 </li>
         <li><a href="docs_src/ECS/Components/Collider.html#_CPPv4NK8Collider7get_tagEv">Collider::get_tag (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Collider.html#_CPPv4N8Collider13get_transformEv">Collider::get_transform (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Collider.html#_CPPv4N8Collider15handling_optionE">Collider::handling_option (C++ member)</a>
 </li>
         <li><a href="docs_src/ECS/Components/Collider.html#_CPPv4N8Collider6heightE">Collider::height (C++ member)</a>
 </li>
         <li><a href="docs_src/ECS/Components/Collider.html#_CPPv4N8Collider4initEv">Collider::init (C++ function)</a>
 </li>
+        <li><a href="docs_src/ECS/Components/Collider.html#_CPPv4N8Collider26projectile_handling_optionE">Collider::projectile_handling_option (C++ member)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Collider.html#_CPPv4N8Collider16set_col_handlingENSt6size_tE">Collider::set_col_handling (C++ function)</a>
+</li>
         <li><a href="docs_src/ECS/Components/Collider.html#_CPPv4N8Collider10set_heightEi">Collider::set_height (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Collider.html#_CPPv4N8Collider17set_proj_handlingENSt6size_tE">Collider::set_proj_handling (C++ function)</a>
 </li>
         <li><a href="docs_src/ECS/Components/Collider.html#_CPPv4N8Collider9set_widthEi">Collider::set_width (C++ function)</a>
 </li>
@@ -231,6 +246,18 @@
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="docs_src/ECS/Components/Collider.html#_CPPv4N8Collider5widthE">Collider::width (C++ member)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Collider.html#_CPPv4N8ColliderD0Ev">Collider::~Collider (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Collider.html#_CPPv416collision_handle">collision_handle (C++ enum)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Collider.html#_CPPv4N16collision_handle20DESTROY_ON_COLLISIONE">collision_handle::DESTROY_ON_COLLISION (C++ enumerator)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Collider.html#_CPPv4N16collision_handle22IMMOVABLE_ON_COLLISIONE">collision_handle::IMMOVABLE_ON_COLLISION (C++ enumerator)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Collider.html#_CPPv4N16collision_handle14MOVABLE_OBJECTE">collision_handle::MOVABLE_OBJECT (C++ enumerator)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Collider.html#_CPPv4N16collision_handle17PUSH_ON_COLLISIONE">collision_handle::PUSH_ON_COLLISION (C++ enumerator)</a>
 </li>
         <li><a href="docs_src/ECS/ECS.html#_CPPv49Component">Component (C++ class)</a>
 </li>
@@ -312,65 +339,69 @@
   <h2>G</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="docs_src/Game.html#_CPPv44Game">Game (C++ class)</a>, <a href="docs_src/TileMap.html#_CPPv44Game">[1]</a>
+        <li><a href="docs_src/Game.html#_CPPv44Game">Game (C++ class)</a>
 </li>
-        <li><a href="docs_src/Game.html#_CPPv4N4Game12AssetManagerE">Game::AssetManager (C++ class)</a>, <a href="docs_src/TileMap.html#_CPPv4N4Game12AssetManagerE">[1]</a>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game12AssetManagerE">Game::AssetManager (C++ class)</a>
 </li>
-        <li><a href="docs_src/Game.html#_CPPv4N4Game12AssetManager8add_fontENSt6stringENSt6stringEi">Game::AssetManager::add_font (C++ function)</a>, <a href="docs_src/TileMap.html#_CPPv4N4Game12AssetManager8add_fontENSt6stringENSt6stringEi">[1]</a>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game12AssetManager8add_fontENSt6stringENSt6stringEi">Game::AssetManager::add_font (C++ function)</a>
 </li>
-        <li><a href="docs_src/Game.html#_CPPv4N4Game12AssetManager11add_textureENSt6stringENSt6stringE">Game::AssetManager::add_texture (C++ function)</a>, <a href="docs_src/TileMap.html#_CPPv4N4Game12AssetManager11add_textureENSt6stringENSt6stringE">[1]</a>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game12AssetManager11add_textureENSt6stringENSt6stringE">Game::AssetManager::add_texture (C++ function)</a>
 </li>
-        <li><a href="docs_src/Game.html#_CPPv4N4Game12AssetManager12AssetManagerEv">Game::AssetManager::AssetManager (C++ function)</a>, <a href="docs_src/TileMap.html#_CPPv4N4Game12AssetManager12AssetManagerEv">[1]</a>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game12AssetManager12AssetManagerEv">Game::AssetManager::AssetManager (C++ function)</a>
 </li>
-        <li><a href="docs_src/Game.html#_CPPv4N4Game12AssetManager8font_mapE">Game::AssetManager::font_map (C++ member)</a>, <a href="docs_src/TileMap.html#_CPPv4N4Game12AssetManager8font_mapE">[1]</a>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game12AssetManager12destroy_fontENSt6stringE">Game::AssetManager::destroy_font (C++ function)</a>
 </li>
-        <li><a href="docs_src/Game.html#_CPPv4N4Game12AssetManager8get_fontENSt6stringE">Game::AssetManager::get_font (C++ function)</a>, <a href="docs_src/TileMap.html#_CPPv4N4Game12AssetManager8get_fontENSt6stringE">[1]</a>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game12AssetManager15destroy_textureENSt6stringE">Game::AssetManager::destroy_texture (C++ function)</a>
 </li>
-        <li><a href="docs_src/Game.html#_CPPv4N4Game12AssetManager11get_textureENSt6stringE">Game::AssetManager::get_texture (C++ function)</a>, <a href="docs_src/TileMap.html#_CPPv4N4Game12AssetManager11get_textureENSt6stringE">[1]</a>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game12AssetManager8font_mapE">Game::AssetManager::font_map (C++ member)</a>
 </li>
-        <li><a href="docs_src/Game.html#_CPPv4N4Game12AssetManager9get_tupleENSt6stringE">Game::AssetManager::get_tuple (C++ function)</a>, <a href="docs_src/TileMap.html#_CPPv4N4Game12AssetManager9get_tupleENSt6stringE">[1]</a>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game12AssetManager8get_fontENSt6stringE">Game::AssetManager::get_font (C++ function)</a>
 </li>
-        <li><a href="docs_src/Game.html#_CPPv4N4Game12AssetManager10height_mapE">Game::AssetManager::height_map (C++ member)</a>, <a href="docs_src/TileMap.html#_CPPv4N4Game12AssetManager10height_mapE">[1]</a>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game12AssetManager11get_textureENSt6stringE">Game::AssetManager::get_texture (C++ function)</a>
 </li>
-        <li><a href="docs_src/Game.html#_CPPv4N4Game12AssetManager11texture_mapE">Game::AssetManager::texture_map (C++ member)</a>, <a href="docs_src/TileMap.html#_CPPv4N4Game12AssetManager11texture_mapE">[1]</a>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game12AssetManager9get_tupleENSt6stringE">Game::AssetManager::get_tuple (C++ function)</a>
 </li>
-        <li><a href="docs_src/Game.html#_CPPv4N4Game12AssetManager9width_mapE">Game::AssetManager::width_map (C++ member)</a>, <a href="docs_src/TileMap.html#_CPPv4N4Game12AssetManager9width_mapE">[1]</a>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game12AssetManager10height_mapE">Game::AssetManager::height_map (C++ member)</a>
 </li>
-        <li><a href="docs_src/Game.html#_CPPv4N4Game12AssetManagerD0Ev">Game::AssetManager::~AssetManager (C++ function)</a>, <a href="docs_src/TileMap.html#_CPPv4N4Game12AssetManagerD0Ev">[1]</a>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game12AssetManager11texture_mapE">Game::AssetManager::texture_map (C++ member)</a>
 </li>
-        <li><a href="docs_src/Game.html#_CPPv4N4Game6assetsE">Game::assets (C++ member)</a>, <a href="docs_src/TileMap.html#_CPPv4N4Game6assetsE">[1]</a>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game12AssetManager9width_mapE">Game::AssetManager::width_map (C++ member)</a>
 </li>
-        <li><a href="docs_src/Game.html#_CPPv4N4Game5cleanEv">Game::clean (C++ function)</a>, <a href="docs_src/TileMap.html#_CPPv4N4Game5cleanEv">[1]</a>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game12AssetManagerD0Ev">Game::AssetManager::~AssetManager (C++ function)</a>
 </li>
-        <li><a href="docs_src/Game.html#_CPPv4N4Game15collider_vectorE">Game::collider_vector (C++ member)</a>, <a href="docs_src/TileMap.html#_CPPv4N4Game15collider_vectorE">[1]</a>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game6assetsE">Game::assets (C++ member)</a>
 </li>
-        <li><a href="docs_src/Game.html#_CPPv4N4Game5eventE">Game::event (C++ member)</a>, <a href="docs_src/TileMap.html#_CPPv4N4Game5eventE">[1]</a>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game5cleanEv">Game::clean (C++ function)</a>
 </li>
-        <li><a href="docs_src/Game.html#_CPPv4N4Game4GameEv">Game::Game (C++ function)</a>, <a href="docs_src/TileMap.html#_CPPv4N4Game4GameEv">[1]</a>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game15collider_vectorE">Game::collider_vector (C++ member)</a>
 </li>
-        <li><a href="docs_src/Game.html#_CPPv4N4Game13handle_eventsEv">Game::handle_events (C++ function)</a>, <a href="docs_src/TileMap.html#_CPPv4N4Game13handle_eventsEv">[1]</a>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game5eventE">Game::event (C++ member)</a>
+</li>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game4GameEv">Game::Game (C++ function)</a>
 </li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="docs_src/Game.html#_CPPv4N4Game4initEPKciiiib">Game::init (C++ function)</a>, <a href="docs_src/TileMap.html#_CPPv4N4Game4initEPKciiiib">[1]</a>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game13handle_eventsEv">Game::handle_events (C++ function)</a>
 </li>
-        <li><a href="docs_src/Game.html#_CPPv4N4Game10is_runningE">Game::is_running (C++ member)</a>, <a href="docs_src/TileMap.html#_CPPv4N4Game10is_runningE">[1]</a>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game4initEPKciiiib">Game::init (C++ function)</a>
 </li>
-        <li><a href="docs_src/Game.html#_CPPv4N4Game6renderEv">Game::render (C++ function)</a>, <a href="docs_src/TileMap.html#_CPPv4N4Game6renderEv">[1]</a>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game10is_runningE">Game::is_running (C++ member)</a>
 </li>
-        <li><a href="docs_src/Game.html#_CPPv4N4Game8rendererE">Game::renderer (C++ member)</a>, <a href="docs_src/TileMap.html#_CPPv4N4Game8rendererE">[1]</a>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game6renderEv">Game::render (C++ function)</a>
 </li>
-        <li><a href="docs_src/Game.html#_CPPv4N4Game7runningEv">Game::running (C++ function)</a>, <a href="docs_src/TileMap.html#_CPPv4N4Game7runningEv">[1]</a>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game8rendererE">Game::renderer (C++ member)</a>
 </li>
-        <li><a href="docs_src/Game.html#_CPPv4N4Game15tracking_playerE">Game::tracking_player (C++ member)</a>, <a href="docs_src/TileMap.html#_CPPv4N4Game15tracking_playerE">[1]</a>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game7runningEv">Game::running (C++ function)</a>
 </li>
-        <li><a href="docs_src/Game.html#_CPPv4N4Game6updateEv">Game::update (C++ function)</a>, <a href="docs_src/TileMap.html#_CPPv4N4Game6updateEv">[1]</a>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game15tracking_playerE">Game::tracking_player (C++ member)</a>
 </li>
-        <li><a href="docs_src/Game.html#_CPPv4N4Game14update_counterE">Game::update_counter (C++ member)</a>, <a href="docs_src/TileMap.html#_CPPv4N4Game14update_counterE">[1]</a>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game6updateEv">Game::update (C++ function)</a>
 </li>
-        <li><a href="docs_src/Game.html#_CPPv4N4Game6windowE">Game::window (C++ member)</a>, <a href="docs_src/TileMap.html#_CPPv4N4Game6windowE">[1]</a>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game14update_counterE">Game::update_counter (C++ member)</a>
 </li>
-        <li><a href="docs_src/Game.html#_CPPv4N4GameD0Ev">Game::~Game (C++ function)</a>, <a href="docs_src/TileMap.html#_CPPv4N4GameD0Ev">[1]</a>
+        <li><a href="docs_src/Game.html#_CPPv4N4Game6windowE">Game::window (C++ member)</a>
+</li>
+        <li><a href="docs_src/Game.html#_CPPv4N4GameD0Ev">Game::~Game (C++ function)</a>
 </li>
         <li><a href="docs_src/ECS/ECS.html#_CPPv4I0E18getComponentTypeID11ComponentIDv">getComponentTypeID (C++ function)</a>
 </li>
@@ -436,19 +467,39 @@
 </li>
         <li><a href="docs_src/ECS/ECS.html#_CPPv4N7Manager9get_groupE5Group">Manager::get_group (C++ function)</a>
 </li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="docs_src/ECS/ECS.html#_CPPv4N7Manager16grouped_entitiesE">Manager::grouped_entities (C++ member)</a>
 </li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="docs_src/ECS/ECS.html#_CPPv4N7Manager7refreshEv">Manager::refresh (C++ function)</a>
 </li>
         <li><a href="docs_src/ECS/ECS.html#_CPPv4N7Manager6renderEv">Manager::render (C++ function)</a>
 </li>
         <li><a href="docs_src/ECS/ECS.html#_CPPv4N7Manager6updateEv">Manager::update (C++ function)</a>
 </li>
+        <li><a href="docs_src/TileMap.html#_CPPv49map_shape">map_shape (C++ type)</a>
+</li>
         <li><a href="docs_src/ECS/ECS.html#_CPPv414max_components">max_components (C++ member)</a>
 </li>
         <li><a href="docs_src/ECS/ECS.html#_CPPv410max_groups">max_groups (C++ member)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="P" class="genindex-section">
+  <h2>P</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="docs_src/ECS/Components/Collider.html#_CPPv417projectile_handle">projectile_handle (C++ enum)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Collider.html#_CPPv4N17projectile_handle20DAMAGE_ON_PROJECTILEE">projectile_handle::DAMAGE_ON_PROJECTILE (C++ enumerator)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="docs_src/ECS/Components/Collider.html#_CPPv4N17projectile_handle21DESTROY_ON_PROJECTILEE">projectile_handle::DESTROY_ON_PROJECTILE (C++ enumerator)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/Collider.html#_CPPv4N17projectile_handle28INDESTRUCTABLE_ON_PROJECTILEE">projectile_handle::INDESTRUCTABLE_ON_PROJECTILE (C++ enumerator)</a>
 </li>
     </ul></td>
   </tr></table>
@@ -570,7 +621,59 @@
   <h2>T</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="docs_src/Game.html#_CPPv46TexTup">TexTup (C++ type)</a>, <a href="docs_src/TileMap.html#_CPPv46TexTup">[1]</a>
+        <li><a href="docs_src/Game.html#_CPPv46TexTup">TexTup (C++ type)</a>
+</li>
+        <li><a href="docs_src/TileMap.html#_CPPv47TileMap">TileMap (C++ class)</a>
+</li>
+        <li><a href="docs_src/TileMap.html#_CPPv4N7TileMap11ids_per_rowE">TileMap::ids_per_row (C++ member)</a>
+</li>
+        <li><a href="docs_src/TileMap.html#_CPPv4N7TileMap12image_heightE">TileMap::image_height (C++ member)</a>
+</li>
+        <li><a href="docs_src/TileMap.html#_CPPv4N7TileMap11image_widthE">TileMap::image_width (C++ member)</a>
+</li>
+        <li><a href="docs_src/TileMap.html#_CPPv4N7TileMap4initEiiiiNSt5tupleIP11SDL_TextureiiEE">TileMap::init (C++ function)</a>
+</li>
+        <li><a href="docs_src/TileMap.html#_CPPv4N7TileMap8load_mapENSt6stringE">TileMap::load_map (C++ function)</a>
+</li>
+        <li><a href="docs_src/TileMap.html#_CPPv4N7TileMap3mapE">TileMap::map (C++ member)</a>
+</li>
+        <li><a href="docs_src/TileMap.html#_CPPv4N7TileMap4nameE">TileMap::name (C++ member)</a>
+</li>
+        <li><a href="docs_src/TileMap.html#_CPPv4N7TileMap6nb_idsE">TileMap::nb_ids (C++ member)</a>
+</li>
+        <li><a href="docs_src/TileMap.html#_CPPv4N7TileMap9nb_xtilesE">TileMap::nb_xtiles (C++ member)</a>
+</li>
+        <li><a href="docs_src/TileMap.html#_CPPv4N7TileMap9nb_ytilesE">TileMap::nb_ytiles (C++ member)</a>
+</li>
+        <li><a href="docs_src/TileMap.html#_CPPv4N7TileMap12set_dst_sizeEii">TileMap::set_dst_size (C++ function)</a>
+</li>
+        <li><a href="docs_src/TileMap.html#_CPPv4N7TileMap12set_positionEii">TileMap::set_position (C++ function)</a>
+</li>
+        <li><a href="docs_src/TileMap.html#_CPPv4N7TileMap5setupEii">TileMap::setup (C++ function)</a>
+</li>
+        <li><a href="docs_src/TileMap.html#_CPPv4N7TileMap13sprite_heightE">TileMap::sprite_height (C++ member)</a>
+</li>
+        <li><a href="docs_src/TileMap.html#_CPPv4N7TileMap12sprite_widthE">TileMap::sprite_width (C++ member)</a>
+</li>
+        <li><a href="docs_src/TileMap.html#_CPPv4N7TileMap7textureE">TileMap::texture (C++ member)</a>
+</li>
+        <li><a href="docs_src/TileMap.html#_CPPv4N7TileMap11texture_posE">TileMap::texture_pos (C++ member)</a>
+</li>
+        <li><a href="docs_src/TileMap.html#_CPPv4N7TileMap11tile_heightE">TileMap::tile_height (C++ member)</a>
+</li>
+        <li><a href="docs_src/TileMap.html#_CPPv4N7TileMap11tile_playerE">TileMap::tile_player (C++ member)</a>
+</li>
+        <li><a href="docs_src/TileMap.html#_CPPv4N7TileMap10tile_widthE">TileMap::tile_width (C++ member)</a>
+</li>
+        <li><a href="docs_src/TileMap.html#_CPPv4N7TileMap7TileMapENSt6stringE">TileMap::TileMap (C++ function)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="docs_src/TileMap.html#_CPPv4N7TileMap15update_trackingEv">TileMap::update_tracking (C++ function)</a>
+</li>
+        <li><a href="docs_src/TileMap.html#_CPPv4N7TileMap2x0E">TileMap::x0 (C++ member)</a>
+</li>
+        <li><a href="docs_src/TileMap.html#_CPPv4N7TileMap2y0E">TileMap::y0 (C++ member)</a>
 </li>
         <li><a href="docs_src/ECS/Components/Transform.html#_CPPv49Transform">Transform (C++ class)</a>
 </li>
@@ -590,8 +693,6 @@
 </li>
         <li><a href="docs_src/ECS/Components/Transform.html#_CPPv4N9Transform8positionE">Transform::position (C++ member)</a>
 </li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="docs_src/ECS/Components/Transform.html#_CPPv4N9Transform12set_positionE3vec">Transform::set_position (C++ function)</a>, <a href="docs_src/ECS/Components/Transform.html#_CPPv4N9Transform12set_positionEff">[1]</a>
 </li>
         <li><a href="docs_src/ECS/Components/Transform.html#_CPPv4N9Transform9set_speedEf">Transform::set_speed (C++ function)</a>
@@ -638,6 +739,8 @@
 </li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="docs_src/ECS/Components/UILabel.html#_CPPv4N7UILabel13set_transformEP9Transform">UILabel::set_transform (C++ function)</a>
+</li>
         <li><a href="docs_src/ECS/Components/UILabel.html#_CPPv4N7UILabel5shiftE">UILabel::shift (C++ member)</a>
 </li>
         <li><a href="docs_src/ECS/Components/UILabel.html#_CPPv4N7UILabel4textE">UILabel::text (C++ member)</a>

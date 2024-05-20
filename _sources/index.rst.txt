@@ -13,6 +13,7 @@ Welcome to CPP Game's documentation!
    Entity Component System (ECS) <docs_src/ECS/ECS.rst>
    Game class <docs_src/Game.rst>
    TileMap class <docs_src/TileMap.rst>
+   Utils <docs_src/utils.rst>
 
 
 Indices and tables

@@ -170,6 +170,7 @@
 </li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Game class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="TileMap.html">TileMap class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">Utils</a></li>
 </ul>
 
 </div>
@@ -221,7 +222,7 @@
 <span class="target" id="class_game"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Game</span></span></span><a class="headerlink" href="#_CPPv44Game" title="Permalink to this definition">#</a><br /></dt>
 <dd><div class="docutils container">
 <em>#include &lt;Game.hpp&gt;</em></div>
-<p><a class="reference internal" href="TileMap.html#class_game"><span class="std std-ref">Game</span></a> class definition, used for running the game and handling events. Most functions are defined in Game.cpp. </p>
+<p><a class="reference internal" href="#class_game"><span class="std std-ref">Game</span></a> class definition, used for running the game and handling events. Most functions are defined in Game.cpp. </p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
@@ -276,7 +277,7 @@
 <dt class="sig sig-object cpp" id="_CPPv4N4Game8rendererE">
 <span class="target" id="class_game_1ac7e25215d3da900e32769f9fde0c10d6"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">SDL_Renderer</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">renderer</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">nullptr</span></span><a class="headerlink" href="#_CPPv4N4Game8rendererE" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Renderer object responsible for rendering objects. </p>
-<p>Definition of <a class="reference internal" href="TileMap.html#class_game"><span class="std std-ref">Game</span></a> object’s static variables:</p>
+<p>Definition of <a class="reference internal" href="#class_game"><span class="std std-ref">Game</span></a> object’s static variables:</p>
 <p>To tell if the game is still running. It is called in the main function at each tick, to determine whether to finish execution or not. </p>
 </dd></dl>
 
@@ -301,7 +302,7 @@
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N4Game6assetsE">
 <span class="target" id="class_game_1a37cea32973064156c47f1f66c9f00f44"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N4Game12AssetManagerE" title="Game::AssetManager"><span class="n"><span class="pre">AssetManager</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">assets</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv44Game" title="Game"><span class="n"><span class="pre">Game</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N4Game12AssetManagerE" title="Game::AssetManager"><span class="n"><span class="pre">AssetManager</span></span></a><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#_CPPv4N4Game6assetsE" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>The game’s <a class="reference internal" href="TileMap.html#class_game_1_1_asset_manager"><span class="std std-ref">AssetManager</span></a> instance, which handles textures and fonts. </p>
+<dd><p>The game’s <a class="reference internal" href="#class_game_1_1_asset_manager"><span class="std std-ref">AssetManager</span></a> instance, which handles textures and fonts. </p>
 </dd></dl>
 
 </div>
@@ -331,7 +332,7 @@
 <span class="target" id="class_game_1_1_asset_manager"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">AssetManager</span></span></span><a class="headerlink" href="#_CPPv4N4Game12AssetManagerE" title="Permalink to this definition">#</a><br /></dt>
 <dd><div class="docutils container">
 <em>#include &lt;Game.hpp&gt;</em></div>
-<p>Definition of the <a class="reference internal" href="TileMap.html#class_game_1_1_asset_manager"><span class="std std-ref">AssetManager</span></a> class, which manages textures and fonts. Function definitions are made in AssetManager.cpp. This class had to be defined in this file because it depends on the <a class="reference internal" href="TileMap.html#class_game"><span class="std std-ref">Game</span></a> class definition, which also depends on <a class="reference internal" href="TileMap.html#class_game_1_1_asset_manager"><span class="std std-ref">AssetManager</span></a>. Creating an AssetManager.hpp header would cause a circular import problem. </p>
+<p>Definition of the <a class="reference internal" href="#class_game_1_1_asset_manager"><span class="std std-ref">AssetManager</span></a> class, which manages textures and fonts. Function definitions are made in AssetManager.cpp. This class had to be defined in this file because it depends on the <a class="reference internal" href="#class_game"><span class="std std-ref">Game</span></a> class definition, which also depends on <a class="reference internal" href="#class_game_1_1_asset_manager"><span class="std std-ref">AssetManager</span></a>. Creating an AssetManager.hpp header would cause a circular import problem. </p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
@@ -364,6 +365,12 @@
 </dd></dl>
 
 <dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4Game12AssetManager15destroy_textureENSt6stringE">
+<span class="target" id="class_game_1_1_asset_manager_1ad18c32767b4f39d9c1151079f81eaf3e"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">destroy_texture</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">id</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4Game12AssetManager15destroy_textureENSt6stringE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Destroy a texture based on its ID. This can be called when a given texture is no longer used. This will also remove the map entry (necessary to avoid issues in the destructor). </p>
+</dd></dl>
+
+<dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N4Game12AssetManager8add_fontENSt6stringENSt6stringEi">
 <span class="target" id="class_game_1_1_asset_manager_1a392d88858d0cdb4a7f30fc90355d2ef8"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add_font</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">id</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">path</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">font_size</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4Game12AssetManager8add_fontENSt6stringENSt6stringEi" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Add a new font to the font_map, under the ID “id”. </p>
@@ -373,6 +380,12 @@
 <dt class="sig sig-object cpp" id="_CPPv4N4Game12AssetManager8get_fontENSt6stringE">
 <span class="target" id="class_game_1_1_asset_manager_1ab76fddc20e0076be376a44100cc58686"></span><span class="n"><span class="pre">TTF_Font</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">get_font</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">id</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4Game12AssetManager8get_fontENSt6stringE" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Get a font object from its ID. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4Game12AssetManager12destroy_fontENSt6stringE">
+<span class="target" id="class_game_1_1_asset_manager_1af22619c8bebd8bce9e0d31e2b525d973"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">destroy_font</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">id</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4Game12AssetManager12destroy_fontENSt6stringE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Close a font based on its ID. This can be called when a given font is no longer used. This will also remove the map entry (necessary to avoid issues in the destructor). </p>
 </dd></dl>
 
 </div>
