@@ -7,7 +7,7 @@ using vec = Eigen::Vector2f;
 
 class Collider;
 class Collision{
-    public:
+public:
     // Axis-Aligned Bounding Box collision: collision of two rectangles
     /*static bool rect_AABB(const SDL_Rect& RA, const SDL_Rect& RB){
         if (RA.transform->get_x() + RA.w >= RB.transform->get_x() &&
@@ -20,67 +20,48 @@ class Collision{
         }
     }
     */
-    static bool collider_AABB(const Collider *CA, const Collider *CB){
-        if (CA->transform->get_x() + CA->width  > CB->transform->get_x() &&
-            CB->transform->get_x() + CB->width  > CA->transform->get_x() &&
-            CA->transform->get_y() + CA->height > CB->transform->get_y() &&
-            CB->transform->get_y() + CB->height > CA->transform->get_y()){
 
-            std::cout << CA->get_tag() << " hit: " << CB->get_tag() << "\n";
-            return true;
-        }else{ return false; }
-    }
+    /** Function for checking if two colliders are colliding.
+    This function only checks for AABB collision, which considers that both
+    objects are rectangles (which is currently the implementation of the 
+    Collider component). */
+    static bool collider_AABB(const Collider *CA, const Collider *CB);
 
-    // static int collider_AABB(const Collider *CA, const Collider *CB){
-    //     int return_val = 1;
+    /** Function called when certain types of collision happens, inside of the
+    Collision::handle_collisions function. Specifically,
+    this function is called when an object's position must be set back in order
+    to avoid intersecting objects. This can happend between an immovable object
+    and a player (or another entity that cannot cross such objects), or between
+    two MOVABLE_OBJECTS etc.
 
+    In those cases, to solve the collision, one or both of the objects must be
+    moved back in the opposite direction of their velocity, until at least one of
+    the collision conditions defined in collider_AABB is no longer met. This is
+    done by calculating the amount of time we must rollback so that one of the 
+    conditions is no longer met. Than, we can use this time to update the objects'
+    positions (r = r_collision - speed * v * calculated time).
 
-    //     if (CA->transform->get_x() + CA->width  > CB->transform->get_x()){return_val *= 2;}
-    //     if (CB->transform->get_x() + CB->width  > CA->transform->get_x()){return_val *= 3;}
-    //     if (CA->transform->get_y() + CA->height > CB->transform->get_y()){return_val *= 5;}
-    //     if (CB->transform->get_y() + CB->height > CA->transform->get_y()){return_val *= 7;}
+    For more thorough information, check source code comments.
 
-    //     if (return_val != 1){
-    //         std::cout << CA->get_tag() << " hit: " << CB->get_tag() << "\n";
-    //         return return_val;
-    //     }else{ return 0; }
+    This function returns:
+        1. The amount of time we must rollback (float);
+        2. An integer indicating the index (starting at zer) of the condition 
+           which is not met. This is useful to knowing in which axis we have 
+           to reset the player's position.
 
-
-    // }
+    Why not pass the Colliders directly? In the case of IMMOVABLE objects, we'll
+    pass an artifical value of speed = 0, even if they are moving, so that we can
+    update the colliding MOVABLE_OBJECT correctly. Despite being much more verbose,
+    this function definition gives us more flexibility.
+    */
     static std::tuple<float, int> get_collision_time( 
         float xa,  float xb,  float ya,  float yb, float speed_a, float speed_b,
         float vxa, float vxb, float vya, float vyb, 
-        float wa,  float wb,  float ha,  float hb)
-    {
-        std::array<float, 4> t;     // Array for storing time values for each condition
-        float min_val = 100000;     // Smallest time value.
-        int best_idx = -1;
-        float dvx = speed_b*vxb - speed_a*vxa;  // Denominators (for checking division by zero)
-        float dvy = speed_b*vyb - speed_a*vya; 
+        float wa,  float wb,  float ha,  float hb);
 
-        if (dvx == 0 && dvy == 0){ 
-            // Object spawned (?) inside another (damn it)
-            std::cout << "Error calculating collision: speed difference = 0" << std::endl;
-            throw std::runtime_error("Game::update");
-        } // Otherwise, if one of the denominators is zero, increate the t value artificially,
-        // avoiding division by zero.
-        else if (dvx == 0){ dvx = 0.0001; } else if (dvy == 0) { dvy = 0.0001; }
 
-        t[0] = (xa - xb + wa)/(-dvx); // Changed sign of denominator (equates to inverting sign of velocities)
-        t[1] = (xb - xa + wb)/(dvx); // Changed sign of denominator (equates to inverting sign of velocities)
-        t[2] = (ya - yb + ha)/(-dvy); // Changed sign of denominator (equates to inverting sign of velocities)
-        t[3] = (yb - ya + hb)/(dvy); // Changed sign of denominator (equates to inverting sign of velocities)
+    /** As this name suggests, this function handles collisions, and is called inside
+    of Game::update for that reason. This docstring should be better developped later.*/
+    static void handle_collisions();
 
-        for (int idx = 0; idx < 4; idx++){  // Only positive t are valid
-            if (t[idx] < min_val && t[idx] > 0){ min_val = t[idx]; best_idx = idx; } }
-
-        if (min_val == 100000 || best_idx == -1){ // Couldn't find a valid t.
-            std::cout << "Error calculating collision: min_val and best_idx" << std::endl;
-            throw std::runtime_error("Game::update");
-        }
-
-        std::cout << "Something" << std::endl;  // Just for debugging.
-
-        return {min_val, best_idx};
-    }
 };

@@ -7,9 +7,9 @@ void KeyboardController::update(){
     if (Game::event.type == SDL_KEYDOWN){
         // Check if the key is bound:
         bool key_is_bound = check_map_id<int, std::size_t>(
-                key_bind_map, Game::event.key.keysym.sym, "", false);    // Message unnecessary since we'll not halt execution
+                local_key_bind_map, Game::event.key.keysym.sym, "", false);    // Message unnecessary since we'll not halt execution
         if (key_is_bound){  // If so, go to switch statement:
-        std::size_t pressed_key = key_bind_map[Game::event.key.keysym.sym];
+        std::size_t pressed_key = local_key_bind_map[Game::event.key.keysym.sym];
         switch (pressed_key){
         case UP_BUTTON:
             transform->set_vy(-1.0);
@@ -61,9 +61,9 @@ void KeyboardController::update(){
     if (Game::event.type == SDL_KEYUP){
         // Check if the key is bound:
         bool key_is_bound = check_map_id<int, std::size_t>(
-                key_bind_map, Game::event.key.keysym.sym, "", false);    // Message unnecessary since we'll not halt execution
+                local_key_bind_map, Game::event.key.keysym.sym, "", false);    // Message unnecessary since we'll not halt execution
         if (key_is_bound){  // If so, go to switch statement:
-        std::size_t pressed_key = key_bind_map[Game::event.key.keysym.sym];
+        std::size_t pressed_key = local_key_bind_map[Game::event.key.keysym.sym];
         switch (pressed_key){
         case UP_BUTTON:
             transform->set_vy(0.0);
