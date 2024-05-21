@@ -168,6 +168,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../Entities.html">Entities</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../../Collision.html">Collision</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Game.html">Game class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../TileMap.html">TileMap class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../utils.html">Utils</a></li>
@@ -209,8 +210,7 @@
 <h1>KeyboardController<a class="headerlink" href="#keyboardcontroller" title="Permalink to this heading">#</a></h1>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>This Component will likely be rewritten, so it is different according to the
-type of Entity etc.</p>
+<p>This Component is being reviewed.</p>
 </div>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-typedefs">Typedefs</p>
@@ -218,6 +218,64 @@ type of Entity etc.</p>
 <dt class="sig sig-object cpp" id="_CPPv43vec">
 <span class="target" id="_keyboard_controller_8hpp_1a8eef6d9f3318172ff1eeeb36a0ec9b70"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">vec</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">Eigen</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Vector2f</span></span><a class="headerlink" href="#_CPPv43vec" title="Permalink to this definition">#</a><br /></dt>
 <dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-enums">Enums</p>
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv413key_bind_enum">
+<span class="target" id="_keyboard_controller_8hpp_1a0cd25abae8d72832f3c997dee8f3f9d3"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">key_bind_enum</span></span></span><a class="headerlink" href="#_CPPv413key_bind_enum" title="Permalink to this definition">#</a><br /></dt>
+<dd><p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N13key_bind_enum9UP_BUTTONE">
+<span class="target" id="_keyboard_controller_8hpp_1a0cd25abae8d72832f3c997dee8f3f9d3a308e2dec294b93e1c691bacd5cd45266"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">UP_BUTTON</span></span></span><a class="headerlink" href="#_CPPv4N13key_bind_enum9UP_BUTTONE" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N13key_bind_enum11DOWN_BUTTONE">
+<span class="target" id="_keyboard_controller_8hpp_1a0cd25abae8d72832f3c997dee8f3f9d3a4ef6f8a30edabae1ea534aa7c4f79199"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">DOWN_BUTTON</span></span></span><a class="headerlink" href="#_CPPv4N13key_bind_enum11DOWN_BUTTONE" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N13key_bind_enum11LEFT_BUTTONE">
+<span class="target" id="_keyboard_controller_8hpp_1a0cd25abae8d72832f3c997dee8f3f9d3acc7c999423bde38a6b6156b77c4f194e"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">LEFT_BUTTON</span></span></span><a class="headerlink" href="#_CPPv4N13key_bind_enum11LEFT_BUTTONE" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N13key_bind_enum12RIGHT_BUTTONE">
+<span class="target" id="_keyboard_controller_8hpp_1a0cd25abae8d72832f3c997dee8f3f9d3a2f7db56ce29bb4a148cae5ab0198709a"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">RIGHT_BUTTON</span></span></span><a class="headerlink" href="#_CPPv4N13key_bind_enum12RIGHT_BUTTONE" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N13key_bind_enum15ATTACK_A_BUTTONE">
+<span class="target" id="_keyboard_controller_8hpp_1a0cd25abae8d72832f3c997dee8f3f9d3aabb045a25c21073ece3a777ed4695823"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ATTACK_A_BUTTON</span></span></span><a class="headerlink" href="#_CPPv4N13key_bind_enum15ATTACK_A_BUTTONE" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N13key_bind_enum15ATTACK_B_BUTTONE">
+<span class="target" id="_keyboard_controller_8hpp_1a0cd25abae8d72832f3c997dee8f3f9d3a32464aa5f03601dfd0084b8fb08b0eb7"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ATTACK_B_BUTTON</span></span></span><a class="headerlink" href="#_CPPv4N13key_bind_enum15ATTACK_B_BUTTONE" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N13key_bind_enum20CAMERA_TOGGLE_BUTTONE">
+<span class="target" id="_keyboard_controller_8hpp_1a0cd25abae8d72832f3c997dee8f3f9d3a7a13e3db83bf370a0b7ec866637f4981"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">CAMERA_TOGGLE_BUTTON</span></span></span><a class="headerlink" href="#_CPPv4N13key_bind_enum20CAMERA_TOGGLE_BUTTONE" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N13key_bind_enum11QUIT_BUTTONE">
+<span class="target" id="_keyboard_controller_8hpp_1a0cd25abae8d72832f3c997dee8f3f9d3a688de96d0ed9d324db1e4c8ed4ae6a20"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">QUIT_BUTTON</span></span></span><a class="headerlink" href="#_CPPv4N13key_bind_enum11QUIT_BUTTONE" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-variables">Variables</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv419global_key_bind_map">
+<span class="target" id="_keyboard_controller_8hpp_1a81366203d7061b32f3821346d632090b"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">map</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">int</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">global_key_bind_map</span></span></span><a class="headerlink" href="#_CPPv419global_key_bind_map" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>A map between the key_bind enum and the SDL_KeyCode. </p>
+</dd></dl>
 
 </div>
 <dl class="cpp class">
@@ -241,9 +299,15 @@ type of Entity etc.</p>
 <dd></dd></dl>
 
 <dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N18KeyboardController14get_componentsEv">
+<span class="target" id="class_keyboard_controller_1ada6322e10158609260684d2ea9f1cdd3"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_components</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N18KeyboardController14get_componentsEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Function for getting the <a class="reference internal" href="Transform.html#class_transform"><span class="std std-ref">Transform</span></a> and <a class="reference internal" href="Sprite.html#class_sprite"><span class="std std-ref">Sprite</span></a> components. This is separate from the init function in case the <a class="reference internal" href="#class_keyboard_controller"><span class="std std-ref">KeyboardController</span></a> is defined before those other components and we have to get them later. </p>
+</dd></dl>
+
+<dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N18KeyboardController6updateEv">
 <span class="target" id="class_keyboard_controller_1a27d58a4ee2b9fc0e8026e52acf8841e5"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">update</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N18KeyboardController6updateEv" title="Permalink to this definition">#</a><br /></dt>
-<dd><p><a class="reference internal" href="../ECS.html#class_component"><span class="std std-ref">Component</span></a> initialization. This is called in <a class="reference internal" href="../ECS.html#class_entity_1aafe23d7d7ea7f427ca40454edcae460e"><span class="std std-ref">Entity::addComponent</span></a> and should have no arguments. </p>
+<dd><p>Defined in KeyboardController.cpp file. </p>
 </dd></dl>
 
 </div>
@@ -252,12 +316,14 @@ type of Entity etc.</p>
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N18KeyboardController14reverse_spriteE">
 <span class="target" id="class_keyboard_controller_1a16638cbe6ef9a5f4968bed46dcd18ce5"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">reverse_sprite</span></span></span><a class="headerlink" href="#_CPPv4N18KeyboardController14reverse_spriteE" title="Permalink to this definition">#</a><br /></dt>
-<dd></dd></dl>
+<dd><p>Whether to reverse the sprite (left-right). </p>
+</dd></dl>
 
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N18KeyboardController10projectileE">
 <span class="target" id="class_keyboard_controller_1ad3ae333e3d3db61f8cf5a1a1998c1834"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">projectile</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span><a class="headerlink" href="#_CPPv4N18KeyboardController10projectileE" title="Permalink to this definition">#</a><br /></dt>
-<dd></dd></dl>
+<dd><p>For avoiding creating projectiles continuously. </p>
+</dd></dl>
 
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N18KeyboardController9transformE">
@@ -268,6 +334,15 @@ type of Entity etc.</p>
 <dt class="sig sig-object cpp" id="_CPPv4N18KeyboardController6spriteE">
 <span class="target" id="class_keyboard_controller_1ae1ebd9e6ed7d6574ea3bc2cfa26e90a3"></span><a class="reference internal" href="Sprite.html#_CPPv46Sprite" title="Sprite"><span class="n"><span class="pre">Sprite</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">sprite</span></span></span><a class="headerlink" href="#_CPPv4N18KeyboardController6spriteE" title="Permalink to this definition">#</a><br /></dt>
 <dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N18KeyboardController18local_key_bind_mapE">
+<span class="target" id="class_keyboard_controller_1a5a658150f834fae64ce240fdfd110aa9"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">map</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">int</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">local_key_bind_map</span></span></span><a class="headerlink" href="#_CPPv4N18KeyboardController18local_key_bind_mapE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>A map between the key_bind enum and the SDL_KeyCode. </p>
+</dd></dl>
 
 </div>
 </dd></dl>

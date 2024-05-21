@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="prev" title="Tile Map" href="TileMap.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Game class" href="Game.html" /><link rel="prev" title="Entities" href="ECS/Entities.html" />
 
     <link rel="shortcut icon" href="../_static/favicon.ico"/><!-- Generated with Sphinx 6.2.1 and Furo 2024.01.29 -->
-        <title>Utils - CPP Game</title>
+        <title>Collision class - CPP Game</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=369552022d0b975c8e74270ce6eabe0fb7978f24" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -168,10 +168,10 @@
 <li class="toctree-l2"><a class="reference internal" href="ECS/Entities.html">Entities</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="Collision.html">Collision</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Collision</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Game.html">Game class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="TileMap.html">TileMap class</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">Utils</a></li>
 </ul>
 
 </div>
@@ -206,34 +206,57 @@
           </label>
         </div>
         <article role="main">
-          <section id="utils">
-<h1>Utils<a class="headerlink" href="#utils" title="Permalink to this heading">#</a></h1>
-<p>Functions defined in utils.hpp.</p>
+          <section id="collision-class">
+<h1>Collision class<a class="headerlink" href="#collision-class" title="Permalink to this heading">#</a></h1>
+<p>This class groups functions for handling collision. The use of a class seems unnecessary, and might
+be reviewed later. This could potentially be implemented directly inside of Game.hpp and Game.cpp,
+but this modularity seems nevertheless positive.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Improve Collision::handle_collisions docstring.</p>
+</div>
 <div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-typedefs">Typedefs</p>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv43vec">
+<span class="target" id="_collision_8hpp_1a8eef6d9f3318172ff1eeeb36a0ec9b70"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">vec</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">Eigen</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Vector2f</span></span><br /></dt>
+<dd></dd></dl>
+
+</div>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv49Collision">
+<span class="target" id="class_collision"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Collision</span></span></span><a class="headerlink" href="#_CPPv49Collision" title="Permalink to this definition">#</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4I00E12check_map_idbNSt3mapI2T12T2EE2T1NSt6stringEb">
-<span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T1</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T2</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="utils_8hpp_1a93992cd6e43728abad7f869bd848d3db"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">check_map_id</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">map</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I00E12check_map_idbNSt3mapI2T12T2EE2T1NSt6stringEb" title="check_map_id::T1"><span class="n"><span class="pre">T1</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00E12check_map_idbNSt3mapI2T12T2EE2T1NSt6stringEb" title="check_map_id::T2"><span class="n"><span class="pre">T2</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">map</span></span>, <a class="reference internal" href="#_CPPv4I00E12check_map_idbNSt3mapI2T12T2EE2T1NSt6stringEb" title="check_map_id::T1"><span class="n"><span class="pre">T1</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">id</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">message</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">halt_execution</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">true</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I00E12check_map_idbNSt3mapI2T12T2EE2T1NSt6stringEb" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Function for checking if the queried entry of a map exists (<code class="docutils literal notranslate"><span class="pre">map[id]</span></code>), and throw an error otherwise.</p>
-<p>This is used to avoid undefined behaviour in the code and ease debugging.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>T1</strong> – The type of the ID. </p></li>
-<li><p><strong>T2</strong> – The type of the map entry.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Parameters<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>map</strong> – The map we want to verify. </p></li>
-<li><p><strong>id</strong> – The ID we want to verify. </p></li>
-<li><p><strong>message</strong> – A message containing the function that’s behind this call and the name of the map involved, in that function’s scope. This will be concatenated to the printed output if an error is thrown, like so: <code class="docutils literal notranslate"><span class="pre">std::cout</span> <span class="pre">&lt;&lt;</span> <span class="pre">&quot;Function</span> <span class="pre">and</span> <span class="pre">map</span> <span class="pre">names:</span> <span class="pre">&quot;</span> <span class="pre">&lt;&lt;</span> <span class="pre">message</span> <span class="pre">&lt;&lt;</span> <span class="pre">&quot;;</span> <span class="pre">ID:</span> <span class="pre">&quot;</span> <span class="pre">&lt;&lt;</span> <span class="pre">id</span> <span class="pre">&lt;&lt;</span> <span class="pre">std::endl;</span></code></p></li>
-</ul>
-</dd>
-</dl>
+<dt class="sig sig-object cpp" id="_CPPv4N9Collision13collider_AABBEPK8ColliderPK8Collider">
+<span class="target" id="class_collision_1af273694095a9efa18e764836c699ec6d"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">collider_AABB</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="ECS/Components/Collider.html#_CPPv48Collider" title="Collider"><span class="n"><span class="pre">Collider</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">CA</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="ECS/Components/Collider.html#_CPPv48Collider" title="Collider"><span class="n"><span class="pre">Collider</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">CB</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9Collision13collider_AABBEPK8ColliderPK8Collider" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Function for checking if two colliders are colliding. This function only checks for AABB collision, which considers that both objects are rectangles (which is currently the implementation of the <a class="reference internal" href="ECS/Components/Collider.html#class_collider"><span class="std std-ref">Collider</span></a> component). </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N9Collision18get_collision_timeEffffffffffffff">
+<span class="target" id="class_collision_1adeabea3107053e8d0cae978b03c58d80"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">tuple</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">float</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_collision_time</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">xa</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">xb</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ya</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">yb</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">speed_a</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">speed_b</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">vxa</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">vxb</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">vya</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">vyb</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">wa</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">wb</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ha</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">hb</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9Collision18get_collision_timeEffffffffffffff" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Function called when certain types of collision happens, inside of the <a class="reference internal" href="#class_collision_1a8c89f7e55c87bfbb200db0a7ae40fa13"><span class="std std-ref">Collision::handle_collisions</span></a> function. Specifically, this function is called when an object’s position must be set back in order to avoid intersecting objects. This can happend between an immovable object and a player (or another entity that cannot cross such objects), or between two MOVABLE_OBJECTS etc.</p>
+<p>In those cases, to solve the collision, one or both of the objects must be moved back in the opposite direction of their velocity, until at least one of the collision conditions defined in collider_AABB is no longer met. This is done by calculating the amount of time we must rollback so that one of the conditions is no longer met. Than, we can use this time to update the objects’ positions (r = r_collision - speed * v * calculated time).</p>
+<p>For more thorough information, check source code comments.</p>
+<p>This function returns:<ol class="lowerroman simple">
+<li><p>The amount of time we must rollback (float);</p></li>
+<li><p>An integer indicating the index (starting at zer) of the condition which is not met. This is useful to knowing in which axis we have to reset the player’s position.</p></li>
+</ol>
+</p>
+<p>Why not pass the Colliders directly? In the case of IMMOVABLE objects, we’ll pass an artifical value of speed = 0, even if they are moving, so that we can update the colliding MOVABLE_OBJECT correctly. Despite being much more verbose, this function definition gives us more flexibility. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N9Collision17handle_collisionsEv">
+<span class="target" id="class_collision_1a8c89f7e55c87bfbb200db0a7ae40fa13"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">handle_collisions</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9Collision17handle_collisionsEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>As this name suggests, this function handles collisions, and is called inside of <a class="reference internal" href="Game.html#class_game_1a79df6376b332d63c9eca0dcee30305c3"><span class="std std-ref">Game::update</span></a> for that reason. This docstring should be better developped later. </p>
 </dd></dl>
 
 </div>
+</dd></dl>
+
 </section>
 
         </article>
@@ -241,15 +264,23 @@
       <footer>
         
         <div class="related-pages">
-          
-          <a class="prev-page" href="TileMap.html">
+          <a class="next-page" href="Game.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Game class</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="ECS/Entities.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Tile Map</div>
+                <div class="title">Entities</div>
                 
               </div>
             </a>

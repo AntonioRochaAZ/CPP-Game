@@ -166,6 +166,7 @@
 <li class="toctree-l2"><a class="reference internal" href="docs_src/ECS/Entities.html">Entities</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="docs_src/Collision.html">Collision</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs_src/Game.html">Game class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs_src/TileMap.html">TileMap class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs_src/utils.html">Utils</a></li>
@@ -211,7 +212,7 @@
   <h2>C</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="docs_src/utils.html#_CPPv4I00E12check_map_idvNSt3mapI2T12T2EE2T1NSt6stringE">check_map_id (C++ function)</a>
+        <li><a href="docs_src/utils.html#_CPPv4I00E12check_map_idbNSt3mapI2T12T2EE2T1NSt6stringEb">check_map_id (C++ function)</a>
 </li>
         <li><a href="docs_src/ECS/Components/Collider.html#_CPPv48Collider">Collider (C++ class)</a>
 </li>
@@ -243,11 +244,19 @@
 </li>
         <li><a href="docs_src/ECS/Components/Collider.html#_CPPv4N8Collider9transformE">Collider::transform (C++ member)</a>
 </li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="docs_src/ECS/Components/Collider.html#_CPPv4N8Collider5widthE">Collider::width (C++ member)</a>
 </li>
         <li><a href="docs_src/ECS/Components/Collider.html#_CPPv4N8ColliderD0Ev">Collider::~Collider (C++ function)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="docs_src/Collision.html#_CPPv49Collision">Collision (C++ class)</a>
+</li>
+        <li><a href="docs_src/Collision.html#_CPPv4N9Collision13collider_AABBEPK8ColliderPK8Collider">Collision::collider_AABB (C++ function)</a>
+</li>
+        <li><a href="docs_src/Collision.html#_CPPv4N9Collision18get_collision_timeEffffffffffffff">Collision::get_collision_time (C++ function)</a>
+</li>
+        <li><a href="docs_src/Collision.html#_CPPv4N9Collision17handle_collisionsEv">Collision::handle_collisions (C++ function)</a>
 </li>
         <li><a href="docs_src/ECS/Components/Collider.html#_CPPv416collision_handle">collision_handle (C++ enum)</a>
 </li>
@@ -379,10 +388,10 @@
 </li>
         <li><a href="docs_src/Game.html#_CPPv4N4Game4GameEv">Game::Game (C++ function)</a>
 </li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="docs_src/Game.html#_CPPv4N4Game13handle_eventsEv">Game::handle_events (C++ function)</a>
 </li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="docs_src/Game.html#_CPPv4N4Game4initEPKciiiib">Game::init (C++ function)</a>
 </li>
         <li><a href="docs_src/Game.html#_CPPv4N4Game10is_runningE">Game::is_running (C++ member)</a>
@@ -406,6 +415,8 @@
         <li><a href="docs_src/ECS/ECS.html#_CPPv4I0E18getComponentTypeID11ComponentIDv">getComponentTypeID (C++ function)</a>
 </li>
         <li><a href="docs_src/ECS/ECS.html#_CPPv421getNewComponentTypeIDv">getNewComponentTypeID (C++ function)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/KeyboardController.html#_CPPv419global_key_bind_map">global_key_bind_map (C++ member)</a>
 </li>
         <li><a href="docs_src/ECS/ECS.html#_CPPv45Group">Group (C++ type)</a>
 </li>
@@ -431,16 +442,38 @@
   <h2>K</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="docs_src/ECS/Components/KeyboardController.html#_CPPv413key_bind_enum">key_bind_enum (C++ enum)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/KeyboardController.html#_CPPv4N13key_bind_enum15ATTACK_A_BUTTONE">key_bind_enum::ATTACK_A_BUTTON (C++ enumerator)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/KeyboardController.html#_CPPv4N13key_bind_enum15ATTACK_B_BUTTONE">key_bind_enum::ATTACK_B_BUTTON (C++ enumerator)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/KeyboardController.html#_CPPv4N13key_bind_enum20CAMERA_TOGGLE_BUTTONE">key_bind_enum::CAMERA_TOGGLE_BUTTON (C++ enumerator)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/KeyboardController.html#_CPPv4N13key_bind_enum11DOWN_BUTTONE">key_bind_enum::DOWN_BUTTON (C++ enumerator)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/KeyboardController.html#_CPPv4N13key_bind_enum11LEFT_BUTTONE">key_bind_enum::LEFT_BUTTON (C++ enumerator)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/KeyboardController.html#_CPPv4N13key_bind_enum11QUIT_BUTTONE">key_bind_enum::QUIT_BUTTON (C++ enumerator)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/KeyboardController.html#_CPPv4N13key_bind_enum12RIGHT_BUTTONE">key_bind_enum::RIGHT_BUTTON (C++ enumerator)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/KeyboardController.html#_CPPv4N13key_bind_enum9UP_BUTTONE">key_bind_enum::UP_BUTTON (C++ enumerator)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="docs_src/ECS/Components/KeyboardController.html#_CPPv418KeyboardController">KeyboardController (C++ class)</a>
+</li>
+        <li><a href="docs_src/ECS/Components/KeyboardController.html#_CPPv4N18KeyboardController14get_componentsEv">KeyboardController::get_components (C++ function)</a>
 </li>
         <li><a href="docs_src/ECS/Components/KeyboardController.html#_CPPv4N18KeyboardController4initEv">KeyboardController::init (C++ function)</a>
 </li>
         <li><a href="docs_src/ECS/Components/KeyboardController.html#_CPPv4N18KeyboardController18KeyboardControllerEb">KeyboardController::KeyboardController (C++ function)</a>, <a href="docs_src/ECS/Components/KeyboardController.html#_CPPv4N18KeyboardController18KeyboardControllerEv">[1]</a>
 </li>
+        <li><a href="docs_src/ECS/Components/KeyboardController.html#_CPPv4N18KeyboardController18local_key_bind_mapE">KeyboardController::local_key_bind_map (C++ member)</a>
+</li>
         <li><a href="docs_src/ECS/Components/KeyboardController.html#_CPPv4N18KeyboardController10projectileE">KeyboardController::projectile (C++ member)</a>
 </li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="docs_src/ECS/Components/KeyboardController.html#_CPPv4N18KeyboardController14reverse_spriteE">KeyboardController::reverse_sprite (C++ member)</a>
 </li>
         <li><a href="docs_src/ECS/Components/KeyboardController.html#_CPPv4N18KeyboardController6spriteE">KeyboardController::sprite (C++ member)</a>
@@ -763,7 +796,7 @@
   <h2>V</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="docs_src/ECS/Components/KeyboardController.html#_CPPv43vec">vec (C++ type)</a>, <a href="docs_src/ECS/Components/Transform.html#_CPPv43vec">[1]</a>
+        <li><a href="docs_src/Collision.html#_CPPv43vec">vec (C++ type)</a>, <a href="docs_src/ECS/Components/KeyboardController.html#_CPPv43vec">[1]</a>, <a href="docs_src/ECS/Components/Transform.html#_CPPv43vec">[2]</a>
 </li>
     </ul></td>
   </tr></table>
