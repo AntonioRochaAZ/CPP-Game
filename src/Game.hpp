@@ -13,6 +13,8 @@
 SDL_Texture pointer, the texture's width and its height, respectively. */
 using TexTup = std::tuple<SDL_Texture*, int, int>;
 
+using vec = Eigen::Vector2f;
+
 class Collider; // Forward declaration of the Collider class (otherwise, circular import).
 
 /** Game class definition, used for running the game and handling events. Most functions are
@@ -22,6 +24,11 @@ private:
     bool is_running;            ///< Whether the game is still running or it can be closed.
     int update_counter = 0;     ///< A tick counter (I believe it is deprecated TODO: REMOVE?)
     SDL_Window* window;         ///< The SDL window where the game is displayed.
+    vec previous_camera_position = vec(0.0,0.0);    
+        ///< Previous camera position (for updating).    
+    Entity* camera_ref_entity;  ///< The entity we are following with the camera.  
+    vec previous_ref_entity_position = vec(0.0,0.0);    
+        ///< Previous position of the reference entity (for updating).  
 
 public:
     Game();
@@ -41,8 +48,12 @@ public:
     static SDL_Renderer* renderer;  ///< Renderer object responsible for rendering objects.
     static SDL_Event event;         ///< Event object used in event handling. 
     static std::vector<Collider*> collider_vector;  ///< Vector of collider objects for checking collision.
-    static bool tracking_player;    ///< Whether the camera should follow the player or not.
     
+    static bool tracking_player;    ///< Whether the camera should follow the player or not.
+    static vec camera_position;        
+        ///< Where the camera is positioned (top-left of the screen).
+
+
     /** Definition of the AssetManager class, which manages textures and fonts.
     Function definitions are made in AssetManager.cpp. This class had to be defined in this file
     because it depends on the Game class definition, which also depends on AssetManager. Creating an

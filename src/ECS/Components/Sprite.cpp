@@ -55,6 +55,8 @@ void Sprite::update(){
     dst_rect.y = transform->get_y();
 }
 void Sprite::render(){
+    dst_rect.x -= Game::camera_position[0]; // Updating position according to camera.
+    dst_rect.y -= Game::camera_position[1];
     SDL_RenderCopyEx(Game::renderer, texture, &src_rect, &dst_rect, 0.0, NULL, sprite_flip);
 }
 

@@ -67,11 +67,5 @@ class TileMap : public Manager{
 
         void set_position(int x, int y);    ///< This can be used to change where the grid starts.
 
-        /** This next function changes if the grid is stationary or if it moves (this will)
-        depend on whether the camera is following the player or not. This is only called in 
-        \ref Game::handle_events as of now, and may change in the future, depending on how
-        we deal with the POV. */
-        void update_tracking(); 
-
         // TODO: add possibility to update other map variables and optimize rendering. 
 };

@@ -23,5 +23,7 @@ void UILabel::update(){
 }
 
 void UILabel::render(){
+    dst_rect.x -= Game::camera_position[0]; // Updating position according to camera.
+    dst_rect.y -= Game::camera_position[1];
     SDL_RenderCopy(Game::renderer, texture, nullptr, &dst_rect);
 }

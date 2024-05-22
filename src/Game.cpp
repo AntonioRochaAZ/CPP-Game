@@ -17,8 +17,9 @@ TileMap background = TileMap("Background");
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
 std::vector<Collider*> Game::collider_vector;
-bool Game::tracking_player = true;
+bool Game::tracking_player = false;
 Game::AssetManager Game::assets = Game::AssetManager();
+vec Game::camera_position = vec(0.0, 0.0);
 
 auto& player(manager.addEntity("Player 1"));
 auto& label(manager.addEntity("TestLabel"));
@@ -77,7 +78,6 @@ int Game::init(const char* title, int x, int y, int width, int height, bool full
     global_key_bind_map.emplace(SDLK_k, ATTACK_B_BUTTON);
     global_key_bind_map.emplace(SDLK_p, CAMERA_TOGGLE_BUTTON);
     global_key_bind_map.emplace(SDLK_ESCAPE, QUIT_BUTTON);
-    std::cout << global_key_bind_map[SDLK_k] << std::endl;
 
     // Change color of the renderer (black by default)
     // renderer, r, g, b, alpha (255 is opaque, 0 is transparent)
@@ -120,8 +120,11 @@ int Game::init(const char* title, int x, int y, int width, int height, bool full
     // Font:
     SDL_Color white = { 255, 255, 255, 255 };
     label.addComponent<Transform>();
-    label.addComponent<UILabel>(0.0, 0.0, 4000, 2000, "Hello there", "andale", white);
+    label.addComponent<UILabel>(-400.0, 0.0, 4000, 2000, "Hello there", "andale", white);
     
+    // Setting the reference entity (for camera tracking) as the player:
+    camera_ref_entity = &player;
+
     // Ok, it is running now:
     is_running = true;
     return 0;
@@ -146,11 +149,11 @@ void Game::handle_events(){
                         // will have a bug where neither the map not
                         // the player doesn't move
                         Game::tracking_player = false;
-                        background.update_tracking();
                     }else{
-                        // This condition is necessary (see SDLK_p comment)
                         Game::tracking_player = true;
-                        background.update_tracking();
+                        // Get current reference camera and entity positions (will be update next):
+                        previous_camera_position = camera_position;
+                        previous_ref_entity_position = camera_ref_entity->getComponent<Transform>().get_position();
                     }
                     break;
                 case QUIT_BUTTON:
@@ -180,14 +183,21 @@ void Game::update(){
     background.update();
     manager.update();
 
-    // Sometimes we get a bouncing effect, despite still holding the button.
-    // Though some time later we get back. We also get stuck sometimes...
+    Collision::handle_collisions();     // Handling positions
 
-    // I think the best thing is to do this predictively ? Looking ahead if we
-    // are going to hit something. --> This is not the best if we have many objects
-    // and very few collisions.
+    // Updating camera position:
+    if (tracking_player){ 
+        // Getting new position:
+        vec new_ref_entity_position = camera_ref_entity->getComponent<Transform>().get_position();
+        // Updating camera position:
+        camera_position = previous_camera_position + \
+            (new_ref_entity_position - previous_ref_entity_position);
 
-    Collision::handle_collisions();
+        // Updating previous camera position:
+        previous_camera_position = camera_position;
+        // Updating ref_entity_position:
+        previous_ref_entity_position = new_ref_entity_position;
+    }
 };
 
 // Declaring variable tiles which will be of type
