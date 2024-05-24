@@ -211,19 +211,19 @@
 <p>This component renders text on screen. It depends on the <a class="reference internal" href="Transform.html#_CPPv49Transform" title="Transform"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">Transform</span></code></a> component
 of the <a class="reference internal" href="../ECS.html#_CPPv46Entity" title="Entity"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">Entity</span></code></a>. The <a class="reference internal" href="Transform.html#_CPPv49Transform" title="Transform"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">Transform</span></code></a> component must update before
 this, so it must be added to the <a class="reference internal" href="../ECS.html#_CPPv46Entity" title="Entity"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">Entity</span></code></a> first.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>TODO: learn more about how text rendering in SDL works so that we can change the
-size of the font and add more options.</p>
-</div>
+<p>Font sizes are dealt with inside of this component, with the <code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">font_size</span></code>, used
+in the <code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">set_text</span></code> function. In SDL2, the font size is stored inside of the
+TTF_Font object, meaning that everytime this function is called this pointer’s information
+is updated. This isn’t a problem, since <code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">set_text</span></code> is only called when updating
+the text, which is not done all the time.</p>
 <dl class="cpp class">
 <dt class="sig sig-object cpp" id="_CPPv47UILabel">
 <span class="target" id="class_u_i_label"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">UILabel</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><a class="reference internal" href="../ECS.html#_CPPv49Component" title="Component"><span class="n"><span class="pre">Component</span></span></a><a class="headerlink" href="#_CPPv47UILabel" title="Permalink to this definition">#</a><br /></dt>
 <dd><div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N7UILabel7UILabelEffiiNSt6stringENSt6stringER9SDL_Color">
-<span class="target" id="class_u_i_label_1ae7635cfaf5c1ef16e05d4c239d470899"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">UILabel</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">x_shift</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">y_shift</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">width</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">height</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mText</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mFont_id</span></span>, <span class="n"><span class="pre">SDL_Color</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">mColour</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7UILabel7UILabelEffiiNSt6stringENSt6stringER9SDL_Color" title="Permalink to this definition">#</a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N7UILabel7UILabelEffiiNSt6stringENSt6stringER9SDL_Colori">
+<span class="target" id="class_u_i_label_1a75b5f673a56d1c96f5949b5ce05de9a6"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">UILabel</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">x_shift</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">y_shift</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">width</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">height</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mText</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mFont_id</span></span>, <span class="n"><span class="pre">SDL_Color</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">mColour</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mFont_size</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">24</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7UILabel7UILabelEffiiNSt6stringENSt6stringER9SDL_Colori" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Constructor </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -235,6 +235,7 @@ size of the font and add more options.</p>
 <li><p><strong>mText</strong> – The text to be displayed. </p></li>
 <li><p><strong>mFont_id</strong> – The font_id (see member). </p></li>
 <li><p><strong>mColour</strong> – The text color. </p></li>
+<li><p><strong>mFont_size</strong> – The font size (24) by default. </p></li>
 </ul>
 </dd>
 </dl>
@@ -301,6 +302,12 @@ size of the font and add more options.</p>
 <dt class="sig sig-object cpp" id="_CPPv4N7UILabel6colourE">
 <span class="target" id="class_u_i_label_1ab5fea804a1dbaf61e21b9fe8a0b1945a"></span><span class="n"><span class="pre">SDL_Color</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">colour</span></span></span><a class="headerlink" href="#_CPPv4N7UILabel6colourE" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>The color of the object. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N7UILabel9font_sizeE">
+<span class="target" id="class_u_i_label_1a08d480aae882ca6bd599093b310ec6cb"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">font_size</span></span></span><a class="headerlink" href="#_CPPv4N7UILabel9font_sizeE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Size of the font. </p>
 </dd></dl>
 
 <dl class="cpp var">

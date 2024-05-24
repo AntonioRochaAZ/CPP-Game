@@ -217,6 +217,11 @@
 <dd><p>This tuple is the return type of AssetManager::load_texture. It consists of the SDL_Texture pointer, the texture’s width and its height, respectively. </p>
 </dd></dl>
 
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv43vec">
+<span class="target" id="_game_8hpp_1a8eef6d9f3318172ff1eeeb36a0ec9b70"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">vec</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">Eigen</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Vector2f</span></span><br /></dt>
+<dd></dd></dl>
+
 </div>
 <dl class="cpp class">
 <dt class="sig sig-object cpp" id="_CPPv44Game">
@@ -296,8 +301,14 @@
 
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N4Game15tracking_playerE">
-<span class="target" id="class_game_1ae6b502293051b51e4b9d830d41e8744d"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">tracking_player</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">true</span></span><a class="headerlink" href="#_CPPv4N4Game15tracking_playerE" title="Permalink to this definition">#</a><br /></dt>
+<span class="target" id="class_game_1ae6b502293051b51e4b9d830d41e8744d"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">tracking_player</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span><a class="headerlink" href="#_CPPv4N4Game15tracking_playerE" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Whether the camera should follow the player or not. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N4Game15camera_positionE">
+<span class="target" id="class_game_1a61630d8d18ef7a07f53202ca76b74e18"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><a class="reference internal" href="ECS/Components/KeyboardController.html#_CPPv43vec" title="vec"><span class="n"><span class="pre">vec</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">camera_position</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="ECS/Components/KeyboardController.html#_CPPv43vec" title="vec"><span class="n"><span class="pre">vec</span></span></a><span class="p"><span class="pre">(</span></span><span class="m"><span class="pre">0.0</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">0.0</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#_CPPv4N4Game15camera_positionE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Where the camera is positioned (top-left of the screen). </p>
 </dd></dl>
 
 <dl class="cpp var">
@@ -325,6 +336,24 @@
 <dt class="sig sig-object cpp" id="_CPPv4N4Game6windowE">
 <span class="target" id="class_game_1adc376cc3011b5c8f1c3897626100174c"></span><span class="n"><span class="pre">SDL_Window</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">window</span></span></span><a class="headerlink" href="#_CPPv4N4Game6windowE" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>The SDL window where the game is displayed. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N4Game24previous_camera_positionE">
+<span class="target" id="class_game_1a570c4fee6bf673a466c62d853d80f1fd"></span><a class="reference internal" href="ECS/Components/KeyboardController.html#_CPPv43vec" title="vec"><span class="n"><span class="pre">vec</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">previous_camera_position</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="ECS/Components/KeyboardController.html#_CPPv43vec" title="vec"><span class="n"><span class="pre">vec</span></span></a><span class="p"><span class="pre">(</span></span><span class="m"><span class="pre">0.0</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">0.0</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#_CPPv4N4Game24previous_camera_positionE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Previous camera position (for updating). </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N4Game17camera_ref_entityE">
+<span class="target" id="class_game_1a0e3fe983ce0a6099551f90094553a7a2"></span><a class="reference internal" href="ECS/ECS.html#_CPPv46Entity" title="Entity"><span class="n"><span class="pre">Entity</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">camera_ref_entity</span></span></span><a class="headerlink" href="#_CPPv4N4Game17camera_ref_entityE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>The entity we are following with the camera. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N4Game28previous_ref_entity_positionE">
+<span class="target" id="class_game_1a12e825befc1020b75fd62c35ff50919b"></span><a class="reference internal" href="ECS/Components/KeyboardController.html#_CPPv43vec" title="vec"><span class="n"><span class="pre">vec</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">previous_ref_entity_position</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="ECS/Components/KeyboardController.html#_CPPv43vec" title="vec"><span class="n"><span class="pre">vec</span></span></a><span class="p"><span class="pre">(</span></span><span class="m"><span class="pre">0.0</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">0.0</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#_CPPv4N4Game28previous_ref_entity_positionE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Previous position of the reference entity (for updating). </p>
 </dd></dl>
 
 </div>
