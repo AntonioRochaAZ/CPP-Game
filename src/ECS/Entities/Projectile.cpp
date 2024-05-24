@@ -24,18 +24,7 @@ Projectile::Projectile(Manager& man, std::string name, std::string sprite_name, 
 
 
 };
-/*
-void Projectile::set_trajectory(Transform* ref_transform, int rng, float spd, vec vel){
-    range = rng; reference_transform = ref_transform;
-    speed = spd; velocity = vel;
 
-    // We'll start by following the reference object:
-    this->addComponent<Transform>(
-        ref_transform->get_position(), 
-        ref_transform->get_speed(), 
-        ref_transform->get_velocity());
-}
-*/
 void Projectile::update(){
 
     /*
@@ -65,7 +54,7 @@ void Projectile::update(){
     if (distance > range){
         // Projectile reaches its maximum range
         this->destroy();
-    }else if (false){
+    }else if (false){   // set to false because not implemented
         // Check if projectile went off-screen
         // (TODO: should also check if it hits a barrier)
         // Tutorial code:

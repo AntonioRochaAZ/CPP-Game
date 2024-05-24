@@ -93,7 +93,7 @@ int Game::init(const char* title, int x, int y, int width, int height, bool full
     player.getComponent<KeyboardController>().init();   // Force it to get the Transform and Sprite pointers.
     Game::assets.add_font("andale", "assets/fonts/andale_mono.ttf", 16);
     SDL_Color red = { 255, 0, 0, 255 };
-    player.addComponent<UILabel>(20.0, -30.0, 4000, 2000, "P1", "andale", red);
+    player.addComponent<UILabel>(20.0, -30.0, 40, 20, "P1", "andale", red, 24);
     // player.addComponent<Collider>(
     //     player.get_name(), player.getComponent<Sprite>().get_dst_width(),
     //     player.getComponent<Sprite>().get_dst_height(), MOVABLE_OBJECT);
@@ -120,7 +120,7 @@ int Game::init(const char* title, int x, int y, int width, int height, bool full
     // Font:
     SDL_Color white = { 255, 255, 255, 255 };
     label.addComponent<Transform>();
-    label.addComponent<UILabel>(-400.0, 0.0, 4000, 2000, "Hello there", "andale", white);
+    label.addComponent<UILabel>(-400.0, 0.0, 40, 20, "Hello there", "andale", white, 24);
     
     // Setting the reference entity (for camera tracking) as the player:
     camera_ref_entity = &player;

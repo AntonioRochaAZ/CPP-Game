@@ -9,7 +9,8 @@ void UILabel::set_text(std::string mText, std::string mFont_id){
     text = mText; font_id = mFont_id;
 
     // TODO: do we need to delete this pointer later?
-    SDL_Surface* surface = TTF_RenderText_Blended(
+    TTF_SetFontSize(Game::assets.get_font(font_id), font_size);
+    SDL_Surface* surface = TTF_RenderUTF8_Solid(
         Game::assets.get_font(font_id), text.c_str(), colour);
     texture = SDL_CreateTextureFromSurface(Game::renderer, surface);
     SDL_FreeSurface(surface);   // Does this delete the pointer?

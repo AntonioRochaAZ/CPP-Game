@@ -41,10 +41,25 @@ void KeyboardController::update(){
                 // time being.
                 projectile = true;
                 // In case a projectile is sent:
+                int x_sign;
+                switch (sprite->sprite_flip){
+                case SDL_FLIP_NONE:
+                    x_sign = 1;
+                    break;
+                case SDL_FLIP_HORIZONTAL:
+                    x_sign = -1;
+                    break;
+                default:
+                    std::cout << "Error when trying to decide direction to shoot projectile." << std::endl;
+                    std::cout << "Only coded for SDL_FLIP_NONE and SDL_FLIP_HORIZONTAL. Got this value instead: " \
+                              << sprite->sprite_flip << std::endl;
+                    throw std::runtime_error("");
+                    break;
+                }
                 Projectile* proj = new Projectile(
                     entity->manager, "Projectile", "projectile1", 
                     Sprite::Animation(1, 1000, 6, 3), 1000, 
-                    transform->get_position()+vec(100, 0), 20, vec(1.0, 0.0)
+                    transform->get_position()+vec(x_sign * 100, 0), 20, vec(x_sign * 1.0, 0.0)
                 );
                 entity->manager.addEntity(proj);
                 proj->getComponent<Sprite>().set_scale(10);   // TODO: Eventually get player scale.

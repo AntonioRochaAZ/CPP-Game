@@ -8,19 +8,7 @@ using vec = Eigen::Vector2f;
 class Collider;
 class Collision{
 public:
-    // Axis-Aligned Bounding Box collision: collision of two rectangles
-    /*static bool rect_AABB(const SDL_Rect& RA, const SDL_Rect& RB){
-        if (RA.transform->get_x() + RA.w >= RB.transform->get_x() &&
-            RB.transform->get_x() + RB.w >= RA.transform->get_x() &&
-            RA.transform->get_y() + RA.h >= RB.transform->get_y() &&
-            RB.transform->get_y() + RB.h >= CA.transform->get_y()){
-            return true;
-        }else{
-            return false;
-        }
-    }
-    */
-
+    
     /** Function for checking if two colliders are colliding.
     This function only checks for AABB collision, which considers that both
     objects are rectangles (which is currently the implementation of the 

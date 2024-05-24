@@ -67,8 +67,11 @@ command ``make documentation``, defined in the Makefile.
  
 ### TODOs
 
-- Review all code, searching for bugs, memory leaks, optimizations,
-  restructuring possibilities (some ideas in mind).
-- Optimize rendering (stop rendering objects off-screen)
+- Create a player Entity type where we can generalize some behaviour (projectile creation,
+  other attacks, the label above their head, and so on). This will be useful to then generalize
+  the KeyboardController Component later.
+- Optimize rendering (stop rendering objects off-screen) (Must think if this really is necessary,
+  and if so, when).
 - Make updating independent of FPS.
-- Create function for changing order of component updates (currently a mess).
+- Add options to windown size etc.
+- Create function for changing order of component updates (?) (currently a mess).

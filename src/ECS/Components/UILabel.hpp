@@ -10,6 +10,7 @@ private:
     std::string font_id;    
         ///< The ID of the font to be used (will be loaded through \ref Game::assets::get_font).
     SDL_Color colour;       ///< The color of the object.
+    int font_size;          ///< Size of the font.
 
     SDL_Rect dst_rect;      ///< The destination rectangle to be rendered.
     SDL_Texture* texture;   
@@ -31,9 +32,10 @@ public:
         @param mText: The text to be displayed.
         @param mFont_id: The font_id (see member).
         @param mColour: The text color.
+        @param mFont_size: The font size (24) by default.
     */
-    UILabel(float x_shift, float y_shift, int width, int height, std::string mText, std::string mFont_id, SDL_Color& mColour):
-        shift(vec(x_shift, y_shift)), text(mText), font_id(mFont_id), colour(mColour){
+    UILabel(float x_shift, float y_shift, int width, int height, std::string mText, std::string mFont_id, SDL_Color& mColour, int mFont_size=24):
+        shift(vec(x_shift, y_shift)), text(mText), font_id(mFont_id), colour(mColour), font_size(mFont_size){
         dst_rect.w = width;
         dst_rect.h = height;
         set_text(mText, mFont_id);
