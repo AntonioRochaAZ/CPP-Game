@@ -13,7 +13,8 @@ repository are original and are made in [Aseprite](https://www.aseprite.org/).
 
 ## Current state of development
 > You can now toggle whether the camera should follow the player or not with
-> P. You can also exit the game by clicking ESC. You can shoot projectiles
+> P. When the camera is following the player, a second player model is shown.
+> You can also exit the game by clicking ESC. You can shoot projectiles
 > with K.
 
 ![Current state of development](assets/current.gif)
@@ -75,3 +76,6 @@ command ``make documentation``, defined in the Makefile.
 - Make updating independent of FPS.
 - Add options to windown size etc.
 - Create function for changing order of component updates (?) (currently a mess).
+- Two projectiles (from the same player) will destroy each other if you shoot them while moving.
+  Either we cap the time between shots, or do something else about it (e.g. make it so that
+  projectile don't interact, but it would be interesting to be able to shoot down enemy projectiles, for example).

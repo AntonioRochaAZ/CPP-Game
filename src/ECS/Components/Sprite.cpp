@@ -125,6 +125,10 @@ void Sprite::set_animation(int an_index){
     set_animation(animation_name);
 }
 
+void Sprite::set_texture(TexTup texture_tuple){
+    std::tie(texture, image_width, image_height) = texture_tuple;
+}
+
 // Size related -------------------------------------------------------
 int Sprite::get_xscale(){
     if (image_width != 0){

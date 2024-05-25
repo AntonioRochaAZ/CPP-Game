@@ -64,6 +64,9 @@ class Sprite : public Component{
         void set_animation(std::string animation_name);
             ///< Changes current animation (reaches into the animation_map member).
         void set_animation(int an_index);   ///< Overloading.
+        void set_texture(TexTup texture_tuple);  
+            ///< Overriding the current texture and its w/h information. This is more for
+            ///< showing off the different player models and is not supposed to remain later.
         std::string current_animation;      ///< Current animation being rendered.
         int current_frame;                  ///< The frame of the animation we are at (starts at 0).
 

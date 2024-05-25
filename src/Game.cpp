@@ -84,6 +84,7 @@ int Game::init(const char* title, int x, int y, int width, int height, bool full
     SDL_SetRenderDrawColor(renderer, 0, 255, 120, 255);
 
     Game::assets.add_texture("player", "assets/player.bmp");
+    Game::assets.add_texture("player2", "assets/player2.bmp");
     Game::assets.add_texture("projectile1", "assets/projectile1-still.bmp");
     player.addComponent<KeyboardController>();
     player.addComponent<Collider>(
@@ -91,9 +92,10 @@ int Game::init(const char* title, int x, int y, int width, int height, bool full
     player.addComponent<Transform>(vec(0.0, 0.0), 10, vec(0.0, 0.0));
     player.addComponent<Sprite>(Game::assets.get_tuple("player"), true);
     player.getComponent<KeyboardController>().init();   // Force it to get the Transform and Sprite pointers.
-    Game::assets.add_font("andale", "assets/fonts/andale_mono.ttf", 16);
+    // Game::assets.add_font("andale", "assets/fonts/andale_mono.ttf", 16);
+    Game::assets.add_font("custom_font2px", "assets/fonts/customfont-2px_spacing.ttf", 16);
     SDL_Color red = { 255, 0, 0, 255 };
-    player.addComponent<UILabel>(20.0, -30.0, 40, 20, "P1", "andale", red, 24);
+    player.addComponent<UILabel>(20.0, -30.0, 40, 20, "P1", "custom_font2px", red, 24);
     // player.addComponent<Collider>(
     //     player.get_name(), player.getComponent<Sprite>().get_dst_width(),
     //     player.getComponent<Sprite>().get_dst_height(), MOVABLE_OBJECT);
@@ -120,7 +122,7 @@ int Game::init(const char* title, int x, int y, int width, int height, bool full
     // Font:
     SDL_Color white = { 255, 255, 255, 255 };
     label.addComponent<Transform>();
-    label.addComponent<UILabel>(-400.0, 0.0, 40, 20, "Hello there", "andale", white, 24);
+    label.addComponent<UILabel>(-400.0, 0.0, 40, 20, "Hello there", "custom_font2px", white, 24);
     
     // Setting the reference entity (for camera tracking) as the player:
     camera_ref_entity = &player;
@@ -149,13 +151,16 @@ void Game::handle_events(){
                         // will have a bug where neither the map not
                         // the player doesn't move
                         Game::tracking_player = false;
+                        player.getComponent<Sprite>().set_texture(Game::assets.get_tuple("player"));
                     }else{
                         Game::tracking_player = true;
                         // Get current reference camera and entity positions (will be update next):
                         previous_camera_position = camera_position;
                         previous_ref_entity_position = camera_ref_entity->getComponent<Transform>().get_position();
+                        player.getComponent<Sprite>().set_texture(Game::assets.get_tuple("player2"));
                     }
                     break;
+                    
                 case QUIT_BUTTON:
                     is_running = false;
                     break;
@@ -178,7 +183,7 @@ void Game::update(){
     std::stringstream ss;
     ss << "Player position: " << player.getComponent<Transform>().get_x() << \
         ", " << player.getComponent<Transform>().get_y();
-    label.getComponent<UILabel>().set_text(ss.str(), "andale");
+    label.getComponent<UILabel>().set_text(ss.str(), "custom_font2px");
 
     background.update();
     manager.update();
