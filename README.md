@@ -84,7 +84,10 @@ command ``make documentation``, defined in the Makefile.
 - Remove getter/setter functions, use structs or public members instead.
 - Collider dynamic shape must be updated in the collider, and not in the sprite component (the collider
   update comes before the sprite update, at least for the player).
+- Study the use of "const" and passing arguments by reference (check when it is possible/should be done).
 
 -> Make it so Animations can be stored in the AssetManager, since they are related to the textures.
 -> That means rewritting Sprite's constructor and maybe even removing the add_animation function. However,
 -> it could eventually be useful (?).
+---> Parse and read the animation text files in the AssetManager add texture function. Later, then make
+---> Sprite initialization etc. only depend on AssetManager functions.

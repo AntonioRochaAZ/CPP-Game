@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <fstream> // Reading files
 
 /** Function for checking if the queried entry of a map exists (``map[id]``), 
     and throw an error otherwise.
@@ -34,4 +35,27 @@ bool check_map_id(std::map<T1, T2> map, T1 id, std::string message, bool halt_ex
     }else{
         return true;
     }
+};
+
+
+/** Checks if we've reached the end of a file we're working on before
+    we should (this is to be called when reading a specific numebr of
+    lines from a given file). This function will throw runtime errors 
+    if so. The path is only used to aid debugging.
+    @param open_file: The open ifstream file.
+    @param path: The path (literally will only be used for debugging).
+*/
+inline std::string check_get_line(std::ifstream& open_file, std::string path){
+    std::string line;   // The line we will get.
+    // Checking for errors:
+    if (open_file.eof()){
+        std::cout << "ERROR WHEN READING FILE: " << path;
+        throw std::runtime_error("Error when reading file: EOS reached.");
+    }
+    // Reading the line into variable "line":
+    if (!std::getline(open_file, line)){
+        std::cout << "ERROR WHEN READING FILE: " << path;
+        throw std::runtime_error("Error when reading line.");
+    }
+    return line;
 };

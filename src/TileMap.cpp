@@ -6,6 +6,7 @@
 #include <memory>
 // So we can use the switch statement with strings:
 #include <unordered_map>
+#include "utils.hpp"
 
 
 using map_shape = std::vector< std::vector<int> >;
@@ -74,31 +75,31 @@ void TileMap::load_map(std::string path){
         {"col", 2},
     };
 
-    auto get_line = [&]() -> std::string {
-        /* Checks if we've reached the end of a file we're working on before
-        we should. This function will throw runtime errors if so. The path is
-        only used to aid debugging.
+    // auto get_line = [&]() -> std::string {
+    //     /* Checks if we've reached the end of a file we're working on before
+    //     we should. This function will throw runtime errors if so. The path is
+    //     only used to aid debugging.
 
-        I tried to make this general and save it in a utils.hpp file,
-        but it did not work because of the ifstream variable:
-        "error: call to implicitly-deleted copy constructor of 'std::ifstream'
-        (aka 'basic_ifstream<char>'"
-        I'll try to fix this eventually.
-        */
-            // Checking for errors:
-            if (map_file.eof()){
-                std::cout << "ERROR WHEN READING FILE: " << path;
-                throw std::runtime_error(
-                    "Error when reading file: EOS reached.");
-            }
-            // Reading the line into variable "line":
-            if (!std::getline(map_file, line)){
-                std::cout << "ERROR WHEN READING FILE: " << path;
-                throw std::runtime_error(
-                    "Error when reading line.");
-        }
-        return line;
-    };
+    //     I tried to make this general and save it in a utils.hpp file,
+    //     but it did not work because of the ifstream variable:
+    //     "error: call to implicitly-deleted copy constructor of 'std::ifstream'
+    //     (aka 'basic_ifstream<char>'"
+    //     I'll try to fix this eventually.
+    //     */
+    //         // Checking for errors:
+    //         if (map_file.eof()){
+    //             std::cout << "ERROR WHEN READING FILE: " << path;
+    //             throw std::runtime_error(
+    //                 "Error when reading file: EOS reached.");
+    //         }
+    //         // Reading the line into variable "line":
+    //         if (!std::getline(map_file, line)){
+    //             std::cout << "ERROR WHEN READING FILE: " << path;
+    //             throw std::runtime_error(
+    //                 "Error when reading line.");
+    //     }
+    //     return line;
+    // };
 
     map_file.open(path);
     if (!map_file.is_open()){
@@ -111,7 +112,7 @@ void TileMap::load_map(std::string path){
     case 1: // Texture information
         for (int y = 0; y < nb_ytiles; y++){
                 // Read line and check for errors:
-                line = get_line();
+                line = check_get_line(map_file, path);
 
                 std::stringstream ss(line);      // A variable we can tokenize
                 std::string token;               // The numbers, as a string
@@ -146,7 +147,7 @@ void TileMap::load_map(std::string path){
     case 2: // collision information.
         for (int y = 0; y < nb_ytiles; y++){
                 // Read line and check for errors:
-                line = get_line();
+                line = check_get_line(map_file, path);
 
                 std::stringstream ss(line);      // A variable we can tokenize
                 std::string token;               // The numbers, as a string
