@@ -1,7 +1,10 @@
 // DEFINITION OF ASSETMANAGER CLASS IS IN GAME.HPP (AVOID CICULAR INCLUDES!)
 #include <tuple>
+#include <filesystem>
 #include "Game.hpp"
 #include "utils.hpp"
+
+using Animation = Game::AssetManager::Animation;
 
 // Image Management: ------------------------------------------------------------------------------
 Game::AssetManager::~AssetManager(){
@@ -21,14 +24,38 @@ Game::AssetManager::~AssetManager(){
 }
 
 void Game::AssetManager::add_texture(std::string id, std::string path){
+    // Definitions:
     SDL_Surface* tmp_surface;   ///< Temporary surface (used to create texture).
+    std::size_t extension_idx;  ///< For getting the index of the "."
 
+
+    // Get texture:
     tmp_surface = SDL_LoadBMP(path.c_str());    // Load image as surface.
     width_map.emplace(id, tmp_surface->w);      // Save width/height into maps.
     height_map.emplace(id, tmp_surface->h);
     texture_map.emplace(id, SDL_CreateTextureFromSurface(Game::renderer, tmp_surface));      
         // Load texture and save it into map.
     SDL_FreeSurface(tmp_surface);               // Free surface.
+
+    // Check if animation information is available:
+    extension_idx = path.find_last_of(".");
+    std::cout << "Checking for file: " << path.substr(0, extension_idx) + ".txt" << std::endl;
+    if (std::filesystem::exists(path.substr(0, extension_idx) + ".txt")){
+        // Then the file exists, let's get its information:
+        is_animated_map.emplace(id, true);
+        std::cout << "True!" << std::endl;
+    } else { 
+        is_animated_map.emplace(id, false); 
+        std::cout << "False!" << std::endl;
+    }
+}
+
+void Game::AssetManager::add_texture(
+    std::string id, std::string path, 
+    std::map< std::string, Animation > sprite_animation_map
+){
+    add_texture(id, path);
+    animation_map.emplace(id, sprite_animation_map);
 }
 
 SDL_Texture* Game::AssetManager::get_texture(std::string id){ 

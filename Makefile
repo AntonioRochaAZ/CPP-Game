@@ -10,8 +10,8 @@ LINKER_FLAGS = -l SDL2 -l SDL2_image -l SDL2_ttf
 # Version (debug/release):
 DEBUG_DIR = debug
 RELEASE_DIR = release
-DEBUG_COMPILER_FLAGS = -std=c++14 -Wall -O0 -g
-RELEASE_COMPILER_FLAGS = -std=c++14 -Wall -O3 -g
+DEBUG_COMPILER_FLAGS = -std=c++17 -Wall -O0 -g
+RELEASE_COMPILER_FLAGS = -std=c++17 -Wall -O3 -g
 
 # Documentation related:
 MAKEFILE_DIR = $(CURDIR)

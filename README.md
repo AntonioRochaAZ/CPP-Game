@@ -71,6 +71,7 @@ command ``make documentation``, defined in the Makefile.
 - Create a player Entity type where we can generalize some behaviour (projectile creation,
   other attacks, the label above their head, and so on). This will be useful to then generalize
   the KeyboardController Component later.
+- Delete some of the Collider component's constructors (too many, definitely not all used).
 - Optimize rendering (stop rendering objects off-screen) (Must think if this really is necessary,
   and if so, when).
 - Make updating independent of FPS.
@@ -79,3 +80,11 @@ command ``make documentation``, defined in the Makefile.
 - Two projectiles (from the same player) will destroy each other if you shoot them while moving.
   Either we cap the time between shots, or do something else about it (e.g. make it so that
   projectile don't interact, but it would be interesting to be able to shoot down enemy projectiles, for example).
+- Review Collider constructors (way too many of them).
+- Remove getter/setter functions, use structs or public members instead.
+- Collider dynamic shape must be updated in the collider, and not in the sprite component (the collider
+  update comes before the sprite update, at least for the player).
+
+-> Make it so Animations can be stored in the AssetManager, since they are related to the textures.
+-> That means rewritting Sprite's constructor and maybe even removing the add_animation function. However,
+-> it could eventually be useful (?).

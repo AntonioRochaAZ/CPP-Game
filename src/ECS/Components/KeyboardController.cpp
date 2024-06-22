@@ -58,14 +58,12 @@ void KeyboardController::update(){
                 }
                 Projectile* proj = new Projectile(
                     entity->manager, "Projectile", "projectile1", 
-                    Sprite::Animation(1, 1000, 6, 3), 1000, 
+                    Animation(1, 1000, 6, 3), 1000, 
                     transform->get_position()+vec(x_sign * 100, 0), 20, vec(x_sign * 1.0, 0.0)
                 );
-                entity->manager.addEntity(proj);
                 proj->getComponent<Sprite>().set_scale(10);   // TODO: Eventually get player scale.
                 proj->getComponent<Collider>().get_shape();   // Updating collider dimensions.
-                // Will this pointer ever be deleted??
-                proj->add_group(ProjectileGroup);
+                // Will this pointer ever be deleted?? -> Yes, 
             }
             break;
         default:

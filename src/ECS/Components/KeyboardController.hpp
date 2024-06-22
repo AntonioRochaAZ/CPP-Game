@@ -37,7 +37,7 @@ public:
     Transform* transform;
     Sprite* sprite;
 
-    void init() override{ get_components(); local_key_bind_map = global_key_bind_map; }
+    void init() override{ local_key_bind_map = global_key_bind_map; }
 
     /** Function for getting the Transform and Sprite components. This is separate from the init
     function in case the KeyboardController is defined before those other components and we have

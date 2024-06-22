@@ -12,36 +12,6 @@
 class Sprite : public Component{
     public:
 
-        /// Useful struct for structuring Animation information.
-        struct Animation{
-            int frames;             ///< Number of frames in the animation
-            int animation_period;   ///< Period of each frame in miliseconds
-            int sprite_width;       
-            int sprite_height;
-            
-            // Members set up by the Sprite component:
-            /** The animation index (for when the Entity has multiple animations).
-                This member is set up by the \ref ::Sprite component when an animation
-                is added through \ref Sprite::add_animation. 
-            */
-            int index;              
-            /** The height (in pixels) at which we start "reading" the animation from the texture
-                source file. This member is set up by the \ref ::Sprite component when an animation
-                is added through \ref Sprite::add_animation.
-            */
-            int src_y;
-            
-            /** Constructor
-                @param f: frames member.
-                @param t: animation_period member (ms/frame).
-                @param w: sprite_width member (pixels).
-                @param h: sprite_height member (pixels).
-            */
-            Animation(int f, int t, int w, int h):
-                frames(f), animation_period(t), sprite_width(w), sprite_height(h),
-                index(-1), src_y(0){}
-        };
-
         SDL_RendererFlip sprite_flip = SDL_FLIP_NONE;   
             /**< Whether to flip the texture. Will be dealt with by the 
                 \ref KeyboardController Component, when the player turns
@@ -59,7 +29,7 @@ class Sprite : public Component{
         void render() override;     ///< Defined in Sprite.cpp file (long)
 
         // Texture and animation related: -------------------------------------
-        void add_animation(Sprite::Animation animation, std::string animation_name);
+        void add_animation(Animation animation, std::string animation_name);
             ///< Adds an animation to the animation_map member.
         void set_animation(std::string animation_name);
             ///< Changes current animation (reaches into the animation_map member).
@@ -121,6 +91,6 @@ class Sprite : public Component{
         int frames;                         ///< How many frames in the current animation.
         int animation_period;               ///< The period of the current animation being played (ms/frame).
         int nb_animations;                  ///< Total number of animations.
-        std::map<std::string, Sprite::Animation> animation_map;
+        std::map<std::string, Animation> animation_map;
             ///< Map translating animation names to animation objects.
 };

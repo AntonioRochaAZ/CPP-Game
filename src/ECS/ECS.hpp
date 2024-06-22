@@ -148,11 +148,6 @@ class Entity{
         void destroy(){ active = false; }
 };
 
-
-// TODO: in the addEntity, should delete the "new" entities at
-// some point... Instead, create smart pointers directly, and
-// then return them instead of regular pointers.
-
 /** This class serves to manage groups of entities in the game
 at each frame. It will delete entities that are not active. */
 class Manager{

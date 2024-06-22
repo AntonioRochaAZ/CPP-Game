@@ -1,16 +1,46 @@
 #include "Sprite.hpp"
 #include <stdexcept>    // Exception throwing
 #include "../../utils.hpp"  // map id checking.
+#include "Collider.hpp"  // map id checking.
 
 // DEFINITIONS:------------------------------------------------------------------------------
 // Constructors:
+// Sprite::Sprite(std::string texture_id):
+//     frames(0),
+//     animation_period(0),
+//     nb_animations(0)
+// {
+//     check_map_id<std::string, SDL_Texture*>(
+//         Game::assets.texture_map, texture_id, "Sprite::Sprite, Game::assets.texture_map");
+
+//     // get texture tuple from Asset Manager,
+//     // Check (with halt_bool = false) if there are animations in Game::assets.animation_map 
+//     // for the given texture_id. If so, animated = true, get the number of animations (and other
+//     // related Sprite members), and we can also set the animation_map directly.
+//     std::tie(texture, image_width, image_height) = texture_tuple;
+
+//     // Initializing source rect:
+//     src_rect.x = src_rect.y = 0;
+//     src_rect.w = image_width;
+//     src_rect.h = image_height;
+
+//     // Initializing destination rect:
+//     // Position will come in the init() method
+//     dst_rect.w = image_width;
+//     dst_rect.h = image_height;
+
+//     // Since we have passed the actual Texture pointer, we mustn't
+//     // destroy the texture in the destructor.
+//     // (Now initialized before-hand):
+//     //destroy_texture = false;
+// };
+
 Sprite::Sprite(TexTup texture_tuple, bool is_animated):
-    animated(false),
+    animated(is_animated),
     frames(0),
     animation_period(0),
     nb_animations(0)
 {
-    animated = is_animated;
     std::tie(texture, image_width, image_height) = texture_tuple;
 
     // Initializing source rect:
@@ -61,7 +91,7 @@ void Sprite::render(){
 }
 
 // Texture and animation related: -------------------------------------
-void Sprite::add_animation(Sprite::Animation animation, std::string animation_name){
+void Sprite::add_animation(Animation animation, std::string animation_name){
     // Animations should be added in the order they appear in the image.
     // Error handling:
     if (!animated){
@@ -75,7 +105,7 @@ void Sprite::add_animation(Sprite::Animation animation, std::string animation_na
 
     // Getting the source's height, based on the previous
     // animations added to the sprite component:
-    std::map<std::string, Sprite::Animation>::iterator it;
+    std::map<std::string, Animation>::iterator it;
     for (it = animation_map.begin(); it != animation_map.end(); it++){
         if (it->second.index == nb_animations - 1){
             animation.src_y = it->second.src_y + it->second.sprite_height;
@@ -93,9 +123,9 @@ void Sprite::add_animation(Sprite::Animation animation, std::string animation_na
 
 void Sprite::set_animation(std::string animation_name){
     if(animated){
-        check_map_id<std::string, Sprite::Animation>(animation_map, animation_name, "set_animation, animation_map");
+        check_map_id<std::string, Animation>(animation_map, animation_name, "set_animation, animation_map");
         
-        Sprite::Animation& local_animation = animation_map.find(animation_name)->second;
+        Animation& local_animation = animation_map.find(animation_name)->second;
             ///< Here we pass by the iterator to avoid issues with not having a default
             ///< constructor for the Animation class.
         current_animation = animation_name;
@@ -110,12 +140,18 @@ void Sprite::set_animation(std::string animation_name){
         dst_rect.w = scale_x * src_rect.w;
         dst_rect.h = scale_y * src_rect.h;
     }
+    if (entity->has_component<Collider>()){
+        if (entity->getComponent<Collider>().dynamic_shape){
+            entity->getComponent<Collider>().set_width( dst_rect.w);
+            entity->getComponent<Collider>().set_height(dst_rect.h);
+        }
+    }
 }
 // Overloading:
 void Sprite::set_animation(int an_index){
     // Getting Animation name from index:
     std::string animation_name;
-    std::map<std::string, Sprite::Animation>::iterator it;
+    std::map<std::string, Animation>::iterator it;
     for (it = animation_map.begin(); it != animation_map.end(); it++){
         if (it->second.index == an_index){
             animation_name = it->second.index;

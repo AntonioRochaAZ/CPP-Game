@@ -60,22 +60,61 @@ public:
     AssetManager.hpp header would cause a circular import problem. 
     */
     class AssetManager{
-    private:
+    // private:
+    public:
+
+        /// Useful struct for structuring Animation information.
+        struct Animation{
+            int frames;             ///< Number of frames in the animation
+            int animation_period;   ///< Period of each frame in miliseconds
+            int sprite_width;       
+            int sprite_height;
+            
+            // Members set up by the Sprite component:
+            /** The animation index (for when the Entity has multiple animations).
+                This member is set up by the \ref ::Sprite component when an animation
+                is added through \ref Sprite::add_animation. 
+            */
+            int index;              
+            /** The height (in pixels) at which we start "reading" the animation from the texture
+                source file. This member is set up by the \ref ::Sprite component when an animation
+                is added through \ref Sprite::add_animation.
+            */
+            int src_y;
+            
+            /** Constructor
+                @param f: frames member.
+                @param t: animation_period member (ms/frame).
+                @param w: sprite_width member (pixels).
+                @param h: sprite_height member (pixels).
+            */
+            Animation(int f, int t, int w, int h):
+                frames(f), animation_period(t), sprite_width(w), sprite_height(h),
+                index(-1), src_y(0){}
+        };
+
         // I would like to use a shared pointer instead of a regular pointer here,
         // to try it out, but I am not sure how this would affect the destroy
         // texture function we must use to destroy textures. I'll use this then
         std::map< std::string, SDL_Texture* > texture_map;  ///< A map from strings (an ID) to textures objects.
+        std::map< std::string, bool > is_animated_map;      ///< A map from strings (an ID) to a bool indicating if the texture has animations.
+        std::map< std::string, 
+            std::map< std::string, Animation >
+            > animation_map;  ///< A map from strings (an ID) to a map of animation objects (animation name -> Animation object).
         std::map< std::string, int > width_map;  ///< A map from strings (an ID) to the associated texture's width.
         std::map< std::string, int > height_map; ///< A map from strings (an ID) to the associated texture's height.
         std::map< std::string, TTF_Font* > font_map; ///< A map from strings (an ID) to font objects.
 
-    public:
         AssetManager(){};
         ~AssetManager();    ///< Destroys all texture and font pointers. Defined in AssetManager.cpp.
 
         // TEXTURE MANAGEMENT ---------------------------------------------------------------
         void add_texture(std::string id, std::string path); 
             ///< Load a texture from a path and save it under the ID "id" in the maps.
+        void add_texture(std::string id, std::string path, 
+                         std::map< std::string, Animation > sprite_animation_map); 
+            ///< Load a texture from a path and save it under the ID "id" in the maps.
+            ///< Then, save its animations in the animation map.
         SDL_Texture* get_texture(std::string id);  
             ///< Get a texture from the \ref AssetManager::texture_map "texture_map".
         TexTup get_tuple(std::string id);  
@@ -99,3 +138,5 @@ public:
     static AssetManager assets;   
         ///< The game's AssetManager instance, which handles textures and fonts.
 };
+
+using Animation = Game::AssetManager::Animation;

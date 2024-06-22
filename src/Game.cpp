@@ -83,17 +83,17 @@ int Game::init(const char* title, int x, int y, int width, int height, bool full
     // renderer, r, g, b, alpha (255 is opaque, 0 is transparent)
     SDL_SetRenderDrawColor(renderer, 0, 255, 120, 255);
 
-    Game::assets.add_texture("player", "assets/player.bmp");
-    Game::assets.add_texture("player2", "assets/player2.bmp");
-    Game::assets.add_texture("projectile1", "assets/projectile1-still.bmp");
+    Game::assets.add_texture("player1", "./assets/player1.bmp");
+    Game::assets.add_texture("player2", "./assets/player2.bmp");
+    Game::assets.add_texture("projectile1", "./assets/projectile1-still.bmp");
     player.addComponent<KeyboardController>();
     player.addComponent<Collider>(
         player.get_name(), 80, 170, MOVABLE_OBJECT);
     player.addComponent<Transform>(vec(0.0, 0.0), 10, vec(0.0, 0.0));
-    player.addComponent<Sprite>(Game::assets.get_tuple("player"), true);
-    player.getComponent<KeyboardController>().init();   // Force it to get the Transform and Sprite pointers.
-    // Game::assets.add_font("andale", "assets/fonts/andale_mono.ttf", 16);
-    Game::assets.add_font("custom_font2px", "assets/fonts/customfont-2px_spacing.ttf", 16);
+    player.addComponent<Sprite>(Game::assets.get_tuple("player1"), true);
+    player.getComponent<KeyboardController>().get_components();   // Force it to get the Transform and Sprite pointers.
+    // Game::assets.add_font("andale", "./assets/fonts/andale_mono.ttf", 16);
+    Game::assets.add_font("custom_font2px", "./assets/fonts/customfont-2px_spacing.ttf", 16);
     SDL_Color red = { 255, 0, 0, 255 };
     player.addComponent<UILabel>(20.0, -30.0, 40, 20, "P1", "custom_font2px", red, 24);
     // player.addComponent<Collider>(
@@ -102,20 +102,20 @@ int Game::init(const char* title, int x, int y, int width, int height, bool full
     player.add_group(PlayerGroup);
 
     //player.getComponent<Sprite>().init();
-    player.getComponent<Collider>().get_transform();
+    player.getComponent<Collider>().get_components();
     player.getComponent<Transform>().set_position(0, 0);
-    Sprite::Animation idle_animation(2, 1500, 8, 17);
-    Sprite::Animation walk_animation(5, 100, 9, 17);
+    Animation idle_animation(2, 1500, 8, 17);
+    Animation walk_animation(5, 100, 9, 17);
     player.getComponent<Sprite>().add_animation(idle_animation, "Idle");
     player.getComponent<Sprite>().add_animation(walk_animation, "Walk");
     player.getComponent<Sprite>().set_animation("Idle");
     player.getComponent<Sprite>().set_scale(10);
 
-    Game::assets.add_texture("tiles", "assets/textures.bmp");
+    Game::assets.add_texture("tiles", "./assets/textures.bmp");
     background.init(10, 10, 2, 10, Game::assets.get_tuple("tiles"));
     background.set_dst_size(100, 100);
     background.setup(10, 10);
-    background.load_map("assets/map_1.txt");
+    background.load_map("./assets/map_1.txt");
 
     background.tile_player = &player;
 
@@ -151,7 +151,7 @@ void Game::handle_events(){
                         // will have a bug where neither the map not
                         // the player doesn't move
                         Game::tracking_player = false;
-                        player.getComponent<Sprite>().set_texture(Game::assets.get_tuple("player"));
+                        player.getComponent<Sprite>().set_texture(Game::assets.get_tuple("player1"));
                     }else{
                         Game::tracking_player = true;
                         // Get current reference camera and entity positions (will be update next):

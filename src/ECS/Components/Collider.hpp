@@ -28,6 +28,10 @@ private:
         the collision into account. */
 
 public:
+    bool dynamic_shape;
+        /**< Whether the width and height will be updated dynamically 
+        according to the Sprite's animation information. */
+    
     std::size_t handling_option;    
         ///< Information about if the object can move/be moved or not. It
         ///< should be an entry of the collision_handle enum.
@@ -44,16 +48,19 @@ public:
 
     // Constructors and Destructors: ----------------------------------------------------------
     Collider(){};
-    Collider(std::string user_tag) : tag(user_tag), handling_option(IMMOVABLE_ON_COLLISION),
+    Collider(std::string user_tag, bool mDynamic_shape, std::size_t mHandling) : 
+        tag(user_tag), dynamic_shape(mDynamic_shape), handling_option(mHandling),
+        projectile_handling_option(INDESTRUCTABLE_ON_PROJECTILE) {};
+    Collider(std::string user_tag) : tag(user_tag), dynamic_shape(false), handling_option(IMMOVABLE_ON_COLLISION),
         projectile_handling_option(INDESTRUCTABLE_ON_PROJECTILE) {};
     Collider(std::string user_tag, int w, int h) : 
-        tag(user_tag), handling_option(IMMOVABLE_ON_COLLISION), 
+        tag(user_tag), dynamic_shape(false), handling_option(IMMOVABLE_ON_COLLISION), 
         projectile_handling_option(INDESTRUCTABLE_ON_PROJECTILE), width(w), height(h){};
     Collider(std::string user_tag, int w, int h, std::size_t mHandling) :
-        tag(user_tag), handling_option(mHandling), 
+        tag(user_tag), dynamic_shape(false), handling_option(mHandling), 
         projectile_handling_option(INDESTRUCTABLE_ON_PROJECTILE), width(w), height(h){};
     Collider(std::string user_tag, std::size_t mHandling, std::size_t mProjHandling):
-        tag(user_tag), handling_option(mHandling), projectile_handling_option(mProjHandling){};
+        tag(user_tag), dynamic_shape(false), handling_option(mHandling), projectile_handling_option(mProjHandling){};
     ~Collider();    /// Remove collider from Game collider vector.
 
     // Base class methods: ----------------------------------------------------
@@ -61,7 +68,7 @@ public:
     //void update() override;
 
     // Getting transform: -----------------------------------------------------
-    void get_transform();   
+    void get_components();   
         ///< For getting transform when the definition of the collider has preceeded it.
     void get_shape();   
         ///< For getting shape from the Sprite component.

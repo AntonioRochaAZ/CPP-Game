@@ -19,9 +19,9 @@ void Collider::init(){
     Game::collider_vector.push_back(this);
 }
 
-void Collider::get_transform(){ transform = &entity->getComponent<Transform>(); }
+void Collider::get_components(){ transform = &entity->getComponent<Transform>(); }
 
 void Collider::get_shape(){ 
-    width  = this->entity->getComponent<Sprite>().get_dst_width();
-    height = this->entity->getComponent<Sprite>().get_dst_height();
+    width  = entity->getComponent<Sprite>().get_dst_width();
+    height = entity->getComponent<Sprite>().get_dst_height();
 }
