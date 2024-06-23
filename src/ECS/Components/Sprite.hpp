@@ -16,9 +16,10 @@ class Sprite : public Component{
             /**< Whether to flip the texture. Will be dealt with by the 
                 \ref KeyboardController Component, when the player turns
                 around, for example.
-             */
+            */
 
         // Constructors & destructors -----------------------------------------
+        Sprite(std::string texture_id);   ///< Defined in Sprite.cpp file (long)
         Sprite(TexTup texture_tuple, bool is_animated=false);   ///< Defined in Sprite.cpp file (long)
         // Destructor:
         ~Sprite(){}  
@@ -34,7 +35,7 @@ class Sprite : public Component{
         void set_animation(std::string animation_name);
             ///< Changes current animation (reaches into the animation_map member).
         void set_animation(int an_index);   ///< Overloading.
-        void set_texture(TexTup texture_tuple);  
+        void set_texture(std::string texture_id);  
             ///< Overriding the current texture and its w/h information. This is more for
             ///< showing off the different player models and is not supposed to remain later.
         std::string current_animation;      ///< Current animation being rendered.
@@ -85,6 +86,9 @@ class Sprite : public Component{
             /**< Scale of the rendering: size on screen/size of the source
                 (``scale_x = dst_rect.w/src_rect.w`` and ``scale_y = dst_rect.h/src_rect.h``).
             */
+
+        bool set_collider;                 
+            ///< Whether to set \ref ::Collider dimensions automatically when changing animations.
 
         // Animation related:
         bool animated;                      ///< Whether the sprite is is animated.

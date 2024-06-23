@@ -5,37 +5,17 @@
 
 // DEFINITIONS:------------------------------------------------------------------------------
 // Constructors:
-// Sprite::Sprite(std::string texture_id):
-//     frames(0),
-//     animation_period(0),
-//     nb_animations(0)
-// {
-//     check_map_id<std::string, SDL_Texture*>(
-//         Game::assets.texture_map, texture_id, "Sprite::Sprite, Game::assets.texture_map");
+Sprite::Sprite(std::string texture_id): set_collider(false){
+    set_texture(texture_id);
+};
 
-//     // get texture tuple from Asset Manager,
-//     // Check (with halt_bool = false) if there are animations in Game::assets.animation_map 
-//     // for the given texture_id. If so, animated = true, get the number of animations (and other
-//     // related Sprite members), and we can also set the animation_map directly.
-//     std::tie(texture, image_width, image_height) = texture_tuple;
 
-//     // Initializing source rect:
-//     src_rect.x = src_rect.y = 0;
-//     src_rect.w = image_width;
-//     src_rect.h = image_height;
-
-//     // Initializing destination rect:
-//     // Position will come in the init() method
-//     dst_rect.w = image_width;
-//     dst_rect.h = image_height;
-
-//     // Since we have passed the actual Texture pointer, we mustn't
-//     // destroy the texture in the destructor.
-//     // (Now initialized before-hand):
-//     //destroy_texture = false;
-// };
-
+/** This constructor is kept for the TileMap, for which multiple tile textures
+are contained in one single image file and thus texture object. This allows
+manual control over the sprite.
+*/
 Sprite::Sprite(TexTup texture_tuple, bool is_animated):
+    set_collider(false),
     animated(is_animated),
     frames(0),
     animation_period(0),
@@ -61,11 +41,15 @@ Sprite::Sprite(TexTup texture_tuple, bool is_animated):
 
 // Base class methods: ------------------------------------------------
 void Sprite::init(){
-    // Definint destination_rect position from transform:
+    // Defining destination_rect position from transform:
+    // Note that the transform will always have already been defined because
+    // it must be updated before the sprite, so there is no reason to
+    // check if it exists here.
     transform = &entity->getComponent<Transform>();
     dst_rect.x = transform->get_x();
     dst_rect.y = transform->get_y();
 }
+
 void Sprite::update(){
     if (animated){
         // Update which frame we are using according to
@@ -84,6 +68,7 @@ void Sprite::update(){
     dst_rect.x = transform->get_x();
     dst_rect.y = transform->get_y();
 }
+
 void Sprite::render(){
     dst_rect.x -= Game::camera_position[0]; // Updating position according to camera.
     dst_rect.y -= Game::camera_position[1];
@@ -91,6 +76,10 @@ void Sprite::render(){
 }
 
 // Texture and animation related: -------------------------------------
+/** Although dealing with animations is mostly automatized now, this manual control
+could be useful if we would like to manually tune some things, especially if we want
+to have animated tiles, for example. Should be avoided, though. 
+*/
 void Sprite::add_animation(Animation animation, std::string animation_name){
     // Animations should be added in the order they appear in the image.
     // Error handling:
@@ -139,30 +128,61 @@ void Sprite::set_animation(std::string animation_name){
         // Update destination_rects:
         dst_rect.w = scale_x * src_rect.w;
         dst_rect.h = scale_y * src_rect.h;
+    } else{
+        std::cout << "Tried calling 'set_animation' when sprite isn't animated. Entity: " 
+                  << entity->name << "Animation name: " << animation_name << std::endl;
+        throw std::runtime_error(entity->name);
     }
-    if (entity->has_component<Collider>()){
-        if (entity->getComponent<Collider>().dynamic_shape){
-            entity->getComponent<Collider>().set_width( dst_rect.w);
-            entity->getComponent<Collider>().set_height(dst_rect.h);
-        }
+    if (set_collider){
+        entity->getComponent<Collider>().set_width( dst_rect.w);
+        entity->getComponent<Collider>().set_height(dst_rect.h);
     }
 }
 // Overloading:
 void Sprite::set_animation(int an_index){
     // Getting Animation name from index:
-    std::string animation_name;
+    std::string animation_name = "";
     std::map<std::string, Animation>::iterator it;
     for (it = animation_map.begin(); it != animation_map.end(); it++){
         if (it->second.index == an_index){
-            animation_name = it->second.index;
+            animation_name = it->first;
             break;
         }
+    }
+    if (animation_name == ""){
+        std::cout << "This animation is not here! Entity: " << entity->name << "; animation index: " << an_index << std::endl;
+        throw std::runtime_error(entity->name);
     }
     set_animation(animation_name);
 }
 
-void Sprite::set_texture(TexTup texture_tuple){
-    std::tie(texture, image_width, image_height) = texture_tuple;
+void Sprite::set_texture(std::string texture_id){
+    // Get texture tuple from Asset Manager.
+    std::tie(texture, image_width, image_height) = Game::assets.get_tuple(texture_id);
+
+    // Get animation map
+    src_rect.x = 0;
+    if (Game::assets.is_animated_map[texture_id]){
+        animated = true;
+        animation_map = Game::assets.animation_map[texture_id]; 
+            // We want this to be a copy, so we can eventually touch one sprite's animations
+            // without changeing all textures that use the same ones!
+        nb_animations = animation_map.size();
+        set_animation(0);   
+            // Set the current animation as the first one. This will setup some members
+    } else{
+        animated = false; frames = 0; animation_period = 0; nb_animations = 0;
+
+        // Initializing source rect:
+        src_rect.y = 0;
+        src_rect.w = image_width;
+        src_rect.h = image_height;
+
+        // Initializing destination rect:
+        // Position will come in the init() method
+        dst_rect.w = image_width;
+        dst_rect.h = image_height;
+    }
 }
 
 // Size related -------------------------------------------------------

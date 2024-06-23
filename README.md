@@ -85,6 +85,7 @@ command ``make documentation``, defined in the Makefile.
 - Collider dynamic shape must be updated in the collider, and not in the sprite component (the collider
   update comes before the sprite update, at least for the player).
 - Study the use of "const" and passing arguments by reference (check when it is possible/should be done).
+- Remove the dynamic_shape member of Collider and create a way of setting set_collider to true in Sprite.
 
 -> Make it so Animations can be stored in the AssetManager, since they are related to the textures.
 -> That means rewritting Sprite's constructor and maybe even removing the add_animation function. However,

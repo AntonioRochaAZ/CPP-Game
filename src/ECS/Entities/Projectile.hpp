@@ -22,13 +22,12 @@ public:
         @param velocity: The projectile's velocity vector.
     */
     Projectile(
-        Manager& man, std::string name, std::string sprite_name, Animation fly, 
-        int mRange, vec position, float speed, vec velocity);    // Overloading (testing)
+        Manager& man, std::string name, std::string sprite_name,
+        int rng, vec position, float speed, vec velocity);    // Overloading (testing)
     ~Projectile(){};
 
     int range;                  ///< How far it the projectile will go before being deleted.
     int distance;               ///< How far the projectile has travelled so far.
-    Animation flying_animation; ///< Animations (TODO: generalize).
 
     void update() override;
 };

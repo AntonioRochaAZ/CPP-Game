@@ -6,21 +6,20 @@
 
 using vec = Eigen::Vector2f;
 
-Projectile::Projectile(Manager& man, std::string name, std::string sprite_name, Animation fly, int rng, vec position, float speed, vec velocity):
-    Entity(man, name), range(rng), distance(0), flying_animation(fly){
-    // Animation charging(4, 20, 6, 3), flying(1, 10000, 6, 3);
+Projectile::Projectile(Manager& man, std::string name, std::string sprite_name, int rng, vec position, float speed, vec velocity):
+    Entity(man, name), range(rng), distance(0){
     
     this->addComponent<Collider>(name, 10, 10, DESTROY_ON_COLLISION);   // temporary width and height
     this->addComponent<Transform>(position, speed, velocity);
-    this->addComponent<Sprite>(Game::assets.get_tuple(sprite_name), true);
+    this->addComponent<Sprite>(sprite_name);
     //this->getComponent<Sprite>().add_animation(charging, "Charging");
 
     this->getComponent<Collider>().get_components();
     this->getComponent<Collider>().set_width(this->getComponent<Sprite>().get_dst_width());
     this->getComponent<Collider>().set_height(this->getComponent<Sprite>().get_dst_height());
     
-    this->getComponent<Sprite>().add_animation(flying_animation, "Flying");
-    this->getComponent<Sprite>().set_animation("Flying");
+    // this->getComponent<Sprite>().add_animation(flying_animation, "Flying");
+    // this->getComponent<Sprite>().set_animation("Flying");
 
     this->manager.addEntity(this);
     this->add_group(ProjectileGroup);   // Add this Entity to the Manager's ProjectileGroup.

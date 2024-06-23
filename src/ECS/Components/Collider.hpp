@@ -29,7 +29,8 @@ private:
 
 public:
     bool dynamic_shape;
-        /**< Whether the width and height will be updated dynamically 
+        /**< DEPRECATED, NOW IN SPRITE COMPONENT (set_collider). 
+        Whether the width and height will be updated dynamically 
         according to the Sprite's animation information. */
     
     std::size_t handling_option;    

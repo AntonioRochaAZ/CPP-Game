@@ -57,8 +57,7 @@ void KeyboardController::update(){
                     break;
                 }
                 Projectile* proj = new Projectile(
-                    entity->manager, "Projectile", "projectile1", 
-                    Animation(1, 1000, 6, 3), 1000, 
+                    entity->manager, "Projectile", "projectile1", 1000,
                     transform->get_position()+vec(x_sign * 100, 0), 20, vec(x_sign * 1.0, 0.0)
                 );  // Pretty sure the new pointer is dealt with in the manager (will be turned into a unique_ptr).
                 proj->getComponent<Sprite>().set_scale(10);   // TODO: Eventually get player scale.

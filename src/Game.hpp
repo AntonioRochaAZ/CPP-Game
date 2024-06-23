@@ -69,16 +69,12 @@ public:
             int animation_period;   ///< Period of each frame in miliseconds
             int sprite_width;       
             int sprite_height;
-            
-            // Members set up by the Sprite component:
-            /** The animation index (for when the Entity has multiple animations).
-                This member is set up by the \ref ::Sprite component when an animation
-                is added through \ref Sprite::add_animation. 
-            */
-            int index;              
+            int index;              ///< The animation index (for when the Entity has multiple animations).
+
+            // Members set up when loading the animations:
             /** The height (in pixels) at which we start "reading" the animation from the texture
-                source file. This member is set up by the \ref ::Sprite component when an animation
-                is added through \ref Sprite::add_animation.
+                source file. This member is set up by the \ref ::AssetManager::add_texture member
+                when an animation is added
             */
             int src_y;
             
@@ -87,10 +83,11 @@ public:
                 @param t: animation_period member (ms/frame).
                 @param w: sprite_width member (pixels).
                 @param h: sprite_height member (pixels).
+                @param i: the index of the animation.
             */
-            Animation(int f, int t, int w, int h):
+            Animation(int f, int t, int w, int h, int i):
                 frames(f), animation_period(t), sprite_width(w), sprite_height(h),
-                index(-1), src_y(0){}
+                index(i), src_y(0){}
         };
 
         // I would like to use a shared pointer instead of a regular pointer here,
