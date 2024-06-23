@@ -15,10 +15,9 @@ class TileMap : public Manager{
         std::string name; ///< A name for the tile map (may help debugging):
 
         // Texture related:
-        SDL_Texture* texture;           ///< The texture pointer
-        int image_width, image_height;  ///< W and H of the actual texture.
+        std::string texture_id;             ///< Texture ID of the whole 
         int sprite_width, sprite_height;    ///< Dimensions of the tiles in the .bmp file
-        int nb_ids, ids_per_row;    ///< Number of textures (total) and how many per row.
+        int nb_ids, ids_per_row;            ///< Number of textures (total) and how many per row.
 
         // Game window related:
         int x0, y0;                         ///< Where to start drawing the tile map
@@ -30,28 +29,20 @@ class TileMap : public Manager{
         std::vector< std::array<int, 2> > texture_pos;   ///< ``texture_pos[id][0] = x, texture_pos[id][1] = y``
 
     public:
-        Entity* tile_player; ///< So we can keep track of the player's movement (update map rendering).
-
         // Call order:
         TileMap(std::string mName): name(mName), x0(0), y0(0){};
 
         /** Initialize the TileMap.
-        @param sw: Width of a block texture in the source image in pixels (all blocks must have the same shape).
-        @param sh: Height of a block texture in the source image in pixels (all blocks must have the same shape).
-        @param ni: The number of different textures (IDs) present in the texture file.
-        @param ipr: The number of IDs per row (in the texture file).
-        @param texture_tuple: The tuple returned by \ref Game::AssetManager::get_tuple. 
-            This will contain the texture loaded from the texture file, which contains the
-            texture for all block IDs. When being rendered, we'll simply render a different
-            part of this texture.
+        @param texture_id: the ID under which data is stored in the AssetManager.
+        @param metadata_path: the path to the text file in which information about
+            the tilemap textures is stored (namely the shape of each texture, and the
+            total number of IDs). The number of IDs per row is calculated automatically
+            according to the size of the image.
+        @param mTwidth: the tile width in game (will become a destination rectangle's width).
+        @param mTheight: analogous to mTwidth but for the height.
         */
-        void init(int sw, int sh, int ni, int ipr, std::tuple< SDL_Texture*, int, int> texture_tuple);
-
-        /** Defines the size of the tiles (in the actual game window).
-        @param tw: Tile width (pixels).
-        @param th: Tile height (pixels).
-        */
-        void set_dst_size(int tw, int th);
+        void init(std::string texture_id, std::string metadata_path, int mTwidth, int mTheight);
+        // void init(int sw, int sh, int ni, int ipr, std::string texture_id);
 
         /** Sets up the Entity vectors, according to the number of tiles passed. It will set up
         information about the position and sprite of the tiles, although their IDs will only be

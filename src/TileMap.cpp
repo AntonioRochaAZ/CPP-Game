@@ -12,15 +12,49 @@
 using map_shape = std::vector< std::vector<int> >;
 
 // Call order: ------------------------------------------------------------
-void TileMap::init(int sw, int sh, int ni, int ipr,
-    std::tuple<SDL_Texture*, int, int> texture_tuple){
+void TileMap::init(std::string mTexture_id, std::string metadata_path, int mTwidth, int mTheight){
+    // Variable declarations: -------------------------------------------------------------------------------
+    std::ifstream metadata_file;
+    std::string line;
+    std::string token;
+    int image_width;
+    //-------------------------------------------------------------------------------------------------------
+    // Defining some members:
+    texture_id = mTexture_id; tile_width = mTwidth;  tile_height = mTheight; 
 
-    // Load texture file and set some variables up.
-    std::tie(texture, image_width, image_height) = texture_tuple;
-    sprite_width = sw; sprite_height = sh;
-    nb_ids = ni; ids_per_row = ipr;
+    // Get information from meta data:
+    metadata_file.open(metadata_path);
+    if (!metadata_file.is_open()){
+        std::cout << "ERROR could not open TileMap metadata file:";
+        throw std::invalid_argument(metadata_path);
+    }
+    line = check_get_line(metadata_file, metadata_path); // Only one line to read
+    // Variable declarations: -------------------------------------------------------------------------------
+    std::stringstream ss(line);                // A variable we can tokenize
+    //-------------------------------------------------------------------------------------------------------
+    for (int i = 0; i < 3; i++){                // Get data
+        if (!ss.good()){throw std::runtime_error("Error in TileMap::init: Trying to read more values than there are tokens.");}
+        std::getline(ss, token, ',');   // Getting value
+        switch(i){
+        case 0:
+            std::istringstream(token) >> nb_ids;
+            break;
+        case 1:
+            std::istringstream(token) >> sprite_width;
+            break;
+        case 2:
+            std::istringstream(token) >> sprite_height;
+            break;
+        }
+    }
 
-    // Setting texture_pos:
+    // Calculating the number of IDs per row, for calculating
+    // where each ID starts:
+    check_map_id<std::string, int>(Game::assets.width_map, texture_id, "TileMap::init, Game::assets.width_map");
+    image_width = Game::assets.width_map[texture_id];
+    ids_per_row = image_width / sprite_width;
+
+    // Setting texture_pos (ID positions):
     for (int id = 0; id < nb_ids; id++){
         texture_pos.emplace_back(
             std::array<int, 2>{
@@ -29,9 +63,8 @@ void TileMap::init(int sw, int sh, int ni, int ipr,
             }
         );
     }
-};
+}
 
-void TileMap::set_dst_size(int tw, int th){ tile_width = tw;  tile_height = th; }
 void TileMap::setup(int xtiles, int ytiles){
     // Sets up the entity_vector
 
@@ -53,8 +86,7 @@ void TileMap::setup(int xtiles, int ytiles){
             e.addComponent<Transform>(
                 x0 + x * tile_width, 
                 y0 + y * tile_height);
-            std::tuple<SDL_Texture*, int, int> texture_tuple = {texture, image_width, image_height};
-            e.addComponent<Sprite>(texture_tuple, false);
+            e.addComponent<Sprite>(texture_id);
 
             e.getComponent<Transform>().set_speed(0.0);
             e.getComponent<Sprite>().set_src_height(sprite_height);

@@ -42,7 +42,7 @@ void Game::AssetManager::add_texture(std::string id, std::string path){
 
     // Check if animation information is available:
     extension_idx = path.find_last_of(".");
-    animation_path = path.substr(0, extension_idx) + ".txt";
+    animation_path = path.substr(0, extension_idx) + "_animations.txt";
     if (!std::filesystem::exists(animation_path)){
         // No animation .txt file.
         is_animated_map.emplace(id, false);

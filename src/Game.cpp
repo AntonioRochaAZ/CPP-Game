@@ -11,7 +11,7 @@ std::map<int, std::size_t> global_key_bind_map;
 
 //Map* tile_map;
 Manager manager;
-TileMap background = TileMap("Background");
+TileMap background("Background");
 
 /// Definition of Game object's static variables:
 SDL_Renderer* Game::renderer = nullptr;
@@ -111,9 +111,8 @@ int Game::init(const char* title, int x, int y, int width, int height, bool full
     player.getComponent<Sprite>().set_animation("Idle");
     player.getComponent<Sprite>().set_scale(10);
 
-    Game::assets.add_texture("tiles", "./assets/textures.bmp");
-    background.init(10, 10, 2, 10, Game::assets.get_tuple("tiles"));
-    background.set_dst_size(100, 100);
+    Game::assets.add_texture("tiles", "./assets/tilemap.bmp");
+    background.init("tiles", "./assets/tilemap_metadata.txt", 100, 100);
     background.setup(10, 10);
     background.load_map("./assets/map_1.txt");
 
