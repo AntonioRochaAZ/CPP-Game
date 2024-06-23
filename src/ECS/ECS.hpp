@@ -161,11 +161,11 @@ class Manager{
         /// Function for adding an entity to the \ref Manager::entity_vector "entity_vector"
         /// by creating a new pointer.
         Entity& addEntity(std::string mName = "None"){
-            Entity* e = new Entity(*this, mName);
+            Entity* e = new Entity(*this, mName);   // We'll call addEntity(e) which will deal with the new pointer.
             return addEntity(e); }
         /// Instead, add an existing entity to the \ref Manager::entity_vector "entity_vector".
         Entity& addEntity(Entity* e){
-            std::unique_ptr<Entity> uPtr{e};
+            std::unique_ptr<Entity> uPtr{e};        // Now the pointer is dealt with by unique_ptr
             entity_vector.emplace_back(std::move(uPtr));
             return *e; }
 

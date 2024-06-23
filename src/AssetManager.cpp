@@ -3,6 +3,8 @@
 #include <filesystem>
 #include "Game.hpp"
 #include "utils.hpp"
+#include <fstream>
+#include <sstream> // ostringstream definition
 
 using Animation = Game::AssetManager::Animation;
 
@@ -24,10 +26,11 @@ Game::AssetManager::~AssetManager(){
 }
 
 void Game::AssetManager::add_texture(std::string id, std::string path){
-    // Definitions:
+    // Variable declarations: -------------------------------------------------------------------------------
     SDL_Surface* tmp_surface;   ///< Temporary surface (used to create texture).
     std::size_t extension_idx;  ///< For getting the index of the "."
-
+    std::string animation_path; ///< Path to the .txt file with the animation information
+    //-------------------------------------------------------------------------------------------------------
 
     // Get texture:
     tmp_surface = SDL_LoadBMP(path.c_str());    // Load image as surface.
@@ -39,14 +42,54 @@ void Game::AssetManager::add_texture(std::string id, std::string path){
 
     // Check if animation information is available:
     extension_idx = path.find_last_of(".");
-    std::cout << "Checking for file: " << path.substr(0, extension_idx) + ".txt" << std::endl;
-    if (std::filesystem::exists(path.substr(0, extension_idx) + ".txt")){
+    animation_path = path.substr(0, extension_idx) + ".txt";
+    if (std::filesystem::exists(animation_path)){
         // Then the file exists, let's get its information:
+        // Variable declarations: ---------------------------------------------------------------------------
+        std::ifstream animation_file;   ///< File object
+        std::string line;               ///< Lines we'll parse.
+        std::string token;              ///< The values we'll read from the line, as a string
+        std::string animation_name;     ///< The animation name we'll read from the line.
+        std::array<int, 4> animation_data;  ///< Storage for the numerical values, which will be used to create the animation objects.
+        std::map< std::string, Animation > temporary_map;   ///< Map storing all animations.
+        //---------------------------------------------------------------------------------------------------
+
+
+        animation_file.open(animation_path);
+        if (!animation_file.is_open()){ 
+            std::cout << "ERROR: animation file exists, but could not be opened:";
+            throw std::runtime_error(animation_path);
+        }
+        while (std::getline(animation_file, line)){
+            // Variable declarations: -----------------------------------------------------------------------
+            std::stringstream ss(line); // A variable we can tokenize
+            //-----------------------------------------------------------------------------------------------
+
+            for (int i = 0; i < 5; i ++){
+                if (!ss.good()){
+                    throw std::runtime_error(
+                        "Error in Game::AssetManager::add_texture: trying to read more values than there tokens/line in the text file.");
+                }
+
+                // Getting value:
+                std::getline(ss, token, ',');
+                switch (i){
+                case 0: // Name of the animation
+                    animation_name = token;
+                    break;
+                default:
+                    std::istringstream(token) >> animation_data[i - 1];
+                    break;
+                }
+            }
+            // Add animation to map
+            Animation animation_object(animation_data[0], animation_data[1], animation_data[2], animation_data[3]);
+            temporary_map.emplace(animation_name, animation_object);
+        }
         is_animated_map.emplace(id, true);
-        std::cout << "True!" << std::endl;
+        animation_map.emplace(id, temporary_map);
     } else { 
-        is_animated_map.emplace(id, false); 
-        std::cout << "False!" << std::endl;
+        is_animated_map.emplace(id, false);
     }
 }
 

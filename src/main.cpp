@@ -20,16 +20,15 @@ int main(int argc, const char* argv[]) {
         std::cout << "Thread nb. " << omp_get_thread_num() << "i:" << i << std::endl;
     }*/
     
-
-    game = new Game();
+    Game game;
     // TODO: Segmentation fault when clicking the executable comes from game->init instruction below:
-    game->init("Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, window_width, window_height, fullscreen);
-    while (game->running()){
+    game.init("Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, window_width, window_height, fullscreen);
+    while (game.running()){
 
         frame_start = SDL_GetTicks(); // How much time (in ms) since we started SDL.
-        game->handle_events();
-        game->update();
-        game->render();
+        game.handle_events();
+        game.update();
+        game.render();
 
         frame_time = SDL_GetTicks() - frame_start; // How much time between frame_start and now.
 
@@ -40,8 +39,7 @@ int main(int argc, const char* argv[]) {
             std::cout << "Sloww...";
         }
     }
-    game->clean();
-    delete game;
+    game.clean();
     std::cout << "Got here!";
     return 0;
 }
