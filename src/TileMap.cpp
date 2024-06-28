@@ -8,11 +8,21 @@
 #include <unordered_map>
 #include "utils.hpp"
 
-
 using map_shape = std::vector< std::vector<int> >;
 
 // Call order: ------------------------------------------------------------
-void TileMap::init(std::string mTexture_id, std::string metadata_path, int mTwidth, int mTheight){
+
+/** Initialize TileMap with a given texture file and its metadata.
+This will touch texture related members (texture_id, sprite width and height, 
+nb_ids, ids_per_row and texture_pos).
+    
+@param texture_id: the ID under which data is stored in the AssetManager.
+@param metadata_path: the path to the text file in which information about
+    the tilemap textures is stored (namely the shape of each texture, and the
+    total number of IDs). The number of IDs per row is calculated automatically
+    according to the size of the image. Note that this is not the map file.
+*/
+void TileMap::init(std::string mTexture_id, std::string metadata_path){
     // Variable declarations: -------------------------------------------------------------------------------
     std::ifstream metadata_file;
     std::string line;
@@ -20,7 +30,7 @@ void TileMap::init(std::string mTexture_id, std::string metadata_path, int mTwid
     int image_width;
     //-------------------------------------------------------------------------------------------------------
     // Defining some members:
-    texture_id = mTexture_id; tile_width = mTwidth;  tile_height = mTheight; 
+    texture_id = mTexture_id;
 
     // Get information from meta data:
     metadata_file.open(metadata_path);
@@ -65,12 +75,27 @@ void TileMap::init(std::string mTexture_id, std::string metadata_path, int mTwid
     }
 }
 
+/** Sets up the Entity vectors, according to the number of tiles passed. It will set up
+information about the position and sprite of the tiles, although their IDs will only be
+set later (in \ref load_map), by effectively changing where the source rectangle is read 
+from in the base texture file. 
+
+Ideally, in the future, this should be set up automatically in \ref load_map.
+
+@param x_tiles: Number of tiles (x axis).
+@param y_tiles: Number of tiles (y axis).
+*/
 void TileMap::setup(int xtiles, int ytiles){
     // Sets up the entity_vector
 
     nb_xtiles = xtiles; nb_ytiles = ytiles;
     std::ostringstream full_name;   // String we can concatenate variables (composing the name)
     std::string final_name;         // The final string.
+
+    // If we already had entries in the entity_vector, let's destroy them and refresh. 
+    // May not be optimal, but it is much simpler. We won't often do this anyway.
+    for (std::unique_ptr<Entity>& e : entity_vector){ e->destroy(); }
+    refresh();
 
     // Adding Tile entities to the entity_vector
     for (int y = 0; y < nb_ytiles; y ++){
@@ -98,6 +123,8 @@ void TileMap::setup(int xtiles, int ytiles){
         map.emplace_back(map_line);
     }
 }
+
+
 void TileMap::load_map(std::string path){
     std::ifstream map_file;         // File type
     std::string line;              // Variable used for reading lines.
@@ -107,37 +134,34 @@ void TileMap::load_map(std::string path){
         {"col", 2},
     };
 
-    // auto get_line = [&]() -> std::string {
-    //     /* Checks if we've reached the end of a file we're working on before
-    //     we should. This function will throw runtime errors if so. The path is
-    //     only used to aid debugging.
-
-    //     I tried to make this general and save it in a utils.hpp file,
-    //     but it did not work because of the ifstream variable:
-    //     "error: call to implicitly-deleted copy constructor of 'std::ifstream'
-    //     (aka 'basic_ifstream<char>'"
-    //     I'll try to fix this eventually.
-    //     */
-    //         // Checking for errors:
-    //         if (map_file.eof()){
-    //             std::cout << "ERROR WHEN READING FILE: " << path;
-    //             throw std::runtime_error(
-    //                 "Error when reading file: EOS reached.");
-    //         }
-    //         // Reading the line into variable "line":
-    //         if (!std::getline(map_file, line)){
-    //             std::cout << "ERROR WHEN READING FILE: " << path;
-    //             throw std::runtime_error(
-    //                 "Error when reading line.");
-    //     }
-    //     return line;
-    // };
-
     map_file.open(path);
     if (!map_file.is_open()){
         std::cout << "ERROR: Could not open map file:";
         throw std::invalid_argument(path);
     }
+
+    // Let's first get the number of x and y tiles:
+    line = check_get_line(map_file, path);
+    std::stringstream ss(line);     // A variable we can tokenize
+    std::string token;              // The numbers, as a string
+    int xtiles, ytiles;             // int where we are going to store the entry.               
+    for (int i = 0; i < 2; i++){
+        if (!ss.good()){
+            throw std::runtime_error("Error in TileMap::load_map: trying to read more tokens than there tokens/line in the text file: nb of x and y tiles.");
+        }
+        std::getline(ss, token, ',');       // Getting the number as a str
+        // Turning it into an int:
+        switch(i){
+        case 0:
+            std::istringstream(token) >> xtiles;
+            break;
+        case 1: 
+            std::istringstream(token) >> ytiles;
+            break;
+        }
+    }
+    setup(xtiles, ytiles);  // Setting the entities up.
+
     // Loop for reading through file's lines:
     while (std::getline(map_file, line)) {
     switch (cases[line.substr(0, 3)]) {
@@ -218,4 +242,10 @@ void TileMap::load_map(std::string path){
     map_file.close();
 }
 
-void TileMap::set_position(int x, int y){ x0 = x;  y0 = y; }
+void TileMap::set_position(int x, int y){
+    for(std::unique_ptr<Entity>& e : entity_vector){
+        e->getComponent<Transform>().set_x(e->getComponent<Transform>().get_x() + (x - x0));
+        e->getComponent<Transform>().set_y(e->getComponent<Transform>().get_y() + (y - y0));
+    }
+    x0 = x;  y0 = y; 
+}

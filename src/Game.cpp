@@ -11,7 +11,7 @@ std::map<int, std::size_t> global_key_bind_map;
 
 //Map* tile_map;
 Manager manager;
-TileMap background("Background");
+TileMap background("Background", 100, 100);
 
 /// Definition of Game object's static variables:
 SDL_Renderer* Game::renderer = nullptr;
@@ -112,8 +112,8 @@ int Game::init(const char* title, int x, int y, int width, int height, bool full
     player.getComponent<Sprite>().set_scale(10);
 
     Game::assets.add_texture("tiles", "./assets/tilemap.bmp");
-    background.init("tiles", "./assets/tilemap_metadata.txt", 100, 100);
-    background.setup(10, 10);
+    background.init("tiles", "./assets/tilemap_metadata.txt");
+    // background.setup(10, 10);
     background.load_map("./assets/map_1.txt");
 
     // Font:
@@ -149,12 +149,16 @@ void Game::handle_events(){
                         // the player doesn't move
                         Game::tracking_player = false;
                         player.getComponent<Sprite>().set_texture("player1");
+                        background.load_map("./assets/map_1.txt");
+                        background.set_position(100, 100);
                     }else{
                         Game::tracking_player = true;
                         // Get current reference camera and entity positions (will be update next):
                         previous_camera_position = camera_position;
                         previous_ref_entity_position = camera_ref_entity->getComponent<Transform>().get_position();
                         player.getComponent<Sprite>().set_texture("player2");
+                        background.load_map("./assets/map_2.txt");
+                        background.set_position(0, 0);
                     }
                     break;
                     
