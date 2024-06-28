@@ -2,10 +2,12 @@
 #include "ECS/Components/Collider.hpp"
 
 bool Collision::collider_AABB(const Collider *CA, const Collider *CB){
-    if (CA->transform->get_x() + CA->width  > CB->transform->get_x() &&
-        CB->transform->get_x() + CB->width  > CA->transform->get_x() &&
-        CA->transform->get_y() + CA->height > CB->transform->get_y() &&
-        CB->transform->get_y() + CB->height > CA->transform->get_y()){
+    Transform& TA = CA->entity->getComponent<Transform>();  // Just to simplify.
+    Transform& TB = CB->entity->getComponent<Transform>();
+    if (TA.get_x() + CA->width  > TB.get_x() &&
+        TB.get_x() + CB->width  > TA.get_x() &&
+        TA.get_y() + CA->height > TB.get_y() &&
+        TB.get_y() + CB->height > TA.get_y()){
 
         std::cout << CA->get_tag() << " hit: " << CB->get_tag() << "\n";
         return true;
@@ -121,16 +123,18 @@ void Collision::handle_collisions(){
             */
             
             // For clarity:
-            float xa = CA->transform->get_x();
-            float ya = CA->transform->get_y();
-            float xb = CB->transform->get_x();
-            float yb = CB->transform->get_y();
-            float speed_a = CA->transform->get_speed();
-            float speed_b = CB->transform->get_speed();
-            float vxa = CA->transform->get_vx();
-            float vya = CA->transform->get_vy();
-            float vxb = CB->transform->get_vx();
-            float vyb = CB->transform->get_vy();
+            Transform& TA = CA->entity->getComponent<Transform>();
+            Transform& TB = CB->entity->getComponent<Transform>();
+            float xa = TA.get_x();
+            float ya = TA.get_y();
+            float xb = TB.get_x();
+            float yb = TB.get_y();
+            float speed_a = TA.get_speed();
+            float speed_b = TB.get_speed();
+            float vxa = TA.get_vx();
+            float vya = TA.get_vy();
+            float vxb = TB.get_vx();
+            float vyb = TB.get_vy();
             float wa = CA->width;
             float ha = CA->height;
             float wb = CB->width;
@@ -175,10 +179,10 @@ void Collision::handle_collisions(){
 
                     // Update ONLY B's transform :
                     if (t_idx <= 1){ 
-                        CB->transform->set_x( xb - speed_b*vxb* diff );
+                        TB.set_x( xb - speed_b*vxb* diff );
                         // CB->transform->set_vx(0.0); 
                     }else{ 
-                        CB->transform->set_y( yb - speed_b*vyb* diff );
+                        TB.set_y( yb - speed_b*vyb* diff );
                         // CB->transform->set_vy(0.0);
                     }
                     if (CB->entity->has_component<Sprite>()){ CB->entity->getComponent<Sprite>().update(); }
@@ -218,10 +222,10 @@ void Collision::handle_collisions(){
 
                     // Update ONLY A's transform :
                     if (t_idx <= 1){ 
-                        CA->transform->set_x( xa - speed_a*vxa* diff );
+                        TA.set_x( xa - speed_a*vxa* diff );
                         // CA->transform->set_vx(0.0); 
                     }else{ 
-                        CA->transform->set_y( ya - speed_a*vya* diff );
+                        TA.set_y( ya - speed_a*vya* diff );
                         // CA->transform->set_vy(0.0); 
                     }
                     if (CA->entity->has_component<Sprite>()){ CA->entity->getComponent<Sprite>().update(); }
@@ -238,19 +242,19 @@ void Collision::handle_collisions(){
 
                     // Update A:
                     if (t_idx <= 1){
-                        CA->transform->set_x( xa - speed_a*vxa* diff );
+                        TA.set_x( xa - speed_a*vxa* diff );
                         // CA->transform->set_vx(0.0);
                     }else{
-                        CA->transform->set_y( ya - speed_a*vya* diff );
+                        TA.set_y( ya - speed_a*vya* diff );
                         // CA->transform->set_vy(0.0);
                     }
                     if (CA->entity->has_component<Sprite>()){ CA->entity->getComponent<Sprite>().update(); }
                     if (CA->entity->has_component<UILabel>()){ CA->entity->getComponent<UILabel>().update(); }
                 
                     // Update B:
-                    CB->transform->set_x( xb - speed_b*vxb* diff );
-                    CB->transform->set_y( yb - speed_b*vyb* diff );
-                    if (t_idx <= 1){ CB->transform->set_vx(0.0); }else{ CB->transform->set_vy(0.0); }
+                    TB.set_x( xb - speed_b*vxb* diff );
+                    TB.set_y( yb - speed_b*vyb* diff );
+                    if (t_idx <= 1){ TB.set_vx(0.0); }else{ TB.set_vy(0.0); }
                     if (CB->entity->has_component<Sprite>()){ CB->entity->getComponent<Sprite>().update(); }
                     if (CB->entity->has_component<UILabel>()){ CB->entity->getComponent<UILabel>().update(); }
                 

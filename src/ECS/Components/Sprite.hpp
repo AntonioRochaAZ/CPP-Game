@@ -18,6 +18,9 @@ class Sprite : public Component{
                 around, for example.
             */
 
+        bool set_collider;                 
+            ///< Whether to set \ref ::Collider dimensions automatically when changing animations.
+
         // Constructors & destructors -----------------------------------------
         Sprite(std::string texture_id);   ///< Defined in Sprite.cpp file (long)
         Sprite(TexTup texture_tuple, bool is_animated=false);   ///< Defined in Sprite.cpp file (long)
@@ -49,8 +52,8 @@ class Sprite : public Component{
         // trying to change it here.
         int get_dst_width(){ return dst_rect.w; }       ///< Gets actual width on the screen
         int get_dst_height(){ return dst_rect.h; }      ///< Gets actual height on the screen
-        void set_dst_width(int w){ dst_rect.w = w; }    ///< Sets actual width on the screen
-        void set_dst_height(int h){ dst_rect.h = h; }   ///< Sets actual height on the screen
+        void set_dst_width(int w){ dst_rect.w = w; maybe_update_collider();}    ///< Sets actual width on the screen
+        void set_dst_height(int h){ dst_rect.h = h; maybe_update_collider(); }   ///< Sets actual height on the screen
         int get_dst_x(){ return dst_rect.x; }           ///< Gets X position on screen (pixels).
         int get_dst_y(){ return dst_rect.y; }           ///< Gets Y position on screen (pixels).
         // Setting SOURCE info:
@@ -68,13 +71,15 @@ class Sprite : public Component{
         void set_xscale(float sclx){
             scale_x = sclx; 
             dst_rect.w = scale_x * src_rect.w;
+            maybe_update_collider();
         };
         void set_yscale(float scly){
             scale_y = scly;
             dst_rect.h = scale_y * src_rect.h;
+            maybe_update_collider();
         };
         void set_scale(float scale){ set_xscale(scale); set_yscale(scale); };  ///< Sets the same scale for both x and y axes.
-
+        
     private:    
         // Entity
         Transform* transform;               ///< Entity's \ref ::Transform component.
@@ -87,9 +92,6 @@ class Sprite : public Component{
                 (``scale_x = dst_rect.w/src_rect.w`` and ``scale_y = dst_rect.h/src_rect.h``).
             */
 
-        bool set_collider;                 
-            ///< Whether to set \ref ::Collider dimensions automatically when changing animations.
-
         // Animation related:
         bool animated;                      ///< Whether the sprite is is animated.
         int frames;                         ///< How many frames in the current animation.
@@ -97,4 +99,6 @@ class Sprite : public Component{
         int nb_animations;                  ///< Total number of animations.
         std::map<std::string, Animation> animation_map;
             ///< Map translating animation names to animation objects.
+        void maybe_update_collider();      
+            ///< Checks if set_collider is true and updates the collider's shape if so.
 };

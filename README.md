@@ -80,15 +80,11 @@ command ``make documentation``, defined in the Makefile.
 - Two projectiles (from the same player) will destroy each other if you shoot them while moving.
   Either we cap the time between shots, or do something else about it (e.g. make it so that
   projectile don't interact, but it would be interesting to be able to shoot down enemy projectiles, for example).
-- Review Collider constructors (way too many of them).
 - Remove getter/setter functions, use structs or public members instead.
 - Collider dynamic shape must be updated in the collider, and not in the sprite component (the collider
   update comes before the sprite update, at least for the player).
 - Study the use of "const" and passing arguments by reference (check when it is possible/should be done).
 - Remove the dynamic_shape member of Collider and create a way of setting set_collider to true in Sprite.
-
--> Make it so Animations can be stored in the AssetManager, since they are related to the textures.
--> That means rewritting Sprite's constructor and maybe even removing the add_animation function. However,
--> it could eventually be useful (?).
----> Parse and read the animation text files in the AssetManager add texture function. Later, then make
----> Sprite initialization etc. only depend on AssetManager functions.
+- In Collision.cpp, we may be able to avoid code repetition in the switch case of handle_collision if we check for
+  the combination of collision types, instead of one then the other. We can then change who is CA and who is CB
+  (more like C1 and C2).

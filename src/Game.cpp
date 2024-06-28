@@ -91,6 +91,7 @@ int Game::init(const char* title, int x, int y, int width, int height, bool full
         player.get_name(), 80, 170, MOVABLE_OBJECT);
     player.addComponent<Transform>(vec(0.0, 0.0), 10, vec(0.0, 0.0));
     player.addComponent<Sprite>("player1");
+
     player.getComponent<KeyboardController>().get_components();   // Force it to get the Transform and Sprite pointers.
     // Game::assets.add_font("andale", "./assets/fonts/andale_mono.ttf", 16);
     Game::assets.add_font("custom_font2px", "./assets/fonts/customfont-2px_spacing.ttf", 16);
@@ -102,14 +103,15 @@ int Game::init(const char* title, int x, int y, int width, int height, bool full
     player.add_group(PlayerGroup);
 
     //player.getComponent<Sprite>().init();
-    player.getComponent<Collider>().get_components();
     player.getComponent<Transform>().set_position(0, 0);
     // Animation idle_animation(2, 1500, 8, 17);
     // Animation walk_animation(5, 100, 9, 17);
     // player.getComponent<Sprite>().add_animation(idle_animation, "Idle");
     // player.getComponent<Sprite>().add_animation(walk_animation, "Walk");
+    player.getComponent<Sprite>().set_collider = true;
     player.getComponent<Sprite>().set_animation("Idle");
     player.getComponent<Sprite>().set_scale(10);
+    player.getComponent<Collider>().enable_dynamic_shape();
 
     Game::assets.add_texture("tiles", "./assets/tilemap.bmp");
     background.init("tiles", "./assets/tilemap_metadata.txt");
@@ -149,6 +151,7 @@ void Game::handle_events(){
                         // the player doesn't move
                         Game::tracking_player = false;
                         player.getComponent<Sprite>().set_texture("player1");
+                        player.getComponent<Sprite>().set_scale(1);
                         background.load_map("./assets/map_1.txt");
                         background.set_position(100, 100);
                     }else{
@@ -157,6 +160,7 @@ void Game::handle_events(){
                         previous_camera_position = camera_position;
                         previous_ref_entity_position = camera_ref_entity->getComponent<Transform>().get_position();
                         player.getComponent<Sprite>().set_texture("player2");
+                        player.getComponent<Sprite>().set_scale(100);
                         background.load_map("./assets/map_2.txt");
                         background.set_position(0, 0);
                     }

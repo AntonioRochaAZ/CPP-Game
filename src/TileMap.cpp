@@ -225,7 +225,7 @@ void TileMap::load_map(std::string path){
                     if (id == 1){
                         std::string local_name = entity_vector[nb_xtiles*y + x]->get_name();
                         entity_vector[nb_xtiles*y + x]->addComponent<Collider>(
-                            local_name, tile_width, tile_height);
+                            local_name, tile_width, tile_height, IMMOVABLE_ON_COLLISION);
                     }
                 }
                 // map_file.get(tile);     // A number.

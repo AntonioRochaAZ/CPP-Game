@@ -27,11 +27,15 @@ private:
         /**< This tag could eventually be useful for deciding whether to take 
         the collision into account. */
 
-public:
     bool dynamic_shape;
-        /**< DEPRECATED, NOW IN SPRITE COMPONENT (set_collider). 
-        Whether the width and height will be updated dynamically 
-        according to the Sprite's animation information. */
+        /**< This is only used for debugging. The actual handling is done in
+        the \ref ::Sprite component with the set_collider attribute. To set
+        it on or off, use the enable_dynamic_shape and disable_dynamic_shape 
+        functions. They'll ensure that dynamic_shape and the Sprite's set_collider
+        members are in sync.
+        */
+
+public:
     
     std::size_t handling_option;    
         ///< Information about if the object can move/be moved or not. It
@@ -42,26 +46,14 @@ public:
         ///< hit by a projectile.
 
     int width, height;  ///< Width and Height of the rectangular collider.
-    Transform* transform;   ///< A pointer to the transform of the entity.
-    // TODO: "Problem": we consider our objects as rectangles for the
-    // moment.
-    // "AABB" Collision (episode 11 of tutorial).
 
     // Constructors and Destructors: ----------------------------------------------------------
     Collider(){};
-    Collider(std::string user_tag, bool mDynamic_shape, std::size_t mHandling) : 
-        tag(user_tag), dynamic_shape(mDynamic_shape), handling_option(mHandling),
-        projectile_handling_option(INDESTRUCTABLE_ON_PROJECTILE) {};
-    Collider(std::string user_tag) : tag(user_tag), dynamic_shape(false), handling_option(IMMOVABLE_ON_COLLISION),
-        projectile_handling_option(INDESTRUCTABLE_ON_PROJECTILE) {};
-    Collider(std::string user_tag, int w, int h) : 
-        tag(user_tag), dynamic_shape(false), handling_option(IMMOVABLE_ON_COLLISION), 
-        projectile_handling_option(INDESTRUCTABLE_ON_PROJECTILE), width(w), height(h){};
+
     Collider(std::string user_tag, int w, int h, std::size_t mHandling) :
         tag(user_tag), dynamic_shape(false), handling_option(mHandling), 
         projectile_handling_option(INDESTRUCTABLE_ON_PROJECTILE), width(w), height(h){};
-    Collider(std::string user_tag, std::size_t mHandling, std::size_t mProjHandling):
-        tag(user_tag), dynamic_shape(false), handling_option(mHandling), projectile_handling_option(mProjHandling){};
+
     ~Collider();    /// Remove collider from Game collider vector.
 
     // Base class methods: ----------------------------------------------------
@@ -69,8 +61,15 @@ public:
     //void update() override;
 
     // Getting transform: -----------------------------------------------------
-    void get_components();   
-        ///< For getting transform when the definition of the collider has preceeded it.
+    void enable_dynamic_shape(){ 
+        dynamic_shape = true;
+        entity->getComponent<Sprite>().set_collider = true;
+        get_shape();
+    };
+    void disable_dynamic_shape(){
+        dynamic_shape = false;
+        entity->getComponent<Sprite>().set_collider = false;
+    }
     void get_shape();   
         ///< For getting shape from the Sprite component.
     void set_proj_handling(std::size_t mProjHandling){projectile_handling_option = mProjHandling;};

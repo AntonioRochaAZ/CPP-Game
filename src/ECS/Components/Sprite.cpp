@@ -133,10 +133,7 @@ void Sprite::set_animation(std::string animation_name){
                   << entity->name << "Animation name: " << animation_name << std::endl;
         throw std::runtime_error(entity->name);
     }
-    if (set_collider){
-        entity->getComponent<Collider>().set_width( dst_rect.w);
-        entity->getComponent<Collider>().set_height(dst_rect.h);
-    }
+    maybe_update_collider();
 }
 // Overloading:
 void Sprite::set_animation(int an_index){
@@ -182,6 +179,7 @@ void Sprite::set_texture(std::string texture_id){
         // Position will come in the init() method
         dst_rect.w = image_width;
         dst_rect.h = image_height;
+        maybe_update_collider();
     }
 }
 
@@ -199,4 +197,14 @@ int Sprite::get_yscale(){
     }else{
         throw std::runtime_error("image_height = 0, while it shouldn't.");
     }
+}
+
+void Sprite::maybe_update_collider(){
+    // Why not check for a member of collider? 
+    // Like getComponent<Collider>().dynamic_shape ?
+    // Because this function is called in Sprite's initialization, before
+    // Sprite's "entity" member is initialized. So we can't access other 
+    // components yet... It is easier to initialize set_collider to false
+    // and have this called.
+    if(set_collider){ entity->getComponent<Collider>().get_shape(); }
 }
