@@ -9,7 +9,7 @@ bool Collision::collider_AABB(const Collider *CA, const Collider *CB){
         TA.get_y() + CA->height > TB.get_y() &&
         TB.get_y() + CB->height > TA.get_y()){
 
-        std::cout << CA->get_tag() << " hit: " << CB->get_tag() << "\n";
+        std::cout << CA->get_tag() << " hit: " << CB->get_tag() << std::endl;
         return true;
     }else{ return false; }
 }
@@ -48,9 +48,9 @@ std::tuple<float, int> Collision::get_collision_time(
         (which equates to switching the sign of vx or vy).
 
         For the first condition:
-        CA->transform->get_x() + CA->width  > CB->transform->get_x()
+        CA's transform->get_x() + CA->width > CB's transform->get_x()
         We want to get the limiting value of t in which we have an equality, instead of an inequality:
-        CA->transform->get_x() + CA->width  = CB->transform->get_x()
+        CA's transform->get_x() + CA->width = CB's transform->get_x()
         This gives us:
         xa - speed_a * vxa * t + wa = xb - speed_b * vxb * t
         t = (xa - xb + wa)/(- speed_b*vxb + speed_a*vxa)        // Definition of t[0], below
@@ -143,150 +143,120 @@ void Collision::handle_collisions(){
             float diff; // Amount of time to move.
             int t_idx;  // Information about collision axis.
 
-            switch(col_handle_A){
-            case (IMMOVABLE_ON_COLLISION):    // Stop B
-                // // FIRST: CHECK PROJECTILE HANDLING BY A AND B.
-                // if (CB->entity->has_group(ProjectileGroup)){
-                // switch(proj_handle_A){
-                // case(INDESTRUCTABLE_ON_PROJECTILE): break;  // Do nothing.
-                // case(DESTROY_ON_PROJECTILE): CA->entity->destroy(); break;  // Destroy A
-                // case(DAMAGE_ON_PROJECTILE):
-                //     // TODO.
-                //     break;
-                // default:
-                //     goto proj_error_case;
-                // }}
-                // // Now for B:
-                // if (CA->entity->has_group(ProjectileGroup)){
-                // switch(proj_handle_B){
-                // case(INDESTRUCTABLE_ON_PROJECTILE): break;  // Do nothing.
-                // case(DESTROY_ON_PROJECTILE): CB->entity->destroy(); break;  // Destroy A
-                // case(DAMAGE_ON_PROJECTILE):
-                //     // TODO.
-                //     break;
-                // default:
-                //     goto proj_error_case;
-                // }}
 
-                speed_a = 0;    // Artificially set A's speed to 0 for calculations.
-                switch (col_handle_B) {         
-                // We exclude case(IMMOVABLE_ON_COLLISION) because it was already checked in line
-                // (CA->handling_option + CB->handling_option == 0)
-                case (MOVABLE_OBJECT):      // In both cases we'll stop B:
-                case (PUSH_ON_COLLISION):
-                    std::tie(diff, t_idx) = Collision::get_collision_time(
+            /* Here, I'll use bit manipulation to avoid code duplication: it
+            will allow us to have only one switch statement for the combination
+            of cases. Adapted from: 
+            https://stackoverflow.com/questions/8644096/multiple-conditions-in-switch-case
+            */
+
+            #define IMMOVABLE_BIT (1 << 0)  // 0001
+            #define MOVABLE_BIT (1 << 1)    // 0010
+            #define PUSH_BIT (1 << 2)       // 0100
+            #define DESTROY_BIT (1 << 3)    // 1000
+
+            // Here, we'll integrate the conditions to an int, using bitwise OR:
+            int bit_result = \
+                  ((col_handle_A == IMMOVABLE_ON_COLLISION) or
+                   (col_handle_B == IMMOVABLE_ON_COLLISION) ? IMMOVABLE_BIT : 0) 
+                | ((col_handle_A == MOVABLE_OBJECT) or
+                   (col_handle_B == MOVABLE_OBJECT) ? MOVABLE_BIT : 0) 
+                | ((col_handle_A == PUSH_ON_COLLISION) or
+                   (col_handle_B == PUSH_ON_COLLISION) ? PUSH_BIT : 0) 
+                | ((col_handle_A == DESTROY_ON_COLLISION) or
+                   (col_handle_B == DESTROY_ON_COLLISION) ? DESTROY_BIT : 0);
+
+            std::cout << "Bit result: " << bit_result << std::endl;
+            switch(bit_result){
+            // Here, the cases in which one of them is IMMOVABLE_ON_COLLISION:
+            case (IMMOVABLE_BIT):   // Both objects Immovable
+                // Already checked before:
+                // "We exclude case(IMMOVABLE_ON_COLLISION) because it was already checked in line
+                // (CA->handling_option + CB->handling_option == 0)"
+                // Weird that we got here:
+                throw std::runtime_error(
+                    "Arrived at IMMOVABLE_BIT case in switch statement even though it had been tested for.");
+                break;
+            case (IMMOVABLE_BIT + MOVABLE_BIT):     // fall through
+            case (IMMOVABLE_BIT + PUSH_BIT):
+                Collider* C_MOV; Transform* T_MOV;
+                float x_mov, y_mov, speed_mov, vx_mov, vy_mov;
+                if (col_handle_A == IMMOVABLE_ON_COLLISION){    // A is the IMMOVABLE one:
+                    C_MOV = CB; T_MOV = &TB; speed_a = 0;       // Must set speed of immovable to 0 for time calculation
+                    x_mov = xb; y_mov = yb; speed_mov = speed_b;//  (equates to not moving the immovable back in time). 
+                    vx_mov= vxb; vy_mov = vyb;
+                } else{                                         // B is the IMMOVABLE one
+                    C_MOV = CA; T_MOV = &TA; speed_b = 0;       // Must set speed of immovable to 0 for time calculation
+                    x_mov = xa; y_mov = ya; speed_mov = speed_a;// (equates to not moving the immovable back in time).
+                    vx_mov= vxa; vy_mov = vya;
+                }
+                // TODO: if we have objects that are IMMOVABLE ON COLLISION but are actually moving,
+                // This will have to be improved (we can't just set the speed of the immovable object
+                // to zero like here, we'll have not only to get collision time with accurate speeds,
+                // we'll have to compensate movement in t \in [collision_time, current_time]).
+                // This isn't too difficult to do: Calculate collision time and push the movable object's
+                // position to that state (do not update immovable object at all since it is immovable, and
+                // will end up in the place it is either way). Then, calculate the angle of approach between
+                // objects, and either reflect the movable object's v according to the normal and calculate 
+                // displacement, or set the movable object's v to the immovable object's v. These are still not
+                // exactly accurate. We have to make remove from v_mov the component of v_immov, (and perhaps
+                // adapt the speed accordingly (?)). Ok, that is a little more complicated.
+                std::tie(diff, t_idx) = Collision::get_collision_time(
                         xa, xb, ya, yb, speed_a, speed_b, vxa, vxb, vya, vyb, wa, wb, ha, hb);
 
-                    // Update ONLY B's transform :
-                    if (t_idx <= 1){ 
-                        TB.set_x( xb - speed_b*vxb* diff );
-                        // CB->transform->set_vx(0.0); 
-                    }else{ 
-                        TB.set_y( yb - speed_b*vyb* diff );
-                        // CB->transform->set_vy(0.0);
-                    }
-                    if (CB->entity->has_component<Sprite>()){ CB->entity->getComponent<Sprite>().update(); }
-                    if (CB->entity->has_component<UILabel>()){ CB->entity->getComponent<UILabel>().update(); }
-                    
-                    break;
-                case(DESTROY_ON_COLLISION):     // Destroy B
-                    goto just_destroy_b;
-                default:
-                    goto error_case;
-                }
+                // Update ONLY C_MOV's transform :
+                if (t_idx <= 1){ T_MOV->set_x( x_mov - speed_mov*vx_mov* diff ); }
+                else{ T_MOV->set_y( y_mov - speed_mov*vy_mov* diff ); }
+                if (C_MOV->entity->has_component<Sprite>()){ C_MOV->entity->getComponent<Sprite>().update(); }
+                if (C_MOV->entity->has_component<UILabel>()){ C_MOV->entity->getComponent<UILabel>().update(); }
+                break;
+            case (IMMOVABLE_BIT + DESTROY_BIT): 
+                goto destroy_one;
+                break; // just in case
+
+            // Now cases in which one of them has the MOVABLE_OBJECT option:
+            case (MOVABLE_BIT): // Both are MOVABLE.
+                goto stop_at_middle;
+                break; // just in case
+            case (MOVABLE_BIT + PUSH_BIT):
+                // TODO: push the pushable object.
+                break;
+            case (MOVABLE_BIT + DESTROY_BIT):
+                goto destroy_one;
+                break; // just in case
+
+            // Now cases in which one of them has the PUSH_ON_COLLISION option:
+            case (PUSH_BIT):    // Both are PUSH_ON_COLLISION, BUT also fall through of both MOVABLE (done through a goto).
+            stop_at_middle: // Regular time calculation, updating both entities:
+                std::tie(diff, t_idx) = Collision::get_collision_time(
+                    xa, xb, ya, yb, speed_a, speed_b, vxa, vxb, vya, vyb, wa, wb, ha, hb);
+
+                // Update A:
+                if (t_idx <= 1){ TA.set_x( xa - speed_a*vxa* diff ); }
+                else{ TA.set_y( ya - speed_a*vya* diff ); }
+                if (CA->entity->has_component<Sprite>()){ CA->entity->getComponent<Sprite>().update(); }
+                if (CA->entity->has_component<UILabel>()){ CA->entity->getComponent<UILabel>().update(); }
+            
+                // Update B:
+                TB.set_x( xb - speed_b*vxb* diff );
+                TB.set_y( yb - speed_b*vyb* diff );
+                if (t_idx <= 1){ TB.set_vx(0.0); }
+                else{ TB.set_vy(0.0); }
+                if (CB->entity->has_component<Sprite>()){ CB->entity->getComponent<Sprite>().update(); }
+                if (CB->entity->has_component<UILabel>()){ CB->entity->getComponent<UILabel>().update(); }
+                break;
+            case (PUSH_BIT + DESTROY_BIT):
+            destroy_one:    // We'll destroy the one with the DESTROY_ON_COLLISION option.
+                if (col_handle_A == DESTROY_ON_COLLISION){ CA->entity->destroy(); } 
+                else { CB->entity->destroy(); }
+                break;
+
+            // Cases with DESTROY_BIT:
+            case (DESTROY_BIT): // Both have the DESTROY_ON_COLLISION: Destroy both entities.    
+                CA->entity->destroy(); CB->entity->destroy();
                 break;
             
-            case(MOVABLE_OBJECT):
-                switch (col_handle_B) {
-                case (IMMOVABLE_ON_COLLISION):  // Stop A
-                    goto stop_A;
-                case (MOVABLE_OBJECT):          // Stop at the "middle".
-                    goto stop_at_middle;
-                case (PUSH_ON_COLLISION):       // Move B
-                    /// TODO
-                    break;
-                case(DESTROY_ON_COLLISION):     // Destroy B
-                    goto just_destroy_b;
-                default:
-                    goto error_case;
-                }
-                break;
-
-            case(PUSH_ON_COLLISION):
-                switch (col_handle_B) {
-                case (IMMOVABLE_ON_COLLISION):    // Stop A
-                stop_A:
-                    speed_b = 0;
-                    std::tie(diff, t_idx) = Collision::get_collision_time(
-                        xa, xb, ya, yb, speed_a, speed_b, vxa, vxb, vya, vyb, wa, wb, ha, hb);
-
-                    // Update ONLY A's transform :
-                    if (t_idx <= 1){ 
-                        TA.set_x( xa - speed_a*vxa* diff );
-                        // CA->transform->set_vx(0.0); 
-                    }else{ 
-                        TA.set_y( ya - speed_a*vya* diff );
-                        // CA->transform->set_vy(0.0); 
-                    }
-                    if (CA->entity->has_component<Sprite>()){ CA->entity->getComponent<Sprite>().update(); }
-                    if (CA->entity->has_component<UILabel>()){ CA->entity->getComponent<UILabel>().update(); }
-                
-                    break;
-                case (MOVABLE_OBJECT):      // Move A
-                    /// TODO
-                    break;
-                case (PUSH_ON_COLLISION):   // Stop at the "middle".
-                stop_at_middle: // Regular time calculation, updating both entities:
-                    std::tie(diff, t_idx) = Collision::get_collision_time(
-                        xa, xb, ya, yb, speed_a, speed_b, vxa, vxb, vya, vyb, wa, wb, ha, hb);
-
-                    // Update A:
-                    if (t_idx <= 1){
-                        TA.set_x( xa - speed_a*vxa* diff );
-                        // CA->transform->set_vx(0.0);
-                    }else{
-                        TA.set_y( ya - speed_a*vya* diff );
-                        // CA->transform->set_vy(0.0);
-                    }
-                    if (CA->entity->has_component<Sprite>()){ CA->entity->getComponent<Sprite>().update(); }
-                    if (CA->entity->has_component<UILabel>()){ CA->entity->getComponent<UILabel>().update(); }
-                
-                    // Update B:
-                    TB.set_x( xb - speed_b*vxb* diff );
-                    TB.set_y( yb - speed_b*vyb* diff );
-                    if (t_idx <= 1){ TB.set_vx(0.0); }else{ TB.set_vy(0.0); }
-                    if (CB->entity->has_component<Sprite>()){ CB->entity->getComponent<Sprite>().update(); }
-                    if (CB->entity->has_component<UILabel>()){ CB->entity->getComponent<UILabel>().update(); }
-                
-                    break;
-                case(DESTROY_ON_COLLISION): // Destroy B
-                    goto just_destroy_b;
-                    break;
-                default:
-                    goto error_case;
-                }
-                break;
-
-            case(DESTROY_ON_COLLISION): // Destroy A but:
-                CA->entity->destroy();
-                switch (col_handle_B) {
-                case (DESTROY_ON_COLLISION):    // In this case, also destroy B.
-                just_destroy_b:
-                    CB->entity->destroy();
-                    break;
-                case (IMMOVABLE_ON_COLLISION): 
-                    break;   
-                case (MOVABLE_OBJECT):
-                    break;
-                case (PUSH_ON_COLLISION):
-                    break;
-                default:
-                    goto error_case;
-                }
-                break;
-
             default:  // Unnexpected case: throw an error:
-            error_case:
                 std::cout << "Unknown case in collision detection. Options A and B: " \
                             << col_handle_A << "; " << col_handle_B << "." << std::endl;
                 std::cout << "Entities: " << CA->entity->get_name() << "; " \
@@ -294,9 +264,6 @@ void Collision::handle_collisions(){
                 throw std::runtime_error("Game.cpp: Game::update");
                 break;
             }
-
-            
-
         }
     }}
 }

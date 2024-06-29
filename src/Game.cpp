@@ -151,7 +151,7 @@ void Game::handle_events(){
                         // the player doesn't move
                         Game::tracking_player = false;
                         player.getComponent<Sprite>().set_texture("player1");
-                        player.getComponent<Sprite>().set_scale(1);
+                        player.getComponent<Sprite>().set_scale(10);
                         background.load_map("./assets/map_1.txt");
                         background.set_position(100, 100);
                     }else{
@@ -160,7 +160,7 @@ void Game::handle_events(){
                         previous_camera_position = camera_position;
                         previous_ref_entity_position = camera_ref_entity->getComponent<Transform>().get_position();
                         player.getComponent<Sprite>().set_texture("player2");
-                        player.getComponent<Sprite>().set_scale(100);
+                        player.getComponent<Sprite>().set_scale(20);
                         background.load_map("./assets/map_2.txt");
                         background.set_position(0, 0);
                     }
