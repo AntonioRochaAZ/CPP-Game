@@ -190,7 +190,7 @@ void TileMap::load_map(std::string path){
                     Sprite& s = entity_vector[nb_xtiles*y + x]->getComponent<Sprite>();
                     s.set_src_x(texture_pos[id][0]);
                     s.set_src_y(texture_pos[id][1]);
-                    map[x][y] = id;
+                    map[y][x] = id; // line number, then column
                 }
                 // map_file.get(tile);     // A number.
                 // // atoi turns a string into an int.

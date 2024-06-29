@@ -5,6 +5,7 @@
 #include <sstream>
 #include "ECS/Components/KeyboardController.hpp"
 #include "utils.hpp"
+#include "ECS/Entities/Player.hpp"
 
 // From KeyboardController.hpp:
 std::map<int, std::size_t> global_key_bind_map;
@@ -21,7 +22,16 @@ bool Game::tracking_player = false;
 Game::AssetManager Game::assets = Game::AssetManager();
 vec Game::camera_position = vec(0.0, 0.0);
 
-auto& player(manager.addEntity("Player 1"));
+Player* player = new Player(manager, "player1");
+    //< This will then be turned into a unique_pointer when initialized
+    //< (initialization will add this Entity to manager, which will then
+    //< take care of it). If we don't use a pointer here, the object will
+    //< be freed twice (once by the manager through the deletion of the
+    //< unique_pointer, then by game when it goes out of scope (if I 
+    //< understood the runtime error correctly)).
+Player* player2 = new Player(manager, "player2");
+
+
 auto& label(manager.addEntity("TestLabel"));
 //auto& wall(manager.addEntity());
 
@@ -74,9 +84,9 @@ int Game::init(const char* title, int x, int y, int width, int height, bool full
     global_key_bind_map.emplace(SDLK_s, DOWN_BUTTON);
     global_key_bind_map.emplace(SDLK_a, LEFT_BUTTON);
     global_key_bind_map.emplace(SDLK_d, RIGHT_BUTTON);
-    global_key_bind_map.emplace(SDLK_j, ATTACK_A_BUTTON);
-    global_key_bind_map.emplace(SDLK_k, ATTACK_B_BUTTON);
-    global_key_bind_map.emplace(SDLK_p, CAMERA_TOGGLE_BUTTON);
+    global_key_bind_map.emplace(SDLK_e, ATTACK_A_BUTTON);
+    global_key_bind_map.emplace(SDLK_r, ATTACK_B_BUTTON);
+    global_key_bind_map.emplace(SDLK_m, CAMERA_TOGGLE_BUTTON);
     global_key_bind_map.emplace(SDLK_ESCAPE, QUIT_BUTTON);
 
     // Change color of the renderer (black by default)
@@ -86,37 +96,29 @@ int Game::init(const char* title, int x, int y, int width, int height, bool full
     Game::assets.add_texture("player1", "./assets/player1.bmp");
     Game::assets.add_texture("player2", "./assets/player2.bmp");
     Game::assets.add_texture("projectile1", "./assets/projectile1-still.bmp");
-    player.addComponent<KeyboardController>();
-    player.addComponent<Collider>(
-        player.get_name(), 80, 170, MOVABLE_OBJECT);
-    player.addComponent<Transform>(vec(0.0, 0.0), 10, vec(0.0, 0.0));
-    player.addComponent<Sprite>("player1");
-
-    player.getComponent<KeyboardController>().get_components();   // Force it to get the Transform and Sprite pointers.
-    // Game::assets.add_font("andale", "./assets/fonts/andale_mono.ttf", 16);
     Game::assets.add_font("custom_font2px", "./assets/fonts/customfont-2px_spacing.ttf", 16);
-    SDL_Color red = { 255, 0, 0, 255 };
-    player.addComponent<UILabel>(20.0, -30.0, 40, 20, "P1", "custom_font2px", red, 24);
-    // player.addComponent<Collider>(
-    //     player.get_name(), player.getComponent<Sprite>().get_dst_width(),
-    //     player.getComponent<Sprite>().get_dst_height(), MOVABLE_OBJECT);
-    player.add_group(PlayerGroup);
-
-    //player.getComponent<Sprite>().init();
-    player.getComponent<Transform>().set_position(0, 0);
-    // Animation idle_animation(2, 1500, 8, 17);
-    // Animation walk_animation(5, 100, 9, 17);
-    // player.getComponent<Sprite>().add_animation(idle_animation, "Idle");
-    // player.getComponent<Sprite>().add_animation(walk_animation, "Walk");
-    player.getComponent<Sprite>().set_collider = true;
-    player.getComponent<Sprite>().set_animation("Idle");
-    player.getComponent<Sprite>().set_scale(10);
-    player.getComponent<Collider>().enable_dynamic_shape();
+    
+    player->init("player1");
+    player2->init("player2");
+    std::map<int, std::size_t> player2_keybinds = {
+        {SDLK_i, UP_BUTTON},
+        {SDLK_k, DOWN_BUTTON},
+        {SDLK_j, LEFT_BUTTON},
+        {SDLK_l, RIGHT_BUTTON},
+        {SDLK_o, ATTACK_A_BUTTON},
+        {SDLK_p, ATTACK_B_BUTTON}
+        // {SDLK_m, CAMERA_TOGGLE_BUTTON},
+        // {SDLK_ESCAPE, QUIT_BUTTON}
+    };
+    player2->getComponent<KeyboardController>().local_key_bind_map = player2_keybinds;
+    
+    player->getComponent<Transform>().set_position(150, 500);
+    player2->getComponent<Transform>().set_position(970, 500);
+    player2->getComponent<Sprite>().sprite_flip = SDL_FLIP_HORIZONTAL;
 
     Game::assets.add_texture("tiles", "./assets/tilemap.bmp");
     background.init("tiles", "./assets/tilemap_metadata.txt");
-    // background.setup(10, 10);
-    background.load_map("./assets/map_1.txt");
+    background.load_map("./assets/map_3.txt");
 
     // Font:
     SDL_Color white = { 255, 255, 255, 255 };
@@ -124,7 +126,7 @@ int Game::init(const char* title, int x, int y, int width, int height, bool full
     label.addComponent<UILabel>(-400.0, 0.0, 40, 20, "Hello there", "custom_font2px", white, 24);
     
     // Setting the reference entity (for camera tracking) as the player:
-    camera_ref_entity = &player;
+    camera_ref_entity = player;
 
     // Ok, it is running now:
     is_running = true;
@@ -150,19 +152,19 @@ void Game::handle_events(){
                         // will have a bug where neither the map not
                         // the player doesn't move
                         Game::tracking_player = false;
-                        player.getComponent<Sprite>().set_texture("player1");
-                        player.getComponent<Sprite>().set_scale(10);
-                        background.load_map("./assets/map_1.txt");
-                        background.set_position(100, 100);
+                        // player->getComponent<Sprite>().set_texture("player1");
+                        // player->getComponent<Sprite>().set_scale(10);
+                        // background.load_map("./assets/map_1.txt");
+                        // background.set_position(100, 100);
                     }else{
                         Game::tracking_player = true;
                         // Get current reference camera and entity positions (will be update next):
                         previous_camera_position = camera_position;
                         previous_ref_entity_position = camera_ref_entity->getComponent<Transform>().get_position();
-                        player.getComponent<Sprite>().set_texture("player2");
-                        player.getComponent<Sprite>().set_scale(20);
-                        background.load_map("./assets/map_2.txt");
-                        background.set_position(0, 0);
+                        // player->getComponent<Sprite>().set_texture("player2");
+                        // player->getComponent<Sprite>().set_scale(20);
+                        // background.load_map("./assets/map_2.txt");
+                        // background.set_position(0, 0);
                     }
                     break;
                     
@@ -186,8 +188,8 @@ void Game::update(){
 
     // Label updating (debugging):
     std::stringstream ss;
-    ss << "Player position: " << player.getComponent<Transform>().get_x() << \
-        ", " << player.getComponent<Transform>().get_y();
+    ss << "Player position: " << player->getComponent<Transform>().get_x() << \
+        ", " << player->getComponent<Transform>().get_y();
     label.getComponent<UILabel>().set_text(ss.str(), "custom_font2px");
 
     background.update();

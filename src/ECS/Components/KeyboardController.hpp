@@ -21,11 +21,9 @@ extern std::map<int, std::size_t> global_key_bind_map;    ///< A map between the
 
 /* Component for allowing controlling entities through the keyboard. */
 class KeyboardController : public Component{
-private:
-    std::map<int, std::size_t> local_key_bind_map;    ///< A map between the key_bind enum and the SDL_KeyCode.
-
-
 public:
+// private:
+    std::map<int, std::size_t> local_key_bind_map;    ///< A map between the key_bind enum and the SDL_KeyCode.
 
     bool reverse_sprite;    ///< Whether to reverse the sprite (left-right).
 

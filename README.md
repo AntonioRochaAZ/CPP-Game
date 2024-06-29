@@ -12,10 +12,9 @@ The game is 2D and has an "8-bit" style. The assets in this
 repository are original and are made in [Aseprite](https://www.aseprite.org/).
 
 ## Current state of development
-> You can now toggle whether the camera should follow the player or not with
-> P. When the camera is following the player, a second player model is shown.
-> You can also exit the game by clicking ESC. You can shoot projectiles
-> with K.
+> You can move the first player with the W, A, S, D keys, and shoot with R.
+> For the second player, it can be moved with the I, J, K, L keys, and it shoots with P.
+> Finally, you can still toggle the camera to follow Player 1 by pressing M.
 
 ![Current state of development](assets/current.gif)
 
@@ -51,8 +50,7 @@ command ``make documentation``, defined in the Makefile.
 ## Notes and TODOs
 
 > Note:
-    This is a *work in progress*. I've finished watching the referenced tutorial, but will likely
-    study SDL2 more in-depth to better understand how it works.
+    This is a *work in progress*. I've finished watching the referenced tutorial, but will likely study SDL2 more in-depth to better understand how it works.
 
 > Note:
     This project is developed on a Mac, though the source code should work on
@@ -61,16 +59,11 @@ command ``make documentation``, defined in the Makefile.
 > **KNOWN BUGS:**
     - Segmentation fault when launching the executable by double clicking (instead of using the command line).
       It comes from Game::init, but must still be debugged.
-
-> Note:
-    Folder *assets/fonts* is not provided, because I am not sure if the font I am using can be shared (Andale Mono,
-    taken directly from MacOS's font catalog).
  
 ### TODOs
 
-- Create a player Entity type where we can generalize some behaviour (projectile creation,
-  other attacks, the label above their head, and so on). This will be useful to then generalize
-  the KeyboardController Component later.
+In no specific order.
+
 - Optimize rendering (stop rendering objects off-screen) (Must think if this really is necessary,
   and if so, when).
 - Make updating independent of FPS.
@@ -81,7 +74,4 @@ command ``make documentation``, defined in the Makefile.
   projectile don't interact, but it would be interesting to be able to shoot down enemy projectiles, for example).
 - Remove getter/setter functions, use structs or public members instead.
 - Study the use of "const" and passing arguments by reference (check when it is possible/should be done).
-- Remove the dynamic_shape member of Collider and create a way of setting set_collider to true in Sprite.
-- In Collision.cpp, we may be able to avoid code repetition in the switch case of handle_collision if we check for
-  the combination of collision types, instead of one then the other. We can then change who is CA and who is CB
-  (more like C1 and C2).
+- Perhaps generalize the KeyboardController Component later.

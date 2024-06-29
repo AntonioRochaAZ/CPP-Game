@@ -151,12 +151,12 @@ class Entity{
 /** This class serves to manage groups of entities in the game
 at each frame. It will delete entities that are not active. */
 class Manager{
-    protected:
+    public:
+    // protected:
         std::vector< std::unique_ptr<Entity> > entity_vector; ///< Vector of entities.
         std::array< std::vector<Entity*>, max_groups > grouped_entities; 
             ///< Array of vectors for each group.
     
-    public:
         // ENTITY ADDITION:--------------------------------------------------------------
         /// Function for adding an entity to the \ref Manager::entity_vector "entity_vector"
         /// by creating a new pointer.
