@@ -165,7 +165,10 @@
 <li class="toctree-l3"><a class="reference internal" href="ECS/Components/UILabel.html">UILabel</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="ECS/Entities.html">Entities</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="ECS/Entities.html">Entities</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Entities</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="ECS/Entities/Projectile.html">Projectile</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Collision.html">Collision</a></li>
@@ -228,6 +231,20 @@
 <li><p><strong>map</strong> – The map we want to verify. </p></li>
 <li><p><strong>id</strong> – The ID we want to verify. </p></li>
 <li><p><strong>message</strong> – A message containing the function that’s behind this call and the name of the map involved, in that function’s scope. This will be concatenated to the printed output if an error is thrown, like so: <code class="docutils literal notranslate"><span class="pre">std::cout</span> <span class="pre">&lt;&lt;</span> <span class="pre">&quot;Function</span> <span class="pre">and</span> <span class="pre">map</span> <span class="pre">names:</span> <span class="pre">&quot;</span> <span class="pre">&lt;&lt;</span> <span class="pre">message</span> <span class="pre">&lt;&lt;</span> <span class="pre">&quot;;</span> <span class="pre">ID:</span> <span class="pre">&quot;</span> <span class="pre">&lt;&lt;</span> <span class="pre">id</span> <span class="pre">&lt;&lt;</span> <span class="pre">std::endl;</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv414check_get_lineRNSt8ifstreamENSt6stringE">
+<span class="target" id="utils_8hpp_1a419c40463e4835cefcbc5c41d1f3649a"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">check_get_line</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ifstream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">open_file</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">path</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv414check_get_lineRNSt8ifstreamENSt6stringE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Checks if we’ve reached the end of a file we’re working on before we should (this is to be called when reading a specific numebr of lines from a given file). This function will throw runtime errors if so. The path is only used to aid debugging. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>open_file</strong> – The open ifstream file. </p></li>
+<li><p><strong>path</strong> – The path (literally will only be used for debugging). </p></li>
 </ul>
 </dd>
 </dl>

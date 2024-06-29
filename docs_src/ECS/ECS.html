@@ -165,7 +165,10 @@
 <li class="toctree-l3"><a class="reference internal" href="Components/UILabel.html">UILabel</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="Entities.html">Entities</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="Entities.html">Entities</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Entities</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="Entities/Projectile.html">Projectile</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../Collision.html">Collision</a></li>
@@ -231,7 +234,7 @@ updated in the order that the components were added to the entity. For example:<
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cm">/* In this code, component Transform will be updated before its</span>
 <span class="cm">Sprite, which will be updated before its KeyboardController.*/</span>
 <span class="n">player</span><span class="p">.</span><span class="n">addComponent</span><span class="o">&lt;</span><span class="n">Transform</span><span class="o">&gt;</span><span class="p">();</span>
-<span class="n">player</span><span class="p">.</span><span class="n">addComponent</span><span class="o">&lt;</span><span class="n">Sprite</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Game</span><span class="o">::</span><span class="n">assets</span><span class="p">.</span><span class="n">get_tuple</span><span class="p">(</span><span class="s">&quot;player&quot;</span><span class="p">),</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span>
+<span class="n">player</span><span class="p">.</span><span class="n">addComponent</span><span class="o">&lt;</span><span class="n">Sprite</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;player1&quot;</span><span class="p">);</span>
 <span class="n">player</span><span class="p">.</span><span class="n">addComponent</span><span class="o">&lt;</span><span class="n">KeyboardController</span><span class="o">&gt;</span><span class="p">();</span>
 <span class="n">player</span><span class="p">.</span><span class="n">add_group</span><span class="p">(</span><span class="n">PlayerGroup</span><span class="p">);</span>
 </pre></div>
@@ -248,7 +251,10 @@ updated in the order that the components were added to the entity. For example:<
 <li class="toctree-l2"><a class="reference internal" href="Components/UILabel.html">UILabel</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="Entities.html">Entities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Entities.html">Entities</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Entities/Projectile.html">Projectile</a></li>
+</ul>
+</li>
 </ul>
 </div>
 <div class="breathe-sectiondef docutils container">

@@ -165,7 +165,10 @@
 <li class="toctree-l3"><a class="reference internal" href="UILabel.html">UILabel</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../Entities.html">Entities</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Entities.html">Entities</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Entities</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Entities/Projectile.html">Projectile</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../Collision.html">Collision</a></li>
@@ -276,23 +279,8 @@ attributes defined by the collision_handle enumerator.</p>
 <dd></dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N8Collider8ColliderENSt6stringE">
-<span class="target" id="class_collider_1a225d7aa0fd536df94ab196574bb9e5fc"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Collider</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">user_tag</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Collider8ColliderENSt6stringE" title="Permalink to this definition">#</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N8Collider8ColliderENSt6stringEii">
-<span class="target" id="class_collider_1ae5488a54cfaee9c944fef9714a7f0307"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Collider</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">user_tag</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">w</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">h</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Collider8ColliderENSt6stringEii" title="Permalink to this definition">#</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N8Collider8ColliderENSt6stringEiiNSt6size_tE">
 <span class="target" id="class_collider_1a280e1ef68a68ab9fe1c433a9fd5274bd"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Collider</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">user_tag</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">w</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">h</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mHandling</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Collider8ColliderENSt6stringEiiNSt6size_tE" title="Permalink to this definition">#</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N8Collider8ColliderENSt6stringENSt6size_tENSt6size_tE">
-<span class="target" id="class_collider_1a53454ff22806f0fc15a5482f89f43851"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Collider</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">user_tag</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mHandling</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mProjHandling</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Collider8ColliderENSt6stringENSt6size_tENSt6size_tE" title="Permalink to this definition">#</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
@@ -307,10 +295,14 @@ attributes defined by the collision_handle enumerator.</p>
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N8Collider13get_transformEv">
-<span class="target" id="class_collider_1a542e782a8b1241577e5f7346cb7ff8b7"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_transform</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Collider13get_transformEv" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>For getting transform when the definition of the collider has preceeded it. </p>
-</dd></dl>
+<dt class="sig sig-object cpp" id="_CPPv4N8Collider20enable_dynamic_shapeEv">
+<span class="target" id="class_collider_1aa5c8e14d4a1e9ab31310051b569f716c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">enable_dynamic_shape</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Collider20enable_dynamic_shapeEv" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8Collider21disable_dynamic_shapeEv">
+<span class="target" id="class_collider_1a9f3ce6b54cdc4531bb79872b12e08ec1"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">disable_dynamic_shape</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Collider21disable_dynamic_shapeEv" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N8Collider9get_shapeEv">
@@ -371,12 +363,6 @@ attributes defined by the collision_handle enumerator.</p>
 <dd><p>Width and Height of the rectangular collider. </p>
 </dd></dl>
 
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N8Collider9transformE">
-<span class="target" id="class_collider_1a316074fce488c8c3012ba1232686aaec"></span><a class="reference internal" href="Transform.html#_CPPv49Transform" title="Transform"><span class="n"><span class="pre">Transform</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">transform</span></span></span><a class="headerlink" href="#_CPPv4N8Collider9transformE" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>A pointer to the transform of the entity. </p>
-</dd></dl>
-
 </div>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
@@ -384,6 +370,12 @@ attributes defined by the collision_handle enumerator.</p>
 <dt class="sig sig-object cpp" id="_CPPv4N8Collider3tagE">
 <span class="target" id="class_collider_1a47553d89c2a08d0df50e2e4934572902"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">tag</span></span></span><a class="headerlink" href="#_CPPv4N8Collider3tagE" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>This tag could eventually be useful for deciding whether to take the collision into account. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N8Collider13dynamic_shapeE">
+<span class="target" id="class_collider_1a1a24d13aef085886140112436cf72918"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dynamic_shape</span></span></span><a class="headerlink" href="#_CPPv4N8Collider13dynamic_shapeE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>This is only used for debugging. The actual handling is done in the <a class="reference internal" href="Sprite.html#class_sprite"><span class="std std-ref">Sprite</span></a> component with the set_collider attribute. To set it on or off, use the enable_dynamic_shape and disable_dynamic_shape functions. They’ll ensure that dynamic_shape and the <a class="reference internal" href="Sprite.html#class_sprite"><span class="std std-ref">Sprite</span></a>’s set_collider members are in sync. </p>
 </dd></dl>
 
 </div>

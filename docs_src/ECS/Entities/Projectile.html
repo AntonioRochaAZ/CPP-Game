@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
+<link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="Collision class" href="../../Collision.html" /><link rel="prev" title="Entities" href="../Entities.html" />
 
     <link rel="shortcut icon" href="../../../_static/favicon.ico"/><!-- Generated with Sphinx 6.2.1 and Furo 2024.01.29 -->
         <title>Projectile - CPP Game</title>
@@ -155,8 +155,8 @@
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../ECS.html">Entity Component System (ECS)</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Entity Component System (ECS)</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../ECS.html">Entity Component System (ECS)</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Entity Component System (ECS)</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2 has-children"><a class="reference internal" href="../Components.html">Components</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Components</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../Components/Transform.html">Transform</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../Components/Sprite.html">Sprite</a></li>
@@ -165,7 +165,10 @@
 <li class="toctree-l3"><a class="reference internal" href="../Components/UILabel.html">UILabel</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../Entities.html">Entities</a></li>
+<li class="toctree-l2 current has-children"><a class="reference internal" href="../Entities.html">Entities</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Entities</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">Projectile</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../Collision.html">Collision</a></li>
@@ -232,8 +235,8 @@ collider tag.</p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N10Projectile10ProjectileER7ManagerNSt6stringENSt6stringEN6Sprite9AnimationEi3vecf3vec">
-<span class="target" id="class_projectile_1a9860b4cba344f430b6f2f0db32c57a38"></span><span class="sig-name descname"><span class="n"><span class="pre">Projectile</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="../ECS.html#_CPPv47Manager" title="Manager"><span class="n"><span class="pre">Manager</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">man</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">name</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">sprite_name</span></span>, <a class="reference internal" href="../Components/Sprite.html#_CPPv46Sprite" title="Sprite"><span class="n"><span class="pre">Sprite</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="../Components/Sprite.html#_CPPv4N6Sprite9AnimationE" title="Sprite::Animation"><span class="n"><span class="pre">Animation</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">fly</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mRange</span></span>, <a class="reference internal" href="../Components/KeyboardController.html#_CPPv43vec" title="vec"><span class="n"><span class="pre">vec</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">position</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">speed</span></span>, <a class="reference internal" href="../Components/KeyboardController.html#_CPPv43vec" title="vec"><span class="n"><span class="pre">vec</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">velocity</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10Projectile10ProjectileER7ManagerNSt6stringENSt6stringEN6Sprite9AnimationEi3vecf3vec" title="Permalink to this definition">#</a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N10Projectile10ProjectileER7ManagerNSt6stringENSt6stringEi3vecf3vec">
+<span class="target" id="class_projectile_1ad5ca108274c059aaeaadbcce8f843bfc"></span><span class="sig-name descname"><span class="n"><span class="pre">Projectile</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="../ECS.html#_CPPv47Manager" title="Manager"><span class="n"><span class="pre">Manager</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">man</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">name</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">sprite_name</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rng</span></span>, <a class="reference internal" href="../Components/KeyboardController.html#_CPPv43vec" title="vec"><span class="n"><span class="pre">vec</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">position</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">speed</span></span>, <a class="reference internal" href="../Components/KeyboardController.html#_CPPv43vec" title="vec"><span class="n"><span class="pre">vec</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">velocity</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10Projectile10ProjectileER7ManagerNSt6stringENSt6stringEi3vecf3vec" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Constructor </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -277,12 +280,6 @@ collider tag.</p>
 <dd><p>How far the projectile has travelled so far. </p>
 </dd></dl>
 
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N10Projectile16flying_animationE">
-<span class="target" id="class_projectile_1a8c31acbfe42936565fe99b8be6dfedab"></span><a class="reference internal" href="../Components/Sprite.html#_CPPv46Sprite" title="Sprite"><span class="n"><span class="pre">Sprite</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="../Components/Sprite.html#_CPPv4N6Sprite9AnimationE" title="Sprite::Animation"><span class="n"><span class="pre">Animation</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">flying_animation</span></span></span><a class="headerlink" href="#_CPPv4N10Projectile16flying_animationE" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Animations (TODO: generalize). </p>
-</dd></dl>
-
 </div>
 </dd></dl>
 
@@ -293,8 +290,26 @@ collider tag.</p>
       <footer>
         
         <div class="related-pages">
-          
-          
+          <a class="next-page" href="../../Collision.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Collision class</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../Entities.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Entities</div>
+                
+              </div>
+            </a>
         </div>
         <div class="bottom-of-page">
           <div class="left-details">

@@ -165,7 +165,10 @@
 <li class="toctree-l3"><a class="reference internal" href="UILabel.html">UILabel</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../Entities.html">Entities</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Entities.html">Entities</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Entities</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Entities/Projectile.html">Projectile</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../Collision.html">Collision</a></li>
@@ -220,9 +223,16 @@ and handle adding and setting animations.</p>
 <dd><div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite6SpriteENSt6stringE">
+<span class="target" id="class_sprite_1a785a7bf89f52f493f326ef461464575c"></span><span class="sig-name descname"><span class="n"><span class="pre">Sprite</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">texture_id</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite6SpriteENSt6stringE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Defined in Sprite.cpp file (long) </p>
+</dd></dl>
+
+<dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N6Sprite6SpriteE6TexTupb">
 <span class="target" id="class_sprite_1aa65273d1d6eecc2029b26f7850d38a82"></span><span class="sig-name descname"><span class="n"><span class="pre">Sprite</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="../../Game.html#_CPPv46TexTup" title="TexTup"><span class="n"><span class="pre">TexTup</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">texture_tuple</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">is_animated</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite6SpriteE6TexTupb" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Defined in Sprite.cpp file (long) </p>
+<p>This constructor is kept for the <a class="reference internal" href="../../TileMap.html#class_tile_map"><span class="std std-ref">TileMap</span></a>, for which multiple tile textures are contained in one single image file and thus texture object. This allows manual control over the sprite. </p>
 </dd></dl>
 
 <dl class="cpp function">
@@ -249,9 +259,10 @@ and handle adding and setting animations.</p>
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6Sprite13add_animationEN6Sprite9AnimationENSt6stringE">
-<span class="target" id="class_sprite_1ad7f304e05efe81202a63efc1c476e21a"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add_animation</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv46Sprite" title="Sprite"><span class="n"><span class="pre">Sprite</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N6Sprite9AnimationE" title="Sprite::Animation"><span class="n"><span class="pre">Animation</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">animation</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">animation_name</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite13add_animationEN6Sprite9AnimationENSt6stringE" title="Permalink to this definition">#</a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite13add_animationE9AnimationNSt6stringE">
+<span class="target" id="class_sprite_1a4c7cb3bf2a4342400c00ee9805876650"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add_animation</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">Animation</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">animation</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">animation_name</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite13add_animationE9AnimationNSt6stringE" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Adds an animation to the animation_map member. </p>
+<p>Although dealing with animations is mostly automatized now, this manual control could be useful if we would like to manually tune some things, especially if we want to have animated tiles, for example. Should be avoided, though. </p>
 </dd></dl>
 
 <dl class="cpp function">
@@ -264,6 +275,12 @@ and handle adding and setting animations.</p>
 <dt class="sig sig-object cpp" id="_CPPv4N6Sprite13set_animationEi">
 <span class="target" id="class_sprite_1a6ca9a33087a98c04f81856f9367fbb54"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_animation</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">an_index</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite13set_animationEi" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Overloading. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite11set_textureENSt6stringE">
+<span class="target" id="class_sprite_1aa7d2cf99ece2f45544b6c3bf7f1a3fa4"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_texture</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">texture_id</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite11set_textureENSt6stringE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Overriding the current texture and its w/h information. This is more for showing off the different player models and is not supposed to remain later. </p>
 </dd></dl>
 
 <dl class="cpp function">
@@ -387,6 +404,12 @@ and handle adding and setting animations.</p>
 </dd></dl>
 
 <dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite12set_colliderE">
+<span class="target" id="class_sprite_1a8dfc607db8f929fe721effc67e5cef34"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_collider</span></span></span><a class="headerlink" href="#_CPPv4N6Sprite12set_colliderE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Whether to set <a class="reference internal" href="Collider.html#class_collider"><span class="std std-ref">Collider</span></a> dimensions automatically when changing animations. </p>
+</dd></dl>
+
+<dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N6Sprite17current_animationE">
 <span class="target" id="class_sprite_1aeec64602ab19bb4500779c16a5cf2491"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">current_animation</span></span></span><a class="headerlink" href="#_CPPv4N6Sprite17current_animationE" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Current animation being rendered. </p>
@@ -396,6 +419,15 @@ and handle adding and setting animations.</p>
 <dt class="sig sig-object cpp" id="_CPPv4N6Sprite13current_frameE">
 <span class="target" id="class_sprite_1a8eec8f007b36cd1ae4bfce07e8418d4e"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">current_frame</span></span></span><a class="headerlink" href="#_CPPv4N6Sprite13current_frameE" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>The frame of the animation we are at (starts at 0). </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-functions">Private Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite21maybe_update_colliderEv">
+<span class="target" id="class_sprite_1a1b41048fbcb05388f95392efbc9ad3db"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">maybe_update_collider</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite21maybe_update_colliderEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Checks if set_collider is true and updates the collider’s shape if so. </p>
 </dd></dl>
 
 </div>
@@ -473,75 +505,11 @@ and handle adding and setting animations.</p>
 
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N6Sprite13animation_mapE">
-<span class="target" id="class_sprite_1a7ede083628724074c6c0ad810ef0a1cb"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">map</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv46Sprite" title="Sprite"><span class="n"><span class="pre">Sprite</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N6Sprite9AnimationE" title="Sprite::Animation"><span class="n"><span class="pre">Animation</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">animation_map</span></span></span><a class="headerlink" href="#_CPPv4N6Sprite13animation_mapE" title="Permalink to this definition">#</a><br /></dt>
+<span class="target" id="class_sprite_1a9c08a152666a1614419856001252c137"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">map</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">Animation</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">animation_map</span></span></span><a class="headerlink" href="#_CPPv4N6Sprite13animation_mapE" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Map translating animation names to animation objects. </p>
 </dd></dl>
 
 </div>
-<dl class="cpp struct">
-<dt class="sig sig-object cpp" id="_CPPv4N6Sprite9AnimationE">
-<span class="target" id="struct_sprite_1_1_animation"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Animation</span></span></span><a class="headerlink" href="#_CPPv4N6Sprite9AnimationE" title="Permalink to this definition">#</a><br /></dt>
-<dd><div class="docutils container">
-<em>#include &lt;Sprite.hpp&gt;</em></div>
-<p>Useful struct for structuring <a class="reference internal" href="#struct_sprite_1_1_animation"><span class="std std-ref">Animation</span></a> information. </p>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6Sprite9Animation9AnimationEiiii">
-<span class="target" id="struct_sprite_1_1_animation_1a10b72417de8ec742589ba06a2eb3b730"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Animation</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">f</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">t</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">w</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">h</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite9Animation9AnimationEiiii" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Constructor </p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>f</strong> – frames member. </p></li>
-<li><p><strong>t</strong> – animation_period member (ms/frame). </p></li>
-<li><p><strong>w</strong> – sprite_width member (pixels). </p></li>
-<li><p><strong>h</strong> – sprite_height member (pixels). </p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-</div>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N6Sprite9Animation6framesE">
-<span class="target" id="struct_sprite_1_1_animation_1ad6b6e98c2acc19dc5638c5d490793a73"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">frames</span></span></span><a class="headerlink" href="#_CPPv4N6Sprite9Animation6framesE" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Number of frames in the animation. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N6Sprite9Animation16animation_periodE">
-<span class="target" id="struct_sprite_1_1_animation_1a3aa682fb06b447c0833573b33767c1d7"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">animation_period</span></span></span><a class="headerlink" href="#_CPPv4N6Sprite9Animation16animation_periodE" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Period of each frame in miliseconds. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N6Sprite9Animation12sprite_widthE">
-<span class="target" id="struct_sprite_1_1_animation_1ace2c21951dddd8dda01ae838acf7ed4f"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sprite_width</span></span></span><a class="headerlink" href="#_CPPv4N6Sprite9Animation12sprite_widthE" title="Permalink to this definition">#</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N6Sprite9Animation13sprite_heightE">
-<span class="target" id="struct_sprite_1_1_animation_1a5a901cc377c94f35127e640ef478082b"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sprite_height</span></span></span><a class="headerlink" href="#_CPPv4N6Sprite9Animation13sprite_heightE" title="Permalink to this definition">#</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N6Sprite9Animation5indexE">
-<span class="target" id="struct_sprite_1_1_animation_1a41195d29544e510027b07b7be2de4725"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">index</span></span></span><a class="headerlink" href="#_CPPv4N6Sprite9Animation5indexE" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>The animation index (for when the <a class="reference internal" href="../ECS.html#class_entity"><span class="std std-ref">Entity</span></a> has multiple animations). This member is set up by the <a class="reference internal" href="#class_sprite"><span class="std std-ref">Sprite</span></a> component when an animation is added through <a class="reference internal" href="#class_sprite_1ad7f304e05efe81202a63efc1c476e21a"><span class="std std-ref">Sprite::add_animation</span></a>. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N6Sprite9Animation5src_yE">
-<span class="target" id="struct_sprite_1_1_animation_1aaf77a943ede1f7f9b5ff7b6dd4d66f7d"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">src_y</span></span></span><a class="headerlink" href="#_CPPv4N6Sprite9Animation5src_yE" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>The height (in pixels) at which we start “reading” the animation from the texture source file. This member is set up by the <a class="reference internal" href="#class_sprite"><span class="std std-ref">Sprite</span></a> component when an animation is added through <a class="reference internal" href="#class_sprite_1ad7f304e05efe81202a63efc1c476e21a"><span class="std std-ref">Sprite::add_animation</span></a>. </p>
-</dd></dl>
-
-</div>
-</dd></dl>
-
 </dd></dl>
 
 </section>

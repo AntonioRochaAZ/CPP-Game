@@ -28,7 +28,7 @@ and animations, how they handle keyboard inputs etc.
         /* In this code, component Transform will be updated before its
         Sprite, which will be updated before its KeyboardController.*/ 
         player.addComponent<Transform>();
-        player.addComponent<Sprite>(Game::assets.get_tuple("player"), true);
+        player.addComponent<Sprite>("player1");
         player.addComponent<KeyboardController>();
         player.add_group(PlayerGroup);
 

@@ -165,7 +165,10 @@
 <li class="toctree-l3"><a class="reference internal" href="ECS/Components/UILabel.html">UILabel</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="ECS/Entities.html">Entities</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="ECS/Entities.html">Entities</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Entities</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="ECS/Entities/Projectile.html">Projectile</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Collision.html">Collision</a></li>
@@ -223,7 +226,7 @@ because of symmetry etc.</p>
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-typedefs">Typedefs</p>
 <dl class="cpp type">
 <dt class="sig sig-object cpp" id="_CPPv49map_shape">
-<span class="target" id="_tile_map_8hpp_1aee577f54343ff6065683a1cbe7f351ef"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">map_shape</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">int</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv49map_shape" title="Permalink to this definition">#</a><br /></dt>
+<span class="target" id="_tile_map_8hpp_1aa6593a41bd35381453a4f06ca0832094"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">map_shape</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">int</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv49map_shape" title="Permalink to this definition">#</a><br /></dt>
 <dd></dd></dl>
 
 </div>
@@ -233,36 +236,29 @@ because of symmetry etc.</p>
 <dd><div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N7TileMap7TileMapENSt6stringE">
-<span class="target" id="class_tile_map_1acb60d7c867370b0a3a949200bfaf71d7"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TileMap</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mName</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7TileMap7TileMapENSt6stringE" title="Permalink to this definition">#</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N7TileMap4initEiiiiNSt5tupleIP11SDL_TextureiiEE">
-<span class="target" id="class_tile_map_1ad5ea415dba2a72cf01050f96181d8409"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">init</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">sw</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">sh</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ni</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ipr</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">tuple</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">SDL_Texture</span></span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">texture_tuple</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7TileMap4initEiiiiNSt5tupleIP11SDL_TextureiiEE" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Initialize the <a class="reference internal" href="#class_tile_map"><span class="std std-ref">TileMap</span></a>. </p>
+<dt class="sig sig-object cpp" id="_CPPv4N7TileMap7TileMapENSt6stringEii">
+<span class="target" id="class_tile_map_1abe5cd43f5be6735c75efa876596730eb"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TileMap</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mName</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mTwidth</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mTheight</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7TileMap7TileMapENSt6stringEii" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Constructor. This will only set up some basic members. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>sw</strong> – Width of a block texture in the source image in pixels (all blocks must have the same shape). </p></li>
-<li><p><strong>sh</strong> – Height of a block texture in the source image in pixels (all blocks must have the same shape). </p></li>
-<li><p><strong>ni</strong> – The number of different textures (IDs) present in the texture file. </p></li>
-<li><p><strong>ipr</strong> – The number of IDs per row (in the texture file). </p></li>
-<li><p><strong>texture_tuple</strong> – The tuple returned by <a class="reference internal" href="Game.html#class_game_1_1_asset_manager_1ae347796c7d4103a394fe2774760ff6bd"><span class="std std-ref">Game::AssetManager::get_tuple</span></a>. This will contain the texture loaded from the texture file, which contains the texture for all block IDs. When being rendered, we’ll simply render a different part of this texture. </p></li>
+<li><p><strong>mName</strong> – A name to give the <a class="reference internal" href="#class_tile_map"><span class="std std-ref">TileMap</span></a> object (mostly for debugging). </p></li>
+<li><p><strong>mTwidth</strong> – the tile width in game (will become a destination rectangle’s width). </p></li>
+<li><p><strong>mTheight</strong> – analogous to mTwidth but for the height. </p></li>
 </ul>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N7TileMap12set_dst_sizeEii">
-<span class="target" id="class_tile_map_1ab2efd70cb82a149c872ed8c5d40bb805"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_dst_size</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">tw</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">th</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7TileMap12set_dst_sizeEii" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Defines the size of the tiles (in the actual game window). </p>
+<dt class="sig sig-object cpp" id="_CPPv4N7TileMap4initENSt6stringENSt6stringE">
+<span class="target" id="class_tile_map_1a8a11bdcf25bade4ac05c6a578f6c5b32"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">init</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">texture_id</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">metadata_path</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7TileMap4initENSt6stringENSt6stringE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Initialize <a class="reference internal" href="#class_tile_map"><span class="std std-ref">TileMap</span></a> with a given texture file and its metadata. This will touch texture related members (texture_id, sprite width and height, nb_ids, ids_per_row and texture_pos).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>tw</strong> – Tile width (pixels). </p></li>
-<li><p><strong>th</strong> – Tile height (pixels). </p></li>
+<li><p><strong>texture_id</strong> – the ID under which data is stored in the AssetManager. </p></li>
+<li><p><strong>metadata_path</strong> – the path to the text file in which information about the tilemap textures is stored (namely the shape of each texture, and the total number of IDs). The number of IDs per row is calculated automatically according to the size of the image. Note that this is not the map file. </p></li>
 </ul>
 </dd>
 </dl>
@@ -271,7 +267,8 @@ because of symmetry etc.</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N7TileMap5setupEii">
 <span class="target" id="class_tile_map_1a0ea01daedb7829bc431d26cefa409c44"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">setup</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">x_tiles</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">y_tiles</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7TileMap5setupEii" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Sets up the <a class="reference internal" href="ECS/ECS.html#class_entity"><span class="std std-ref">Entity</span></a> vectors, according to the number of tiles passed. It will set up information about the position and sprite of the tiles, although their IDs will only be set later (in <a class="reference internal" href="#class_tile_map_1aac9ca6661ddb5e337bdf55b605505575"><span class="std std-ref">load_map</span></a>), by effectively changing where the source rectangle is read from in the base texture file. </p>
+<dd><p>Sets up the <a class="reference internal" href="ECS/ECS.html#class_entity"><span class="std std-ref">Entity</span></a> vectors, according to the number of tiles passed. It will set up information about the position and sprite of the tiles, although their IDs will only be set later (in <a class="reference internal" href="#class_tile_map_1aac9ca6661ddb5e337bdf55b605505575"><span class="std std-ref">load_map</span></a>), by effectively changing where the source rectangle is read from in the base texture file.</p>
+<p>Ideally, in the future, this should be set up automatically in <a class="reference internal" href="#class_tile_map_1aac9ca6661ddb5e337bdf55b605505575"><span class="std std-ref">load_map</span></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -285,7 +282,7 @@ because of symmetry etc.</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N7TileMap8load_mapENSt6stringE">
 <span class="target" id="class_tile_map_1aac9ca6661ddb5e337bdf55b605505575"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">load_map</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">path</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7TileMap8load_mapENSt6stringE" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Load the ID and other data from a text file. </p>
+<dd><p>Load the tile IDs and collision information from a map text file. </p>
 </dd></dl>
 
 <dl class="cpp function">
@@ -296,60 +293,12 @@ because of symmetry etc.</p>
 
 </div>
 <div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N7TileMap11tile_playerE">
-<span class="target" id="class_tile_map_1aa6a2d4eab751fcf10f1016e8500e4820"></span><a class="reference internal" href="ECS/ECS.html#_CPPv46Entity" title="Entity"><span class="n"><span class="pre">Entity</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">tile_player</span></span></span><a class="headerlink" href="#_CPPv4N7TileMap11tile_playerE" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>So we can keep track of the player’s movement (update map rendering). </p>
-</dd></dl>
-
-</div>
-<div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N7TileMap4nameE">
 <span class="target" id="class_tile_map_1ae2cc3c167bb64cac0ed5a7c430ffcf28"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">name</span></span></span><a class="headerlink" href="#_CPPv4N7TileMap4nameE" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>A name for the tile map (may help debugging): </p>
 <p>&lt; We create this as a <a class="reference internal" href="ECS/ECS.html#class_manager"><span class="std std-ref">Manager</span></a> child class because it acts as one (managing multiple entities, which are the tile blocks). </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N7TileMap7textureE">
-<span class="target" id="class_tile_map_1aa6a39b3de0917c77aa22d139dacfbbf9"></span><span class="n"><span class="pre">SDL_Texture</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">texture</span></span></span><a class="headerlink" href="#_CPPv4N7TileMap7textureE" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>The texture pointer. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N7TileMap11image_widthE">
-<span class="target" id="class_tile_map_1a63a70ccc9648844e6795271367f6b103"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">image_width</span></span></span><a class="headerlink" href="#_CPPv4N7TileMap11image_widthE" title="Permalink to this definition">#</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N7TileMap12image_heightE">
-<span class="target" id="class_tile_map_1a434f06ef7e846d9b266811323e3c5532"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">image_height</span></span></span><a class="headerlink" href="#_CPPv4N7TileMap12image_heightE" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>W and H of the actual texture. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N7TileMap12sprite_widthE">
-<span class="target" id="class_tile_map_1a8fa164f77b404c912f9bbea9267b31dc"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sprite_width</span></span></span><a class="headerlink" href="#_CPPv4N7TileMap12sprite_widthE" title="Permalink to this definition">#</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N7TileMap13sprite_heightE">
-<span class="target" id="class_tile_map_1aa41815e77f002c5534f151cf7a8c428c"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sprite_height</span></span></span><a class="headerlink" href="#_CPPv4N7TileMap13sprite_heightE" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Dimensions of the tiles in the .bmp file. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N7TileMap6nb_idsE">
-<span class="target" id="class_tile_map_1a7f5b9a4f37e9dfaea3b9fc5765c94df5"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nb_ids</span></span></span><a class="headerlink" href="#_CPPv4N7TileMap6nb_idsE" title="Permalink to this definition">#</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N7TileMap11ids_per_rowE">
-<span class="target" id="class_tile_map_1ad185a36a83b64c9f020a8d4bc6be15ab"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ids_per_row</span></span></span><a class="headerlink" href="#_CPPv4N7TileMap11ids_per_rowE" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Number of textures (total) and how many per row. </p>
 </dd></dl>
 
 <dl class="cpp var">
@@ -372,6 +321,34 @@ because of symmetry etc.</p>
 <dt class="sig sig-object cpp" id="_CPPv4N7TileMap11tile_heightE">
 <span class="target" id="class_tile_map_1a5dc2329988d2c423f254b33d842e21a0"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">tile_height</span></span></span><a class="headerlink" href="#_CPPv4N7TileMap11tile_heightE" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Dimensions of the tiles in the game window. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N7TileMap10texture_idE">
+<span class="target" id="class_tile_map_1a285cd2637be762a2cec6efa6f4b0dab6"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">texture_id</span></span></span><a class="headerlink" href="#_CPPv4N7TileMap10texture_idE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Texture ID of the whole. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N7TileMap12sprite_widthE">
+<span class="target" id="class_tile_map_1a8fa164f77b404c912f9bbea9267b31dc"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sprite_width</span></span></span><a class="headerlink" href="#_CPPv4N7TileMap12sprite_widthE" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N7TileMap13sprite_heightE">
+<span class="target" id="class_tile_map_1aa41815e77f002c5534f151cf7a8c428c"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sprite_height</span></span></span><a class="headerlink" href="#_CPPv4N7TileMap13sprite_heightE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Dimensions of the tiles in the .bmp file. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N7TileMap6nb_idsE">
+<span class="target" id="class_tile_map_1a7f5b9a4f37e9dfaea3b9fc5765c94df5"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">nb_ids</span></span></span><a class="headerlink" href="#_CPPv4N7TileMap6nb_idsE" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N7TileMap11ids_per_rowE">
+<span class="target" id="class_tile_map_1ad185a36a83b64c9f020a8d4bc6be15ab"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ids_per_row</span></span></span><a class="headerlink" href="#_CPPv4N7TileMap11ids_per_rowE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Number of textures (total) and how many per row. </p>
 </dd></dl>
 
 <dl class="cpp var">
