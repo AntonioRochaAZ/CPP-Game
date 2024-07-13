@@ -160,7 +160,7 @@ void Game::handle_events(){
                         Game::tracking_player = true;
                         // Get current reference camera and entity positions (will be update next):
                         previous_camera_position = camera_position;
-                        previous_ref_entity_position = camera_ref_entity->getComponent<Transform>().get_position();
+                        previous_ref_entity_position = camera_ref_entity->getComponent<Transform>().position;
                         // player->getComponent<Sprite>().set_texture("player2");
                         // player->getComponent<Sprite>().set_scale(20);
                         // background.load_map("./assets/map_2.txt");
@@ -188,8 +188,8 @@ void Game::update(){
 
     // Label updating (debugging):
     std::stringstream ss;
-    ss << "Player position: " << player->getComponent<Transform>().get_x() << \
-        ", " << player->getComponent<Transform>().get_y();
+    ss << "Player position: " << player->getComponent<Transform>().x << \
+        ", " << player->getComponent<Transform>().y;
     label.getComponent<UILabel>().set_text(ss.str(), "custom_font2px");
 
     background.update();
@@ -200,7 +200,7 @@ void Game::update(){
     // Updating camera position:
     if (tracking_player){ 
         // Getting new position:
-        vec new_ref_entity_position = camera_ref_entity->getComponent<Transform>().get_position();
+        vec new_ref_entity_position = camera_ref_entity->getComponent<Transform>().position;
         // Updating camera position:
         camera_position = previous_camera_position + \
             (new_ref_entity_position - previous_ref_entity_position);

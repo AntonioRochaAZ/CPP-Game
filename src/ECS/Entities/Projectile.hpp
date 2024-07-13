@@ -8,9 +8,7 @@ using vec = Eigen::Vector2f;
 
 /** Projectile Entity.
 */
-class Projectile : public Entity{
-public:
-
+struct Projectile : public Entity{
     /** Constructor
         @param man: The Manager object to associate this projectile to.
         @param name: The name to give the Entity (will also be passed to the Collider component).

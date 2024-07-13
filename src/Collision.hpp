@@ -5,7 +5,7 @@
 
 using vec = Eigen::Vector2f;
 
-class Collider;
+struct Collider;
 class Collision{
 public:
     

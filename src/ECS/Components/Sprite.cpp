@@ -9,7 +9,6 @@ Sprite::Sprite(std::string texture_id): set_collider(false){
     set_texture(texture_id);
 };
 
-
 /** This constructor is kept for the TileMap, for which multiple tile textures
 are contained in one single image file and thus texture object. This allows
 manual control over the sprite.
@@ -40,14 +39,16 @@ Sprite::Sprite(TexTup texture_tuple, bool is_animated):
 };
 
 // Base class methods: ------------------------------------------------
+/** 
+    Defining destination_rect position from transform:
+    Note that the transform will always have already been defined because
+    it MUST be updated before the sprite, so there is no reason to
+    check if it exists here.
+*/
 void Sprite::init(){
-    // Defining destination_rect position from transform:
-    // Note that the transform will always have already been defined because
-    // it must be updated before the sprite, so there is no reason to
-    // check if it exists here.
     transform = &entity->getComponent<Transform>();
-    dst_rect.x = transform->get_x();
-    dst_rect.y = transform->get_y();
+    dst_rect.x = transform->x;
+    dst_rect.y = transform->y;
 }
 
 void Sprite::update(){
@@ -65,8 +66,8 @@ void Sprite::update(){
         current_frame = static_cast<int>((SDL_GetTicks() / animation_period) % frames);
         src_rect.x = src_rect.w * current_frame;
     }
-    dst_rect.x = transform->get_x();
-    dst_rect.y = transform->get_y();
+    dst_rect.x = transform->x;
+    dst_rect.y = transform->y;
 }
 
 void Sprite::render(){
@@ -183,28 +184,17 @@ void Sprite::set_texture(std::string texture_id){
     }
 }
 
-// Size related -------------------------------------------------------
-int Sprite::get_xscale(){
-    if (image_width != 0){
-        return (int)(dst_rect.w/image_width);
-    }else{
-        throw std::runtime_error("image_width = 0, while it shouldn't.");
-    }
-}
-int Sprite::get_yscale(){
-    if (image_height != 0){
-        return (int)(dst_rect.h/image_height);
-    }else{
-        throw std::runtime_error("image_height = 0, while it shouldn't.");
-    }
-}
-
+// Size related: --------------------------------------------------------------
+/**
+    Checks if set_collider is true and updates the collider's shape if so.
+    
+    Why not check for a member of collider? 
+    Like getComponent<Collider>().dynamic_shape ?
+    Because this function is called in Sprite's initialization, before
+    Sprite's "entity" member is initialized. So we can't access other 
+    components yet... It is easier to initialize set_collider to false
+    and have this called.
+*/
 void Sprite::maybe_update_collider(){
-    // Why not check for a member of collider? 
-    // Like getComponent<Collider>().dynamic_shape ?
-    // Because this function is called in Sprite's initialization, before
-    // Sprite's "entity" member is initialized. So we can't access other 
-    // components yet... It is easier to initialize set_collider to false
-    // and have this called.
     if(set_collider){ entity->getComponent<Collider>().get_shape(); }
 }

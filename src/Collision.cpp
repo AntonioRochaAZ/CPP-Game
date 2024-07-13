@@ -4,10 +4,10 @@
 bool Collision::collider_AABB(const Collider *CA, const Collider *CB){
     Transform& TA = CA->entity->getComponent<Transform>();  // Just to simplify.
     Transform& TB = CB->entity->getComponent<Transform>();
-    if (TA.get_x() + CA->width  > TB.get_x() &&
-        TB.get_x() + CB->width  > TA.get_x() &&
-        TA.get_y() + CA->height > TB.get_y() &&
-        TB.get_y() + CB->height > TA.get_y()){
+    if (TA.x + CA->width  > TB.x &&
+        TB.x + CB->width  > TA.x &&
+        TA.y + CA->height > TB.y &&
+        TB.y + CB->height > TA.y){
 
         std::cout << CA->get_tag() << " hit: " << CB->get_tag() << std::endl;
         return true;
@@ -33,7 +33,7 @@ std::tuple<float, int> Collision::get_collision_time(
             has spawned inside of another one. Let's throw an error for debugging this: */
             std::cout << "Error calculating collision: speed difference = 0" << std::endl;
             throw std::runtime_error("Game::update");
-        } 
+        }
         // Otherwise, if one of the denominators is zero, increate the t value artificially,
         // avoiding division by zero.
         else if (dvx == 0){ dvx = 0.000001; } else if (dvy == 0) { dvy = 0.000001; }
@@ -89,10 +89,10 @@ void Collision::handle_collisions(){
             // Instead of checking if each is IMMOVABLE_ON_COLLISION, we check if their sum is one,
             // since IMMOVABLE_ON_COLLISION is the enum's entry for 0.
             continue;
-        }else if (CA->entity->has_group(PlayerGroup) && CB->entity->has_group(PlayerGroup)){
+        }/*else if (CA->entity->has_group(PlayerGroup) && CB->entity->has_group(PlayerGroup)){
             // This is checked separately because it is less frequent than the previous one.
             continue;
-        }
+        }*/
         // If we got here, then at least one of the objects is movable, let's check for
         // collision:
         bool collision_result = Collision::collider_AABB(CA, CB);
@@ -125,16 +125,12 @@ void Collision::handle_collisions(){
             // For clarity:
             Transform& TA = CA->entity->getComponent<Transform>();
             Transform& TB = CB->entity->getComponent<Transform>();
-            float xa = TA.get_x();
-            float ya = TA.get_y();
-            float xb = TB.get_x();
-            float yb = TB.get_y();
-            float speed_a = TA.get_speed();
-            float speed_b = TB.get_speed();
-            float vxa = TA.get_vx();
-            float vya = TA.get_vy();
-            float vxb = TB.get_vx();
-            float vyb = TB.get_vy();
+            float xa = TA.x; float ya = TA.y;
+            float xb = TB.x; float yb = TB.y;
+            float speed_a = TA.speed;
+            float speed_b = TB.speed;
+            float vxa = TA.vx; float vya = TA.vy;
+            float vxb = TB.vx; float vyb = TB.vy;
             float wa = CA->width;
             float ha = CA->height;
             float wb = CB->width;
@@ -155,7 +151,7 @@ void Collision::handle_collisions(){
             #define PUSH_BIT (1 << 2)       // 0100
             #define DESTROY_BIT (1 << 3)    // 1000
 
-            // Here, we'll integrate the conditions to an int, using bitwise OR:
+            // Here, we'll integrate the conditions to an int, using bitwise OR (|):
             int bit_result = \
                   ((col_handle_A == IMMOVABLE_ON_COLLISION) or
                    (col_handle_B == IMMOVABLE_ON_COLLISION) ? IMMOVABLE_BIT : 0) 
@@ -205,8 +201,8 @@ void Collision::handle_collisions(){
                         xa, xb, ya, yb, speed_a, speed_b, vxa, vxb, vya, vyb, wa, wb, ha, hb);
 
                 // Update ONLY C_MOV's transform :
-                if (t_idx <= 1){ T_MOV->set_x( x_mov - speed_mov*vx_mov* diff ); }
-                else{ T_MOV->set_y( y_mov - speed_mov*vy_mov* diff ); }
+                if (t_idx <= 1){ T_MOV->x = x_mov - speed_mov*vx_mov* diff; }
+                else{ T_MOV->y = y_mov - speed_mov*vy_mov* diff; }
                 if (C_MOV->entity->has_component<Sprite>()){ C_MOV->entity->getComponent<Sprite>().update(); }
                 if (C_MOV->entity->has_component<UILabel>()){ C_MOV->entity->getComponent<UILabel>().update(); }
                 break;
@@ -231,17 +227,14 @@ void Collision::handle_collisions(){
                 std::tie(diff, t_idx) = Collision::get_collision_time(
                     xa, xb, ya, yb, speed_a, speed_b, vxa, vxb, vya, vyb, wa, wb, ha, hb);
 
-                // Update A:
-                if (t_idx <= 1){ TA.set_x( xa - speed_a*vxa* diff ); }
-                else{ TA.set_y( ya - speed_a*vya* diff ); }
+                // Update A and B:
+                if (t_idx <= 1){ 
+                    TA.x = xa - speed_a*vxa* diff; TB.x = xb - speed_b*vxb* diff; 
+                }else{
+                    TA.y = ya - speed_a*vya* diff; TB.y = yb - speed_b*vyb* diff;
+                }
                 if (CA->entity->has_component<Sprite>()){ CA->entity->getComponent<Sprite>().update(); }
                 if (CA->entity->has_component<UILabel>()){ CA->entity->getComponent<UILabel>().update(); }
-            
-                // Update B:
-                TB.set_x( xb - speed_b*vxb* diff );
-                TB.set_y( yb - speed_b*vyb* diff );
-                if (t_idx <= 1){ TB.set_vx(0.0); }
-                else{ TB.set_vy(0.0); }
                 if (CB->entity->has_component<Sprite>()){ CB->entity->getComponent<Sprite>().update(); }
                 if (CB->entity->has_component<UILabel>()){ CB->entity->getComponent<UILabel>().update(); }
                 break;

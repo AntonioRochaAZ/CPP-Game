@@ -113,9 +113,9 @@ void TileMap::setup(int xtiles, int ytiles){
                 y0 + y * tile_height);
             e.addComponent<Sprite>(texture_id);
 
-            e.getComponent<Transform>().set_speed(0.0);
-            e.getComponent<Sprite>().set_src_height(sprite_height);
-            e.getComponent<Sprite>().set_src_width(sprite_width);
+            e.getComponent<Transform>().speed = 0.0;
+            e.getComponent<Sprite>().src_rect.h = sprite_height;
+            e.getComponent<Sprite>().src_rect.w = sprite_width;
             e.getComponent<Sprite>().set_dst_height(tile_height);
             e.getComponent<Sprite>().set_dst_width(tile_width);
             map_line.emplace_back(-1);
@@ -188,8 +188,8 @@ void TileMap::load_map(std::string path){
 
                     // Update tile source position according to id:
                     Sprite& s = entity_vector[nb_xtiles*y + x]->getComponent<Sprite>();
-                    s.set_src_x(texture_pos[id][0]);
-                    s.set_src_y(texture_pos[id][1]);
+                    s.src_rect.x = texture_pos[id][0];
+                    s.src_rect.y = texture_pos[id][1];
                     map[y][x] = id; // line number, then column
                 }
                 // map_file.get(tile);     // A number.
@@ -244,8 +244,9 @@ void TileMap::load_map(std::string path){
 
 void TileMap::set_position(int x, int y){
     for(std::unique_ptr<Entity>& e : entity_vector){
-        e->getComponent<Transform>().set_x(e->getComponent<Transform>().get_x() + (x - x0));
-        e->getComponent<Transform>().set_y(e->getComponent<Transform>().get_y() + (y - y0));
+        Transform& T = e->getComponent<Transform>(); // For conciseness
+        T.x = T.x + (x - x0);
+        T.y = T.y + (y - y0);
     }
     x0 = x;  y0 = y; 
 }

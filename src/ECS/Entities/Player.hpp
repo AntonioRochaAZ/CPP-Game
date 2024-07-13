@@ -7,9 +7,7 @@ using vec = Eigen::Vector2f;
 
 /** Player Entity.
 */
-class Player : public Entity{
-public:
-
+struct Player : public Entity{
     int player_number;
     std::string player_name;
     static std::unordered_map<int, SDL_Color> player_colour;

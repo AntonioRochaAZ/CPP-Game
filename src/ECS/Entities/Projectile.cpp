@@ -15,8 +15,8 @@ Projectile::Projectile(Manager& man, std::string name, std::string sprite_name, 
     //getComponent<Sprite>().add_animation(charging, "Charging");
 
     getComponent<Collider>().enable_dynamic_shape();
-    getComponent<Collider>().set_width(getComponent<Sprite>().get_dst_width());
-    getComponent<Collider>().set_height(getComponent<Sprite>().get_dst_height());
+    getComponent<Collider>().set_width(getComponent<Sprite>().dst_rect.w);
+    getComponent<Collider>().set_height(getComponent<Sprite>().dst_rect.h);
     
     // getComponent<Sprite>().add_animation(flying_animation, "Flying");
     // getComponent<Sprite>().set_animation("Flying");
@@ -36,22 +36,22 @@ void Projectile::update(){
 
         getComponent<Sprite>().set_animation("Flying");
 
-        vec position = ref_transform.get_position();
-        float ref_speed = ref_transform.get_speed();
-        vec ref_velocity = ref_transform.get_velocity();
+        vec position = ref_transform.position;
+        float ref_speed = ref_transform.speed;
+        vec ref_velocity = ref_transform.velocity;
         velocity = speed * velocity + ref_speed * ref_velocity;
         speed = velocity.norm();
 
     } else if (getComponent<Sprite>().current_animation == "Charging"){
         // In this case, we are in the charging animaiton, but not yet in the last frame.
         // We'll follow the reference object:
-        getComponent<Transform>().set_position(reference_transform->get_position())
-        getComponent<Transform>().set_speed(reference_transform->get_speed())
-        getComponent<Transform>().set_velocity(reference_transform->get_velocity())
+        getComponent<Transform>().position = reference_transform->position;
+        getComponent<Transform>().speed = reference_transform->speed;
+        getComponent<Transform>().velocity = reference_transform->velocity;
     }
     */
     
-    distance += getComponent<Transform>().get_speed();
+    distance += getComponent<Transform>().speed;
     if (distance > range){
         // Projectile reaches its maximum range
         destroy();

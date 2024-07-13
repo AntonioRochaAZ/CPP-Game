@@ -3,8 +3,7 @@
 #include "../../Game.hpp"  // ECS will be included here
 
 
-class UILabel : public Component{
-private:
+struct UILabel : public Component{
     vec shift;              ///< How much to shift the text box from the Transform's position.
     std::string text;       ///< The actual text to display.
     std::string font_id;    
@@ -21,7 +20,6 @@ private:
         ///< Here we use a pointer, so that we don't have to explicitly 
         ///< initialize it in the constructor.
 
-public:
 
     /** Constructor
         @param x_shift: How much to shift the text box in the x-axis, in pixels
@@ -50,8 +48,8 @@ public:
         that). */
     void init() override{
         transform = &entity->getComponent<Transform>();  // Get the transform for position. 
-        dst_rect.x = static_cast<int>(transform->get_x() + shift[0]);
-        dst_rect.y = static_cast<int>(transform->get_y() + shift[1]);
+        dst_rect.x = static_cast<int>(transform->x + shift[0]);
+        dst_rect.y = static_cast<int>(transform->y + shift[1]);
     }
 
     void set_text(std::string mText, std::string mFont_id); 

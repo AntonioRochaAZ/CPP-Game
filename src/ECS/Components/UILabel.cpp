@@ -19,8 +19,8 @@ void UILabel::set_text(std::string mText, std::string mFont_id){
 }
 
 void UILabel::update(){
-    dst_rect.x = static_cast<int>(transform->get_x() + shift[0]);
-    dst_rect.y = static_cast<int>(transform->get_y() + shift[1]);
+    dst_rect.x = static_cast<int>(transform->x + shift[0]);
+    dst_rect.y = static_cast<int>(transform->y + shift[1]);
 }
 
 void UILabel::render(){

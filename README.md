@@ -64,6 +64,10 @@ command ``make documentation``, defined in the Makefile.
 
 In no specific order.
 
+- Add components like health to allow players to fight.
+- Perhaps generalize the KeyboardController component later, by allowing different
+  actions to be triggered by the attack buttons according to the Entity. Perhaps create
+  a sort of attack component.
 - Optimize rendering (stop rendering objects off-screen) (Must think if this really is necessary,
   and if so, when).
 - Make updating independent of FPS.
@@ -72,6 +76,5 @@ In no specific order.
 - Two projectiles (from the same player) will destroy each other if you shoot them while moving.
   Either we cap the time between shots, or do something else about it (e.g. make it so that
   projectile don't interact, but it would be interesting to be able to shoot down enemy projectiles, for example).
-- Remove getter/setter functions, use structs or public members instead.
 - Study the use of "const" and passing arguments by reference (check when it is possible/should be done).
-- Perhaps generalize the KeyboardController Component later.
+- Long comment under "case (IMMOVABLE_BIT + PUSH_BIT)" inside of Collision::handle_collisions.

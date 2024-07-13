@@ -15,7 +15,7 @@ using TexTup = std::tuple<SDL_Texture*, int, int>;
 
 using vec = Eigen::Vector2f;
 
-class Collider; // Forward declaration of the Collider class (otherwise, circular import).
+struct Collider; // Forward declaration of the Collider class (otherwise, circular import).
 
 /** Game class definition, used for running the game and handling events. Most functions are
 defined in Game.cpp. */

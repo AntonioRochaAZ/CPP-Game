@@ -12,22 +12,22 @@ void KeyboardController::update(){
         std::size_t pressed_key = local_key_bind_map[Game::event.key.keysym.sym];
         switch (pressed_key){
         case UP_BUTTON:
-            transform->set_vy(-1.0);
+            transform->vy = -1.0;
             sprite->set_animation("Walk");
             break;
         case LEFT_BUTTON:
-            transform->set_vx(-1.0);
+            transform->vx = -1.0;
             sprite->set_animation("Walk");
             if (reverse_sprite){
                 sprite->sprite_flip = SDL_FLIP_HORIZONTAL;
             }
             break;
         case DOWN_BUTTON:
-            transform->set_vy(1.0);
+            transform->vy = 1.0;
             sprite->set_animation("Walk");
             break;
         case RIGHT_BUTTON:
-            transform->set_vx(1.0);
+            transform->vx = 1.0;
             sprite->set_animation("Walk");
             if (reverse_sprite){
                 // Adding the if just to avoid problems.
@@ -58,7 +58,7 @@ void KeyboardController::update(){
                 }
                 Projectile* proj = new Projectile(
                     entity->manager, "Projectile", "projectile1", 1000,
-                    transform->get_position()+vec(x_sign * 100, 0), 20, vec(x_sign * 1.0, 0.0)
+                    transform->position + vec(x_sign * 100, 0), 20, vec(x_sign * 1.0, 0.0)
                 );  // Pretty sure the new pointer is dealt with in the manager (will be turned into a unique_ptr).
                 proj->getComponent<Sprite>().set_scale(10);   // TODO: Eventually get player scale.
                 proj->getComponent<Collider>().get_shape();   // Updating collider dimensions.
@@ -78,16 +78,16 @@ void KeyboardController::update(){
         std::size_t pressed_key = local_key_bind_map[Game::event.key.keysym.sym];
         switch (pressed_key){
         case UP_BUTTON:
-            transform->set_vy(0.0);
+            transform->vy = 0.0;
             break;
         case LEFT_BUTTON:
-            transform->set_vx(0.0);
+            transform->vx = 0.0;
             break;
         case DOWN_BUTTON:
-            transform->set_vy(0.0);
+            transform->vy = 0.0;
             break;
         case RIGHT_BUTTON:
-            transform->set_vx(0.0);
+            transform->vx = 0.0;
             break;
         case ATTACK_B_BUTTON:
             projectile=false;
@@ -96,7 +96,7 @@ void KeyboardController::update(){
             break;
         }}
     }
-    if (transform->get_velocity().norm() == 0){
+    if (transform->velocity.norm() == 0){
         sprite->set_animation("Idle");
     }
 }

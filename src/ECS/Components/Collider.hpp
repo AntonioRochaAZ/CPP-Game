@@ -21,8 +21,7 @@ enum projectile_handle : std::size_t{
 
 /** Component used for collision detection. Currently only supports AABB 
     collistion (intersecting rectangles). */
-class Collider : public Component{
-private:
+struct Collider : public Component{
     std::string tag;        
         /**< This tag could eventually be useful for deciding whether to take 
         the collision into account. */
@@ -35,8 +34,6 @@ private:
         members are in sync.
         */
 
-public:
-    
     std::size_t handling_option;    
         ///< Information about if the object can move/be moved or not. It
         ///< should be an entry of the collision_handle enum.
