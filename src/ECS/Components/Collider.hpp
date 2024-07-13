@@ -3,7 +3,13 @@
 #include "SDL2/SDL.h"
 #include "../Components.hpp"
 
-/** Options for collision handling */
+/** 
+    Options for collision handling:
+    - IMMOVABLE_ON_COLLISION: Cannot move the object.
+    - MOVABLE_OBJECT: The object can move by itself.
+    - PUSH_ON_COLLISION: The object can be pushed.
+    - DESTROY_ON_COLLISION: Destroy the object when any collision happpens (e.g. a projectile that hits a wall).
+*/
 enum collision_handle : std::size_t{
     IMMOVABLE_ON_COLLISION,       // Cannot move the object.
     MOVABLE_OBJECT,             // The object can move by itself.
@@ -12,7 +18,11 @@ enum collision_handle : std::size_t{
 };
 
 /** Options for handling collisions against projectiles.
-Currently unused. Could eventually add the possibility to reflect projectiles. */
+Currently unused. Could eventually add the possibility to reflect projectiles. 
+
+Actually, this probably won't be used, this information will probably be integrated
+into collision_handle.
+*/
 enum projectile_handle : std::size_t{
     INDESTRUCTABLE_ON_PROJECTILE,       // Projectiles won't affect it
     DESTROY_ON_PROJECTILE,              // Object is destroyed when a projectile hits it
@@ -56,7 +66,7 @@ struct Collider : public Component{
     // Base class methods: ----------------------------------------------------
     void init() override;
     //void update() override;
-
+    
     // Getting transform: -----------------------------------------------------
     void enable_dynamic_shape(){ 
         dynamic_shape = true;

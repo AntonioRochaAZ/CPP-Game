@@ -14,9 +14,7 @@ Projectile::Projectile(Manager& man, std::string name, std::string sprite_name, 
     addComponent<Sprite>(sprite_name);
     //getComponent<Sprite>().add_animation(charging, "Charging");
 
-    getComponent<Collider>().enable_dynamic_shape();
-    getComponent<Collider>().set_width(getComponent<Sprite>().dst_rect.w);
-    getComponent<Collider>().set_height(getComponent<Sprite>().dst_rect.h);
+    getComponent<Collider>().enable_dynamic_shape();    // Automatically gets the shape from the Sprite component.
     
     // getComponent<Sprite>().add_animation(flying_animation, "Flying");
     // getComponent<Sprite>().set_animation("Flying");

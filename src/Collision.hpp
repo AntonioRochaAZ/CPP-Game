@@ -6,8 +6,7 @@
 using vec = Eigen::Vector2f;
 
 struct Collider;
-class Collision{
-public:
+struct Collision{
     
     /** Function for checking if two colliders are colliding.
     This function only checks for AABB collision, which considers that both
@@ -33,9 +32,13 @@ public:
 
     This function returns:
         1. The amount of time we must rollback (float);
-        2. An integer indicating the index (starting at zer) of the condition 
+        2. An integer indicating the index (starting at zero) of the condition 
            which is not met. This is useful to knowing in which axis we have 
-           to reset the player's position.
+           to reset the player's position. This is useful because, if we only
+           return the object's position in time, it will end up getting stuck
+           in the contact point. By taking the axis of the collision into
+           account, we'll make the object slide on the surface of the object
+           it is colliding with.
 
     Why not pass the Colliders directly? In the case of IMMOVABLE objects, we'll
     pass an artifical value of speed = 0, even if they are moving, so that we can

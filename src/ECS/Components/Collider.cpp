@@ -16,6 +16,6 @@ void Collider::init(){
 }
 
 void Collider::get_shape(){ 
-    width  = entity->getComponent<Sprite>().dst_rect.w;
-    height = entity->getComponent<Sprite>().dst_rect.h;
+    width  = entity->getComponent<Sprite>().get_dst_width();
+    height = entity->getComponent<Sprite>().get_dst_height();
 }

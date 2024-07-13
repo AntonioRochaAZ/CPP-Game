@@ -1,6 +1,6 @@
 Utils
 =====
 
-Functions defined in utils.hpp.
+Useful/repetitive functions.
 
 .. doxygenfile:: utils.hpp

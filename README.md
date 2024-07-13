@@ -78,3 +78,4 @@ In no specific order.
   projectile don't interact, but it would be interesting to be able to shoot down enemy projectiles, for example).
 - Study the use of "const" and passing arguments by reference (check when it is possible/should be done).
 - Long comment under "case (IMMOVABLE_BIT + PUSH_BIT)" inside of Collision::handle_collisions.
+- Create gifs and a diagram of how the collision handling works.

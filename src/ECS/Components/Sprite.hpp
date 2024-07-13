@@ -16,7 +16,17 @@
     one must change the Transform's position instead of
     trying to change it here. 
 */
-struct Sprite : public Component{
+class Sprite : public Component{
+private:
+    // These members are private because, when updated, we may need to
+    // updated the Collider's shape. This means we have to systematically
+    // call the maybe_update_collider() function. To void issues where the
+    // shape of the sprite is changed and the collider shape isn't updated,
+    // we force these to be private.
+    SDL_Rect dst_rect;      ///< Rendering rectangle (source).
+    int scale_x, scale_y;   ///< Scale factors for (size on screen)/(source size).     
+
+public:
     // Members: ---------------------------------------------------------------
     Transform* transform;   ///< Entity's \ref ::Transform component.
     bool set_collider;      ///< Whether to set \ref ::Collider dimensions automatically when changing animations.          
@@ -26,9 +36,8 @@ struct Sprite : public Component{
     
     // Texture related (on screen):
         SDL_Texture* texture;               ///< Pointer to the Texture used.
-        int scale_x, scale_y;               ///< Scale factors for (size on screen)/(source size).     
             ///< (``scale_x = dst_rect.w/src_rect.w`` and ``scale_y = dst_rect.h/src_rect.h``).
-        SDL_Rect src_rect, dst_rect;        ///< Rendering rectangles (source and destination).   
+        SDL_Rect src_rect;                  ///< Rendering rectangle (source).   
         SDL_RendererFlip sprite_flip = SDL_FLIP_NONE;   
             ///< Whether to flip the texture. Will be dealt with by the 
             ///< \ref KeyboardController Component, when the player turns
@@ -68,11 +77,16 @@ struct Sprite : public Component{
     // AUTOMATICALLY.
     void maybe_update_collider();   // Implemented and documented in Sprite.cpp
 
-    void set_dst_width(int w){ dst_rect.w = w; maybe_update_collider();}    ///< Sets actual width on the screen
-    void set_dst_height(int h){ dst_rect.h = h; maybe_update_collider(); }  ///< Sets actual height on the screen
-    void set_xscale(float sclx){ scale_x = sclx; set_dst_width(sclx * src_rect.w); };
-    void set_yscale(float scly){ scale_y = scly; set_dst_height(scly * src_rect.h); };
-    void set_scale(float scale){ set_xscale(scale); set_yscale(scale); }; 
-        ///< Sets the same scale for both x and y axes.
+    // Getter/Setter functions:
+    // They must be used so that maybe_update_collider is systematically called.
+    // No get_xscale/ get_yscale functions because not needed for the moment.
+        void set_dst_width(int w){ dst_rect.w = w; maybe_update_collider();}    ///< Sets actual width on the screen
+        void set_dst_height(int h){ dst_rect.h = h; maybe_update_collider(); }  ///< Sets actual height on the screen
+        int get_dst_width(){ return dst_rect.w; }    ///< Gets actual width on the screen
+        int get_dst_height(){ return dst_rect.h; }  ///< Gets actual height on the screen
+        void set_xscale(float sclx){ scale_x = sclx; set_dst_width(sclx * src_rect.w); };
+        void set_yscale(float scly){ scale_y = scly; set_dst_height(scly * src_rect.h); };
+        void set_scale(float scale){ set_xscale(scale); set_yscale(scale); }; 
+            ///< Sets the same scale for both x and y axes.
     
 };

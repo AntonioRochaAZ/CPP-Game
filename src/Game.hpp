@@ -59,9 +59,7 @@ public:
     because it depends on the Game class definition, which also depends on AssetManager. Creating an
     AssetManager.hpp header would cause a circular import problem. 
     */
-    class AssetManager{
-    // private:
-    public:
+    struct AssetManager{
 
         /// Useful struct for structuring Animation information.
         struct Animation{
