@@ -167,6 +167,7 @@
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="Entities.html">Entities</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Entities</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="Entities/Projectile.html">Projectile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Entities/Player.html">Player</a></li>
 </ul>
 </li>
 </ul>
@@ -253,6 +254,7 @@ updated in the order that the components were added to the entity. For example:<
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Entities.html">Entities</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="Entities/Projectile.html">Projectile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Entities/Player.html">Player</a></li>
 </ul>
 </li>
 </ul>
@@ -359,7 +361,7 @@ updated in the order that the components were added to the entity. For example:<
 <dd><div class="docutils container">
 <em>#include &lt;ECS.hpp&gt;</em></div>
 <p>Definition of the generic component class, which will be subsequently used for other specific ones (see Components.hpp). </p>
-<p>Subclassed by <a class="reference internal" href="Components/Collider.html#class_collider"><span class="std std-ref">Collider</span></a>, <a class="reference internal" href="Components/KeyboardController.html#class_keyboard_controller"><span class="std std-ref">KeyboardController</span></a>, <a class="reference internal" href="Components/Sprite.html#class_sprite"><span class="std std-ref">Sprite</span></a>, <a class="reference internal" href="Components/Transform.html#class_transform"><span class="std std-ref">Transform</span></a>, <a class="reference internal" href="Components/UILabel.html#class_u_i_label"><span class="std std-ref">UILabel</span></a></p>
+<p>Subclassed by <a class="reference internal" href="Components/Collider.html#struct_collider"><span class="std std-ref">Collider</span></a>, <a class="reference internal" href="Components/KeyboardController.html#struct_keyboard_controller"><span class="std std-ref">KeyboardController</span></a>, <a class="reference internal" href="Components/Sprite.html#class_sprite"><span class="std std-ref">Sprite</span></a>, <a class="reference internal" href="Components/Transform.html#struct_transform"><span class="std std-ref">Transform</span></a>, <a class="reference internal" href="Components/UILabel.html#struct_u_i_label"><span class="std std-ref">UILabel</span></a></p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
@@ -403,7 +405,7 @@ updated in the order that the components were added to the entity. For example:<
 <dd><div class="docutils container">
 <em>#include &lt;ECS.hpp&gt;</em></div>
 <p>Definition of the generic <a class="reference internal" href="#class_entity"><span class="std std-ref">Entity</span></a> class. </p>
-<p>Subclassed by <a class="reference internal" href="Entities/Projectile.html#class_projectile"><span class="std std-ref">Projectile</span></a></p>
+<p>Subclassed by <a class="reference internal" href="Entities/Player.html#struct_player"><span class="std std-ref">Player</span></a>, <a class="reference internal" href="Entities/Projectile.html#struct_projectile"><span class="std std-ref">Projectile</span></a></p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
@@ -612,7 +614,7 @@ updated in the order that the components were added to the entity. For example:<
 
 </div>
 <div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-protected-attributes">Protected Attributes</p>
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N7Manager13entity_vectorE">
 <span class="target" id="class_manager_1ae8d5bafb0dbb0e8c6e78ce15a4e465af"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unique_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv46Entity" title="Entity"><span class="n"><span class="pre">Entity</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">entity_vector</span></span></span><a class="headerlink" href="#_CPPv4N7Manager13entity_vectorE" title="Permalink to this definition">#</a><br /></dt>

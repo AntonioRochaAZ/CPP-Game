@@ -167,6 +167,7 @@
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../Entities.html">Entities</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Entities</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../Entities/Projectile.html">Projectile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Entities/Player.html">Player</a></li>
 </ul>
 </li>
 </ul>
@@ -219,19 +220,19 @@ in the <code class="xref cpp cpp-member docutils literal notranslate"><span clas
 TTF_Font object, meaning that everytime this function is called this pointer’s information
 is updated. This isn’t a problem, since <code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">set_text</span></code> is only called when updating
 the text, which is not done all the time.</p>
-<dl class="cpp class">
+<dl class="cpp struct">
 <dt class="sig sig-object cpp" id="_CPPv47UILabel">
-<span class="target" id="class_u_i_label"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">UILabel</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><a class="reference internal" href="../ECS.html#_CPPv49Component" title="Component"><span class="n"><span class="pre">Component</span></span></a><a class="headerlink" href="#_CPPv47UILabel" title="Permalink to this definition">#</a><br /></dt>
+<span class="target" id="struct_u_i_label"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">UILabel</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><a class="reference internal" href="../ECS.html#_CPPv49Component" title="Component"><span class="n"><span class="pre">Component</span></span></a><a class="headerlink" href="#_CPPv47UILabel" title="Permalink to this definition">#</a><br /></dt>
 <dd><div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N7UILabel7UILabelEffiiNSt6stringENSt6stringER9SDL_Colori">
-<span class="target" id="class_u_i_label_1a75b5f673a56d1c96f5949b5ce05de9a6"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">UILabel</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">x_shift</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">y_shift</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">width</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">height</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mText</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mFont_id</span></span>, <span class="n"><span class="pre">SDL_Color</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">mColour</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mFont_size</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">24</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7UILabel7UILabelEffiiNSt6stringENSt6stringER9SDL_Colori" title="Permalink to this definition">#</a><br /></dt>
+<span class="target" id="struct_u_i_label_1a75b5f673a56d1c96f5949b5ce05de9a6"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">UILabel</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">x_shift</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">y_shift</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">width</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">height</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mText</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mFont_id</span></span>, <span class="n"><span class="pre">SDL_Color</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">mColour</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mFont_size</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">24</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7UILabel7UILabelEffiiNSt6stringENSt6stringER9SDL_Colori" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Constructor </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>x_shift</strong> – How much to shift the text box in the x-axis, in pixels (with respect to the <a class="reference internal" href="../ECS.html#class_entity"><span class="std std-ref">Entity</span></a>’s Transform::position). </p></li>
+<li><p><strong>x_shift</strong> – How much to shift the text box in the x-axis, in pixels (with respect to the <a class="reference internal" href="../ECS.html#class_entity"><span class="std std-ref">Entity</span></a>’s <a class="reference internal" href="Transform.html#struct_transform_1a64e0bfc186ad1a0e52414ce7958f3856"><span class="std std-ref">Transform::position</span></a>). </p></li>
 <li><p><strong>y_shift</strong> – Analogously, in the y-axis (pixels). </p></li>
 <li><p><strong>width</strong> – The width of the destination rectangle (pixels). </p></li>
 <li><p><strong>height</strong> – The height if the destination rectangle (pixels). </p></li>
@@ -246,89 +247,89 @@ the text, which is not done all the time.</p>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N7UILabelD0Ev">
-<span class="target" id="class_u_i_label_1a0a122405866786e8e5ebc7d61103084d"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~UILabel</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7UILabelD0Ev" title="Permalink to this definition">#</a><br /></dt>
+<span class="target" id="struct_u_i_label_1a0a122405866786e8e5ebc7d61103084d"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~UILabel</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7UILabelD0Ev" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>The destructor (destroys the texture pointer). </p>
 </dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N7UILabel4initEv">
-<span class="target" id="class_u_i_label_1aec70508c5ccc8a42813282b366b05598"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">init</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N7UILabel4initEv" title="Permalink to this definition">#</a><br /></dt>
+<span class="target" id="struct_u_i_label_1aec70508c5ccc8a42813282b366b05598"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">init</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N7UILabel4initEv" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Initialization function: it sets the transform member and initializes the destination rectangle position according to the shift. It appears that trying to set the transform member in the constructor doesn’t work (probably something related to not having access to the entity member or something like that). </p>
 </dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N7UILabel8set_textENSt6stringENSt6stringE">
-<span class="target" id="class_u_i_label_1a054fb446f223887f81eee2d65c347bd1"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_text</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mText</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mFont_id</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7UILabel8set_textENSt6stringENSt6stringE" title="Permalink to this definition">#</a><br /></dt>
+<span class="target" id="struct_u_i_label_1a054fb446f223887f81eee2d65c347bd1"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_text</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mText</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mFont_id</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7UILabel8set_textENSt6stringENSt6stringE" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Sets the text to be displayed. Called in the constructor. </p>
 </dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N7UILabel6updateEv">
-<span class="target" id="class_u_i_label_1ae83cf5e43ef69794e45f700013ddaf60"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">update</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N7UILabel6updateEv" title="Permalink to this definition">#</a><br /></dt>
+<span class="target" id="struct_u_i_label_1ae83cf5e43ef69794e45f700013ddaf60"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">update</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N7UILabel6updateEv" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Updates dst_rect’s position according to the transform’s (defined in UILabel.cpp). </p>
 </dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N7UILabel6renderEv">
-<span class="target" id="class_u_i_label_1a2786b6c56a2e6f37aa12b103b4e44e5d"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">render</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N7UILabel6renderEv" title="Permalink to this definition">#</a><br /></dt>
+<span class="target" id="struct_u_i_label_1a2786b6c56a2e6f37aa12b103b4e44e5d"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">render</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N7UILabel6renderEv" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Update function (called every game tick). </p>
 </dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N7UILabel13set_transformEP9Transform">
-<span class="target" id="class_u_i_label_1ab25269c5f8e7d873558e6c98fc6adc52"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_transform</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="Transform.html#_CPPv49Transform" title="Transform"><span class="n"><span class="pre">Transform</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7UILabel13set_transformEP9Transform" title="Permalink to this definition">#</a><br /></dt>
+<span class="target" id="struct_u_i_label_1ab25269c5f8e7d873558e6c98fc6adc52"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_transform</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="Transform.html#_CPPv49Transform" title="Transform"><span class="n"><span class="pre">Transform</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7UILabel13set_transformEP9Transform" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Function for hooking up this component to another <a class="reference internal" href="../ECS.html#class_entity"><span class="std std-ref">Entity</span></a>’s transform. This can be useful if we want to have multiple text boxes following a same <a class="reference internal" href="../ECS.html#class_entity"><span class="std std-ref">Entity</span></a>. </p>
 </dd></dl>
 
 </div>
 <div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N7UILabel5shiftE">
-<span class="target" id="class_u_i_label_1a81fb587752e65e9f48a58a8c10ad0c36"></span><a class="reference internal" href="KeyboardController.html#_CPPv43vec" title="vec"><span class="n"><span class="pre">vec</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">shift</span></span></span><a class="headerlink" href="#_CPPv4N7UILabel5shiftE" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>How much to shift the text box from the <a class="reference internal" href="Transform.html#class_transform"><span class="std std-ref">Transform</span></a>’s position. </p>
+<span class="target" id="struct_u_i_label_1a81fb587752e65e9f48a58a8c10ad0c36"></span><a class="reference internal" href="KeyboardController.html#_CPPv43vec" title="vec"><span class="n"><span class="pre">vec</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">shift</span></span></span><a class="headerlink" href="#_CPPv4N7UILabel5shiftE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>How much to shift the text box from the <a class="reference internal" href="Transform.html#struct_transform"><span class="std std-ref">Transform</span></a>’s position. </p>
 </dd></dl>
 
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N7UILabel4textE">
-<span class="target" id="class_u_i_label_1afa4f8eff02950526eb1e1848b4d41a6c"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">text</span></span></span><a class="headerlink" href="#_CPPv4N7UILabel4textE" title="Permalink to this definition">#</a><br /></dt>
+<span class="target" id="struct_u_i_label_1afa4f8eff02950526eb1e1848b4d41a6c"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">text</span></span></span><a class="headerlink" href="#_CPPv4N7UILabel4textE" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>The actual text to display. </p>
 </dd></dl>
 
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N7UILabel7font_idE">
-<span class="target" id="class_u_i_label_1a2eed8a861a60d339d41136582eec2635"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">font_id</span></span></span><a class="headerlink" href="#_CPPv4N7UILabel7font_idE" title="Permalink to this definition">#</a><br /></dt>
+<span class="target" id="struct_u_i_label_1a2eed8a861a60d339d41136582eec2635"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">font_id</span></span></span><a class="headerlink" href="#_CPPv4N7UILabel7font_idE" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>The ID of the font to be used (will be loaded through Game::assets::get_font). </p>
 </dd></dl>
 
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N7UILabel6colourE">
-<span class="target" id="class_u_i_label_1ab5fea804a1dbaf61e21b9fe8a0b1945a"></span><span class="n"><span class="pre">SDL_Color</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">colour</span></span></span><a class="headerlink" href="#_CPPv4N7UILabel6colourE" title="Permalink to this definition">#</a><br /></dt>
+<span class="target" id="struct_u_i_label_1ab5fea804a1dbaf61e21b9fe8a0b1945a"></span><span class="n"><span class="pre">SDL_Color</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">colour</span></span></span><a class="headerlink" href="#_CPPv4N7UILabel6colourE" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>The color of the object. </p>
 </dd></dl>
 
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N7UILabel9font_sizeE">
-<span class="target" id="class_u_i_label_1a08d480aae882ca6bd599093b310ec6cb"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">font_size</span></span></span><a class="headerlink" href="#_CPPv4N7UILabel9font_sizeE" title="Permalink to this definition">#</a><br /></dt>
+<span class="target" id="struct_u_i_label_1a08d480aae882ca6bd599093b310ec6cb"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">font_size</span></span></span><a class="headerlink" href="#_CPPv4N7UILabel9font_sizeE" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Size of the font. </p>
 </dd></dl>
 
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N7UILabel8dst_rectE">
-<span class="target" id="class_u_i_label_1a41dcd5e49bbc885134decbbab25ae765"></span><span class="n"><span class="pre">SDL_Rect</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dst_rect</span></span></span><a class="headerlink" href="#_CPPv4N7UILabel8dst_rectE" title="Permalink to this definition">#</a><br /></dt>
+<span class="target" id="struct_u_i_label_1a41dcd5e49bbc885134decbbab25ae765"></span><span class="n"><span class="pre">SDL_Rect</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dst_rect</span></span></span><a class="headerlink" href="#_CPPv4N7UILabel8dst_rectE" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>The destination rectangle to be rendered. </p>
 </dd></dl>
 
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N7UILabel7textureE">
-<span class="target" id="class_u_i_label_1ab5cf0186bf5d114dc392c4a79a179a14"></span><span class="n"><span class="pre">SDL_Texture</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">texture</span></span></span><a class="headerlink" href="#_CPPv4N7UILabel7textureE" title="Permalink to this definition">#</a><br /></dt>
+<span class="target" id="struct_u_i_label_1ab5cf0186bf5d114dc392c4a79a179a14"></span><span class="n"><span class="pre">SDL_Texture</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">texture</span></span></span><a class="headerlink" href="#_CPPv4N7UILabel7textureE" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>The texture object to be rendered (managed by the component, and destroyed by the destructor). </p>
 </dd></dl>
 
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N7UILabel9transformE">
-<span class="target" id="class_u_i_label_1a03553b0ccb414d36f6e2a44dde18a3e4"></span><a class="reference internal" href="Transform.html#_CPPv49Transform" title="Transform"><span class="n"><span class="pre">Transform</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">transform</span></span></span><a class="headerlink" href="#_CPPv4N7UILabel9transformE" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>The <a class="reference internal" href="../ECS.html#class_entity"><span class="std std-ref">Entity</span></a>’s <a class="reference internal" href="Transform.html#class_transform"><span class="std std-ref">Transform</span></a> component for the position. Here we use a pointer, so that we don’t have to explicitly initialize it in the constructor. </p>
+<span class="target" id="struct_u_i_label_1a03553b0ccb414d36f6e2a44dde18a3e4"></span><a class="reference internal" href="Transform.html#_CPPv49Transform" title="Transform"><span class="n"><span class="pre">Transform</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">transform</span></span></span><a class="headerlink" href="#_CPPv4N7UILabel9transformE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>The <a class="reference internal" href="../ECS.html#class_entity"><span class="std std-ref">Entity</span></a>’s <a class="reference internal" href="Transform.html#struct_transform"><span class="std std-ref">Transform</span></a> component for the position. Here we use a pointer, so that we don’t have to explicitly initialize it in the constructor. </p>
 </dd></dl>
 
 </div>

@@ -167,6 +167,7 @@
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../Entities.html">Entities</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Entities</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../Entities/Projectile.html">Projectile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Entities/Player.html">Player</a></li>
 </ul>
 </li>
 </ul>
@@ -213,12 +214,21 @@
 <h1>Collider<a class="headerlink" href="#collider" title="Permalink to this heading">#</a></h1>
 <p>Component for defining Entity’s collision information, such as its bounding boxes and collision
 attributes defined by the collision_handle enumerator.</p>
+<p>The shape of the collider can be dynamically updated according to the shape of the <a class="reference internal" href="Sprite.html#_CPPv46Sprite" title="Sprite"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">Sprite</span></code></a> component,
+which must be enabled by calling <a class="reference internal" href="#_CPPv4N8Collider20enable_dynamic_shapeEv" title="Collider::enable_dynamic_shape"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">Collider::enable_dynamic_shape</span></code></a>.</p>
+<p>For checking how the collision is actually handled, see <a class="reference internal" href="../../Collision.html#_CPPv49Collision" title="Collision"><code class="xref cpp cpp-struct docutils literal notranslate"><span class="pre">Collision</span></code></a>.</p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-enums">Enums</p>
 <dl class="cpp enum">
 <dt class="sig sig-object cpp" id="_CPPv416collision_handle">
 <span class="target" id="_collider_8hpp_1af38ffb259b47a9640947ffc03ee0f670"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">collision_handle</span></span></span><a class="headerlink" href="#_CPPv416collision_handle" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Options for collision handling </p>
+<dd><p>Options for collision handling:<ul class="simple">
+<li><p>IMMOVABLE_ON_COLLISION: Cannot move the object.</p></li>
+<li><p>MOVABLE_OBJECT: The object can move by itself.</p></li>
+<li><p>PUSH_ON_COLLISION: The object can be pushed.</p></li>
+<li><p>DESTROY_ON_COLLISION: Destroy the object when any collision happpens (e.g. a projectile that hits a wall). </p></li>
+</ul>
+</p>
 <p><em>Values:</em></p>
 <dl class="cpp enumerator">
 <dt class="sig sig-object cpp" id="_CPPv4N16collision_handle22IMMOVABLE_ON_COLLISIONE">
@@ -245,7 +255,8 @@ attributes defined by the collision_handle enumerator.</p>
 <dl class="cpp enum">
 <dt class="sig sig-object cpp" id="_CPPv417projectile_handle">
 <span class="target" id="_collider_8hpp_1a9e78a6dcfeb046e971aea135e9ab6295"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">projectile_handle</span></span></span><a class="headerlink" href="#_CPPv417projectile_handle" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Options for handling collisions against projectiles. Currently unused. Could eventually add the possibility to reflect projectiles. </p>
+<dd><p>Options for handling collisions against projectiles. Currently unused. Could eventually add the possibility to reflect projectiles.</p>
+<p>Actually, this probably won’t be used, this information will probably be integrated into collision_handle. </p>
 <p><em>Values:</em></p>
 <dl class="cpp enumerator">
 <dt class="sig sig-object cpp" id="_CPPv4N17projectile_handle28INDESTRUCTABLE_ON_PROJECTILEE">
@@ -265,9 +276,9 @@ attributes defined by the collision_handle enumerator.</p>
 </dd></dl>
 
 </div>
-<dl class="cpp class">
+<dl class="cpp struct">
 <dt class="sig sig-object cpp" id="_CPPv48Collider">
-<span class="target" id="class_collider"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Collider</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><a class="reference internal" href="../ECS.html#_CPPv49Component" title="Component"><span class="n"><span class="pre">Component</span></span></a><a class="headerlink" href="#_CPPv48Collider" title="Permalink to this definition">#</a><br /></dt>
+<span class="target" id="struct_collider"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Collider</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><a class="reference internal" href="../ECS.html#_CPPv49Component" title="Component"><span class="n"><span class="pre">Component</span></span></a><a class="headerlink" href="#_CPPv48Collider" title="Permalink to this definition">#</a><br /></dt>
 <dd><div class="docutils container">
 <em>#include &lt;Collider.hpp&gt;</em></div>
 <p><a class="reference internal" href="../ECS.html#class_component"><span class="std std-ref">Component</span></a> used for collision detection. Currently only supports AABB collistion (intersecting rectangles). </p>
@@ -275,107 +286,104 @@ attributes defined by the collision_handle enumerator.</p>
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N8Collider8ColliderEv">
-<span class="target" id="class_collider_1aa7186870221f868bbc74c3ae8609fa66"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Collider</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Collider8ColliderEv" title="Permalink to this definition">#</a><br /></dt>
+<span class="target" id="struct_collider_1aa7186870221f868bbc74c3ae8609fa66"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Collider</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Collider8ColliderEv" title="Permalink to this definition">#</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N8Collider8ColliderENSt6stringEiiNSt6size_tE">
-<span class="target" id="class_collider_1a280e1ef68a68ab9fe1c433a9fd5274bd"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Collider</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">user_tag</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">w</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">h</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mHandling</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Collider8ColliderENSt6stringEiiNSt6size_tE" title="Permalink to this definition">#</a><br /></dt>
+<span class="target" id="struct_collider_1a280e1ef68a68ab9fe1c433a9fd5274bd"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Collider</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">user_tag</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">w</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">h</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mHandling</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Collider8ColliderENSt6stringEiiNSt6size_tE" title="Permalink to this definition">#</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N8ColliderD0Ev">
-<span class="target" id="class_collider_1a564acde9860f875a32a6638c573d87be"></span><span class="sig-name descname"><span class="n"><span class="pre">~Collider</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8ColliderD0Ev" title="Permalink to this definition">#</a><br /></dt>
+<span class="target" id="struct_collider_1a564acde9860f875a32a6638c573d87be"></span><span class="sig-name descname"><span class="n"><span class="pre">~Collider</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8ColliderD0Ev" title="Permalink to this definition">#</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N8Collider4initEv">
-<span class="target" id="class_collider_1aed04ad82be15bcba1d3dc6a09f76dae6"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">init</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N8Collider4initEv" title="Permalink to this definition">#</a><br /></dt>
+<span class="target" id="struct_collider_1aed04ad82be15bcba1d3dc6a09f76dae6"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">init</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N8Collider4initEv" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Remove collider from <a class="reference internal" href="../../Game.html#class_game"><span class="std std-ref">Game</span></a> collider vector. </p>
 </dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N8Collider20enable_dynamic_shapeEv">
-<span class="target" id="class_collider_1aa5c8e14d4a1e9ab31310051b569f716c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">enable_dynamic_shape</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Collider20enable_dynamic_shapeEv" title="Permalink to this definition">#</a><br /></dt>
+<span class="target" id="struct_collider_1aa5c8e14d4a1e9ab31310051b569f716c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">enable_dynamic_shape</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Collider20enable_dynamic_shapeEv" title="Permalink to this definition">#</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N8Collider21disable_dynamic_shapeEv">
-<span class="target" id="class_collider_1a9f3ce6b54cdc4531bb79872b12e08ec1"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">disable_dynamic_shape</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Collider21disable_dynamic_shapeEv" title="Permalink to this definition">#</a><br /></dt>
+<span class="target" id="struct_collider_1a9f3ce6b54cdc4531bb79872b12e08ec1"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">disable_dynamic_shape</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Collider21disable_dynamic_shapeEv" title="Permalink to this definition">#</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N8Collider9get_shapeEv">
-<span class="target" id="class_collider_1a3b4e5eb6fa25883ed5c394fcbc91458e"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_shape</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Collider9get_shapeEv" title="Permalink to this definition">#</a><br /></dt>
+<span class="target" id="struct_collider_1a3b4e5eb6fa25883ed5c394fcbc91458e"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_shape</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Collider9get_shapeEv" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>For getting shape from the <a class="reference internal" href="Sprite.html#class_sprite"><span class="std std-ref">Sprite</span></a> component. </p>
 </dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N8Collider17set_proj_handlingENSt6size_tE">
-<span class="target" id="class_collider_1a591d46924ff1056ed4d8a2caf9f91e14"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_proj_handling</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mProjHandling</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Collider17set_proj_handlingENSt6size_tE" title="Permalink to this definition">#</a><br /></dt>
+<span class="target" id="struct_collider_1a591d46924ff1056ed4d8a2caf9f91e14"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_proj_handling</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mProjHandling</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Collider17set_proj_handlingENSt6size_tE" title="Permalink to this definition">#</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N8Collider16set_col_handlingENSt6size_tE">
-<span class="target" id="class_collider_1a50a9682be97e4d21d659923bfbbd381e"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_col_handling</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mHandling</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Collider16set_col_handlingENSt6size_tE" title="Permalink to this definition">#</a><br /></dt>
+<span class="target" id="struct_collider_1a50a9682be97e4d21d659923bfbbd381e"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_col_handling</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mHandling</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Collider16set_col_handlingENSt6size_tE" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Setter function for projectile_handling_option. </p>
 </dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N8Collider9set_widthEi">
-<span class="target" id="class_collider_1abe43fb036fe5d2f0bedf3636231e2c8a"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_width</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">w</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Collider9set_widthEi" title="Permalink to this definition">#</a><br /></dt>
+<span class="target" id="struct_collider_1abe43fb036fe5d2f0bedf3636231e2c8a"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_width</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">w</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Collider9set_widthEi" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Setter function for handling_option. </p>
 </dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N8Collider10set_heightEi">
-<span class="target" id="class_collider_1a6a911408d8da3974e37d2f257ff44efd"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_height</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">h</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Collider10set_heightEi" title="Permalink to this definition">#</a><br /></dt>
+<span class="target" id="struct_collider_1a6a911408d8da3974e37d2f257ff44efd"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_height</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">h</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Collider10set_heightEi" title="Permalink to this definition">#</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4NK8Collider7get_tagEv">
-<span class="target" id="class_collider_1a21c62bd4ebc48f247d6b62cc1c33170f"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_tag</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK8Collider7get_tagEv" title="Permalink to this definition">#</a><br /></dt>
+<span class="target" id="struct_collider_1a21c62bd4ebc48f247d6b62cc1c33170f"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_tag</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK8Collider7get_tagEv" title="Permalink to this definition">#</a><br /></dt>
 <dd></dd></dl>
 
 </div>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
 <dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N8Collider15handling_optionE">
-<span class="target" id="class_collider_1ad6db54a6d682dabf54e9f6300bb88000"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">handling_option</span></span></span><a class="headerlink" href="#_CPPv4N8Collider15handling_optionE" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Information about if the object can move/be moved or not. It should be an entry of the collision_handle enum. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N8Collider26projectile_handling_optionE">
-<span class="target" id="class_collider_1a518f32d998899f7950b5510e9019b70b"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">projectile_handling_option</span></span></span><a class="headerlink" href="#_CPPv4N8Collider26projectile_handling_optionE" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Information about if the object should be destroyed or damaged when hit by a projectile. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N8Collider5widthE">
-<span class="target" id="class_collider_1a7c7686e1813ab0ad9d3c7f38bd93d813"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">width</span></span></span><a class="headerlink" href="#_CPPv4N8Collider5widthE" title="Permalink to this definition">#</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N8Collider6heightE">
-<span class="target" id="class_collider_1af6b0ca8b127659e24478aa96dfc4361c"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">height</span></span></span><a class="headerlink" href="#_CPPv4N8Collider6heightE" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Width and Height of the rectangular collider. </p>
-</dd></dl>
-
-</div>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
-<dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N8Collider3tagE">
-<span class="target" id="class_collider_1a47553d89c2a08d0df50e2e4934572902"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">tag</span></span></span><a class="headerlink" href="#_CPPv4N8Collider3tagE" title="Permalink to this definition">#</a><br /></dt>
+<span class="target" id="struct_collider_1a47553d89c2a08d0df50e2e4934572902"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">tag</span></span></span><a class="headerlink" href="#_CPPv4N8Collider3tagE" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>This tag could eventually be useful for deciding whether to take the collision into account. </p>
 </dd></dl>
 
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N8Collider13dynamic_shapeE">
-<span class="target" id="class_collider_1a1a24d13aef085886140112436cf72918"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dynamic_shape</span></span></span><a class="headerlink" href="#_CPPv4N8Collider13dynamic_shapeE" title="Permalink to this definition">#</a><br /></dt>
+<span class="target" id="struct_collider_1a1a24d13aef085886140112436cf72918"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dynamic_shape</span></span></span><a class="headerlink" href="#_CPPv4N8Collider13dynamic_shapeE" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>This is only used for debugging. The actual handling is done in the <a class="reference internal" href="Sprite.html#class_sprite"><span class="std std-ref">Sprite</span></a> component with the set_collider attribute. To set it on or off, use the enable_dynamic_shape and disable_dynamic_shape functions. They’ll ensure that dynamic_shape and the <a class="reference internal" href="Sprite.html#class_sprite"><span class="std std-ref">Sprite</span></a>’s set_collider members are in sync. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N8Collider15handling_optionE">
+<span class="target" id="struct_collider_1ad6db54a6d682dabf54e9f6300bb88000"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">handling_option</span></span></span><a class="headerlink" href="#_CPPv4N8Collider15handling_optionE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Information about if the object can move/be moved or not. It should be an entry of the collision_handle enum. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N8Collider26projectile_handling_optionE">
+<span class="target" id="struct_collider_1a518f32d998899f7950b5510e9019b70b"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">projectile_handling_option</span></span></span><a class="headerlink" href="#_CPPv4N8Collider26projectile_handling_optionE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Information about if the object should be destroyed or damaged when hit by a projectile. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N8Collider5widthE">
+<span class="target" id="struct_collider_1a7c7686e1813ab0ad9d3c7f38bd93d813"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">width</span></span></span><a class="headerlink" href="#_CPPv4N8Collider5widthE" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N8Collider6heightE">
+<span class="target" id="struct_collider_1af6b0ca8b127659e24478aa96dfc4361c"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">height</span></span></span><a class="headerlink" href="#_CPPv4N8Collider6heightE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Width and Height of the rectangular collider. </p>
 </dd></dl>
 
 </div>

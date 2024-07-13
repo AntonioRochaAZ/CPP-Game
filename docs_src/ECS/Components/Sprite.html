@@ -167,6 +167,7 @@
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../Entities.html">Entities</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Entities</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../Entities/Projectile.html">Projectile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Entities/Player.html">Player</a></li>
 </ul>
 </li>
 </ul>
@@ -211,39 +212,47 @@
         <article role="main">
           <section id="sprite">
 <h1>Sprite<a class="headerlink" href="#sprite" title="Permalink to this heading">#</a></h1>
-<p>Component used for handling Entity’s sprites (textures an animations). Although
+<p>Component used for handling Entity’s sprites (textures and animations). Although
 texture loading and their memory management are now completely handled by the
 <a class="reference internal" href="../../Game.html#_CPPv4N4Game6assetsE" title="Game::assets"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">Game::assets</span></code></a> (class of type
 <a class="reference internal" href="../../Game.html#_CPPv4N4Game12AssetManagerE" title="Game::AssetManager"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">Game::AssetManager</span></code></a>), this
-component will keep pointers to the textures involved, and will structure
-and handle adding and setting animations.</p>
+component will keep pointers to the textures involved. Some manual handling is
+still possible with the use of the :cpp:member`Sprite::add_animation`,
+:cpp:member`Sprite::set_animation`, and :cpp:member`Sprite::set_texture` functions.
+This can be useful in the future.</p>
+<p>Function <a class="reference internal" href="#_CPPv4N6Sprite21maybe_update_colliderEv" title="Sprite::maybe_update_collider"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">Sprite::maybe_update_collider</span></code></a> will handle updating the
+<a class="reference internal" href="Collider.html#_CPPv48Collider" title="Collider"><code class="xref cpp cpp-struct docutils literal notranslate"><span class="pre">Collider</span></code></a> component’s shape automatically if it is enabled. It is
+called in the setter functions defined here. That is why the destination rectangle
+(<code class="docutils literal notranslate"><span class="pre">dst_rect</span></code>) and the scale variables (<code class="docutils literal notranslate"><span class="pre">scale_x,</span> <span class="pre">scale_y</span></code>) are private members.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In the future, it would be useful to be able to render more than one animation
+at once. This would allow better control of some animations.</p>
+</div>
 <dl class="cpp class">
 <dt class="sig sig-object cpp" id="_CPPv46Sprite">
 <span class="target" id="class_sprite"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Sprite</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><a class="reference internal" href="../ECS.html#_CPPv49Component" title="Component"><span class="n"><span class="pre">Component</span></span></a><a class="headerlink" href="#_CPPv46Sprite" title="Permalink to this definition">#</a><br /></dt>
-<dd><div class="breathe-sectiondef docutils container">
+<dd><div class="docutils container">
+<em>#include &lt;Sprite.hpp&gt;</em></div>
+<p>NOTE: dst_rect’s position is SET in the update method, according to the <a class="reference internal" href="Transform.html#struct_transform"><span class="std std-ref">Transform</span></a> object. To change it, one must change the <a class="reference internal" href="Transform.html#struct_transform"><span class="std std-ref">Transform</span></a>’s position instead of trying to change it here. </p>
+<div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N6Sprite6SpriteENSt6stringE">
 <span class="target" id="class_sprite_1a785a7bf89f52f493f326ef461464575c"></span><span class="sig-name descname"><span class="n"><span class="pre">Sprite</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">texture_id</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite6SpriteENSt6stringE" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Defined in Sprite.cpp file (long) </p>
-</dd></dl>
+<dd></dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N6Sprite6SpriteE6TexTupb">
 <span class="target" id="class_sprite_1aa65273d1d6eecc2029b26f7850d38a82"></span><span class="sig-name descname"><span class="n"><span class="pre">Sprite</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="../../Game.html#_CPPv46TexTup" title="TexTup"><span class="n"><span class="pre">TexTup</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">texture_tuple</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">is_animated</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite6SpriteE6TexTupb" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Defined in Sprite.cpp file (long) </p>
-<p>This constructor is kept for the <a class="reference internal" href="../../TileMap.html#class_tile_map"><span class="std std-ref">TileMap</span></a>, for which multiple tile textures are contained in one single image file and thus texture object. This allows manual control over the sprite. </p>
+<dd><p>This constructor is kept for the <a class="reference internal" href="../../TileMap.html#class_tile_map"><span class="std std-ref">TileMap</span></a>, for which multiple tile textures are contained in one single image file and thus texture object. This allows manual control over the sprite. </p>
 </dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6SpriteD0Ev">
-<span class="target" id="class_sprite_1a8accab430f9d90ae5117b57d67e32b84"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~Sprite</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6SpriteD0Ev" title="Permalink to this definition">#</a><br /></dt>
-<dd></dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N6Sprite4initEv">
 <span class="target" id="class_sprite_1aeaf5c7aa5aeff1b0a4da9e66430f1c42"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">init</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N6Sprite4initEv" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Defined in Sprite.cpp file (long) </p>
+<p>Defining destination_rect position from transform: Note that the transform will always have already been defined because it MUST be updated before the sprite, so there is no reason to check if it exists here. </p>
 </dd></dl>
 
 <dl class="cpp function">
@@ -261,8 +270,7 @@ and handle adding and setting animations.</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N6Sprite13add_animationE9AnimationNSt6stringE">
 <span class="target" id="class_sprite_1a4c7cb3bf2a4342400c00ee9805876650"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add_animation</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">Animation</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">animation</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">animation_name</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite13add_animationE9AnimationNSt6stringE" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Adds an animation to the animation_map member. </p>
-<p>Although dealing with animations is mostly automatized now, this manual control could be useful if we would like to manually tune some things, especially if we want to have animated tiles, for example. Should be avoided, though. </p>
+<dd><p>Although dealing with animations is mostly automatized now, this manual control could be useful if we would like to manually tune some things, especially if we want to have animated tiles, for example. Should be avoided, though. </p>
 </dd></dl>
 
 <dl class="cpp function">
@@ -280,19 +288,14 @@ and handle adding and setting animations.</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N6Sprite11set_textureENSt6stringE">
 <span class="target" id="class_sprite_1aa7d2cf99ece2f45544b6c3bf7f1a3fa4"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_texture</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">texture_id</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite11set_textureENSt6stringE" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Overriding the current texture and its w/h information. This is more for showing off the different player models and is not supposed to remain later. </p>
+<dd><p>Overriding the current texture and its width/height information. This is more for showing off the different player models and is not supposed to remain later. </p>
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6Sprite13get_dst_widthEv">
-<span class="target" id="class_sprite_1a1c2d3ebe1140aafce860fab977b4651d"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_dst_width</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite13get_dst_widthEv" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Gets actual width on the screen. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6Sprite14get_dst_heightEv">
-<span class="target" id="class_sprite_1a14e5a698912eb88453dd8a1c67bc032c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_dst_height</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite14get_dst_heightEv" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Gets actual height on the screen. </p>
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite21maybe_update_colliderEv">
+<span class="target" id="class_sprite_1a1b41048fbcb05388f95392efbc9ad3db"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">maybe_update_collider</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite21maybe_update_colliderEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Checks if set_collider is true and updates the collider’s shape if so.</p>
+<p>Why not check for a member of collider? Like getComponent&lt;Collider&gt;().dynamic_shape ? Because this function is called in <a class="reference internal" href="#class_sprite"><span class="std std-ref">Sprite</span></a>’s initialization, before <a class="reference internal" href="#class_sprite"><span class="std std-ref">Sprite</span></a>’s “entity” member is initialized. So we can’t access other components yet… It is easier to initialize set_collider to false and have this called. </p>
 </dd></dl>
 
 <dl class="cpp function">
@@ -308,75 +311,15 @@ and handle adding and setting animations.</p>
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6Sprite9get_dst_xEv">
-<span class="target" id="class_sprite_1aa85a38a9eb5e833275aeee5b7507e19d"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_dst_x</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite9get_dst_xEv" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Gets X position on screen (pixels). </p>
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite13get_dst_widthEv">
+<span class="target" id="class_sprite_1a1c2d3ebe1140aafce860fab977b4651d"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_dst_width</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite13get_dst_widthEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Gets actual width on the screen. </p>
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6Sprite9get_dst_yEv">
-<span class="target" id="class_sprite_1a9fe55db9cbd31a2c2fde3d12b809576f"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_dst_y</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite9get_dst_yEv" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Gets Y position on screen (pixels). </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6Sprite13set_src_widthEi">
-<span class="target" id="class_sprite_1a60f89255be081831ce89099195ccd598"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_src_width</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">w</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite13set_src_widthEi" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Sets the width we want to get from the SOURCE texture. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6Sprite14set_src_heightEi">
-<span class="target" id="class_sprite_1a7585ba4b94bf731201a6bc692d4238b6"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_src_height</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">h</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite14set_src_heightEi" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Sets the height we want to get from the SOURCE texture. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6Sprite9set_src_xEi">
-<span class="target" id="class_sprite_1aecb202e21867f51e1eeacf63d19b7fc6"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_src_x</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">x</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite9set_src_xEi" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Sets the X position in the SOURCE texture. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6Sprite9set_src_yEi">
-<span class="target" id="class_sprite_1a6f408314538e11420267a0c44fdfac19"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_src_y</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">y</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite9set_src_yEi" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Sets the Y position in the SOURCE texture. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6Sprite9get_src_xEv">
-<span class="target" id="class_sprite_1af3fbc5df61c060f80b5a9850f9c614c8"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_src_x</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite9get_src_xEv" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Gets the X position from the SOURCE texture. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6Sprite9get_src_yEv">
-<span class="target" id="class_sprite_1ae4fb91c9349e23ac853661bb1958cc10"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_src_y</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite9get_src_yEv" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Gets the Y position from the SOURCE texture. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6Sprite13get_src_widthEv">
-<span class="target" id="class_sprite_1a146408d2633d5109557ad65ac34cd09d"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_src_width</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite13get_src_widthEv" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Gets the width we are using for the SOURCE texture. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6Sprite14get_src_heightEv">
-<span class="target" id="class_sprite_1a95c4c27fd022011597037d1d3bde04c8"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_src_height</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite14get_src_heightEv" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Gets the height we are using for the SOURCE texture. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6Sprite10get_xscaleEv">
-<span class="target" id="class_sprite_1a9c06ddf1115b41e286fcf6731a3dda1c"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_xscale</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite10get_xscaleEv" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Defined in Sprite.cpp file (exception handling) </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6Sprite10get_yscaleEv">
-<span class="target" id="class_sprite_1a6a6d01fb7fdee495f54d0d627ccc8629"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_yscale</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite10get_yscaleEv" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Defined in Sprite.cpp file (exception handling) </p>
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite14get_dst_heightEv">
+<span class="target" id="class_sprite_1a14e5a698912eb88453dd8a1c67bc032c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_dst_height</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite14get_dst_heightEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Gets actual height on the screen. </p>
 </dd></dl>
 
 <dl class="cpp function">
@@ -398,63 +341,15 @@ and handle adding and setting animations.</p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
 <dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N6Sprite11sprite_flipE">
-<span class="target" id="class_sprite_1a2989301662ce292a08e38f18202a57a9"></span><span class="n"><span class="pre">SDL_RendererFlip</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sprite_flip</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">SDL_FLIP_NONE</span></span><a class="headerlink" href="#_CPPv4N6Sprite11sprite_flipE" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Whether to flip the texture. Will be dealt with by the <a class="reference internal" href="KeyboardController.html#class_keyboard_controller"><span class="std std-ref">KeyboardController</span></a> <a class="reference internal" href="../ECS.html#class_component"><span class="std std-ref">Component</span></a>, when the player turns around, for example. </p>
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite9transformE">
+<span class="target" id="class_sprite_1a0abb6be39cdb7359d85a62c469bb1dd4"></span><a class="reference internal" href="Transform.html#_CPPv49Transform" title="Transform"><span class="n"><span class="pre">Transform</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">transform</span></span></span><a class="headerlink" href="#_CPPv4N6Sprite9transformE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p><a class="reference internal" href="../ECS.html#class_entity"><span class="std std-ref">Entity</span></a>’s <a class="reference internal" href="Transform.html#struct_transform"><span class="std std-ref">Transform</span></a> component. </p>
 </dd></dl>
 
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N6Sprite12set_colliderE">
 <span class="target" id="class_sprite_1a8dfc607db8f929fe721effc67e5cef34"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_collider</span></span></span><a class="headerlink" href="#_CPPv4N6Sprite12set_colliderE" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Whether to set <a class="reference internal" href="Collider.html#class_collider"><span class="std std-ref">Collider</span></a> dimensions automatically when changing animations. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N6Sprite17current_animationE">
-<span class="target" id="class_sprite_1aeec64602ab19bb4500779c16a5cf2491"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">current_animation</span></span></span><a class="headerlink" href="#_CPPv4N6Sprite17current_animationE" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Current animation being rendered. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N6Sprite13current_frameE">
-<span class="target" id="class_sprite_1a8eec8f007b36cd1ae4bfce07e8418d4e"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">current_frame</span></span></span><a class="headerlink" href="#_CPPv4N6Sprite13current_frameE" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>The frame of the animation we are at (starts at 0). </p>
-</dd></dl>
-
-</div>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-functions">Private Functions</p>
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6Sprite21maybe_update_colliderEv">
-<span class="target" id="class_sprite_1a1b41048fbcb05388f95392efbc9ad3db"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">maybe_update_collider</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite21maybe_update_colliderEv" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Checks if set_collider is true and updates the collider’s shape if so. </p>
-</dd></dl>
-
-</div>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N6Sprite9transformE">
-<span class="target" id="class_sprite_1a0abb6be39cdb7359d85a62c469bb1dd4"></span><a class="reference internal" href="Transform.html#_CPPv49Transform" title="Transform"><span class="n"><span class="pre">Transform</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">transform</span></span></span><a class="headerlink" href="#_CPPv4N6Sprite9transformE" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Sets the same scale for both x and y axes. </p>
-<p><a class="reference internal" href="../ECS.html#class_entity"><span class="std std-ref">Entity</span></a>’s <a class="reference internal" href="Transform.html#class_transform"><span class="std std-ref">Transform</span></a> component. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N6Sprite7textureE">
-<span class="target" id="class_sprite_1a531ed274733d916261f49e1a2cbb6ba9"></span><span class="n"><span class="pre">SDL_Texture</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">texture</span></span></span><a class="headerlink" href="#_CPPv4N6Sprite7textureE" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Pointer to the Texture used. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N6Sprite8src_rectE">
-<span class="target" id="class_sprite_1a7862d89036581bc6ee0c0a0d1f7a9c78"></span><span class="n"><span class="pre">SDL_Rect</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">src_rect</span></span></span><a class="headerlink" href="#_CPPv4N6Sprite8src_rectE" title="Permalink to this definition">#</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N6Sprite8dst_rectE">
-<span class="target" id="class_sprite_1a285128a4a229878a7ebfc53b07145e84"></span><span class="n"><span class="pre">SDL_Rect</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dst_rect</span></span></span><a class="headerlink" href="#_CPPv4N6Sprite8dst_rectE" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Rendering rectangles (source and destination). </p>
+<dd><p>Whether to set <a class="reference internal" href="Collider.html#struct_collider"><span class="std std-ref">Collider</span></a> dimensions automatically when changing animations. </p>
 </dd></dl>
 
 <dl class="cpp var">
@@ -469,14 +364,22 @@ and handle adding and setting animations.</p>
 </dd></dl>
 
 <dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N6Sprite7scale_xE">
-<span class="target" id="class_sprite_1a854215a9c380be896860e908b97d11d0"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">scale_x</span></span></span><a class="headerlink" href="#_CPPv4N6Sprite7scale_xE" title="Permalink to this definition">#</a><br /></dt>
-<dd></dd></dl>
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite7textureE">
+<span class="target" id="class_sprite_1a531ed274733d916261f49e1a2cbb6ba9"></span><span class="n"><span class="pre">SDL_Texture</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">texture</span></span></span><a class="headerlink" href="#_CPPv4N6Sprite7textureE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>(<code class="docutils literal notranslate"><span class="pre">scale_x</span> <span class="pre">=</span> <span class="pre">dst_rect.w/src_rect.w</span></code> and <code class="docutils literal notranslate"><span class="pre">scale_y</span> <span class="pre">=</span> <span class="pre">dst_rect.h/src_rect.h</span></code>). </p>
+<p>Pointer to the Texture used. </p>
+</dd></dl>
 
 <dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N6Sprite7scale_yE">
-<span class="target" id="class_sprite_1a794d994249ab290985684a863e7b5ddc"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">scale_y</span></span></span><a class="headerlink" href="#_CPPv4N6Sprite7scale_yE" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Scale of the rendering: size on screen/size of the source (<code class="docutils literal notranslate"><span class="pre">scale_x</span> <span class="pre">=</span> <span class="pre">dst_rect.w/src_rect.w</span></code> and <code class="docutils literal notranslate"><span class="pre">scale_y</span> <span class="pre">=</span> <span class="pre">dst_rect.h/src_rect.h</span></code>). </p>
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite8src_rectE">
+<span class="target" id="class_sprite_1a7862d89036581bc6ee0c0a0d1f7a9c78"></span><span class="n"><span class="pre">SDL_Rect</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">src_rect</span></span></span><a class="headerlink" href="#_CPPv4N6Sprite8src_rectE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Rendering rectangle (source). </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite11sprite_flipE">
+<span class="target" id="class_sprite_1a2989301662ce292a08e38f18202a57a9"></span><span class="n"><span class="pre">SDL_RendererFlip</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sprite_flip</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">SDL_FLIP_NONE</span></span><a class="headerlink" href="#_CPPv4N6Sprite11sprite_flipE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Whether to flip the texture. Will be dealt with by the <a class="reference internal" href="KeyboardController.html#struct_keyboard_controller"><span class="std std-ref">KeyboardController</span></a> <a class="reference internal" href="../ECS.html#class_component"><span class="std std-ref">Component</span></a>, when the player turns around, for example. </p>
 </dd></dl>
 
 <dl class="cpp var">
@@ -507,6 +410,38 @@ and handle adding and setting animations.</p>
 <dt class="sig sig-object cpp" id="_CPPv4N6Sprite13animation_mapE">
 <span class="target" id="class_sprite_1a9c08a152666a1614419856001252c137"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">map</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">Animation</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">animation_map</span></span></span><a class="headerlink" href="#_CPPv4N6Sprite13animation_mapE" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Map translating animation names to animation objects. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite17current_animationE">
+<span class="target" id="class_sprite_1aeec64602ab19bb4500779c16a5cf2491"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">current_animation</span></span></span><a class="headerlink" href="#_CPPv4N6Sprite17current_animationE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Current animation being rendered. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite13current_frameE">
+<span class="target" id="class_sprite_1a8eec8f007b36cd1ae4bfce07e8418d4e"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">current_frame</span></span></span><a class="headerlink" href="#_CPPv4N6Sprite13current_frameE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>The frame of the animation we are at (starts at 0). </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite8dst_rectE">
+<span class="target" id="class_sprite_1a285128a4a229878a7ebfc53b07145e84"></span><span class="n"><span class="pre">SDL_Rect</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dst_rect</span></span></span><a class="headerlink" href="#_CPPv4N6Sprite8dst_rectE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Rendering rectangle (source). </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite7scale_xE">
+<span class="target" id="class_sprite_1a854215a9c380be896860e908b97d11d0"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">scale_x</span></span></span><a class="headerlink" href="#_CPPv4N6Sprite7scale_xE" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite7scale_yE">
+<span class="target" id="class_sprite_1a794d994249ab290985684a863e7b5ddc"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">scale_y</span></span></span><a class="headerlink" href="#_CPPv4N6Sprite7scale_yE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Scale factors for (size on screen)/(source size). </p>
 </dd></dl>
 
 </div>

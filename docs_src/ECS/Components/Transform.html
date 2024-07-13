@@ -167,6 +167,7 @@
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../Entities.html">Entities</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Entities</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../Entities/Projectile.html">Projectile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Entities/Player.html">Player</a></li>
 </ul>
 </li>
 </ul>
@@ -212,20 +213,12 @@
           <section id="transform">
 <h1>Transform<a class="headerlink" href="#transform" title="Permalink to this heading">#</a></h1>
 <p>Component defining the position of an Entity on screen. Other components
-such as the <a class="reference internal" href="Sprite.html#_CPPv46Sprite" title="Sprite"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">Sprite</span></code></a> and the
-<a class="reference internal" href="KeyboardController.html#_CPPv418KeyboardController" title="KeyboardController"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">KeyboardController</span></code></a> may
-depend on this Component.</p>
+may depend on this one for getting the position of the entity on the screen.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Velocity/Speed members should later be changed to depend on real time
 instead of tick (for example pixels/ms instead of pixels/tick). That way,
 the FPS can be fine-tuned without messing these up.</p>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Since it is extremely repetitive to define get/set functions for each member
-and overload possibility, I might eventually just render all members public,
-or limit the number of overloading options.</p>
 </div>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-typedefs">Typedefs</p>
@@ -235,140 +228,88 @@ or limit the number of overloading options.</p>
 <dd></dd></dl>
 
 </div>
-<dl class="cpp class">
+<dl class="cpp struct">
 <dt class="sig sig-object cpp" id="_CPPv49Transform">
-<span class="target" id="class_transform"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Transform</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><a class="reference internal" href="../ECS.html#_CPPv49Component" title="Component"><span class="n"><span class="pre">Component</span></span></a><a class="headerlink" href="#_CPPv49Transform" title="Permalink to this definition">#</a><br /></dt>
+<span class="target" id="struct_transform"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Transform</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><a class="reference internal" href="../ECS.html#_CPPv49Component" title="Component"><span class="n"><span class="pre">Component</span></span></a><a class="headerlink" href="#_CPPv49Transform" title="Permalink to this definition">#</a><br /></dt>
 <dd><div class="docutils container">
 <em>#include &lt;Transform.hpp&gt;</em></div>
-<p><a class="reference internal" href="../ECS.html#class_component"><span class="std std-ref">Component</span></a> defining the position of an <a class="reference internal" href="../ECS.html#class_entity"><span class="std std-ref">Entity</span></a> on screen. Other components such as the <a class="reference internal" href="Sprite.html#class_sprite"><span class="std std-ref">Sprite</span></a> and the <a class="reference internal" href="KeyboardController.html#class_keyboard_controller"><span class="std std-ref">KeyboardController</span></a> may depend on this <a class="reference internal" href="../ECS.html#class_component"><span class="std std-ref">Component</span></a>. </p>
+<p><a class="reference internal" href="../ECS.html#class_component"><span class="std std-ref">Component</span></a> defining the position of an <a class="reference internal" href="../ECS.html#class_entity"><span class="std std-ref">Entity</span></a> on screen. Other components such as the <a class="reference internal" href="Sprite.html#class_sprite"><span class="std std-ref">Sprite</span></a> and the <a class="reference internal" href="KeyboardController.html#struct_keyboard_controller"><span class="std std-ref">KeyboardController</span></a> may depend on this <a class="reference internal" href="../ECS.html#class_component"><span class="std std-ref">Component</span></a>. </p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N9Transform9TransformEv">
-<span class="target" id="class_transform_1aa08ca4266efabc768973cdeea51945ab"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Transform</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9Transform9TransformEv" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Default constructor (no arguments). </p>
+<span class="target" id="struct_transform_1aa08ca4266efabc768973cdeea51945ab"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Transform</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9Transform9TransformEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Default constructor (no arguments). Initializes position and velocity to zero, but speed to 10. </p>
 </dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N9Transform9TransformEff">
-<span class="target" id="class_transform_1a9fb589a9cfea2025a8619666cbb76019"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Transform</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">x</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">y</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9Transform9TransformEff" title="Permalink to this definition">#</a><br /></dt>
+<span class="target" id="struct_transform_1a9fb589a9cfea2025a8619666cbb76019"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Transform</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">x</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">y</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9Transform9TransformEff" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Setting position (calls Transform::set_position) </p>
 </dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N9Transform9TransformE3vecf3vec">
-<span class="target" id="class_transform_1afc5d73d9364a4b45904475e75560b0f6"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Transform</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="KeyboardController.html#_CPPv43vec" title="vec"><span class="n"><span class="pre">vec</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">pos</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">spd</span></span>, <a class="reference internal" href="KeyboardController.html#_CPPv43vec" title="vec"><span class="n"><span class="pre">vec</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">vel</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9Transform9TransformE3vecf3vec" title="Permalink to this definition">#</a><br /></dt>
+<span class="target" id="struct_transform_1afc5d73d9364a4b45904475e75560b0f6"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Transform</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="KeyboardController.html#_CPPv43vec" title="vec"><span class="n"><span class="pre">vec</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">pos</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">spd</span></span>, <a class="reference internal" href="KeyboardController.html#_CPPv43vec" title="vec"><span class="n"><span class="pre">vec</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">vel</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9Transform9TransformE3vecf3vec" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Sets all variables up. </p>
 </dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N9Transform6updateEv">
-<span class="target" id="class_transform_1a95f43abca9677142b734c1536bf1b886"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">update</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N9Transform6updateEv" title="Permalink to this definition">#</a><br /></dt>
+<span class="target" id="struct_transform_1a95f43abca9677142b734c1536bf1b886"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">update</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N9Transform6updateEv" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Defined in Transform.cpp (conciseness) </p>
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N9Transform5get_xEv">
-<span class="target" id="class_transform_1a446dfe25a1199f30556edbf144a852af"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_x</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9Transform5get_xEv" title="Permalink to this definition">#</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N9Transform5get_yEv">
-<span class="target" id="class_transform_1a43e0271bc335507a8032b2950301645b"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_y</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9Transform5get_yEv" title="Permalink to this definition">#</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N9Transform5set_xEf">
-<span class="target" id="class_transform_1a07afcfbec7873838deb02500ac4a903b"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_x</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">x</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9Transform5set_xEf" title="Permalink to this definition">#</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N9Transform5set_yEf">
-<span class="target" id="class_transform_1a120ceec11ff773806349395299e87716"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_y</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">y</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9Transform5set_yEf" title="Permalink to this definition">#</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N9Transform12set_positionEff">
-<span class="target" id="class_transform_1aa4088d10880ffd7b30d504db3d8bc8e3"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_position</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">x</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">y</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9Transform12set_positionEff" title="Permalink to this definition">#</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N9Transform12set_positionE3vec">
-<span class="target" id="class_transform_1a321c2b1937935d3908897be832307367"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_position</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="KeyboardController.html#_CPPv43vec" title="vec"><span class="n"><span class="pre">vec</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">pos</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9Transform12set_positionE3vec" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Overloading. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N9Transform12get_positionEv">
-<span class="target" id="class_transform_1a48253573edbc8433e17ab39a7cc03a25"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="KeyboardController.html#_CPPv43vec" title="vec"><span class="n"><span class="pre">vec</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_position</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9Transform12get_positionEv" title="Permalink to this definition">#</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N9Transform9get_speedEv">
-<span class="target" id="class_transform_1a84f7ac2ab795a67526a0187103557936"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_speed</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9Transform9get_speedEv" title="Permalink to this definition">#</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N9Transform9set_speedEf">
-<span class="target" id="class_transform_1ae6891d6e10cbdb1ecedaad044ab43ab8"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_speed</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">s</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9Transform9set_speedEf" title="Permalink to this definition">#</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N9Transform6get_vxEv">
-<span class="target" id="class_transform_1a82d16d8ee6e6b4a252df332289eb7420"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_vx</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9Transform6get_vxEv" title="Permalink to this definition">#</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N9Transform6get_vyEv">
-<span class="target" id="class_transform_1a37aa770dac636a97b12e40e94bf9cd20"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_vy</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9Transform6get_vyEv" title="Permalink to this definition">#</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N9Transform12get_velocityEv">
-<span class="target" id="class_transform_1a758b3362bc2593f375f75f0bdacc30ce"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="KeyboardController.html#_CPPv43vec" title="vec"><span class="n"><span class="pre">vec</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_velocity</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9Transform12get_velocityEv" title="Permalink to this definition">#</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N9Transform6set_vxEf">
-<span class="target" id="class_transform_1a355f0235db2c770ee773f69f8c1b30df"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_vx</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">x</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9Transform6set_vxEf" title="Permalink to this definition">#</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N9Transform6set_vyEf">
-<span class="target" id="class_transform_1a787c7021b2062a558d29ed2e16fea351"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_vy</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">y</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9Transform6set_vyEf" title="Permalink to this definition">#</a><br /></dt>
+<span class="target" id="struct_transform_1aa4088d10880ffd7b30d504db3d8bc8e3"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_position</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">x</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">y</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9Transform12set_positionEff" title="Permalink to this definition">#</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N9Transform12set_velocityEff">
-<span class="target" id="class_transform_1a9fe865bce090c1c96ad3099d116b7e0b"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_velocity</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">x</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">y</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9Transform12set_velocityEff" title="Permalink to this definition">#</a><br /></dt>
+<span class="target" id="struct_transform_1a9fe865bce090c1c96ad3099d116b7e0b"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_velocity</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">x</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">y</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9Transform12set_velocityEff" title="Permalink to this definition">#</a><br /></dt>
 <dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N9Transform12set_velocityE3vec">
-<span class="target" id="class_transform_1a2624e3f4d48ac72df8e40ec61c4b4259"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_velocity</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="KeyboardController.html#_CPPv43vec" title="vec"><span class="n"><span class="pre">vec</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">v</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9Transform12set_velocityE3vec" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Overloading. </p>
-</dd></dl>
 
 </div>
 <div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N9Transform8positionE">
-<span class="target" id="class_transform_1a64e0bfc186ad1a0e52414ce7958f3856"></span><a class="reference internal" href="KeyboardController.html#_CPPv43vec" title="vec"><span class="n"><span class="pre">vec</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">position</span></span></span><a class="headerlink" href="#_CPPv4N9Transform8positionE" title="Permalink to this definition">#</a><br /></dt>
+<span class="target" id="struct_transform_1a64e0bfc186ad1a0e52414ce7958f3856"></span><a class="reference internal" href="KeyboardController.html#_CPPv43vec" title="vec"><span class="n"><span class="pre">vec</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">position</span></span></span><a class="headerlink" href="#_CPPv4N9Transform8positionE" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Position on screen (pixel, pixel). </p>
 </dd></dl>
 
 <dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N9Transform1xE">
+<span class="target" id="struct_transform_1a0d2550d5f6e39ba9368bb39f2eea429f"></span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">x</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N9Transform8positionE" title="Transform::position"><span class="n"><span class="pre">position</span></span></a><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">0</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#_CPPv4N9Transform1xE" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N9Transform1yE">
+<span class="target" id="struct_transform_1a7e4750417ad8365d54160462becf1be5"></span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">y</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N9Transform8positionE" title="Transform::position"><span class="n"><span class="pre">position</span></span></a><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">1</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#_CPPv4N9Transform1yE" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N9Transform5speedE">
-<span class="target" id="class_transform_1a25a3777aad28148d20cceb0f1900cec4"></span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">speed</span></span></span><a class="headerlink" href="#_CPPv4N9Transform5speedE" title="Permalink to this definition">#</a><br /></dt>
+<span class="target" id="struct_transform_1a25a3777aad28148d20cceb0f1900cec4"></span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">speed</span></span></span><a class="headerlink" href="#_CPPv4N9Transform5speedE" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Speed (pixels/tick). </p>
 </dd></dl>
 
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N9Transform8velocityE">
-<span class="target" id="class_transform_1a02f34c1162d0d124d9d631090ea334fa"></span><a class="reference internal" href="KeyboardController.html#_CPPv43vec" title="vec"><span class="n"><span class="pre">vec</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">velocity</span></span></span><a class="headerlink" href="#_CPPv4N9Transform8velocityE" title="Permalink to this definition">#</a><br /></dt>
+<span class="target" id="struct_transform_1a02f34c1162d0d124d9d631090ea334fa"></span><a class="reference internal" href="KeyboardController.html#_CPPv43vec" title="vec"><span class="n"><span class="pre">vec</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">velocity</span></span></span><a class="headerlink" href="#_CPPv4N9Transform8velocityE" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Velocity vector (pixel/tick, pixel/tick). It is normalized when adjusting the position, and the speed member is used for the magnitude. </p>
 </dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N9Transform2vxE">
+<span class="target" id="struct_transform_1a48833f87c564e33cbc2b7aa22e026104"></span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">vx</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N9Transform8velocityE" title="Transform::velocity"><span class="n"><span class="pre">velocity</span></span></a><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">0</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#_CPPv4N9Transform2vxE" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N9Transform2vyE">
+<span class="target" id="struct_transform_1a7fc21778fe3682335390914827e7adc4"></span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">vy</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N9Transform8velocityE" title="Transform::velocity"><span class="n"><span class="pre">velocity</span></span></a><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">1</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#_CPPv4N9Transform2vyE" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
 
 </div>
 </dd></dl>

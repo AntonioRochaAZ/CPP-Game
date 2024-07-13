@@ -13,6 +13,6 @@ but this modularity seems nevertheless positive.
     (and Collider and maybe other objects) are updated, and rendering is done at the regular rate.
 
 .. note::
-    Improve Collision::handle_collisions docstring.
+    Include diagrams and gifs explaining the collision handling process.
 
 .. doxygenfile :: Collision.hpp

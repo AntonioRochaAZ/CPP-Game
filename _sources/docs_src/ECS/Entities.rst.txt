@@ -6,3 +6,4 @@ Entities
    :caption: Contents:
 
    Projectile            <Entities/Projectile.rst>
+   Player                <Entities/Player.rst>

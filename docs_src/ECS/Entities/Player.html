@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="Projectile" href="Player.html" /><link rel="prev" title="Entities" href="../Entities.html" />
+<link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="Collision class" href="../../Collision.html" /><link rel="prev" title="Projectile" href="Projectile.html" />
 
     <link rel="shortcut icon" href="../../../_static/favicon.ico"/><!-- Generated with Sphinx 6.2.1 and Furo 2024.01.29 -->
         <title>Projectile - CPP Game</title>
@@ -166,8 +166,8 @@
 </ul>
 </li>
 <li class="toctree-l2 current has-children"><a class="reference internal" href="../Entities.html">Entities</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Entities</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">Projectile</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Player.html">Player</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Projectile.html">Projectile</a></li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">Player</a></li>
 </ul>
 </li>
 </ul>
@@ -212,73 +212,69 @@
         <article role="main">
           <section id="projectile">
 <h1>Projectile<a class="headerlink" href="#projectile" title="Permalink to this heading">#</a></h1>
-<p>This class defines a Projectile Entity. Currently, it is only instantiated
-in the <a class="reference internal" href="../Components/KeyboardController.html#_CPPv418KeyboardController" title="KeyboardController"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">KeyboardController</span></code></a> component, in a not very generic call.</p>
-<p>As of now, not very generic. Eventually, it would be ideal to be able to have multiple
-animations per projectile (beginning, flying and ending, though the beginning one might
-be included in the Player/Enemy entity shooting animation instead).</p>
-<p>As of now, all projectiles have the <a class="reference internal" href="../Components/Collider.html#_CPPv4N16collision_handle20DESTROY_ON_COLLISIONE" title="collision_handle::DESTROY_ON_COLLISION"><code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">collision_handle::DESTROY_ON_COLLISION</span></code></a>
-collider tag.</p>
+<p>This class defines a Player Entity.</p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-typedefs">Typedefs</p>
 <dl class="cpp type">
 <dt class="sig sig-object cpp" id="_CPPv43vec">
-<span class="target" id="_projectile_8hpp_1a8eef6d9f3318172ff1eeeb36a0ec9b70"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">vec</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">Eigen</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Vector2f</span></span><br /></dt>
+<span class="target" id="_player_8hpp_1a8eef6d9f3318172ff1eeeb36a0ec9b70"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">vec</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">Eigen</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Vector2f</span></span><br /></dt>
 <dd></dd></dl>
 
 </div>
 <dl class="cpp struct">
-<dt class="sig sig-object cpp" id="_CPPv410Projectile">
-<span class="target" id="struct_projectile"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Projectile</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><a class="reference internal" href="../ECS.html#_CPPv46Entity" title="Entity"><span class="n"><span class="pre">Entity</span></span></a><a class="headerlink" href="#_CPPv410Projectile" title="Permalink to this definition">#</a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv46Player">
+<span class="target" id="struct_player"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Player</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><a class="reference internal" href="../ECS.html#_CPPv46Entity" title="Entity"><span class="n"><span class="pre">Entity</span></span></a><a class="headerlink" href="#_CPPv46Player" title="Permalink to this definition">#</a><br /></dt>
 <dd><div class="docutils container">
-<em>#include &lt;Projectile.hpp&gt;</em></div>
-<p><a class="reference internal" href="#struct_projectile"><span class="std std-ref">Projectile</span></a> <a class="reference internal" href="../ECS.html#class_entity"><span class="std std-ref">Entity</span></a>. </p>
+<em>#include &lt;Player.hpp&gt;</em></div>
+<p><a class="reference internal" href="#struct_player"><span class="std std-ref">Player</span></a> <a class="reference internal" href="../ECS.html#class_entity"><span class="std std-ref">Entity</span></a>. </p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N10Projectile10ProjectileER7ManagerNSt6stringENSt6stringEi3vecf3vec">
-<span class="target" id="struct_projectile_1ad5ca108274c059aaeaadbcce8f843bfc"></span><span class="sig-name descname"><span class="n"><span class="pre">Projectile</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="../ECS.html#_CPPv47Manager" title="Manager"><span class="n"><span class="pre">Manager</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">man</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">name</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">sprite_name</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rng</span></span>, <a class="reference internal" href="../Components/KeyboardController.html#_CPPv43vec" title="vec"><span class="n"><span class="pre">vec</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">position</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">speed</span></span>, <a class="reference internal" href="../Components/KeyboardController.html#_CPPv43vec" title="vec"><span class="n"><span class="pre">vec</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">velocity</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10Projectile10ProjectileER7ManagerNSt6stringENSt6stringEi3vecf3vec" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Constructor </p>
+<dt class="sig sig-object cpp" id="_CPPv4N6Player6PlayerER7ManagerNSt6stringE">
+<span class="target" id="struct_player_1ad7937c7cd68314d584a76a7996f13e7d"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Player</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="../ECS.html#_CPPv47Manager" title="Manager"><span class="n"><span class="pre">Manager</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">man</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">name</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Player6PlayerER7ManagerNSt6stringE" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6Player4initENSt6stringEff">
+<span class="target" id="struct_player_1aee37e1b130c1d9ca5b525dcd437127d4"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">init</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">sprite_name</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">sprite_scale</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">10</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">speed</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">10</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Player4initENSt6stringEff" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>This base constructor allows us to have a global <a class="reference internal" href="#struct_player"><span class="std std-ref">Player</span></a> object in Game.cpp. </p>
+<p>Initializes the player instance with a given sprite. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>man</strong> – The <a class="reference internal" href="../ECS.html#class_manager"><span class="std std-ref">Manager</span></a> object to associate this projectile to. </p></li>
-<li><p><strong>name</strong> – The name to give the <a class="reference internal" href="../ECS.html#class_entity"><span class="std std-ref">Entity</span></a> (will also be passed to the <a class="reference internal" href="../Components/Collider.html#struct_collider"><span class="std std-ref">Collider</span></a> component). </p></li>
 <li><p><strong>sprite_name</strong> – The projectile’s texture id (stored in <a class="reference internal" href="../../Game.html#class_game_1a37cea32973064156c47f1f66c9f00f44"><span class="std std-ref">Game::assets</span></a>). </p></li>
-<li><p><strong>fly</strong> – An Animation object with information about the projectile’s flying animation (currently only one supported). </p></li>
-<li><p><strong>mRange</strong> – The range of the projectile before it is destroyed. </p></li>
-<li><p><strong>position</strong> – The position the projectile should start at. </p></li>
-<li><p><strong>speed</strong> – The projectile’s speed. </p></li>
-<li><p><strong>velocity</strong> – The projectile’s velocity vector. </p></li>
+<li><p><strong>sprite_scale</strong> – The scale factor to pass to the <a class="reference internal" href="../Components/Sprite.html#class_sprite"><span class="std std-ref">Sprite</span></a> component. </p></li>
+<li><p><strong>speed</strong> – The speed to pass to the <a class="reference internal" href="../Components/Transform.html#struct_transform"><span class="std std-ref">Transform</span></a> component. </p></li>
 </ul>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N10ProjectileD0Ev">
-<span class="target" id="struct_projectile_1a94903e021fa2edab60ba3836ca0b937d"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~Projectile</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10ProjectileD0Ev" title="Permalink to this definition">#</a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N6PlayerD0Ev">
+<span class="target" id="struct_player_1a749d2c00e1fe0f5c2746f7505a58c062"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~Player</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6PlayerD0Ev" title="Permalink to this definition">#</a><br /></dt>
 <dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N10Projectile6updateEv">
-<span class="target" id="struct_projectile_1ac41ad56034b53e739619fabbd5e49652"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">update</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N10Projectile6updateEv" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Default update function: updates each component. </p>
-</dd></dl>
 
 </div>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
 <dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N10Projectile5rangeE">
-<span class="target" id="struct_projectile_1acce119ca47db626cd972e1b84b2d5493"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">range</span></span></span><a class="headerlink" href="#_CPPv4N10Projectile5rangeE" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>How far it the projectile will go before being deleted. </p>
-</dd></dl>
+<dt class="sig sig-object cpp" id="_CPPv4N6Player13player_numberE">
+<span class="target" id="struct_player_1a3d925d436ea1d8758ddf9cb200b82a4d"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">player_number</span></span></span><a class="headerlink" href="#_CPPv4N6Player13player_numberE" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
 
 <dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N10Projectile8distanceE">
-<span class="target" id="struct_projectile_1a76b2d32805996f9de38543871434ee62"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">distance</span></span></span><a class="headerlink" href="#_CPPv4N10Projectile8distanceE" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>How far the projectile has travelled so far. </p>
+<dt class="sig sig-object cpp" id="_CPPv4N6Player11player_nameE">
+<span class="target" id="struct_player_1a6b2deb4b03d5bac9453162425cd2fc72"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">player_name</span></span></span><a class="headerlink" href="#_CPPv4N6Player11player_nameE" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-attributes">Public Static Attributes</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6Player13player_colourE">
+<span class="target" id="struct_player_1a7c6ff9277da4045663cb105101a83645"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unordered_map</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">int</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">SDL_Color</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">player_colour</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="p"><span class="pre">{</span></span><span class="m"><span class="pre">1</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="m"><span class="pre">255</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">255</span></span><span class="p"><span class="pre">}</span></span><span class="p"><span class="pre">}</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="m"><span class="pre">2</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="m"><span class="pre">0</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">255</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">255</span></span><span class="p"><span class="pre">}</span></span><span class="p"><span class="pre">}</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="m"><span class="pre">3</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="m"><span class="pre">0</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">200</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">255</span></span><span class="p"><span class="pre">}</span></span><span class="p"><span class="pre">}</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="m"><span class="pre">4</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="m"><span class="pre">255</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">255</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">255</span></span><span class="p"><span class="pre">}</span></span><span class="p"><span class="pre">}</span></span><span class="p"><span class="pre">}</span></span><a class="headerlink" href="#_CPPv4N6Player13player_colourE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Colours associated to each player. Initialized in Player.cpp;. </p>
 </dd></dl>
 
 </div>
@@ -291,23 +287,23 @@ collider tag.</p>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="Player.html">
+          <a class="next-page" href="../../Collision.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Projectile</div>
+                <div class="title">Collision class</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../Entities.html">
+          <a class="prev-page" href="Projectile.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Entities</div>
+                <div class="title">Projectile</div>
                 
               </div>
             </a>
