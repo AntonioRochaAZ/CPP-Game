@@ -31,7 +31,6 @@ Player* player = new Player(manager, "player1");
     //< understood the runtime error correctly)).
 Player* player2 = new Player(manager, "player2");
 
-
 auto& label(manager.addEntity("TestLabel"));
 //auto& wall(manager.addEntity());
 
@@ -96,7 +95,7 @@ int Game::init(const char* title, int x, int y, int width, int height, bool full
     Game::assets.add_texture("player1", "./assets/player1.bmp");
     Game::assets.add_texture("player2", "./assets/player2.bmp");
     Game::assets.add_texture("projectile1", "./assets/projectile1-still.bmp");
-    Game::assets.add_font("custom_font2px", "./assets/fonts/customfont-2px_spacing.ttf", 16);
+    Game::assets.add_font("custom_font1px", "./assets/fonts/customfont-1px_spacing.ttf", 16);
     
     player->init("player1");
     player2->init("player2");
@@ -122,8 +121,10 @@ int Game::init(const char* title, int x, int y, int width, int height, bool full
 
     // Font:
     SDL_Color white = { 255, 255, 255, 255 };
+    SDL_Color purple = { 255, 0, 255, 255 };
     label.addComponent<Transform>();
-    label.addComponent<UILabel>(-400.0, 0.0, 40, 20, "Hello there", "custom_font2px", white, 24);
+    label.addComponent<UILabel>(0, 0.0, 40, 20, "FIGHT!", "custom_font1px", purple, 600);
+    label.getComponent<Transform>().position = vec(250, 200);
     
     // Setting the reference entity (for camera tracking) as the player:
     camera_ref_entity = player;
@@ -187,10 +188,10 @@ void Game::update(){
     update_counter++;
 
     // Label updating (debugging):
-    std::stringstream ss;
-    ss << "Player position: " << player->getComponent<Transform>().x << \
+    // std::stringstream ss;
+    // ss << "Player position: " << player->getComponent<Transform>().x << \
         ", " << player->getComponent<Transform>().y;
-    label.getComponent<UILabel>().set_text(ss.str(), "custom_font2px");
+    // label.getComponent<UILabel>().set_text(ss.str(), "custom_font1px");
 
     background.update();
     manager.update();
@@ -216,7 +217,7 @@ void Game::update(){
 // std::vector<Entity*>
 auto& tile_vector(manager.get_group(MapGroup));
 auto& enemy_vector(manager.get_group(EnemyGroup));
-auto& projectile_vector(manager.get_group(ProjectileGroup));
+auto& projectile_vector(manager.get_group(AttackGroup));
 auto& player_vector(manager.get_group(PlayerGroup));
 
 // Render the window:
@@ -236,8 +237,8 @@ void Game::render(){
     // images and also use all of the window.
     //tile_map->render();
     background.render();
-    manager.render();
     label.render();
+    manager.render();
     // Small bypass to ensure the player shows up in the screen:
     // player.getComponent<Sprite>().render();
     // Not sure why this is necessary, but should be the last:

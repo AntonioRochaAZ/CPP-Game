@@ -56,13 +56,17 @@ void KeyboardController::update(){
                     throw std::runtime_error("");
                     break;
                 }
-                Projectile* proj = new Projectile(
-                    entity->manager, "Projectile", "projectile1", 1000,
-                    transform->position + vec(x_sign * 100, 0), 20, vec(x_sign * 1.0, 0.0)
-                );  // Pretty sure the new pointer is dealt with in the manager (will be turned into a unique_ptr).
-                proj->getComponent<Sprite>().set_scale(10);   // TODO: Eventually get player scale.
-                proj->getComponent<Collider>().get_shape();   // Updating collider dimensions.
-                // Will this pointer ever be deleted?? -> Yes, 
+                // Projectile* proj = new Projectile(
+                //     entity->manager, "Projectile", "projectile1", 10, 20, 1, 
+                //     1000, transform->position + vec(x_sign * 100, 0), vec(x_sign * 1.0, 0.0) 
+                // );
+                entity->manager.addEntity(new Projectile(
+                    entity->manager, "Projectile",
+                    transform->position + vec(x_sign * 100, 0), 20, vec(x_sign * 1.0, 0.0),
+                    "projectile1", 10,
+                    1, 
+                    1000, entity
+                ));
             }
             break;
         default:

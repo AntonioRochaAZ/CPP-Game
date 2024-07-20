@@ -9,8 +9,9 @@ build/debug/*.dSYM  # Just in case.
 # Mac OS related:
 **/.DS_Store
 
-# Aseprite related:
+# Asset related:
 assets/aseprite
+assets/fonts/custom_font_data.txt
 
 # Documentation related:
 docs/doxygen/xml

@@ -23,7 +23,7 @@ enum group_labels : std::size_t{
     ColliderGroup,
     PlayerGroup,
     EnemyGroup,
-    ProjectileGroup,
+    AttackGroup,
 };
 
 // Forward declarations (so they can be recognized when referrenced) before the actual definitions:
@@ -94,9 +94,7 @@ class Entity{
             ///< Bitset array containing information of which groups the entity is part of.
 
     //public:
-        Entity(Manager& user_manager) : manager(user_manager){}
-        Entity(Manager& user_manager, std::string mName) : manager(user_manager){
-            name = mName; }
+        Entity(Manager& user_manager, std::string mName);
         virtual ~Entity(){};
 
         /// Default update function: updates each component.

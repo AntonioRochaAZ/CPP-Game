@@ -59,6 +59,8 @@ command ``make documentation``, defined in the Makefile.
 > **KNOWN BUGS:**
     - Segmentation fault when launching the executable by double clicking (instead of using the command line).
       It comes from Game::init, but must still be debugged.
+    - Players jumping position/phasing when changing from standing still to walking (if touching before). This is because
+      the walking animation has a larger hit-box.
  
 ### TODOs
 
@@ -79,3 +81,5 @@ In no specific order.
 - Study the use of "const" and passing arguments by reference (check when it is possible/should be done).
 - Long comment under "case (IMMOVABLE_BIT + PUSH_BIT)" inside of Collision::handle_collisions.
 - Create gifs and a diagram of how the collision handling works.
+- Find a way of changing the colour of projectiles without having to create multiple different sprites
+  (like adding a filter on top of the texture).

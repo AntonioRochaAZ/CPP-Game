@@ -1,5 +1,9 @@
 #include "ECS.hpp"
 
+Entity::Entity(Manager& user_manager, std::string mName): manager(user_manager), name(mName){
+    // manager.addEntity(this);
+}
+
 void Entity::add_group(Group group){ 
     group_bitset[group] = true; 
     manager.add_to_group(this, group);

@@ -1,31 +1,24 @@
 #pragma once
-#include "../ECS.hpp"
 #include <eigen3/Eigen/Dense>
-#include "../Components/Transform.hpp"
-#include "../Components/Sprite.hpp"
+#include "../ECS.hpp"
+
 
 using vec = Eigen::Vector2f;
 
 /** Projectile Entity.
 */
 struct Projectile : public Entity{
-    /** Constructor
-        @param man: The Manager object to associate this projectile to.
-        @param name: The name to give the Entity (will also be passed to the Collider component).
-        @param sprite_name: The projectile's texture id (stored in Game::assets).
-        @param fly: An Animation object with information about the projectile's flying animation (currently only one supported).
-        @param mRange: The range of the projectile before it is destroyed.
-        @param position: The position the projectile should start at.
-        @param speed: The projectile's speed.
-        @param velocity: The projectile's velocity vector.
-    */
-    Projectile(
-        Manager& man, std::string name, std::string sprite_name,
-        int rng, vec position, float speed, vec velocity);    // Overloading (testing)
-    ~Projectile(){};
 
     int range;                  ///< How far it the projectile will go before being deleted.
     int distance;               ///< How far the projectile has travelled so far.
+    
+    Projectile(
+        Manager& man, std::string name,                 // Entity arguments
+        vec position, float speed, vec velocity,        // Transform arguments
+        std::string sprite_name, float sprite_scale,    // Sprite arguments
+        float damage,                                   // Damage arguments
+        int rng, Entity* owner = nullptr                // Finally, projectile arguments.
+    );    // Overloading (testing)
 
     void update() override;
 };

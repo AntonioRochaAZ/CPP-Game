@@ -6,22 +6,29 @@
 
 using vec = Eigen::Vector2f;
 
-Projectile::Projectile(Manager& man, std::string name, std::string sprite_name, int rng, vec position, float speed, vec velocity):
-    Entity(man, name), range(rng), distance(0){
-    
-    addComponent<Collider>(name, 10, 10, DESTROY_ON_COLLISION);   // temporary width and height
+/** Constructor
+    @param rng: The range of the projectile before it is destroyed (in pixels).
+    @param owner: The Entity that has shot the projectile. This is passed to the
+        Damage component's immune vector (so that entity cannot hit itself).
+*/
+Projectile::Projectile(
+    Manager& man, std::string name, vec position, float speed, vec velocity, 
+    std::string sprite_name, float sprite_scale, float damage, int rng, Entity* owner
+): Entity(man, name), range(rng), distance(0) {
+
+    // Adding components:
+    addComponent<Collider>(get_name(), DESTROY_ON_COLLISION); // Note: no shape specified
     addComponent<Transform>(position, speed, velocity);
     addComponent<Sprite>(sprite_name);
-    //getComponent<Sprite>().add_animation(charging, "Charging");
+    addComponent<Damage>(damage);
 
-    getComponent<Collider>().enable_dynamic_shape();    // Automatically gets the shape from the Sprite component.
+    // Setting component information:
+    getComponent<Collider>().enable_dynamic_shape();
+    getComponent<Sprite>().set_scale(sprite_scale);
+    if (owner != nullptr){ getComponent<Damage>().immune.emplace_back(owner); }
     
-    // getComponent<Sprite>().add_animation(flying_animation, "Flying");
-    // getComponent<Sprite>().set_animation("Flying");
-
-    manager.addEntity(this);
-    add_group(ProjectileGroup);   // Add this Entity to the Manager's ProjectileGroup.
-
+    // Dealing with manager:
+    add_group(AttackGroup);
 };
 
 void Projectile::update(){

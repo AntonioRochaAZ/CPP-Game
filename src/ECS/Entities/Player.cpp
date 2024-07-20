@@ -11,17 +11,16 @@ void Player::init(std::string sprite_name, float sprite_scale, float speed){
     
     // Adding components IN THE RIGHT UPDATE ORDER:
     addComponent<KeyboardController>();
-    addComponent<Collider>(get_name(), 0, 0, MOVABLE_OBJECT); 
-        // width and height will be updated later with the Sprite component.
-    addComponent<Transform>(vec(0.0, 0.0), speed, vec(0.0, 0.0));
+    addComponent<Collider>(get_name(), MOVABLE_OBJECT);  // width and height will be updated later with the Sprite component.
+    addComponent<Transform>();
     addComponent<Sprite>(sprite_name);
+    addComponent<Health>(3, 3);         // starting_hp = 3, max_hp = 3
     
-    // Setting animations up:
-    getComponent<Collider>().enable_dynamic_shape();    
-        // Will allow us to get the shape from the Sprite component
-    getComponent<Sprite>().set_scale(10);
-    getComponent<Sprite>().set_animation("Idle");
-        // This last line will automatically update the Collider's shape.
+    // Setting things up:
+    getComponent<Transform>().speed = speed;
+    getComponent<Collider>().enable_dynamic_shape();  // Will allow us to get the shape from the Sprite component
+    getComponent<Sprite>().set_scale(sprite_scale);
+    getComponent<Sprite>().set_animation("Idle");  // This last line will automatically update the Collider's shape.
 
     // Now let's get Transform and Sprite information into earlier components:
     getComponent<KeyboardController>().get_components();   // Force it to get the Transform and Sprite pointers.
@@ -37,6 +36,6 @@ void Player::init(std::string sprite_name, float sprite_scale, float speed){
         throw std::runtime_error("");
     }
     player_name = "P" + std::to_string(player_number);
-    addComponent<UILabel>(20.0, -30.0, 40, 20, player_name, "custom_font2px", player_colour[player_number], 24);
+    addComponent<UILabel>(20.0, -80.0, 40, 20, player_name, "custom_font1px", player_colour[player_number], 96);
 
 }

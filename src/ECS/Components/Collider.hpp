@@ -8,13 +8,15 @@
     - IMMOVABLE_ON_COLLISION: Cannot move the object.
     - MOVABLE_OBJECT: The object can move by itself.
     - PUSH_ON_COLLISION: The object can be pushed.
+    - PHASE_ON_COLLISION: Collision is identified but it is not moved nor does it stops other objects from moving.
     - DESTROY_ON_COLLISION: Destroy the object when any collision happpens (e.g. a projectile that hits a wall).
 */
 enum collision_handle : std::size_t{
-    IMMOVABLE_ON_COLLISION,       // Cannot move the object.
+    IMMOVABLE_ON_COLLISION,     // Cannot move the object.
     MOVABLE_OBJECT,             // The object can move by itself.
-    PUSH_ON_COLLISION,        // The object can be pushed.
-    DESTROY_ON_COLLISION,    // Destroy the object when any collision happens (e.g. a projectile that hits a wall)
+    PUSH_ON_COLLISION,          // The object can be pushed.
+    PHASE_ON_COLLISION,         // Collision is identified but it is not moved nor does it stops other objects from moving.
+    DESTROY_ON_COLLISION,       // Destroy the object when any collision happens (e.g. a projectile that hits a wall)
 };
 
 /** Options for handling collisions against projectiles.
@@ -57,7 +59,7 @@ struct Collider : public Component{
     // Constructors and Destructors: ----------------------------------------------------------
     Collider(){};
 
-    Collider(std::string user_tag, int w, int h, std::size_t mHandling) :
+    Collider(std::string user_tag, std::size_t mHandling, int w = 0, int h = 0) :
         tag(user_tag), dynamic_shape(false), handling_option(mHandling), 
         projectile_handling_option(INDESTRUCTABLE_ON_PROJECTILE), width(w), height(h){};
 
@@ -77,17 +79,5 @@ struct Collider : public Component{
         dynamic_shape = false;
         entity->getComponent<Sprite>().set_collider = false;
     }
-    void get_shape();   
-        ///< For getting shape from the Sprite component.
-    void set_proj_handling(std::size_t mProjHandling){projectile_handling_option = mProjHandling;};
-        ///< Setter function for projectile_handling_option.
-    void set_col_handling(std::size_t mHandling){handling_option = mHandling;};
-        ///< Setter function for handling_option.
-    
-    // Collider dimensions: ---------------------------------------------------
-    void set_width(int w){ width = w; }
-    void set_height(int h){ height = h; }
-
-    // Get tag:
-    std::string get_tag() const { return tag; }
+    void get_shape();   ///< For getting shape from the Sprite component.
 };
