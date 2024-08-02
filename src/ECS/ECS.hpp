@@ -21,8 +21,8 @@ using GroupBitSet = std::bitset<max_groups>;            ///< Used for checking i
 enum group_labels : std::size_t{
     MapGroup,
     ColliderGroup,
+    TemporaryGroup,
     PlayerGroup,
-    EnemyGroup,
     AttackGroup,
 };
 
@@ -143,7 +143,7 @@ class Entity{
         bool is_active() const { return active; }
         /// Destroys the Entity by setting "active" member to false.
         /// The Entity's Manager will then delete it.
-        void destroy(){ active = false; }
+        virtual void destroy(){ active = false; }
 };
 
 /** This class serves to manage groups of entities in the game
@@ -151,21 +151,30 @@ at each frame. It will delete entities that are not active. */
 class Manager{
     public:
     // protected:
-        std::vector< std::unique_ptr<Entity> > entity_vector; ///< Vector of entities.
+        std::vector< std::shared_ptr<Entity> > entity_vector; 
+            ///< Vector of entities. We define it as a shared pointer because we
+            ///< want Game::camera_ref_entity to be a weak pointer of a given entity,
+            ///< which requires it to be a shared_ptr. We don't want to share its 
+            ///< ownership, though.
         std::array< std::vector<Entity*>, max_groups > grouped_entities; 
             ///< Array of vectors for each group.
     
         // ENTITY ADDITION:--------------------------------------------------------------
         /// Function for adding an entity to the \ref Manager::entity_vector "entity_vector"
         /// by creating a new pointer.
-        Entity& addEntity(std::string mName = "None"){
+        std::shared_ptr<Entity>& addEntity(std::string mName = "None"){
             Entity* e = new Entity(*this, mName);   // We'll call addEntity(e) which will deal with the new pointer.
-            return addEntity(e); }
+            return addEntity(e); 
+        }
         /// Instead, add an existing entity to the \ref Manager::entity_vector "entity_vector".
-        Entity& addEntity(Entity* e){
-            std::unique_ptr<Entity> uPtr{e};        // Now the pointer is dealt with by unique_ptr
-            entity_vector.emplace_back(std::move(uPtr));
-            return *e; }
+        std::shared_ptr<Entity>& addEntity(Entity* e){
+            std::shared_ptr<Entity> sh_ptr(e);        // Now the pointer is dealt with by unique_ptr
+            return addEntity(sh_ptr);
+        }
+        std::shared_ptr<Entity>& addEntity(const std::shared_ptr<Entity> sh_ptr){
+            entity_vector.emplace_back(sh_ptr);
+            return entity_vector.back();
+        }
 
         // GROUP HANDLING:---------------------------------------------------------------
         /// Add an entity to a group. This is called by Entity's Entity::add_group.
@@ -201,8 +210,7 @@ class Manager{
         /// Checks for inactive Entity's and delete them. Defined in ECS.cpp because it is long.
         void refresh();
         
-        // TODO: Maybe we need to define a destuctor for handling some pointers (?)
-        //virtual ~Manager(){};
+        virtual ~Manager(){};
 };
 
 // LONG DEFINITIONS: ==============================================================================

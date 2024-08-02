@@ -1,4 +1,5 @@
 #include "Player.hpp"
+#include "TempEntity.hpp"
 
 std::unordered_map<int, SDL_Color> Player::player_colour = {
     {1, {255, 0  , 0  , 255}},  // red
@@ -7,7 +8,9 @@ std::unordered_map<int, SDL_Color> Player::player_colour = {
     {4, {255, 255, 0  , 255}}   // yellow
 };
 
-void Player::init(std::string sprite_name, float sprite_scale, float speed){
+Player::Player(
+    Manager& man, std::string name, std::string sprite_name, float sprite_scale, float speed
+): Entity(man, name){
     
     // Adding components IN THE RIGHT UPDATE ORDER:
     addComponent<KeyboardController>();
@@ -26,7 +29,7 @@ void Player::init(std::string sprite_name, float sprite_scale, float speed){
     getComponent<KeyboardController>().get_components();   // Force it to get the Transform and Sprite pointers.
     
     // Dealing with manager:
-    manager.addEntity(this);  // Add entity to Manager's entity vector.
+    // manager.addEntity(this);  // Add entity to Manager's entity vector.
     add_group(PlayerGroup);   // Add it to the PlayerGroup.
 
     // Get player number:
@@ -38,4 +41,14 @@ void Player::init(std::string sprite_name, float sprite_scale, float speed){
     player_name = "P" + std::to_string(player_number);
     addComponent<UILabel>(20.0, -80.0, 40, 20, player_name, "custom_font1px", player_colour[player_number], 96);
 
+}
+
+void Player::destroy(){
+    active = false;
+    manager.addEntity(new TempEntity(
+        manager, "temp_player", getComponent<Transform>().position,
+        getComponent<Sprite>().m_texture_id, "Death",
+        getComponent<Sprite>().get_xscale(), getComponent<Sprite>().get_yscale(),  
+        getComponent<Sprite>().sprite_flip
+    ));
 }

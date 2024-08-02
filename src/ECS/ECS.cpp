@@ -10,6 +10,7 @@ void Entity::add_group(Group group){
 }
 
 void Manager::refresh(){
+    
     // Here, i is initialized with direct initialization.
     for (std::size_t i = 0; i < max_groups; i++){
         // We initialize variable v as entry i of the
@@ -20,7 +21,6 @@ void Manager::refresh(){
         // We do as below: we remove entries of the
         // vector (so, Entity pointers) that aren't
         // active OR that are not part of the group.
-        // TODO: DELETE THOSE POINTERS! (?)
         v.erase(
             std::remove_if(std::begin(v), std::end(v),
             [i](Entity* mEntity){
@@ -29,11 +29,14 @@ void Manager::refresh(){
             std::end(v)
         );
     }
+
+    // Delete entities that are no longer active:
+    auto end = std::end(entity_vector);
     auto beginning = std::remove_if(
             std::begin(entity_vector), std::end(entity_vector),
-            [](const std::unique_ptr<Entity> &mEntity){
+            [](const std::shared_ptr<Entity> &mEntity){
                 return !mEntity->is_active();
             }
         );
-    entity_vector.erase(beginning,  std::end(entity_vector));
+    entity_vector.erase(beginning,  end);
 }

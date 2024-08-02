@@ -26,9 +26,12 @@ private:
     SDL_Window* window;         ///< The SDL window where the game is displayed.
     vec previous_camera_position = vec(0.0,0.0);    
         ///< Previous camera position (for updating).    
-    Entity* camera_ref_entity;  ///< The entity we are following with the camera.  
+    std::weak_ptr<Entity> camera_ref_entity; 
+        ///< The entity we are following with the camera.  
     vec previous_ref_entity_position = vec(0.0,0.0);    
         ///< Previous position of the reference entity (for updating).  
+    void update_camera_ref_entity();
+        ///< For dealing with the camera reference entity if it is destroyed.
 
 public:
     Game();

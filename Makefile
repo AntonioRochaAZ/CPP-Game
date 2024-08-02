@@ -10,7 +10,7 @@ LINKER_FLAGS = -l SDL2 -l SDL2_image -l SDL2_ttf
 # Version (debug/release):
 DEBUG_DIR = debug
 RELEASE_DIR = release
-DEBUG_COMPILER_FLAGS = -std=c++17 -Wall -O0 -g
+DEBUG_COMPILER_FLAGS = -std=c++17 -Wall -O0 -g -DDEBUG_MODE 
 RELEASE_COMPILER_FLAGS = -std=c++17 -Wall -O3 -g
 
 # Documentation related:

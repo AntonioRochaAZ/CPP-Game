@@ -94,30 +94,29 @@ void TileMap::setup(int xtiles, int ytiles){
 
     // If we already had entries in the entity_vector, let's destroy them and refresh. 
     // May not be optimal, but it is much simpler. We won't often do this anyway.
-    for (std::unique_ptr<Entity>& e : entity_vector){ e->destroy(); }
+    for (std::shared_ptr<Entity>& e : entity_vector){ e->destroy(); }
     refresh();
 
     // Adding Tile entities to the entity_vector
     for (int y = 0; y < nb_ytiles; y ++){
-        // std::vector< std::unique_ptr<Tile> > vec;
         std::vector<int> map_line;
         for (int x = 0; x < nb_xtiles; x++){
             // Getting the tile name for debugging:
             full_name.str("");      // Resetting to be empty
             full_name << "TileMap: " << name << " - (" << x << "," << y << ")";
             final_name = full_name.str();
-            Entity& e = this->addEntity(final_name);
-            e.add_group(MapGroup);
-            e.addComponent<Transform>(
+            std::shared_ptr<Entity>& e = this->addEntity(final_name);
+            e->add_group(MapGroup);
+            e->addComponent<Transform>(
                 x0 + x * tile_width, 
                 y0 + y * tile_height);
-            e.addComponent<Sprite>(texture_id);
+            e->addComponent<Sprite>(texture_id);
 
-            e.getComponent<Transform>().speed = 0.0;
-            e.getComponent<Sprite>().src_rect.h = sprite_height;
-            e.getComponent<Sprite>().src_rect.w = sprite_width;
-            e.getComponent<Sprite>().set_dst_height(tile_height);
-            e.getComponent<Sprite>().set_dst_width(tile_width);
+            e->getComponent<Transform>().speed = 0.0;
+            e->getComponent<Sprite>().src_rect.h = sprite_height;
+            e->getComponent<Sprite>().src_rect.w = sprite_width;
+            e->getComponent<Sprite>().set_dst_height(tile_height);
+            e->getComponent<Sprite>().set_dst_width(tile_width);
             map_line.emplace_back(-1);
         }
         map.emplace_back(map_line);
@@ -243,7 +242,7 @@ void TileMap::load_map(std::string path){
 }
 
 void TileMap::set_position(int x, int y){
-    for(std::unique_ptr<Entity>& e : entity_vector){
+    for(std::shared_ptr<Entity>& e : entity_vector){
         Transform& T = e->getComponent<Transform>(); // For conciseness
         T.x = T.x + (x - x0);
         T.y = T.y + (y - y0);

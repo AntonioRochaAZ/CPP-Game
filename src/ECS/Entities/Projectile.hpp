@@ -18,7 +18,7 @@ struct Projectile : public Entity{
         std::string sprite_name, float sprite_scale,    // Sprite arguments
         float damage,                                   // Damage arguments
         int rng, Entity* owner = nullptr                // Finally, projectile arguments.
-    );    // Overloading (testing)
+    );
 
     void update() override;
 };

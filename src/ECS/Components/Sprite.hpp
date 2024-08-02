@@ -35,6 +35,7 @@ public:
         int image_width, image_height;      ///< Image shape (source).
     
     // Texture related (on screen):
+        std::string m_texture_id;           ///< The texture ID.
         SDL_Texture* texture;               ///< Pointer to the Texture used.
             ///< (``scale_x = dst_rect.w/src_rect.w`` and ``scale_y = dst_rect.h/src_rect.h``).
         SDL_Rect src_rect;                  ///< Rendering rectangle (source).   
@@ -51,6 +52,7 @@ public:
         std::map<std::string, Animation> animation_map; ///< Map translating animation names to animation objects.
         std::string current_animation;      ///< Current animation being rendered.
         int current_frame;                  ///< The frame of the animation we are at (starts at 0).
+        Uint64 m_reference_time;            ///< Reference time for calculating which frame to show.
     //<------------------------------------------------------------------------
     
 
@@ -85,7 +87,9 @@ public:
         int get_dst_width(){ return dst_rect.w; }    ///< Gets actual width on the screen
         int get_dst_height(){ return dst_rect.h; }  ///< Gets actual height on the screen
         void set_xscale(float sclx){ scale_x = sclx; set_dst_width(sclx * src_rect.w); };
+        float get_xscale(){ return scale_x; };
         void set_yscale(float scly){ scale_y = scly; set_dst_height(scly * src_rect.h); };
+        float get_yscale(){ return scale_y; };
         void set_scale(float scale){ set_xscale(scale); set_yscale(scale); }; 
             ///< Sets the same scale for both x and y axes.
     

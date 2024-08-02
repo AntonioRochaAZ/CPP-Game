@@ -22,21 +22,8 @@ bool Game::tracking_player = false;
 Game::AssetManager Game::assets = Game::AssetManager();
 vec Game::camera_position = vec(0.0, 0.0);
 
-Player* player = new Player(manager, "player1");
-    //< This will then be turned into a unique_pointer when initialized
-    //< (initialization will add this Entity to manager, which will then
-    //< take care of it). If we don't use a pointer here, the object will
-    //< be freed twice (once by the manager through the deletion of the
-    //< unique_pointer, then by game when it goes out of scope (if I 
-    //< understood the runtime error correctly)).
-Player* player2 = new Player(manager, "player2");
-
-auto& label(manager.addEntity("TestLabel"));
-//auto& wall(manager.addEntity());
-
-
+// Constructor and destructor:
 Game::Game(){};
-
 Game::~Game(){};
 
 // Initialize
@@ -91,14 +78,18 @@ int Game::init(const char* title, int x, int y, int width, int height, bool full
     // Change color of the renderer (black by default)
     // renderer, r, g, b, alpha (255 is opaque, 0 is transparent)
     SDL_SetRenderDrawColor(renderer, 0, 255, 120, 255);
-
+    // Setting up some textures and the font:
     Game::assets.add_texture("player1", "./assets/player1.bmp");
     Game::assets.add_texture("player2", "./assets/player2.bmp");
     Game::assets.add_texture("projectile1", "./assets/projectile1-still.bmp");
     Game::assets.add_font("custom_font1px", "./assets/fonts/customfont-1px_spacing.ttf", 16);
     
-    player->init("player1");
-    player2->init("player2");
+    // Setting up player 1:
+    std::shared_ptr<Entity> player1 = manager.addEntity(std::make_shared<Player>(manager, "player1", "player1"));
+    player1->getComponent<Transform>().set_position(150, 500);
+    
+    // Setting up player 2:
+    std::shared_ptr<Entity> player2 = manager.addEntity(std::make_shared<Player>(manager, "player2", "player2"));
     std::map<int, std::size_t> player2_keybinds = {
         {SDLK_i, UP_BUTTON},
         {SDLK_k, DOWN_BUTTON},
@@ -110,24 +101,23 @@ int Game::init(const char* title, int x, int y, int width, int height, bool full
         // {SDLK_ESCAPE, QUIT_BUTTON}
     };
     player2->getComponent<KeyboardController>().local_key_bind_map = player2_keybinds;
-    
-    player->getComponent<Transform>().set_position(150, 500);
     player2->getComponent<Transform>().set_position(970, 500);
     player2->getComponent<Sprite>().sprite_flip = SDL_FLIP_HORIZONTAL;
 
+    // Setting up background:
     Game::assets.add_texture("tiles", "./assets/tilemap.bmp");
     background.init("tiles", "./assets/tilemap_metadata.txt");
     background.load_map("./assets/map_3.txt");
-
-    // Font:
-    SDL_Color white = { 255, 255, 255, 255 };
+    // Setting up background text:
     SDL_Color purple = { 255, 0, 255, 255 };
-    label.addComponent<Transform>();
-    label.addComponent<UILabel>(0, 0.0, 40, 20, "FIGHT!", "custom_font1px", purple, 600);
-    label.getComponent<Transform>().position = vec(250, 200);
+    std::shared_ptr<Entity>& label(manager.addEntity("TestLabel"));
+    label->add_group(MapGroup);
+    label->addComponent<Transform>();
+    label->addComponent<UILabel>(0, 0.0, 40, 20, "FIGHT!", "custom_font1px", purple, 600);
+    label->getComponent<Transform>().position = vec(250, 200);
     
     // Setting the reference entity (for camera tracking) as the player:
-    camera_ref_entity = player;
+    camera_ref_entity = player1;
 
     // Ok, it is running now:
     is_running = true;
@@ -153,19 +143,19 @@ void Game::handle_events(){
                         // will have a bug where neither the map not
                         // the player doesn't move
                         Game::tracking_player = false;
-                        // player->getComponent<Sprite>().set_texture("player1");
-                        // player->getComponent<Sprite>().set_scale(10);
-                        // background.load_map("./assets/map_1.txt");
-                        // background.set_position(100, 100);
                     }else{
                         Game::tracking_player = true;
                         // Get current reference camera and entity positions (will be update next):
                         previous_camera_position = camera_position;
-                        previous_ref_entity_position = camera_ref_entity->getComponent<Transform>().position;
-                        // player->getComponent<Sprite>().set_texture("player2");
-                        // player->getComponent<Sprite>().set_scale(20);
-                        // background.load_map("./assets/map_2.txt");
-                        // background.set_position(0, 0);
+
+                        // Deal with camera_ref_entity if the reference entity has died:
+                        if (camera_ref_entity.expired()){
+                            update_camera_ref_entity();
+                        }
+                        // If it isn't anymore, update position.
+                        if (!camera_ref_entity.expired()){ 
+                            previous_ref_entity_position = camera_ref_entity.lock()->getComponent<Transform>().position;
+                        }
                     }
                     break;
                     
@@ -187,12 +177,6 @@ void Game::handle_events(){
 void Game::update(){
     update_counter++;
 
-    // Label updating (debugging):
-    // std::stringstream ss;
-    // ss << "Player position: " << player->getComponent<Transform>().x << \
-        ", " << player->getComponent<Transform>().y;
-    // label.getComponent<UILabel>().set_text(ss.str(), "custom_font1px");
-
     background.update();
     manager.update();
 
@@ -200,25 +184,22 @@ void Game::update(){
 
     // Updating camera position:
     if (tracking_player){ 
-        // Getting new position:
-        vec new_ref_entity_position = camera_ref_entity->getComponent<Transform>().position;
-        // Updating camera position:
-        camera_position = previous_camera_position + \
-            (new_ref_entity_position - previous_ref_entity_position);
+        if (camera_ref_entity.expired()){ update_camera_ref_entity(); }
+        // If it isn't nullptr:
+        if (!camera_ref_entity.expired()){
+            // Getting new position:
+            vec new_ref_entity_position = camera_ref_entity.lock()->getComponent<Transform>().position;
+            // Updating camera position:
+            camera_position = previous_camera_position + \
+                (new_ref_entity_position - previous_ref_entity_position);
 
-        // Updating previous camera position:
-        previous_camera_position = camera_position;
-        // Updating ref_entity_position:
-        previous_ref_entity_position = new_ref_entity_position;
+            // Updating previous camera position:
+            previous_camera_position = camera_position;
+            // Updating ref_entity_position:k
+            previous_ref_entity_position = new_ref_entity_position;
+        }
     }
 };
-
-// Declaring variable tiles which will be of type
-// std::vector<Entity*>
-auto& tile_vector(manager.get_group(MapGroup));
-auto& enemy_vector(manager.get_group(EnemyGroup));
-auto& projectile_vector(manager.get_group(AttackGroup));
-auto& player_vector(manager.get_group(PlayerGroup));
 
 // Render the window:
 void Game::render(){
@@ -237,7 +218,6 @@ void Game::render(){
     // images and also use all of the window.
     //tile_map->render();
     background.render();
-    label.render();
     manager.render();
     // Small bypass to ensure the player shows up in the screen:
     // player.getComponent<Sprite>().render();
@@ -247,12 +227,6 @@ void Game::render(){
     // SDL_Delay(3000);
 };
 
-// void Game::add_tile(int x, int y, int w, int h, int id, std::string name){
-//     Entity& tile(manager.addEntity(name));
-//     tile.addComponent<Tile>(x, y, w, h, id);
-//     tile.getComponent<Tile>().init();
-//     tile.add_group(MapGroup);
-// };
 
 // Destroy objects
 void Game::clean(){
@@ -264,3 +238,22 @@ void Game::clean(){
 };
 
 
+void Game::update_camera_ref_entity(){
+    // Try to get a new player as the reference entity:
+    if (manager.grouped_entities[PlayerGroup].size() != 0){
+        // I think here this won't work: we would need to reach out for the
+        // regular shared pointer in the manager's entity vector.
+        Entity*& player_ptr =  manager.grouped_entities[PlayerGroup][0];
+        std::shared_ptr<Entity> found_ptr;
+        for (std::shared_ptr<Entity> sh_ptr : manager.entity_vector){
+            if (sh_ptr.get() == player_ptr){
+                found_ptr = sh_ptr;
+                break;
+            }
+        }
+        camera_ref_entity = found_ptr;
+
+    }else{
+        Game::tracking_player = false;
+    }
+}

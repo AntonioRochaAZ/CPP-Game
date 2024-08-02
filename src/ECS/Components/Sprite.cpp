@@ -5,7 +5,7 @@
 
 // DEFINITIONS:------------------------------------------------------------------------------
 // Constructors:
-Sprite::Sprite(std::string texture_id): set_collider(false){
+Sprite::Sprite(std::string texture_id): set_collider(false), m_texture_id(texture_id){
     set_texture(texture_id);
 };
 
@@ -63,7 +63,7 @@ void Sprite::update(){
             std::cout << some_name;
             throw std::runtime_error(" ");
         }
-        current_frame = static_cast<int>((SDL_GetTicks() / animation_period) % frames);
+        current_frame = static_cast<int>(((SDL_GetTicks64() - m_reference_time)/ animation_period) % frames);
         src_rect.x = src_rect.w * current_frame;
     }
     dst_rect.x = transform->x;
@@ -83,11 +83,15 @@ to have animated tiles, for example. Should be avoided, though.
 */
 void Sprite::add_animation(Animation animation, std::string animation_name){
     // Animations should be added in the order they appear in the image.
+    
+#ifdef DEBUG_MODE
     // Error handling:
     if (!animated){
         std::cout << "Can't add animation to non-animated entity: " << entity->get_name();
         throw std::runtime_error("Can't add animation to non-animated entity");
     };
+#endif
+
     // Increment nb_animations counter:
     nb_animations++;
     // Set the animation's index:
@@ -112,28 +116,42 @@ void Sprite::add_animation(Animation animation, std::string animation_name){
 }
 
 void Sprite::set_animation(std::string animation_name){
-    if(animated){
-        check_map_id<std::string, Animation>(animation_map, animation_name, "set_animation, animation_map");
-        
-        Animation& local_animation = animation_map.find(animation_name)->second;
-            ///< Here we pass by the iterator to avoid issues with not having a default
-            ///< constructor for the Animation class.
-        current_animation = animation_name;
-        // Set animation variables according to which animation to play:
-        frames = local_animation.frames;
-        animation_period = local_animation.animation_period;
-        // Set source rectangle variables:
-        src_rect.w = local_animation.sprite_width;
-        src_rect.h = local_animation.sprite_height;
-        src_rect.y = local_animation.src_y;
-        // Update destination_rects:
-        dst_rect.w = scale_x * src_rect.w;
-        dst_rect.h = scale_y * src_rect.h;
-    } else{
+    
+    // Let's first check if the passed animation isn't
+    // the animation that is already set (if so, return):
+    if (current_animation == animation_name){
+        return;
+    }
+
+#ifdef DEBUG_MODE
+    // Checking if the object is animated:
+    if (!animated){
         std::cout << "Tried calling 'set_animation' when sprite isn't animated. Entity: " 
                   << entity->name << "Animation name: " << animation_name << std::endl;
         throw std::runtime_error(entity->name);
+    }else{
+        // If it is, checking if the animation is in the animation_map
+        check_map_id<std::string, Animation>(
+            animation_map, animation_name, "set_animation, animation_map");
     }
+#endif
+    
+    Animation& local_animation = animation_map.find(animation_name)->second;
+        ///< Here we pass by the iterator to avoid issues with not having a default
+        ///< constructor for the Animation class.
+    current_animation = animation_name;
+    // Set animation variables according to which animation to play:
+    frames = local_animation.frames;
+    animation_period = local_animation.animation_period;
+    // Set source rectangle variables:
+    src_rect.w = local_animation.sprite_width;
+    src_rect.h = local_animation.sprite_height;
+    src_rect.y = local_animation.src_y;
+    // Update destination_rects:
+    dst_rect.w = scale_x * src_rect.w;
+    dst_rect.h = scale_y * src_rect.h;
+    // Update reference time:
+    m_reference_time = SDL_GetTicks64();
     maybe_update_collider();
 }
 // Overloading:
