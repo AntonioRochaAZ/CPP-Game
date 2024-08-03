@@ -103,19 +103,25 @@ void Game::AssetManager::add_texture(std::string id, std::string path){
 }
 
 SDL_Texture* Game::AssetManager::get_texture(std::string id){ 
-    check_map_id<std::string, SDL_Texture*>(texture_map, id, "get_texture, texture_map");
+    #ifdef DEBUG_MODE
+        check_map_id<std::string, SDL_Texture*>(texture_map, id, "get_texture, texture_map");
+    #endif
     return texture_map[id];
 }
 
 TexTup Game::AssetManager::get_tuple(std::string id){
-    check_map_id<std::string, SDL_Texture*>(texture_map, id, "get_tuple, texture_map");
-    check_map_id<std::string, int>(width_map, id, "get_tuple, width_map");
-    check_map_id<std::string, int>(height_map, id, "get_tuple, height_map");
+    #ifdef DEBUG_MODE
+        check_map_id<std::string, SDL_Texture*>(texture_map, id, "get_tuple, texture_map");
+        check_map_id<std::string, int>(width_map, id, "get_tuple, width_map");
+        check_map_id<std::string, int>(height_map, id, "get_tuple, height_map");
+    #endif
     return {texture_map[id], width_map[id], height_map[id]};
 }
 
 void Game::AssetManager::destroy_texture(std::string id){
-    check_map_id<std::string, SDL_Texture*>(texture_map, id, "destroy_texture, texture_map");
+    #ifdef DEBUG_MODE
+        check_map_id<std::string, SDL_Texture*>(texture_map, id, "destroy_texture, texture_map");
+    #endif
     SDL_DestroyTexture(texture_map[id]); 
     texture_map.erase(id); width_map.erase(id); height_map.erase(id);
 }
@@ -125,9 +131,13 @@ void Game::AssetManager::add_font(std::string id, std::string path, int font_siz
     font_map.emplace(id, TTF_OpenFont(path.c_str(), font_size)); }
 
 TTF_Font* Game::AssetManager::get_font(std::string id){ 
-    check_map_id<std::string, TTF_Font*>(font_map, id, "get_font, font_map");
+    #ifdef DEBUG_MODE
+        check_map_id<std::string, TTF_Font*>(font_map, id, "get_font, font_map");
+    #endif
     return font_map[id]; }
 
 void Game::AssetManager::destroy_font(std::string id){
-    check_map_id<std::string, TTF_Font*>(font_map, id, "destroy_font, font_map");
+    #ifdef DEBUG_MODE
+        check_map_id<std::string, TTF_Font*>(font_map, id, "destroy_font, font_map");
+    #endif
     TTF_CloseFont(font_map[id]); font_map.erase(id); }

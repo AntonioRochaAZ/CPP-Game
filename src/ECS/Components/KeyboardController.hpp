@@ -6,22 +6,22 @@
 
 using vec = Eigen::Vector2f;
 
-enum key_bind_enum : std::size_t{
-    UP_BUTTON,
-    DOWN_BUTTON,
-    LEFT_BUTTON,
-    RIGHT_BUTTON,
-    ATTACK_A_BUTTON,
-    ATTACK_B_BUTTON,
-    CAMERA_TOGGLE_BUTTON,
-    QUIT_BUTTON
+enum class KeyBind : std::size_t{
+    UP,
+    DOWN,
+    LEFT,
+    RIGHT,
+    ATTACK_A,
+    ATTACK_B,
+    CAMERA_TOGGLE,
+    QUIT
 };
 
-extern std::map<int, std::size_t> global_key_bind_map;    ///< A map between the key_bind enum and the SDL_KeyCode.
+extern std::map<int, KeyBind> global_key_bind_map;    ///< A map between the key_bind enum and the SDL_KeyCode.
 
 /* Component for allowing controlling entities through the keyboard. */
 struct KeyboardController : public Component{
-    std::map<int, std::size_t> local_key_bind_map;    ///< A map between the key_bind enum and the SDL_KeyCode.
+    std::map<int, KeyBind> local_key_bind_map;    ///< A map between the key_bind enum and the SDL_KeyCode.
 
     bool reverse_sprite;    ///< Whether to reverse the sprite (left-right).
 

@@ -84,13 +84,13 @@ to have animated tiles, for example. Should be avoided, though.
 void Sprite::add_animation(Animation animation, std::string animation_name){
     // Animations should be added in the order they appear in the image.
     
-#ifdef DEBUG_MODE
-    // Error handling:
-    if (!animated){
-        std::cout << "Can't add animation to non-animated entity: " << entity->get_name();
-        throw std::runtime_error("Can't add animation to non-animated entity");
-    };
-#endif
+    #ifdef DEBUG_MODE
+        // Error handling:
+        if (!animated){
+            std::cout << "Can't add animation to non-animated entity: " << entity->get_name();
+            throw std::runtime_error("Can't add animation to non-animated entity");
+        };
+    #endif
 
     // Increment nb_animations counter:
     nb_animations++;
@@ -123,18 +123,18 @@ void Sprite::set_animation(std::string animation_name){
         return;
     }
 
-#ifdef DEBUG_MODE
-    // Checking if the object is animated:
-    if (!animated){
-        std::cout << "Tried calling 'set_animation' when sprite isn't animated. Entity: " 
-                  << entity->name << "Animation name: " << animation_name << std::endl;
-        throw std::runtime_error(entity->name);
-    }else{
-        // If it is, checking if the animation is in the animation_map
-        check_map_id<std::string, Animation>(
-            animation_map, animation_name, "set_animation, animation_map");
-    }
-#endif
+    #ifdef DEBUG_MODE
+        // Checking if the object is animated:
+        if (!animated){
+            std::cout << "Tried calling 'set_animation' when sprite isn't animated. Entity: " 
+                    << entity->name << "Animation name: " << animation_name << std::endl;
+            throw std::runtime_error(entity->name);
+        }else{
+            // If it is, checking if the animation is in the animation_map
+            check_map_id<std::string, Animation>(
+                animation_map, animation_name, "set_animation, animation_map");
+        }
+    #endif
     
     Animation& local_animation = animation_map.find(animation_name)->second;
         ///< Here we pass by the iterator to avoid issues with not having a default

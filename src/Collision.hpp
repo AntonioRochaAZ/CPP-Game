@@ -19,7 +19,7 @@ struct Collision{
     this function is called when an object's position must be set back in order
     to avoid intersecting objects. This can happend between an immovable object
     and a player (or another entity that cannot cross such objects), or between
-    two MOVABLE_OBJECTS etc.
+    two CollisionHandle::MOVABLES etc.
 
     In those cases, to solve the collision, one or both of the objects must be
     moved back in the opposite direction of their velocity, until at least one of
@@ -42,7 +42,7 @@ struct Collision{
 
     Why not pass the Colliders directly? In the case of IMMOVABLE objects, we'll
     pass an artifical value of speed = 0, even if they are moving, so that we can
-    update the colliding MOVABLE_OBJECT correctly. Despite being much more verbose,
+    update the colliding CollisionHandle::MOVABLE correctly. Despite being much more verbose,
     this function definition gives us more flexibility.
     */
     static std::tuple<float, int> get_collision_time( 

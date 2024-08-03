@@ -17,13 +17,14 @@ constexpr Group max_groups = 32;            ///< Max. number of groups (layers).
 using ComponentBitSet = std::bitset<max_components>;    ///< Used for checking if an Entity has a given Component.
 using GroupBitSet = std::bitset<max_groups>;            ///< Used for checking if an Entity is part of a group.
 
-/// Enumerator for groups of entities:
-enum group_labels : std::size_t{
-    MapGroup,
-    ColliderGroup,
-    TemporaryGroup,
-    PlayerGroup,
-    AttackGroup,
+/// Enumerator for groups of entities (cannot be an enum class because its values are used in std::size_t
+/// dependant functions):
+enum EntityGroup : std::size_t{
+    MAP_GROUP,
+    COLLIDER_GROUP,
+    TEMPORARY_GROUP,
+    PLAYER_GROUP,
+    ATTACK_GROUP,
 };
 
 // Forward declarations (so they can be recognized when referrenced) before the actual definitions:
@@ -111,7 +112,7 @@ class Entity{
             return component_bitset[getComponentTypeID<T>()]; }
         
         /// Returns whether the Entity is part of a given group.
-        bool has_group(Group group){ return group_bitset[group]; }
+        bool has_group(std::size_t group){ return group_bitset[group]; }
 
         /** Function for adding a component T to the Entity (defined in the end of ECS.hpp).
             @tparam T: A Component type. 
@@ -133,9 +134,9 @@ class Entity{
             (because it requires full definition of the Manager class, and declaring outside 
             Entity's definition cause a linker "duplicate symbols" error). 
         */
-        void add_group(Group group);
+        void add_group(std::size_t group);
         /// Function for removing the Entity from a group.
-        void del_group(Group group){ group_bitset[group] = false; }
+        void del_group(std::size_t group){ group_bitset[group] = false; }
         
         // Set/Get functions:
         std::string get_name(){return name;}
@@ -179,7 +180,7 @@ class Manager{
         // GROUP HANDLING:---------------------------------------------------------------
         /// Add an entity to a group. This is called by Entity's Entity::add_group.
         /// It shouldn't be called directly.
-        void add_to_group(Entity* entity, Group group){
+        void add_to_group(Entity* entity, std::size_t group){
             grouped_entities[group].emplace_back(entity); }
         /// Function for getting the vector of entities in a group.
         std::vector<Entity*>& get_group(Group group){

@@ -5,18 +5,18 @@
 
 /** 
     Options for collision handling:
-    - IMMOVABLE_ON_COLLISION: Cannot move the object.
-    - MOVABLE_OBJECT: The object can move by itself.
-    - PUSH_ON_COLLISION: The object can be pushed.
-    - PHASE_ON_COLLISION: Collision is identified but it is not moved nor does it stops other objects from moving.
-    - DESTROY_ON_COLLISION: Destroy the object when any collision happpens (e.g. a projectile that hits a wall).
+    - CollisionHandle::IMMOVABLE: Cannot move the object.
+    - CollisionHandle::MOVABLE: The object can move by itself.
+    - CollisionHandle::PUSH: The object can be pushed.
+    - CollisionHandle::PHASE: Collision is identified but it is not moved nor does it stops other objects from moving.
+    - CollisionHandle::DESTROY: Destroy the object when any collision happpens (e.g. a projectile that hits a wall).
 */
-enum collision_handle : std::size_t{
-    IMMOVABLE_ON_COLLISION,     // Cannot move the object.
-    MOVABLE_OBJECT,             // The object can move by itself.
-    PUSH_ON_COLLISION,          // The object can be pushed.
-    PHASE_ON_COLLISION,         // Collision is identified but it is not moved nor does it stops other objects from moving.
-    DESTROY_ON_COLLISION,       // Destroy the object when any collision happens (e.g. a projectile that hits a wall)
+enum class CollisionHandle : std::size_t{
+    IMMOVABLE,     // Cannot move the object.
+    MOVABLE,       // The object can move by itself.
+    PUSH,          // The object can be pushed.
+    PHASE,         // Collision is identified but it is not moved nor does it stops other objects from moving.
+    DESTROY,       // Destroy the object when any collision happens (e.g. a projectile that hits a wall)
 };
 
 /** Options for handling collisions against projectiles.
@@ -46,7 +46,7 @@ struct Collider : public Component{
         members are in sync.
         */
 
-    std::size_t handling_option;    
+    CollisionHandle handling_option;    
         ///< Information about if the object can move/be moved or not. It
         ///< should be an entry of the collision_handle enum.
 
@@ -59,7 +59,7 @@ struct Collider : public Component{
     // Constructors and Destructors: ----------------------------------------------------------
     Collider(){};
 
-    Collider(std::string user_tag, std::size_t mHandling, int w = 0, int h = 0) :
+    Collider(std::string user_tag, CollisionHandle mHandling, int w = 0, int h = 0) :
         tag(user_tag), dynamic_shape(false), handling_option(mHandling), 
         projectile_handling_option(INDESTRUCTABLE_ON_PROJECTILE), width(w), height(h){};
 

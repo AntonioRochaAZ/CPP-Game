@@ -64,10 +64,8 @@ command ``make documentation``, defined in the Makefile.
 
 In no specific order.
 
-- Systematize the calls to manager.addEntity() (always call manager.addEntity(new ...)).
 - Perhaps create a way of setting animations for a fixed ammount of frames, before going back to
   another one? (complex, if we stop walking in the middle of the animation it will go back to the walking animation).
-- Learn to apply color filters on non-transparent pixels.
 - Apply color filters to players when they get hit, and to projectiles to change their colour.
 - Make the texture pointer in Game::AssetManager shared pointers that can be owned by Sprite and UILabel components.
 - Think of how to generalize KeyboardController's calls, as well as Health's (how to have a temporary animation when the entity is hurt). Perhaps use virtual functions and/or state machines, and/or function pointers.

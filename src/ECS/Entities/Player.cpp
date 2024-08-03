@@ -14,7 +14,7 @@ Player::Player(
     
     // Adding components IN THE RIGHT UPDATE ORDER:
     addComponent<KeyboardController>();
-    addComponent<Collider>(get_name(), MOVABLE_OBJECT);  // width and height will be updated later with the Sprite component.
+    addComponent<Collider>(get_name(), CollisionHandle::MOVABLE);  // width and height will be updated later with the Sprite component.
     addComponent<Transform>();
     addComponent<Sprite>(sprite_name);
     addComponent<Health>(3, 3);         // starting_hp = 3, max_hp = 3
@@ -30,10 +30,10 @@ Player::Player(
     
     // Dealing with manager:
     // manager.addEntity(this);  // Add entity to Manager's entity vector.
-    add_group(PlayerGroup);   // Add it to the PlayerGroup.
+    add_group(PLAYER_GROUP);   // Add it to the PLAYER_GROUP.
 
     // Get player number:
-    player_number = manager.grouped_entities[PlayerGroup].size();
+    player_number = manager.grouped_entities[PLAYER_GROUP].size();
     if (player_number > player_colour.size()){
         std::cout << "Cannot have more than " << player_colour.size() << " players: the amount of colours in the player_colour map doesn't go that far." << std::endl;
         throw std::runtime_error("");

@@ -8,7 +8,7 @@
 #include "ECS/Entities/Player.hpp"
 
 // From KeyboardController.hpp:
-std::map<int, std::size_t> global_key_bind_map;
+std::map<int, KeyBind> global_key_bind_map;
 
 //Map* tile_map;
 Manager manager;
@@ -66,14 +66,14 @@ int Game::init(const char* title, int x, int y, int width, int height, bool full
     };
 
     // Set key maps up (must be done before any KeyboardController component is created.):
-    global_key_bind_map.emplace(SDLK_w, UP_BUTTON);
-    global_key_bind_map.emplace(SDLK_s, DOWN_BUTTON);
-    global_key_bind_map.emplace(SDLK_a, LEFT_BUTTON);
-    global_key_bind_map.emplace(SDLK_d, RIGHT_BUTTON);
-    global_key_bind_map.emplace(SDLK_e, ATTACK_A_BUTTON);
-    global_key_bind_map.emplace(SDLK_r, ATTACK_B_BUTTON);
-    global_key_bind_map.emplace(SDLK_m, CAMERA_TOGGLE_BUTTON);
-    global_key_bind_map.emplace(SDLK_ESCAPE, QUIT_BUTTON);
+    global_key_bind_map.emplace(SDLK_w, KeyBind::UP);
+    global_key_bind_map.emplace(SDLK_s, KeyBind::DOWN);
+    global_key_bind_map.emplace(SDLK_a, KeyBind::LEFT);
+    global_key_bind_map.emplace(SDLK_d, KeyBind::RIGHT);
+    global_key_bind_map.emplace(SDLK_e, KeyBind::ATTACK_A);
+    global_key_bind_map.emplace(SDLK_r, KeyBind::ATTACK_B);
+    global_key_bind_map.emplace(SDLK_m, KeyBind::CAMERA_TOGGLE);
+    global_key_bind_map.emplace(SDLK_ESCAPE, KeyBind::QUIT);
 
     // Change color of the renderer (black by default)
     // renderer, r, g, b, alpha (255 is opaque, 0 is transparent)
@@ -90,15 +90,15 @@ int Game::init(const char* title, int x, int y, int width, int height, bool full
     
     // Setting up player 2:
     std::shared_ptr<Entity> player2 = manager.addEntity(std::make_shared<Player>(manager, "player2", "player2"));
-    std::map<int, std::size_t> player2_keybinds = {
-        {SDLK_i, UP_BUTTON},
-        {SDLK_k, DOWN_BUTTON},
-        {SDLK_j, LEFT_BUTTON},
-        {SDLK_l, RIGHT_BUTTON},
-        {SDLK_o, ATTACK_A_BUTTON},
-        {SDLK_p, ATTACK_B_BUTTON}
-        // {SDLK_m, CAMERA_TOGGLE_BUTTON},
-        // {SDLK_ESCAPE, QUIT_BUTTON}
+    std::map<int, KeyBind> player2_keybinds = {
+        {SDLK_i, KeyBind::UP},
+        {SDLK_k, KeyBind::DOWN},
+        {SDLK_j, KeyBind::LEFT},
+        {SDLK_l, KeyBind::RIGHT},
+        {SDLK_o, KeyBind::ATTACK_A},
+        {SDLK_p, KeyBind::ATTACK_B}
+        // {SDLK_m, KeyBind::CAMERA_TOGGLE},
+        // {SDLK_ESCAPE, KeyBind::QUIT}
     };
     player2->getComponent<KeyboardController>().local_key_bind_map = player2_keybinds;
     player2->getComponent<Transform>().set_position(970, 500);
@@ -111,7 +111,7 @@ int Game::init(const char* title, int x, int y, int width, int height, bool full
     // Setting up background text:
     SDL_Color purple = { 255, 0, 255, 255 };
     std::shared_ptr<Entity>& label(manager.addEntity("TestLabel"));
-    label->add_group(MapGroup);
+    label->add_group(MAP_GROUP);
     label->addComponent<Transform>();
     label->addComponent<UILabel>(0, 0.0, 40, 20, "FIGHT!", "custom_font1px", purple, 600);
     label->getComponent<Transform>().position = vec(250, 200);
@@ -131,13 +131,13 @@ void Game::handle_events(){
     bool key_is_bound;
     switch (event.type){
         case SDL_KEYDOWN:
-            // Check if the key is bound:
-            key_is_bound = check_map_id<int, std::size_t>(
+            // Check if the key is bound: DO NOT WRAP DEBUG_MODE AROUND THIS
+            key_is_bound = check_map_id<int, KeyBind>(
                     global_key_bind_map, event.key.keysym.sym, "", false);    // Message unnecessary since we'll not halt execution
             if (key_is_bound){  // If so, go to switch statement:
-            std::size_t pressed_key = global_key_bind_map[event.key.keysym.sym];
+            KeyBind pressed_key = global_key_bind_map[event.key.keysym.sym];
             switch (pressed_key){
-                case CAMERA_TOGGLE_BUTTON:
+                case KeyBind::CAMERA_TOGGLE:
                     if (Game::tracking_player){
                         // This condition must be met, otherwise
                         // will have a bug where neither the map not
@@ -159,7 +159,7 @@ void Game::handle_events(){
                     }
                     break;
                     
-                case QUIT_BUTTON:
+                case KeyBind::QUIT:
                     is_running = false;
                     break;
                 default:
@@ -240,10 +240,10 @@ void Game::clean(){
 
 void Game::update_camera_ref_entity(){
     // Try to get a new player as the reference entity:
-    if (manager.grouped_entities[PlayerGroup].size() != 0){
+    if (manager.grouped_entities[PLAYER_GROUP].size() != 0){
         // I think here this won't work: we would need to reach out for the
         // regular shared pointer in the manager's entity vector.
-        Entity*& player_ptr =  manager.grouped_entities[PlayerGroup][0];
+        Entity*& player_ptr =  manager.grouped_entities[PLAYER_GROUP][0];
         std::shared_ptr<Entity> found_ptr;
         for (std::shared_ptr<Entity> sh_ptr : manager.entity_vector){
             if (sh_ptr.get() == player_ptr){

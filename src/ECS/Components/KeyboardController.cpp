@@ -5,28 +5,28 @@
 void KeyboardController::update(){
     // Check if a key is pressed:
     if (Game::event.type == SDL_KEYDOWN){
-        // Check if the key is bound:
-        bool key_is_bound = check_map_id<int, std::size_t>(
+        // Check if the key is bound: DO NOT WRAP DEBUG_MODE AROUND THIS
+        bool key_is_bound = check_map_id<int, KeyBind>(
                 local_key_bind_map, Game::event.key.keysym.sym, "", false);    // Message unnecessary since we'll not halt execution
         if (key_is_bound){  // If so, go to switch statement:
-        std::size_t pressed_key = local_key_bind_map[Game::event.key.keysym.sym];
+        KeyBind pressed_key = local_key_bind_map[Game::event.key.keysym.sym];
         switch (pressed_key){
-        case UP_BUTTON:
+        case KeyBind::UP:
             transform->vy = -1.0;
             sprite->set_animation("Walk");
             break;
-        case LEFT_BUTTON:
+        case KeyBind::LEFT:
             transform->vx = -1.0;
             sprite->set_animation("Walk");
             if (reverse_sprite){
                 sprite->sprite_flip = SDL_FLIP_HORIZONTAL;
             }
             break;
-        case DOWN_BUTTON:
+        case KeyBind::DOWN:
             transform->vy = 1.0;
             sprite->set_animation("Walk");
             break;
-        case RIGHT_BUTTON:
+        case KeyBind::RIGHT:
             transform->vx = 1.0;
             sprite->set_animation("Walk");
             if (reverse_sprite){
@@ -34,8 +34,8 @@ void KeyboardController::update(){
                 sprite->sprite_flip = SDL_FLIP_NONE;
             }
             break;
-        case ATTACK_B_BUTTON:
-            if (!projectile && entity->has_group(PlayerGroup)){   
+        case KeyBind::ATTACK_B:
+            if (!projectile && entity->has_group(PLAYER_GROUP)){   
                 // For some reason, multiple projectiles were being created,
                 // resulting in segmentation fault. I've added this bool for the
                 // time being.
@@ -75,25 +75,25 @@ void KeyboardController::update(){
     }
     // Check if a key is released:
     if (Game::event.type == SDL_KEYUP){
-        // Check if the key is bound:
-        bool key_is_bound = check_map_id<int, std::size_t>(
+        // Check if the key is bound: DO NOT WRAP DEBUG_MODE AROUND THIS
+        bool key_is_bound = check_map_id<int, KeyBind>(
                 local_key_bind_map, Game::event.key.keysym.sym, "", false);    // Message unnecessary since we'll not halt execution
         if (key_is_bound){  // If so, go to switch statement:
-        std::size_t pressed_key = local_key_bind_map[Game::event.key.keysym.sym];
+        KeyBind pressed_key = local_key_bind_map[Game::event.key.keysym.sym];
         switch (pressed_key){
-        case UP_BUTTON:
+        case KeyBind::UP:
             transform->vy = 0.0;
             break;
-        case LEFT_BUTTON:
+        case KeyBind::LEFT:
             transform->vx = 0.0;
             break;
-        case DOWN_BUTTON:
+        case KeyBind::DOWN:
             transform->vy = 0.0;
             break;
-        case RIGHT_BUTTON:
+        case KeyBind::RIGHT:
             transform->vx = 0.0;
             break;
-        case ATTACK_B_BUTTON:
+        case KeyBind::ATTACK_B:
             projectile=false;
             break;
         default:

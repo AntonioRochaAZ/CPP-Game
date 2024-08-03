@@ -16,7 +16,7 @@ TempEntity::TempEntity(
     getComponent<Sprite>().sprite_flip = sprite_flip;
 
     // Dealing with manager:
-    add_group(TemporaryGroup);
+    add_group(TEMPORARY_GROUP);
 }
 
 

@@ -30,7 +30,7 @@ and animations, how they handle keyboard inputs etc.
         player.addComponent<Transform>();
         player.addComponent<Sprite>("player1");
         player.addComponent<KeyboardController>();
-        player.add_group(PlayerGroup);
+        player.add_group(PLAYER_GROUP);
 
 .. toctree::
    :maxdepth: 2

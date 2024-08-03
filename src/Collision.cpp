@@ -8,8 +8,10 @@ bool Collision::collider_AABB(const Collider *CA, const Collider *CB){
         TB.x + CB->width  > TA.x &&
         TA.y + CA->height > TB.y &&
         TB.y + CB->height > TA.y){
-
-        std::cout << CA->tag << " hit: " << CB->tag << std::endl;
+        
+        #ifdef DEBUG_MODE
+            std::cout << CA->tag << " hit: " << CB->tag << std::endl;
+        #endif 
         return true;
     }else{ return false; }
 }
@@ -36,7 +38,7 @@ std::tuple<float, int> Collision::get_collision_time(
         }
         // Otherwise, if one of the denominators is zero, increate the t value artificially,
         // avoiding division by zero.
-        else if (dvx == 0){ dvx = 0.000001; } else if (dvy == 0) { dvy = 0.000001; }
+        if (dvx == 0){ dvx = 0.000001; } if (dvy == 0) { dvy = 0.000001; }
 
         /** Calculating times (based in the conditions in Collision::collider_AABB, where
         the collider's x and y have been switched by:
@@ -69,10 +71,12 @@ std::tuple<float, int> Collision::get_collision_time(
         for (int idx = 0; idx < 4; idx++){          // Getting the minimum, positive value
             if (t[idx] < min_val && t[idx] > 0){ min_val = t[idx]; best_idx = idx; } }
 
-        if (min_val == 100000 || best_idx == -1){   // Couldn't find a valid t.
-            std::cout << "Error calculating collision: min_val and best_idx" << std::endl;
-            throw std::runtime_error("Game::update");
-        }
+        #ifdef DEBUG_MODE
+            if (min_val == 100000 || best_idx == -1){   // Couldn't find a valid t.
+                std::cout << "Error calculating collision: min_val and best_idx" << std::endl;
+                throw std::runtime_error("Game::update");
+            }
+        #endif
 
         return {min_val, best_idx};
     }
@@ -84,15 +88,11 @@ void Collision::handle_collisions(){
     for (int j = i+1; j < nb_colliders; j++){        // From I+1 to N
         Collider* CA = Game::collider_vector[i]; Collider* CB = Game::collider_vector[j];
 
-        if (CA->handling_option + CB->handling_option == 0){
-            // Small trick for checking if both colliders are immovable more quickly:
-            // Instead of checking if each is IMMOVABLE_ON_COLLISION, we check if their sum is one,
-            // since IMMOVABLE_ON_COLLISION is the enum's entry for 0.
+        // If both collision handles are immovable:
+        if (CA->handling_option == CollisionHandle::IMMOVABLE 
+        &&  CB->handling_option == CollisionHandle::IMMOVABLE){
             continue; //----CONTINUE----CONTINUE----CONTINUE----CONTINUE----CONTINUE----CONTINUE----CONTINUE----CONTINUE
-        }/*else if (CA->entity->has_group(PlayerGroup) && CB->entity->has_group(PlayerGroup)){
-            // This is checked separately because it is less frequent than the previous one.
-            continue;
-        }*/
+        }
         // If we got here, then at least one of the objects is movable, let's check for
         // collision:
         bool collision_result = Collision::collider_AABB(CA, CB);
@@ -124,7 +124,7 @@ void Collision::handle_collisions(){
         if (!EA->active && !EB->active){ continue; } //< No need to check collision if one of them is inactive, we continue----CONTINUE----CONTINUE----CONTINUE----CONTINUE
         
         //Let's handle it according to the collider options:
-        std::size_t col_handle_A = CA->handling_option, col_handle_B = CB->handling_option;
+        CollisionHandle col_handle_A = CA->handling_option, col_handle_B = CB->handling_option;
         std::size_t proj_handle_A = CA->projectile_handling_option, proj_handle_B = CB->projectile_handling_option;
 
         /* To handle collision, we'll move the objects "back in time", until there was no
@@ -180,23 +180,24 @@ void Collision::handle_collisions(){
 
         // Here, we'll integrate the conditions to an int, using bitwise OR (|):
         int bit_result = \
-                ((col_handle_A == IMMOVABLE_ON_COLLISION) or
-                (col_handle_B == IMMOVABLE_ON_COLLISION) ? IMMOVABLE_BIT : 0) 
-            | ((col_handle_A == MOVABLE_OBJECT) or
-                (col_handle_B == MOVABLE_OBJECT) ? MOVABLE_BIT : 0) 
-            | ((col_handle_A == PUSH_ON_COLLISION) or
-                (col_handle_B == PUSH_ON_COLLISION) ? PUSH_BIT : 0) 
-            | ((col_handle_A == PHASE_ON_COLLISION) or
-                (col_handle_B == PHASE_ON_COLLISION) ? PHASE_BIT : 0) 
-            | ((col_handle_A == DESTROY_ON_COLLISION) or
-                (col_handle_B == DESTROY_ON_COLLISION) ? DESTROY_BIT : 0);
-
-        std::cout << "Bit result: " << bit_result << std::endl;
+                ((col_handle_A == CollisionHandle::IMMOVABLE) or
+                (col_handle_B == CollisionHandle::IMMOVABLE) ? IMMOVABLE_BIT : 0) 
+            | ((col_handle_A == CollisionHandle::MOVABLE) or
+                (col_handle_B == CollisionHandle::MOVABLE) ? MOVABLE_BIT : 0) 
+            | ((col_handle_A == CollisionHandle::PUSH) or
+                (col_handle_B == CollisionHandle::PUSH) ? PUSH_BIT : 0) 
+            | ((col_handle_A == CollisionHandle::PHASE) or
+                (col_handle_B == CollisionHandle::PHASE) ? PHASE_BIT : 0) 
+            | ((col_handle_A == CollisionHandle::DESTROY) or
+                (col_handle_B == CollisionHandle::DESTROY) ? DESTROY_BIT : 0);
+        #ifdef DEBUG_MODE
+            std::cout << "Bit result: " << bit_result << std::endl;
+        #endif
         switch(bit_result){
-        // Here, the cases in which one of them is IMMOVABLE_ON_COLLISION:
+        // Here, the cases in which one of them is CollisionHandle::IMMOVABLE:
         case (IMMOVABLE_BIT):   // Both objects Immovable
             // Already checked before:
-            // "We exclude case(IMMOVABLE_ON_COLLISION) because it was already checked in line
+            // "We exclude case(CollisionHandle::IMMOVABLE) because it was already checked in line
             // (CA->handling_option + CB->handling_option == 0)"
             // Weird that we got here:
             throw std::runtime_error(
@@ -206,7 +207,7 @@ void Collision::handle_collisions(){
         case (IMMOVABLE_BIT + PUSH_BIT):
             Collider* C_MOV; Transform* T_MOV;
             float x_mov, y_mov, speed_mov, vx_mov, vy_mov;
-            if (col_handle_A == IMMOVABLE_ON_COLLISION){    // A is the IMMOVABLE one:
+            if (col_handle_A == CollisionHandle::IMMOVABLE){    // A is the IMMOVABLE one:
                 C_MOV = CB; T_MOV = &TB; speed_a = 0;       // Must set speed of immovable to 0 for time calculation
                 x_mov = xb; y_mov = yb; speed_mov = speed_b;//  (equates to not moving the immovable back in time). 
                 vx_mov= vxb; vy_mov = vyb;
@@ -242,7 +243,7 @@ void Collision::handle_collisions(){
             goto destroy_one;
             break; // just in case
 
-        // Now cases in which one of them has the MOVABLE_OBJECT option:
+        // Now cases in which one of them has the CollisionHandle::MOVABLE option:
         case (MOVABLE_BIT): // Both are MOVABLE.
             goto stop_at_middle;
             break; // just in case
@@ -255,8 +256,8 @@ void Collision::handle_collisions(){
             goto destroy_one;
             break; // just in case
 
-        // Now cases in which one of them has the PUSH_ON_COLLISION option:
-        case (PUSH_BIT):    // Both are PUSH_ON_COLLISION, BUT also fall through of both MOVABLE (done through a goto).
+        // Now cases in which one of them has the CollisionHandle::PUSH option:
+        case (PUSH_BIT):    // Both are CollisionHandle::PUSH, BUT also fall through of both MOVABLE (done through a goto).
         stop_at_middle: // Regular time calculation, updating both entities:
             std::tie(diff, t_idx) = Collision::get_collision_time(
                 xa, xb, ya, yb, speed_a, speed_b, vxa, vxb, vya, vyb, wa, wb, ha, hb);
@@ -285,22 +286,24 @@ void Collision::handle_collisions(){
             break;
         
         case (PHASE_BIT + DESTROY_BIT):
-        destroy_one:    // We'll destroy the one with the DESTROY_ON_COLLISION option.
-            if (col_handle_A == DESTROY_ON_COLLISION){ CA->entity->destroy(); } 
+        destroy_one:    // We'll destroy the one with the CollisionHandle::DESTROY option.
+            if (col_handle_A == CollisionHandle::DESTROY){ CA->entity->destroy(); } 
             else { CB->entity->destroy(); }
             break;
 
         // Cases with DESTROY_BIT:
-        case (DESTROY_BIT): // Both have the DESTROY_ON_COLLISION: Destroy both entities.    
+        case (DESTROY_BIT): // Both have the CollisionHandle::DESTROY: Destroy both entities.    
             CA->entity->destroy(); CB->entity->destroy();
             break;
         
         default:  // Unnexpected case: throw an error:
-            std::cout << "Unknown case in collision detection. Options A and B: " \
-                        << col_handle_A << "; " << col_handle_B << "." << std::endl;
-            std::cout << "Entities: " << CA->entity->get_name() << "; " \
-                        << CB->entity->get_name() << std::endl;
-            throw std::runtime_error("Game.cpp: Game::update");
+            #ifdef DEBUG_MODE
+                std::cout << "Unknown case in collision detection. Options A and B: " \
+                            << static_cast<std::size_t>(col_handle_A) << "; " << static_cast<std::size_t>(col_handle_B )<< "." << std::endl;
+                std::cout << "Entities: " << CA->entity->get_name() << "; " \
+                            << CB->entity->get_name() << std::endl;
+                throw std::runtime_error("Game.cpp: Game::update");
+            #endif
             break;
         }
     }}

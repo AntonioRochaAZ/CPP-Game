@@ -17,7 +17,7 @@ Projectile::Projectile(
 ): Entity(man, name), range(rng), distance(0) {
 
     // Adding components:
-    addComponent<Collider>(get_name(), DESTROY_ON_COLLISION); // Note: no shape specified
+    addComponent<Collider>(get_name(), CollisionHandle::DESTROY); // Note: no shape specified
     addComponent<Transform>(position, speed, velocity);
     addComponent<Sprite>(sprite_name);
     addComponent<Damage>(damage);
@@ -28,7 +28,7 @@ Projectile::Projectile(
     if (owner != nullptr){ getComponent<Damage>().immune.emplace_back(owner); }
     
     // Dealing with manager:
-    add_group(AttackGroup);
+    add_group(ATTACK_GROUP);
 };
 
 void Projectile::update(){

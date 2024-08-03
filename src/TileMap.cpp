@@ -60,7 +60,9 @@ void TileMap::init(std::string mTexture_id, std::string metadata_path){
 
     // Calculating the number of IDs per row, for calculating
     // where each ID starts:
-    check_map_id<std::string, int>(Game::assets.width_map, texture_id, "TileMap::init, Game::assets.width_map");
+    #ifdef DEBUG_MODE
+        check_map_id<std::string, int>(Game::assets.width_map, texture_id, "TileMap::init, Game::assets.width_map");
+    #endif
     image_width = Game::assets.width_map[texture_id];
     ids_per_row = image_width / sprite_width;
 
@@ -106,7 +108,7 @@ void TileMap::setup(int xtiles, int ytiles){
             full_name << "TileMap: " << name << " - (" << x << "," << y << ")";
             final_name = full_name.str();
             std::shared_ptr<Entity>& e = this->addEntity(final_name);
-            e->add_group(MapGroup);
+            e->add_group(MAP_GROUP);
             e->addComponent<Transform>(
                 x0 + x * tile_width, 
                 y0 + y * tile_height);
@@ -224,7 +226,7 @@ void TileMap::load_map(std::string path){
                     if (id == 1){
                         std::string local_name = entity_vector[nb_xtiles*y + x]->get_name();
                         entity_vector[nb_xtiles*y + x]->addComponent<Collider>(
-                            local_name, IMMOVABLE_ON_COLLISION, tile_width, tile_height);
+                            local_name, CollisionHandle::IMMOVABLE, tile_width, tile_height);
                     }
                 }
                 // map_file.get(tile);     // A number.
