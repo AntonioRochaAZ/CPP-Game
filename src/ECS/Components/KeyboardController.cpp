@@ -35,11 +35,7 @@ void KeyboardController::update(){
             }
             break;
         case KeyBind::ATTACK_B:
-            if (!projectile && entity->has_group(PLAYER_GROUP)){   
-                // For some reason, multiple projectiles were being created,
-                // resulting in segmentation fault. I've added this bool for the
-                // time being.
-                projectile = true;
+            if (entity->has_group(PLAYER_GROUP) && !entity->has_component<Shooting>()){
                 // In case a projectile is sent:
                 int x_sign;
                 switch (sprite->sprite_flip){
@@ -50,16 +46,16 @@ void KeyboardController::update(){
                     x_sign = -1;
                     break;
                 default:
-                    std::cout << "Error when trying to decide direction to shoot projectile." << std::endl;
-                    std::cout << "Only coded for SDL_FLIP_NONE and SDL_FLIP_HORIZONTAL. Got this value instead: " \
-                              << sprite->sprite_flip << std::endl;
-                    throw std::runtime_error("");
+                    #ifdef DEBUG_MODE
+                        std::cout << "Error when trying to decide direction to shoot projectile." << std::endl;
+                        std::cout << "Only coded for SDL_FLIP_NONE and SDL_FLIP_HORIZONTAL. Got this value instead: " \
+                                << sprite->sprite_flip << std::endl;
+                        throw std::runtime_error("");
+                    #endif
+                    x_sign = 1;
                     break;
                 }
-                // Projectile* proj = new Projectile(
-                //     entity->manager, "Projectile", "projectile1", 10, 20, 1, 
-                //     1000, transform->position + vec(x_sign * 100, 0), vec(x_sign * 1.0, 0.0) 
-                // );
+                entity->addComponent<Shooting>(250);   // 250 ms of cooldown
                 entity->manager.addEntity(new Projectile(
                     entity->manager, "Projectile",
                     transform->position + vec(x_sign * 100, 0), 20, vec(x_sign * 1.0, 0.0),
@@ -94,7 +90,6 @@ void KeyboardController::update(){
             transform->vx = 0.0;
             break;
         case KeyBind::ATTACK_B:
-            projectile=false;
             break;
         default:
             break;

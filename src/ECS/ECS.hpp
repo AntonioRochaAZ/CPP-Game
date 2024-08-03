@@ -59,92 +59,102 @@ inline ComponentID getComponentTypeID() noexcept{
 /** Definition of the generic component class, which will be subsequently used for other specific 
 ones (see Components.hpp). */
 class Component{
-    public:
-        // TODO : use a shared pointer? Or not even necessary? Maybe
-        // a reference? What is the interest of using a reference
-        // again?
-        Entity* entity; ///< Pointer to the Entity it is associated to.
+private:
+    bool active = true;
 
-        virtual void init(){}; 
-            ///< Component initialization. This is called in Entity::addComponent and should have no
-            ///< arguments.
-        virtual void update(){};    ///< Update function (called every game tick). 
-        virtual void render(){};    ///< Rendering (called every game tick).
-        virtual ~Component(){};     
+public:
+    // TODO : use a shared pointer? Or not even necessary? Maybe
+    // a reference? What is the interest of using a reference
+    // again?
+    Entity* entity; ///< Pointer to the Entity it is associated to.
+
+    virtual void init(){}; 
+        ///< Component initialization. This is called in Entity::addComponent and should have no
+        ///< arguments.
+    virtual void update(){};    ///< Update function (called every game tick). 
+    virtual void render(){};    ///< Rendering (called every game tick).
+    virtual ~Component(){};     
+
+    bool is_active(){ return active; }
+    void destroy(){ active = false; }
 };
 
 /** Definition of the generic Entity class. */
 class Entity{
-    public:
-    //protected:
-        
-        Manager& manager; ///< Reference to the manager the entity it is attached to.
-        std::string name; ///< A name to identify the entity
-        bool active = true; 
-            ///< Used to decide whether to delete an entity or not at each game tick.
-            ///< This is handled in Manager::refresh.  
-        std::vector< std::unique_ptr<Component> > components;
-            ///< Vector of the Entity's Components (as unique pointers).
-            ///< Entries are emplaced in the order they are added to the entity.
-        ComponentArray component_array;
-            ///< Array of components that the entity has. Here, entry k corresponds 
-            ///< to the Component with type ID k (see \ref getComponentTypeID function).
-        ComponentBitSet component_bitset;
-            ///< Bitset array containing information of which Component types the entity has.
-        GroupBitSet group_bitset;
-            ///< Bitset array containing information of which groups the entity is part of.
+protected:
+    bool active = true; 
 
-    //public:
-        Entity(Manager& user_manager, std::string mName);
-        virtual ~Entity(){};
+public:
+    Manager& manager; ///< Reference to the manager the entity it is attached to.
+    std::string name; ///< A name to identify the entity
+        ///< Used to decide whether to delete an entity or not at each game tick.
+        ///< This is handled in Manager::refresh.  
+    std::vector< std::unique_ptr<Component> > components;
+        ///< Vector of the Entity's Components (as unique pointers).
+        ///< Entries are emplaced in the order they are added to the entity.
+    ComponentArray component_array;
+        ///< Array of components that the entity has. Here, entry k corresponds 
+        ///< to the Component with type ID k (see \ref getComponentTypeID function).
+    ComponentBitSet component_bitset;
+        ///< Bitset array containing information of which Component types the entity has.
+    GroupBitSet group_bitset;
+        ///< Bitset array containing information of which groups the entity is part of.
 
-        /// Default update function: updates each component.
-        virtual void update(){ 
-            int end = components.size();    // Avoid size changes during loop
-            for (int i = 0; i < end; i++) { components[i]->update(); }}
-        /// Default render function: renders each component.
-        virtual void render(){ 
-            int end = components.size();    // Avoid size changes during loop
-            for (int i = 0; i < end; i++) { components[i]->render(); }}
+    Entity(Manager& user_manager, std::string mName);
+    virtual ~Entity(){};
 
-        /// Returns whether the Entity has a given Component. @tparam T: A Component type.
-        template <typename T> bool has_component() const{
-            return component_bitset[getComponentTypeID<T>()]; }
-        
-        /// Returns whether the Entity is part of a given group.
-        bool has_group(std::size_t group){ return group_bitset[group]; }
+    void refresh();
 
-        /** Function for adding a component T to the Entity (defined in the end of ECS.hpp).
-            @tparam T: A Component type. 
-            @tparam Targs: The types of parameters mArgs (this must be defined in the 
-                template so we can have a generic definition in the function).
-            @param mArgs: T's constructor arguments. 
-        */
-        template <typename T, typename... TArgs>
-        T& addComponent(TArgs&&... mArgs);
+    /// Default update function: updates each component.
+    virtual void update(){ 
+        int end = components.size();    // Avoid size changes during loop
+        for (int i = 0; i < end; i++) { components[i]->update(); }
+        refresh();
+    }
+    /// Default render function: renders each component.
+    virtual void render(){ 
+        int end = components.size();    // Avoid size changes during loop
+        for (int i = 0; i < end; i++) { components[i]->render(); }
+    }
 
-        /** Function for getting one of the Entity's components (defined in the end of ECS.hpp).
-            @tparam T: A Component type. 
-        */
-        template<typename T>
-        T& getComponent() const;
+    /// Returns whether the Entity has a given Component. @tparam T: A Component type.
+    template <typename T> bool has_component() const{
+        return component_bitset[getComponentTypeID<T>()]; }
+    
+    /// Returns whether the Entity is part of a given group.
+    bool has_group(Group group){ return group_bitset[group]; }
 
-        /** Function for adding the Entity to a group. This will call the Entity's manager's 
-            Manager::add_to_group function. Because of this, this function is defined in ECS.cpp
-            (because it requires full definition of the Manager class, and declaring outside 
-            Entity's definition cause a linker "duplicate symbols" error). 
-        */
-        void add_group(std::size_t group);
-        /// Function for removing the Entity from a group.
-        void del_group(std::size_t group){ group_bitset[group] = false; }
-        
-        // Set/Get functions:
-        std::string get_name(){return name;}
-        void set_name(std::string mName){name = mName;}
-        bool is_active() const { return active; }
-        /// Destroys the Entity by setting "active" member to false.
-        /// The Entity's Manager will then delete it.
-        virtual void destroy(){ active = false; }
+    /** Function for adding a component T to the Entity (defined in the end of ECS.hpp).
+        @tparam T: A Component type. 
+        @tparam Targs: The types of parameters mArgs (this must be defined in the 
+            template so we can have a generic definition in the function).
+        @param mArgs: T's constructor arguments. 
+    */
+    template <typename T, typename... TArgs>
+    T& addComponent(TArgs&&... mArgs);
+
+    /** Function for getting one of the Entity's components (defined in the end of ECS.hpp).
+        @tparam T: A Component type. 
+    */
+    template<typename T>
+    T& getComponent() const;
+
+    /** Function for adding the Entity to a group. This will call the Entity's manager's 
+        Manager::add_to_group function. Because of this, this function is defined in ECS.cpp
+        (because it requires full definition of the Manager class, and declaring outside 
+        Entity's definition cause a linker "duplicate symbols" error). 
+    */
+    void add_group(std::size_t group);
+    void del_group(std::size_t group){ group_bitset[group] = false; }
+
+
+    // Set/Get functions:
+    std::string get_name(){return name;}
+    void set_name(std::string mName){name = mName;}
+    bool is_active() const { return active; }
+    /// Destroys the Entity by setting "active" member to false.
+    /// The Entity's Manager will then delete it.
+    virtual void destroy(){ active = false; }
 };
 
 /** This class serves to manage groups of entities in the game
@@ -190,6 +200,7 @@ class Manager{
         /// Function for updating every entity in the Manager::entity_vector.
         void update(){
             int end = entity_vector.size(); // Necessary to avoid problems with entity_vector size changes during loop.
+                // This will avoid problems with size increases, but not decreases...
             for (int i = 0; i < end; i++){ 
                 entity_vector[i]->update(); // Update each entity.
             }
@@ -264,6 +275,12 @@ T& Entity::addComponent(TArgs&&... mArgs){
 
 template <typename T>
 T& Entity::getComponent() const{
+    #ifdef DEBUG_MODE
+        if (!component_bitset[getComponentTypeID<T>()]){
+            std::cout << "Entity " << this->name << " doesn't have the passed component (number " << getComponentTypeID<T>() << ")." << std::endl; 
+            throw std::runtime_error("Entity::getComponent()");
+        }
+    #endif
     /*
     Here, the keyword "auto" is used because the type of
     the variable (named "ptr") is "complex". It could be

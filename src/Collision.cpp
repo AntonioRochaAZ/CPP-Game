@@ -101,8 +101,8 @@ void Collision::handle_collisions(){
         // We got a collision
         // Let's check if entities are active and if one is damaging the other:
         Entity*& EA = CA->entity; Entity*& EB = CB->entity;
-        bool condition1 = EA->active && EA->has_component<Health>() && EB->has_component<Damage>();
-        bool condition2 = EB->active && EB->has_component<Health>() && EA->has_component<Damage>();
+        bool condition1 = EA->is_active() && EA->has_component<Health>() && EB->has_component<Damage>();
+        bool condition2 = EB->is_active() && EB->has_component<Health>() && EA->has_component<Damage>();
         if (condition1 || condition2){  // Note that BOTH can be true.
             std::vector<Entity*> immune_vec;
             if (condition1){    // EA will take damage if not immune.
@@ -121,7 +121,7 @@ void Collision::handle_collisions(){
         }
 
         // We still want to handle collision in case we need to destroy one of the colliders on impact
-        if (!EA->active && !EB->active){ continue; } //< No need to check collision if one of them is inactive, we continue----CONTINUE----CONTINUE----CONTINUE----CONTINUE
+        if (!EA->is_active() && !EB->is_active()){ continue; } //< No need to check collision if one of them is inactive, we continue----CONTINUE----CONTINUE----CONTINUE----CONTINUE
         
         //Let's handle it according to the collider options:
         CollisionHandle col_handle_A = CA->handling_option, col_handle_B = CB->handling_option;

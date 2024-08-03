@@ -1,4 +1,6 @@
 #include "Health.hpp"
+#include "../States/Hurting.hpp"
+
 
 /** 
     This function is defined separately of "update" because health updates will
@@ -16,6 +18,17 @@ void Health::update_hp(float damage){
     //     Sprite& sprite = entity->getComponent<Sprite>();
     //     sprite.set_animation(sprite.current_animation + "_hurt", false);
     // }
+    if (entity->has_component<Hurting>() && damage > 0){
+        return; // Invincibility frame, can still heal though.
+    }
+    if (damage > 0){
+        entity->addComponent<Hurting>(250); 
+            //< 250s of invincibility (perhaps make this entity dependant eventually...)
+            //< Could eventually add all this type of information to a json file. This should
+            //< be different than the sprite .txt since that is dependant exclusively on the
+            //< the animations, while we may want to have different characters with the same
+            //< sprite but different Hurting options etc.
+    }
     m_hp = std::min(m_hp - damage, m_max_hp);
     if (m_hp <= 0){ entity->destroy(); }
 }

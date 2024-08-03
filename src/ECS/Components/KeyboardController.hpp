@@ -3,6 +3,7 @@
 #include "../ECS.hpp"
 #include "../Components.hpp"
 #include "../Entities/Projectile.hpp"
+#include "../States.hpp"
 
 using vec = Eigen::Vector2f;
 
