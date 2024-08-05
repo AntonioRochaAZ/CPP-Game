@@ -54,6 +54,7 @@ struct UILabel : public Component{
 
     void set_text(std::string mText, std::string mFont_id); 
         ///< Sets the text to be displayed. Called in the constructor.
+        ///< TODO: separate changing the font ID and colour and size in other functions.
     void update() override; 
         ///< Updates dst_rect's position according to the transform's (defined in UILabel.cpp).
     void render() override;

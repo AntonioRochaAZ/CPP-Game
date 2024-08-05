@@ -57,12 +57,16 @@ Player::Player(
     addComponent<Spawning>(2000);
 }
 
-void Player::destroy(){
+void Player::destroy(){ destroy(true); }
+void Player::destroy(bool create_temp_entity){
     active = false;
-    manager.addEntity(new TempEntity(
-        manager, "temp_player", getComponent<Transform>().position,
-        getComponent<Sprite>().m_texture_id, "Death",
-        getComponent<Sprite>().get_xscale(), getComponent<Sprite>().get_yscale(),  
-        getComponent<Sprite>().sprite_flip
-    ));
+    Player::allocated_players[player_number - 1] = false;
+    if (create_temp_entity){
+        manager.addEntity(new TempEntity(
+            manager, "temp_player", getComponent<Transform>().position,
+            getComponent<Sprite>().m_texture_id, "Death",
+            getComponent<Sprite>().get_xscale(), getComponent<Sprite>().get_yscale(),  
+            getComponent<Sprite>().sprite_flip
+        ));
+    }
 }

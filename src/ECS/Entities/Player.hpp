@@ -27,6 +27,7 @@ struct Player : public Entity{
         float speed = 10
     );
 
+    void destroy(bool create_temp_entity);
     void destroy() override;
     // ~Player();
 };

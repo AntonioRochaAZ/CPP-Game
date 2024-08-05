@@ -59,17 +59,18 @@ command ``make documentation``, defined in the Makefile.
 > **KNOWN BUGS:**
     - Segmentation fault when launching the executable by double clicking (instead of using the command line).
       It comes from Game::init, but must still be debugged.
+    - Graphical bug when players die while facing left (easy to solve: add a shift to the generated temporary entity when there's a sprite flip).
  
 ### TODOs
 
 In no specific order.
 
-- Perhaps create a way of setting animations for a fixed ammount of frames, before going back to
-  another one? (complex, if we stop walking in the middle of the animation it will go back to the walking animation).
 - Apply color filters to players when they get hit, and to projectiles to change their colour.
 - Make the texture pointer in Game::AssetManager shared pointers that can be owned by Sprite and UILabel components.
 - Think of how to generalize KeyboardController's calls, as well as Health's (how to have a temporary animation when the entity is hurt). Perhaps use virtual functions and/or state machines, and/or function pointers.
-- Change enums to enum classes, and change member definitions that use them to the enum classes' types.
+- Learn how to properly center the text on the screen
+- Separate States from Components in ECS.hpp.
+- Work into compiling for Windows and Linux.
 
 - Perhaps generalize the KeyboardController component later, by allowing different
   actions to be triggered by the attack buttons according to the Entity. Perhaps create
@@ -80,11 +81,6 @@ In no specific order.
 - Add options to windown size etc.
 - Create function for changing order of component updates (?) (currently a mess).
 - Create function for deleting components?
-- Two projectiles (from the same player) will destroy each other if you shoot them while moving.
-  Either we cap the time between shots, or do something else about it (e.g. make it so that
-  projectile don't interact, but it would be interesting to be able to shoot down enemy projectiles, for example).
 - Study the use of "const" and passing arguments by reference (check when it is possible/should be done).
 - Long comment under "case (IMMOVABLE_BIT + PUSH_BIT)" inside of Collision::handle_collisions.
 - Create gifs and a diagram of how the collision handling works.
-- Find a way of changing the colour of projectiles without having to create multiple different sprites
-  (like adding a filter on top of the texture).

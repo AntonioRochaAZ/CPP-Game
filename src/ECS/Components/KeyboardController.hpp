@@ -15,7 +15,8 @@ enum class KeyBind : std::size_t{
     ATTACK_A,
     ATTACK_B,
     CAMERA_TOGGLE,
-    QUIT
+    RESET,
+    QUIT,
 };
 
 extern std::map<int, KeyBind> global_key_bind_map;    ///< A map between the key_bind enum and the SDL_KeyCode.

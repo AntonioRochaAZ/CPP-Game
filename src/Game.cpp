@@ -22,9 +22,33 @@ bool Game::tracking_player = false;
 Game::AssetManager Game::assets = Game::AssetManager();
 vec Game::camera_position = vec(0.0, 0.0);
 
+std::shared_ptr<Entity> message = manager.addEntity("Message");
+
 // Constructor and destructor:
 Game::Game(){};
 Game::~Game(){};
+
+void init_players(){
+    // Setting up player 1:
+    std::shared_ptr<Entity> player1 = manager.addEntity(std::make_shared<Player>(manager, "player1", "player1"));
+    player1->getComponent<Transform>().set_position(150, 500);
+    
+    // Setting up player 2:
+    std::shared_ptr<Entity> player2 = manager.addEntity(std::make_shared<Player>(manager, "player2", "player2"));
+    std::map<int, KeyBind> player2_keybinds = {
+        {SDLK_i, KeyBind::UP},
+        {SDLK_k, KeyBind::DOWN},
+        {SDLK_j, KeyBind::LEFT},
+        {SDLK_l, KeyBind::RIGHT},
+        {SDLK_o, KeyBind::ATTACK_A},
+        {SDLK_p, KeyBind::ATTACK_B}
+        // {SDLK_m, KeyBind::CAMERA_TOGGLE},
+        // {SDLK_ESCAPE, KeyBind::QUIT}
+    };
+    player2->getComponent<KeyboardController>().local_key_bind_map = player2_keybinds;
+    player2->getComponent<Transform>().set_position(970, 500);
+    player2->getComponent<Sprite>().sprite_flip = SDL_FLIP_HORIZONTAL;
+}
 
 // Initialize
 int Game::init(const char* title, int x, int y, int width, int height, bool fullscreen){
@@ -73,6 +97,7 @@ int Game::init(const char* title, int x, int y, int width, int height, bool full
     global_key_bind_map.emplace(SDLK_e, KeyBind::ATTACK_A);
     global_key_bind_map.emplace(SDLK_r, KeyBind::ATTACK_B);
     global_key_bind_map.emplace(SDLK_m, KeyBind::CAMERA_TOGGLE);
+    global_key_bind_map.emplace(SDLK_1, KeyBind::RESET);
     global_key_bind_map.emplace(SDLK_ESCAPE, KeyBind::QUIT);
 
     // Change color of the renderer (black by default)
@@ -84,25 +109,7 @@ int Game::init(const char* title, int x, int y, int width, int height, bool full
     Game::assets.add_texture("projectile1", "./assets/projectile1-still.bmp");
     Game::assets.add_font("custom_font1px", "./assets/fonts/customfont-1px_spacing.ttf", 16);
     
-    // Setting up player 1:
-    std::shared_ptr<Entity> player1 = manager.addEntity(std::make_shared<Player>(manager, "player1", "player1"));
-    player1->getComponent<Transform>().set_position(150, 500);
-    
-    // Setting up player 2:
-    std::shared_ptr<Entity> player2 = manager.addEntity(std::make_shared<Player>(manager, "player2", "player2"));
-    std::map<int, KeyBind> player2_keybinds = {
-        {SDLK_i, KeyBind::UP},
-        {SDLK_k, KeyBind::DOWN},
-        {SDLK_j, KeyBind::LEFT},
-        {SDLK_l, KeyBind::RIGHT},
-        {SDLK_o, KeyBind::ATTACK_A},
-        {SDLK_p, KeyBind::ATTACK_B}
-        // {SDLK_m, KeyBind::CAMERA_TOGGLE},
-        // {SDLK_ESCAPE, KeyBind::QUIT}
-    };
-    player2->getComponent<KeyboardController>().local_key_bind_map = player2_keybinds;
-    player2->getComponent<Transform>().set_position(970, 500);
-    player2->getComponent<Sprite>().sprite_flip = SDL_FLIP_HORIZONTAL;
+    init_players();
 
     // Setting up background:
     Game::assets.add_texture("tiles", "./assets/tilemap.bmp");
@@ -116,8 +123,11 @@ int Game::init(const char* title, int x, int y, int width, int height, bool full
     label->addComponent<UILabel>(0, 0.0, 40, 20, "FIGHT!", "custom_font1px", purple, 600);
     label->getComponent<Transform>().position = vec(250, 200);
     
-    // Setting the reference entity (for camera tracking) as the player:
-    camera_ref_entity = player1;
+    SDL_Color ocean_blue = { 52, 143, 235, 255 };
+    message->add_group(MAP_GROUP);
+    message->addComponent<Transform>();
+    message->addComponent<UILabel>(0, 0.0, 40, 20, "", "custom_font1px", ocean_blue, 96);
+    message->getComponent<Transform>().position = vec(400, 200);
 
     // Ok, it is running now:
     is_running = true;
@@ -130,47 +140,61 @@ void Game::handle_events(){
     SDL_PollEvent(&event);
     bool key_is_bound;
     switch (event.type){
-        case SDL_KEYDOWN:
-            // Check if the key is bound: DO NOT WRAP DEBUG_MODE AROUND THIS
-            key_is_bound = check_map_id<int, KeyBind>(
-                    global_key_bind_map, event.key.keysym.sym, "", false);    // Message unnecessary since we'll not halt execution
-            if (key_is_bound){  // If so, go to switch statement:
-            KeyBind pressed_key = global_key_bind_map[event.key.keysym.sym];
-            switch (pressed_key){
-                case KeyBind::CAMERA_TOGGLE:
-                    if (Game::tracking_player){
-                        // This condition must be met, otherwise
-                        // will have a bug where neither the map not
-                        // the player doesn't move
-                        Game::tracking_player = false;
-                    }else{
-                        Game::tracking_player = true;
-                        // Get current reference camera and entity positions (will be update next):
-                        previous_camera_position = camera_position;
+    case SDL_KEYDOWN:
+        // Check if the key is bound: DO NOT WRAP DEBUG_MODE AROUND THIS
+        key_is_bound = check_map_id<int, KeyBind>(
+                global_key_bind_map, event.key.keysym.sym, "", false);    // Message unnecessary since we'll not halt execution
+        if (key_is_bound){  // If so, go to switch statement:
+        KeyBind pressed_key = global_key_bind_map[event.key.keysym.sym];
+        switch (pressed_key){
+        case KeyBind::CAMERA_TOGGLE:
+            if (Game::tracking_player){
+                // This condition must be met, otherwise
+                // will have a bug where neither the map not
+                // the player doesn't move
+                Game::tracking_player = false;
+            }else{
+                Game::tracking_player = true;
+                // Get current reference camera and entity positions (will be update next):
+                previous_camera_position = camera_position;
 
-                        // Deal with camera_ref_entity if the reference entity has died:
-                        if (camera_ref_entity.expired()){
-                            update_camera_ref_entity();
-                        }
-                        // If it isn't anymore, update position.
-                        if (!camera_ref_entity.expired()){ 
-                            previous_ref_entity_position = camera_ref_entity.lock()->getComponent<Transform>().position;
-                        }
-                    }
-                    break;
-                    
-                case KeyBind::QUIT:
-                    is_running = false;
-                    break;
-                default:
-                    break;
-            }}
+                // Deal with camera_ref_entity if the reference entity has died:
+                if (camera_ref_entity.expired()){
+                    update_camera_ref_entity();
+                }
+                // If it isn't anymore, update position.
+                if (!camera_ref_entity.expired()){ 
+                    previous_ref_entity_position = camera_ref_entity.lock()->getComponent<Transform>().position;
+                }
+            }
             break;
-        case SDL_QUIT:
+        case KeyBind::RESET:
+            // Reset players:
+            for (Entity* e_ptr : manager.grouped_entities[PLAYER_GROUP]){
+                // Case object from Entity to Player so we can call custom 
+                // destroy method, which allow destruction without the death
+                // animation:
+                Player* p_ptr = dynamic_cast<Player*>(e_ptr);
+                p_ptr->destroy(false); 
+            }
+            manager.refresh();
+            init_players();
+            // Reset camera position:
+            camera_position = vec(0,0);
+            message->getComponent<UILabel>().set_text("", "custom_font1px");
+            break;
+        case KeyBind::QUIT:
             is_running = false;
             break;
         default:
             break;
+        }}
+        break;
+    case SDL_QUIT:
+        is_running = false;
+        break;
+    default:
+        break;
     }
 };
 
@@ -198,6 +222,11 @@ void Game::update(){
             // Updating ref_entity_position:k
             previous_ref_entity_position = new_ref_entity_position;
         }
+    }
+
+    if (manager.grouped_entities[PLAYER_GROUP].size() == 1){
+        // Only one player left: add a message telling the players to reset.
+        message->getComponent<UILabel>().set_text("Press 1 to reset!", "custom_font1px");
     }
 };
 
