@@ -175,7 +175,7 @@ void Collision::handle_collisions(){
         #define IMMOVABLE_BIT (1 << 0)  // 00001
         #define MOVABLE_BIT (1 << 1)    // 00010
         #define PUSH_BIT (1 << 2)       // 00100
-        #define PHASE_BIT (1 << 3)       // 01000
+        #define PHASE_BIT (1 << 3)      // 01000
         #define DESTROY_BIT (1 << 4)    // 10000
 
         // Here, we'll integrate the conditions to an int, using bitwise OR (|):

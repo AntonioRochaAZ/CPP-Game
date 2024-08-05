@@ -18,11 +18,11 @@ void Health::update_hp(float damage){
     //     Sprite& sprite = entity->getComponent<Sprite>();
     //     sprite.set_animation(sprite.current_animation + "_hurt", false);
     // }
-    if (entity->has_component<Hurting>() && damage > 0){
+    if (m_invincible && damage > 0){
         return; // Invincibility frame, can still heal though.
     }
     if (damage > 0){
-        entity->addComponent<Hurting>(250); 
+        entity->addComponent<Hurting>(450); 
             //< 250s of invincibility (perhaps make this entity dependant eventually...)
             //< Could eventually add all this type of information to a json file. This should
             //< be different than the sprite .txt since that is dependant exclusively on the
@@ -37,4 +37,14 @@ void Health::update(){
     if (m_rate != 0){ 
         update_hp(-m_rate);
     }
+}
+
+void Health::set_invincibility(bool value){
+    #ifdef DEBUG_MODE
+        if (value == m_invincible){
+            std::cout << "Trying to set invincibility to " << value << " but it is already this value." << std::endl;
+            throw std::runtime_error("Health::set_invincibility");
+        }
+    #endif
+    m_invincible = value;
 }

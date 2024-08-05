@@ -1,17 +1,13 @@
-//#include <iostream>
-//#include <SDL2/SDL.h>
 #include "Game.hpp"
 
-Game *game = nullptr;
-
-constexpr int window_width=1200, window_height=1000;
-constexpr bool fullscreen=false;
+constexpr int window_width = 1200, window_height = 1000;
+constexpr bool fullscreen = false;
 
 int main(int argc, const char* argv[]) {
     // Controlling frame rate
     constexpr int FPS = 30;
     constexpr int frame_delay = 1000/FPS;   // Max time between frames
-    Uint32 frame_start;                 //
+    Uint64 frame_start;                 //
     int frame_time;                     //
 
     /* Trying parallelism.
@@ -25,21 +21,25 @@ int main(int argc, const char* argv[]) {
     game.init("Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, window_width, window_height, fullscreen);
     while (game.running()){
 
-        frame_start = SDL_GetTicks(); // How much time (in ms) since we started SDL.
+        frame_start = SDL_GetTicks64(); // How much time (in ms) since we started SDL.
         game.handle_events();
         game.update();
         game.render();
 
-        frame_time = SDL_GetTicks() - frame_start; // How much time between frame_start and now.
+        frame_time = SDL_GetTicks64() - frame_start; // How much time between frame_start and now.
 
         if (frame_delay > frame_time){
             // Then we need to delay the rendering
             SDL_Delay(frame_delay - frame_time);
         }else{
-            std::cout << "Sloww...";
+            #ifdef DEBUG_MODE
+                std::cout << "Sloww..." << std::endl;
+            #endif
         }
     }
     game.clean();
-    std::cout << "Got here!";
+    #ifdef DEBUG_MODE
+        std::cout << "Got to the end!" << std::endl;
+    #endif
     return 0;
 }

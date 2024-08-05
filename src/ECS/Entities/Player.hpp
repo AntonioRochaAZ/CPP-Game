@@ -5,9 +5,12 @@
 
 using vec = Eigen::Vector2f;
 
+constexpr int max_players = 4;
+
 /** Player Entity.
 */
 struct Player : public Entity{
+    static std::array<bool, max_players> allocated_players;
     int player_number;
     std::string player_name;
     static std::unordered_map<int, SDL_Color> player_colour;

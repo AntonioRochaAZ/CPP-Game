@@ -59,7 +59,7 @@ inline ComponentID getComponentTypeID() noexcept{
 /** Definition of the generic component class, which will be subsequently used for other specific 
 ones (see Components.hpp). */
 class Component{
-private:
+protected:
     bool active = true;
 
 public:
