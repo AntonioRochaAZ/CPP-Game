@@ -1,9 +1,25 @@
+#include <filesystem>
 #include "Game.hpp"
 
 constexpr int window_width = 1200, window_height = 1000;
 constexpr bool fullscreen = false;
 
 int main(int argc, const char* argv[]) {
+
+    // Correction for allowing running the executable by double clicking:    
+    #ifndef WORK_DIR
+        #define WORK_DIR "";
+        // The name of the executable, which should be defined during compilation
+        throw std::runtime_error("Work directory is not defined.");
+    #endif
+    std::filesystem::current_path(WORK_DIR);
+
+    std::cout << std::filesystem::current_path() << std::endl;
+    for (int i = 0; i < argc; i ++){
+        std::cout << argv[i] << std::endl;
+    }
+
+
     // Controlling frame rate
     constexpr int FPS = 30;
     constexpr int frame_delay = 1000/FPS;   // Max time between frames
