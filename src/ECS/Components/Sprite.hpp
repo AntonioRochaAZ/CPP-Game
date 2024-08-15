@@ -41,7 +41,7 @@ public:
         SDL_Rect src_rect;                  ///< Rendering rectangle (source).   
         SDL_RendererFlip sprite_flip = SDL_FLIP_NONE;   
             ///< Whether to flip the texture. Will be dealt with by the 
-            ///< \ref KeyboardController Component, when the player turns
+            ///< \ref KeyboardPlayer Component, when the player turns
             ///< around, for example.
     
     // Animation related:

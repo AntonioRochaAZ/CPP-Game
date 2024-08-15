@@ -231,6 +231,13 @@ be included in the class definitions. */
 
 template <typename T, typename... TArgs>
 T& Entity::addComponent(TArgs&&... mArgs){
+
+    if(this->has_component<T>()){
+        #ifdef DEBUG_MODE
+            std::cout << "Trying to add Component that the entity already has: " << typeid(T).name() << std::endl;
+        #endif
+        return getComponent<T>();
+    }
     // In the next line, T* c(...) is equivalent to 
     // T* c = ..., though these initializations may not
     // always yield the same results, according to the

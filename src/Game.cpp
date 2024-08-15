@@ -6,6 +6,7 @@
 #include "ECS/Components/KeyboardController.hpp"
 #include "utils.hpp"
 #include "ECS/Entities/Player.hpp"
+#include "ECS/Components/CustomControllers.hpp"
 
 // From KeyboardController.hpp:
 std::map<int, KeyBind> global_key_bind_map;
@@ -23,6 +24,7 @@ Game::AssetManager Game::assets = Game::AssetManager();
 vec Game::camera_position = vec(0.0, 0.0);
 
 std::shared_ptr<Entity> message = manager.addEntity("Message");
+std::shared_ptr<Entity> cursor = manager.addEntity("CURSOR"); // DO NOT CHANGE THIS NAME OR DELETE THIS ENTITY
 
 // Constructor and destructor:
 Game::Game(){};
@@ -45,7 +47,7 @@ void init_players(){
         // {SDLK_m, KeyBind::CAMERA_TOGGLE},
         // {SDLK_ESCAPE, KeyBind::QUIT}
     };
-    player2->getComponent<KeyboardController>().local_key_bind_map = player2_keybinds;
+    player2->getComponent<KeyboardPlayer>().local_key_bind_map = player2_keybinds;
     player2->getComponent<Transform>().set_position(970, 500);
     player2->getComponent<Sprite>().sprite_flip = SDL_FLIP_HORIZONTAL;
 }
@@ -129,6 +131,10 @@ int Game::init(const char* title, int x, int y, int width, int height, bool full
     message->addComponent<UILabel>(0, 0.0, 40, 20, "", "custom_font1px", ocean_blue, 96);
     message->getComponent<Transform>().position = vec(400, 200);
 
+    cursor->add_group(COLLIDER_GROUP);
+    cursor->addComponent<Transform>();
+    cursor->addComponent<Collider>("Cursor", CollisionHandle::PHASE, 10, 10);
+
     // Ok, it is running now:
     is_running = true;
     return 0;
@@ -189,6 +195,18 @@ void Game::handle_events(){
         default:
             break;
         }}
+        break;
+    case SDL_MOUSEMOTION:
+        cursor->getComponent<Transform>().position = vec(event.motion.x, event.motion.y);
+        // Collider *cursor_collider = cursor->getComponent<Collider>();
+        // // Check if it collides with an entity that has the MouseController component:
+        // for (Collider *c : Game::collider_vector){
+        //     if (Collision::collider_AABB(c, )){
+
+        //     }
+
+        // }
+
         break;
     case SDL_QUIT:
         is_running = false;

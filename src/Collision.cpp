@@ -93,16 +93,28 @@ void Collision::handle_collisions(){
         &&  CB->handling_option == CollisionHandle::IMMOVABLE){
             continue; //----CONTINUE----CONTINUE----CONTINUE----CONTINUE----CONTINUE----CONTINUE----CONTINUE----CONTINUE
         }
-        // If we got here, then at least one of the objects is movable, let's check for
-        // collision:
+        // If we got here, then at least one of the objects is not immovable, 
+        // let's check for collision:
         bool collision_result = Collision::collider_AABB(CA, CB);
         if(!collision_result){ continue; } // If there's no collision, we continue ----CONTINUE----CONTINUE----CONTINUE----CONTINUE
         
-        // We got a collision
-        // Let's check if entities are active and if one is damaging the other:
+        // We got a collision!
+        // Let's check the special cases:
         Entity*& EA = CA->entity; Entity*& EB = CB->entity;
-        bool condition1 = EA->is_active() && EA->has_component<Health>() && EB->has_component<Damage>();
-        bool condition2 = EB->is_active() && EB->has_component<Health>() && EA->has_component<Damage>();
+        // 1. where we have a cursor:
+        bool condition1 = EA->name=="CURSOR" && EB->has_component<MouseController>();
+        bool condition2 = EB->name=="CURSOR" && EA->has_component<MouseController>();
+        if (condition1 || condition2){
+            if (condition1){
+                EB->getComponent<MouseController>().handle_events();
+            }else{
+                EA->getComponent<MouseController>().handle_events();
+            }
+        }
+
+        // 2. Let's check if entities are active and if one is damaging the other:
+        condition1 = EA->is_active() && EA->has_component<Health>() && EB->has_component<Damage>();
+        condition2 = EB->is_active() && EB->has_component<Health>() && EA->has_component<Damage>();
         if (condition1 || condition2){  // Note that BOTH can be true.
             std::vector<Entity*> immune_vec;
             if (condition1){    // EA will take damage if not immune.

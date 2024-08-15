@@ -25,25 +25,21 @@ extern std::map<int, KeyBind> global_key_bind_map;    ///< A map between the key
 struct KeyboardController : public Component{
     std::map<int, KeyBind> local_key_bind_map;    ///< A map between the key_bind enum and the SDL_KeyCode.
 
-    bool reverse_sprite;    ///< Whether to reverse the sprite (left-right).
-
-    KeyboardController() : reverse_sprite(true){};
-    KeyboardController(bool mReverse_sprite) : reverse_sprite(mReverse_sprite){};
-
-    bool projectile = false;    ///< For avoiding creating projectiles continuously.
-
-    Transform* transform;
-    Sprite* sprite;
-
+    KeyboardController(){};
     void init() override{ local_key_bind_map = global_key_bind_map; }
 
-    /** Function for getting the Transform and Sprite components. This is separate from the init
-    function in case the KeyboardController is defined before those other components and we have
-    to get them later.*/
-    void get_components(){
-        if (entity->has_component<Transform>()){ transform = &entity->getComponent<Transform>(); }
-        if (entity->has_component<Sprite>()){ sprite = &entity->getComponent<Sprite>(); }
-    }
-
     void update() override; ///< Defined in KeyboardController.cpp file.
+    virtual void on_up(){};
+    virtual void on_down(){};
+    virtual void on_left(){};
+    virtual void on_right(){};
+    virtual void on_attack_a(){};
+    virtual void on_attack_b(){};
+    virtual void on_up_end(){};
+    virtual void on_down_end(){};
+    virtual void on_left_end(){};
+    virtual void on_right_end(){};
+    virtual void on_attack_a_end(){};
+    virtual void on_attack_b_end(){};
+    virtual void on_update_end(){};
 };

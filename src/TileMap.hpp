@@ -41,7 +41,55 @@ class TileMap : public Manager{
         void init(std::string texture_id, std::string metadata_path);
         void setup(int x_tiles, int y_tiles);
         void load_map(std::string path);    ///< Load the tile IDs and collision information from a map text file.
+        
+        template<std::size_t xtiles, std::size_t ytiles>
+        void load_map(bool redo_setup, int id_array[xtiles][ytiles], std::string type);    
+            ///< Load the tile IDs or collision information from an array of ints. We use double pointer
+            ///< to avoid having to declare the shape before-hand.
         void set_position(int x, int y);    ///< This can be used to change where the grid starts.
         
         // TODO: add possibility to update other map variables and optimize rendering. 
+};
+
+/// Eventually we could couple this with the previous function, so that this function is called by the other.
+template<std::size_t xtiles, std::size_t ytiles>
+void TileMap::load_map(bool redo_setup, int id_array[xtiles][ytiles], std::string type){
+
+    std::unordered_map<std::string, int> cases = {
+        {"tex", 1},
+        {"col", 2},
+    };
+
+    if (redo_setup){ setup(xtiles, ytiles); }   // Setting the entities up. 
+    
+    switch (cases[type.substr(0, 3)]) {
+    case 1: // Texture information
+        for (int y = 0; y < nb_ytiles; y++){
+                // Read line and check for errors:
+                for (int x = 0; x < nb_xtiles; x++){
+                    int id = id_array[x][y];
+                    // Update tile source position according to id:
+                    Sprite& s = entity_vector[nb_xtiles*y + x]->getComponent<Sprite>();
+                    s.src_rect.x = texture_pos[id][0];
+                    s.src_rect.y = texture_pos[id][1];
+                    map[y][x] = id; // line number, then column
+                }
+        } // closing case tex
+        break;
+    case 2: // collision information.
+        for (int y = 0; y < nb_ytiles; y++){
+                for (int x = 0; x < nb_xtiles; x++){
+                    int id = id_array[x][y];
+                    // add collision if id is 1:
+                    if (id == 1){
+                        std::string local_name = entity_vector[nb_xtiles*y + x]->get_name();
+                        entity_vector[nb_xtiles*y + x]->addComponent<Collider>(
+                            local_name, CollisionHandle::IMMOVABLE, tile_width, tile_height);
+                    }
+                }
+        } // closing case col
+    default: // Can't interpret it:
+        break;
+        // continue; // Do nothing, just cycle.
+    } // closing switch
 };

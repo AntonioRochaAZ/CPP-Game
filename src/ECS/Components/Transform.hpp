@@ -5,7 +5,7 @@
 using vec = Eigen::Vector2f;
 
 /** Component defining the position of an Entity on screen. Other components
-such as the \ref ::Sprite and the \ref ::KeyboardController may depend on this 
+such as the \ref ::Sprite and the \ref ::KeyboardPlayerr may depend on this 
 Component.*/
 struct Transform : public Component{
     // Members: ------------------------------------------------------

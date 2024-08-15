@@ -1,6 +1,7 @@
 #include "Player.hpp"
 #include "TempEntity.hpp"
 #include <algorithm>
+#include "../Components/CustomControllers/KeyboardPlayer.hpp"
 
 std::unordered_map<int, SDL_Color> Player::player_colour = {
     {1, {255, 0  , 0  , 255}},  // red
@@ -20,7 +21,7 @@ Player::Player(
 ): Entity(man, name){
     
     // Adding components IN THE RIGHT UPDATE ORDER:
-    addComponent<KeyboardController>();
+    addComponent<KeyboardPlayer>();
     addComponent<Collider>(get_name(), CollisionHandle::MOVABLE);  // width and height will be updated later with the Sprite component.
     addComponent<Transform>();
     addComponent<Sprite>(sprite_name);
@@ -33,7 +34,7 @@ Player::Player(
     getComponent<Sprite>().set_animation("Idle");  // This last line will automatically update the Collider's shape.
 
     // Now let's get Transform and Sprite information into earlier components:
-    getComponent<KeyboardController>().get_components();   // Force it to get the Transform and Sprite pointers.
+    getComponent<KeyboardPlayer>().get_components();   // Force it to get the Transform and Sprite pointers.
     
     // Dealing with manager:
     // manager.addEntity(this);  // Add entity to Manager's entity vector.
