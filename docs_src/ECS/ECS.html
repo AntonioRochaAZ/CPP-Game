@@ -160,16 +160,38 @@
 <li class="toctree-l2 has-children"><a class="reference internal" href="Components.html">Components</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Components</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="Components/Transform.html">Transform</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Components/Sprite.html">Sprite</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Components/KeyboardController.html">KeyboardController</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="Components/KeyboardController.html">KeyboardController</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of KeyboardController</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="Components/CustomControllers/KeyboardPlayer.html">KeyboardPlayer</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="Components/MouseController.html">MouseController</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of MouseController</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="Components/CustomControllers/MouseTest.html">MouseTest</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="Components/Collider.html">Collider</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Components/UILabel.html">UILabel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Components/Health.html">Health</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Components/Damage.html">Damage</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="Entities.html">Entities</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Entities</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="Entities.html">Entities</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Entities</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="Entities/Projectile.html">Projectile</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Entities/Player.html">Player</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Entities/TempEntity.html">TempEntity</a></li>
 </ul>
 </li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="States.html">States</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of States</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="States/Cooldown.html">Cooldown</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Cooldown</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="States/Hurting.html">Hurting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="States/Shooting.html">Shooting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="States/Spawning.html">Spawning</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../CustomControllers.html">Custom Controllers</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of Custom Controllers</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../Collision.html">Collision</a></li>
@@ -217,7 +239,7 @@ Entity Component System (ECS). This includes the definition of the base Entity,
 Component and Manager classes.</p>
 <p>The Manager class handles the updating, rendering and deletion of Entities. Entities
 are grouped according to the groups defined in the
-<a class="reference internal" href="#_CPPv412group_labels" title="group_labels"><code class="xref cpp cpp-enum docutils literal notranslate"><span class="pre">group_labels</span></code></a> enum, and groups
+<code class="xref cpp cpp-enum docutils literal notranslate"><span class="pre">group_labels</span></code> enum, and groups
 are rendered in order. The addition of the entity to a group must be done manually.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -237,7 +259,7 @@ updated in the order that the components were added to the entity. For example:<
 <span class="n">player</span><span class="p">.</span><span class="n">addComponent</span><span class="o">&lt;</span><span class="n">Transform</span><span class="o">&gt;</span><span class="p">();</span>
 <span class="n">player</span><span class="p">.</span><span class="n">addComponent</span><span class="o">&lt;</span><span class="n">Sprite</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;player1&quot;</span><span class="p">);</span>
 <span class="n">player</span><span class="p">.</span><span class="n">addComponent</span><span class="o">&lt;</span><span class="n">KeyboardController</span><span class="o">&gt;</span><span class="p">();</span>
-<span class="n">player</span><span class="p">.</span><span class="n">add_group</span><span class="p">(</span><span class="n">PlayerGroup</span><span class="p">);</span>
+<span class="n">player</span><span class="p">.</span><span class="n">add_group</span><span class="p">(</span><span class="n">PLAYER_GROUP</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -247,14 +269,33 @@ updated in the order that the components were added to the entity. For example:<
 <li class="toctree-l1"><a class="reference internal" href="Components.html">Components</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="Components/Transform.html">Transform</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Components/Sprite.html">Sprite</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Components/KeyboardController.html">KeyboardController</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Components/KeyboardController.html">KeyboardController</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Components/CustomControllers/KeyboardPlayer.html">KeyboardPlayer</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Components/MouseController.html">MouseController</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Components/CustomControllers/MouseTest.html">MouseTest</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="Components/Collider.html">Collider</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Components/UILabel.html">UILabel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Components/Health.html">Health</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Components/Damage.html">Damage</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Entities.html">Entities</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="Entities/Projectile.html">Projectile</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Entities/Player.html">Player</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Entities/TempEntity.html">TempEntity</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="States.html">States</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="States/Cooldown.html">Cooldown</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="States/Hurting.html">Hurting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="States/Shooting.html">Shooting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="States/Spawning.html">Spawning</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -293,33 +334,33 @@ updated in the order that the components were added to the entity. For example:<
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-enums">Enums</p>
 <dl class="cpp enum">
-<dt class="sig sig-object cpp" id="_CPPv412group_labels">
-<span class="target" id="_e_c_s_8hpp_1a64b820e64867dca1bc6892adff3acae3"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">group_labels</span></span></span><a class="headerlink" href="#_CPPv412group_labels" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Enumerator for groups of entities: </p>
+<dt class="sig sig-object cpp" id="_CPPv411EntityGroup">
+<span class="target" id="_e_c_s_8hpp_1a74f25f02f296a05cbbf2080a493937bb"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">EntityGroup</span></span></span><a class="headerlink" href="#_CPPv411EntityGroup" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Enumerator for groups of entities (cannot be an enum class because its values are used in std::size_t dependant functions): </p>
 <p><em>Values:</em></p>
 <dl class="cpp enumerator">
-<dt class="sig sig-object cpp" id="_CPPv4N12group_labels8MapGroupE">
-<span class="target" id="_e_c_s_8hpp_1a64b820e64867dca1bc6892adff3acae3a9fb4567ca4b249c2a9c4df7722bd33b5"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MapGroup</span></span></span><a class="headerlink" href="#_CPPv4N12group_labels8MapGroupE" title="Permalink to this definition">#</a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N11EntityGroup9MAP_GROUPE">
+<span class="target" id="_e_c_s_8hpp_1a74f25f02f296a05cbbf2080a493937bba48b79a34b2d052fddda4c0d9f66991aa"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MAP_GROUP</span></span></span><a class="headerlink" href="#_CPPv4N11EntityGroup9MAP_GROUPE" title="Permalink to this definition">#</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp enumerator">
-<dt class="sig sig-object cpp" id="_CPPv4N12group_labels13ColliderGroupE">
-<span class="target" id="_e_c_s_8hpp_1a64b820e64867dca1bc6892adff3acae3acfac592e5bf3614c9cf28dc09225bff7"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ColliderGroup</span></span></span><a class="headerlink" href="#_CPPv4N12group_labels13ColliderGroupE" title="Permalink to this definition">#</a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N11EntityGroup14COLLIDER_GROUPE">
+<span class="target" id="_e_c_s_8hpp_1a74f25f02f296a05cbbf2080a493937bba4160faecf10b5fd35e2fe5dfe04ceee1"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">COLLIDER_GROUP</span></span></span><a class="headerlink" href="#_CPPv4N11EntityGroup14COLLIDER_GROUPE" title="Permalink to this definition">#</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp enumerator">
-<dt class="sig sig-object cpp" id="_CPPv4N12group_labels11PlayerGroupE">
-<span class="target" id="_e_c_s_8hpp_1a64b820e64867dca1bc6892adff3acae3ac36fdaea7b8f14eae975bb8f7f588167"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PlayerGroup</span></span></span><a class="headerlink" href="#_CPPv4N12group_labels11PlayerGroupE" title="Permalink to this definition">#</a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N11EntityGroup15TEMPORARY_GROUPE">
+<span class="target" id="_e_c_s_8hpp_1a74f25f02f296a05cbbf2080a493937bba8d84760c5d008f65a12c8cf969eee1f8"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TEMPORARY_GROUP</span></span></span><a class="headerlink" href="#_CPPv4N11EntityGroup15TEMPORARY_GROUPE" title="Permalink to this definition">#</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp enumerator">
-<dt class="sig sig-object cpp" id="_CPPv4N12group_labels10EnemyGroupE">
-<span class="target" id="_e_c_s_8hpp_1a64b820e64867dca1bc6892adff3acae3af1d98ddb8694892327a4eef5180f27fa"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">EnemyGroup</span></span></span><a class="headerlink" href="#_CPPv4N12group_labels10EnemyGroupE" title="Permalink to this definition">#</a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N11EntityGroup12PLAYER_GROUPE">
+<span class="target" id="_e_c_s_8hpp_1a74f25f02f296a05cbbf2080a493937bba247a08212255b6ca9d7751b52b41ff49"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PLAYER_GROUP</span></span></span><a class="headerlink" href="#_CPPv4N11EntityGroup12PLAYER_GROUPE" title="Permalink to this definition">#</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp enumerator">
-<dt class="sig sig-object cpp" id="_CPPv4N12group_labels15ProjectileGroupE">
-<span class="target" id="_e_c_s_8hpp_1a64b820e64867dca1bc6892adff3acae3afa3adaba9e3e3fc79d9317efabed9ea9"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ProjectileGroup</span></span></span><a class="headerlink" href="#_CPPv4N12group_labels15ProjectileGroupE" title="Permalink to this definition">#</a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N11EntityGroup12ATTACK_GROUPE">
+<span class="target" id="_e_c_s_8hpp_1a74f25f02f296a05cbbf2080a493937bbadd1de0c8772df1b0239d195f6e78d7f3"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ATTACK_GROUP</span></span></span><a class="headerlink" href="#_CPPv4N11EntityGroup12ATTACK_GROUPE" title="Permalink to this definition">#</a><br /></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -361,7 +402,7 @@ updated in the order that the components were added to the entity. For example:<
 <dd><div class="docutils container">
 <em>#include &lt;ECS.hpp&gt;</em></div>
 <p>Definition of the generic component class, which will be subsequently used for other specific ones (see Components.hpp). </p>
-<p>Subclassed by <a class="reference internal" href="Components/Collider.html#struct_collider"><span class="std std-ref">Collider</span></a>, <a class="reference internal" href="Components/KeyboardController.html#struct_keyboard_controller"><span class="std std-ref">KeyboardController</span></a>, <a class="reference internal" href="Components/Sprite.html#class_sprite"><span class="std std-ref">Sprite</span></a>, <a class="reference internal" href="Components/Transform.html#struct_transform"><span class="std std-ref">Transform</span></a>, <a class="reference internal" href="Components/UILabel.html#struct_u_i_label"><span class="std std-ref">UILabel</span></a></p>
+<p>Subclassed by <a class="reference internal" href="Components/Collider.html#struct_collider"><span class="std std-ref">Collider</span></a>, <a class="reference internal" href="States/Cooldown.html#struct_cooldown"><span class="std std-ref">Cooldown</span></a>, <a class="reference internal" href="Components/Damage.html#struct_damage"><span class="std std-ref">Damage</span></a>, <a class="reference internal" href="Components/Health.html#class_health"><span class="std std-ref">Health</span></a>, <a class="reference internal" href="Components/KeyboardController.html#struct_keyboard_controller"><span class="std std-ref">KeyboardController</span></a>, <a class="reference internal" href="Components/MouseController.html#struct_mouse_controller"><span class="std std-ref">MouseController</span></a>, <a class="reference internal" href="Components/Sprite.html#class_sprite"><span class="std std-ref">Sprite</span></a>, <a class="reference internal" href="Components/Transform.html#struct_transform"><span class="std std-ref">Transform</span></a>, <a class="reference internal" href="Components/UILabel.html#struct_u_i_label"><span class="std std-ref">UILabel</span></a></p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
@@ -387,6 +428,16 @@ updated in the order that the components were added to the entity. For example:<
 <dd><p>Rendering (called every game tick). </p>
 </dd></dl>
 
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N9Component9is_activeEv">
+<span class="target" id="class_component_1ae1a97027b9862ee3e41e6566501d765e"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">is_active</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9Component9is_activeEv" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N9Component7destroyEv">
+<span class="target" id="class_component_1a2ffe59bf3ac18fa3f5141edaa222603e"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">destroy</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9Component7destroyEv" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
 </div>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
@@ -397,6 +448,14 @@ updated in the order that the components were added to the entity. For example:<
 </dd></dl>
 
 </div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-protected-attributes">Protected Attributes</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N9Component6activeE">
+<span class="target" id="class_component_1a2ebc869395d66425690dfeae99d1b791"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">active</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">true</span></span><a class="headerlink" href="#_CPPv4N9Component6activeE" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+</div>
 </dd></dl>
 
 <dl class="cpp class">
@@ -405,22 +464,22 @@ updated in the order that the components were added to the entity. For example:<
 <dd><div class="docutils container">
 <em>#include &lt;ECS.hpp&gt;</em></div>
 <p>Definition of the generic <a class="reference internal" href="#class_entity"><span class="std std-ref">Entity</span></a> class. </p>
-<p>Subclassed by <a class="reference internal" href="Entities/Player.html#struct_player"><span class="std std-ref">Player</span></a>, <a class="reference internal" href="Entities/Projectile.html#struct_projectile"><span class="std std-ref">Projectile</span></a></p>
+<p>Subclassed by <a class="reference internal" href="Entities/Player.html#struct_player"><span class="std std-ref">Player</span></a>, <a class="reference internal" href="Entities/Projectile.html#struct_projectile"><span class="std std-ref">Projectile</span></a>, <a class="reference internal" href="Entities/TempEntity.html#struct_temp_entity"><span class="std std-ref">TempEntity</span></a></p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6Entity6EntityER7Manager">
-<span class="target" id="class_entity_1ae284eaefa784a700f960ad81a6a40ffc"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Entity</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv47Manager" title="Manager"><span class="n"><span class="pre">Manager</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">user_manager</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Entity6EntityER7Manager" title="Permalink to this definition">#</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N6Entity6EntityER7ManagerNSt6stringE">
-<span class="target" id="class_entity_1a88344f143eec598e787a7246808482fb"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Entity</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv47Manager" title="Manager"><span class="n"><span class="pre">Manager</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">user_manager</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mName</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Entity6EntityER7ManagerNSt6stringE" title="Permalink to this definition">#</a><br /></dt>
+<span class="target" id="class_entity_1a88344f143eec598e787a7246808482fb"></span><span class="sig-name descname"><span class="n"><span class="pre">Entity</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv47Manager" title="Manager"><span class="n"><span class="pre">Manager</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">user_manager</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mName</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Entity6EntityER7ManagerNSt6stringE" title="Permalink to this definition">#</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N6EntityD0Ev">
 <span class="target" id="class_entity_1a588098978eea6a3486b7361605ff3f0f"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~Entity</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6EntityD0Ev" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6Entity7refreshEv">
+<span class="target" id="class_entity_1aabcc7161ef99ca8dbe5d68f95af59a42"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">refresh</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Entity7refreshEv" title="Permalink to this definition">#</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
@@ -481,16 +540,15 @@ updated in the order that the components were added to the entity. For example:<
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6Entity9add_groupE5Group">
-<span class="target" id="class_entity_1af787dec6fc2e84db4890788610a407cc"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add_group</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv45Group" title="Group"><span class="n"><span class="pre">Group</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">group</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Entity9add_groupE5Group" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Function for adding the <a class="reference internal" href="#class_entity"><span class="std std-ref">Entity</span></a> to a group. This will call the <a class="reference internal" href="#class_entity"><span class="std std-ref">Entity</span></a>’s manager’s <a class="reference internal" href="#class_manager_1a630103c77c24b00bc8145bcd912cbe91"><span class="std std-ref">Manager::add_to_group</span></a> function. Because of this, this function is defined in ECS.cpp (because it requires full definition of the <a class="reference internal" href="#class_manager"><span class="std std-ref">Manager</span></a> class, and declaring outside <a class="reference internal" href="#class_entity"><span class="std std-ref">Entity</span></a>’s definition cause a linker “duplicate symbols” error). </p>
+<dt class="sig sig-object cpp" id="_CPPv4N6Entity9add_groupENSt6size_tE">
+<span class="target" id="class_entity_1a5456d5f9ff72ebae941dc58f947f45d5"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add_group</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">group</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Entity9add_groupENSt6size_tE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Function for adding the <a class="reference internal" href="#class_entity"><span class="std std-ref">Entity</span></a> to a group. This will call the <a class="reference internal" href="#class_entity"><span class="std std-ref">Entity</span></a>’s manager’s <a class="reference internal" href="#class_manager_1adee768b5ebb139e34bf77dc090824ed2"><span class="std std-ref">Manager::add_to_group</span></a> function. Because of this, this function is defined in ECS.cpp (because it requires full definition of the <a class="reference internal" href="#class_manager"><span class="std std-ref">Manager</span></a> class, and declaring outside <a class="reference internal" href="#class_entity"><span class="std std-ref">Entity</span></a>’s definition cause a linker “duplicate symbols” error). </p>
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N6Entity9del_groupE5Group">
-<span class="target" id="class_entity_1a89d8b9b2b334f927d35bc4e7344becf9"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">del_group</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv45Group" title="Group"><span class="n"><span class="pre">Group</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">group</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Entity9del_groupE5Group" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Function for removing the <a class="reference internal" href="#class_entity"><span class="std std-ref">Entity</span></a> from a group. </p>
-</dd></dl>
+<dt class="sig sig-object cpp" id="_CPPv4N6Entity9del_groupENSt6size_tE">
+<span class="target" id="class_entity_1addabbbdd21967fd78f233ab01a9d8a53"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">del_group</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">group</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Entity9del_groupENSt6size_tE" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N6Entity8get_nameEv">
@@ -509,7 +567,7 @@ updated in the order that the components were added to the entity. For example:<
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N6Entity7destroyEv">
-<span class="target" id="class_entity_1a691dbe5f9ec930c27af2af0b97907a9e"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">destroy</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Entity7destroyEv" title="Permalink to this definition">#</a><br /></dt>
+<span class="target" id="class_entity_1a6e7e3de653fca50fdbdabf9f59c1665e"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">destroy</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Entity7destroyEv" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Destroys the <a class="reference internal" href="#class_entity"><span class="std std-ref">Entity</span></a> by setting “active” member to false. The <a class="reference internal" href="#class_entity"><span class="std std-ref">Entity</span></a>’s <a class="reference internal" href="#class_manager"><span class="std std-ref">Manager</span></a> will then delete it. </p>
 </dd></dl>
 
@@ -525,13 +583,7 @@ updated in the order that the components were added to the entity. For example:<
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N6Entity4nameE">
 <span class="target" id="class_entity_1a931b21fbdebb1a5963b4bcab5df128f5"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">name</span></span></span><a class="headerlink" href="#_CPPv4N6Entity4nameE" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>A name to identify the entity. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N6Entity6activeE">
-<span class="target" id="class_entity_1a939da33e8b67b1d2ee227930aa72da3b"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">active</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">true</span></span><a class="headerlink" href="#_CPPv4N6Entity6activeE" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Used to decide whether to delete an entity or not at each game tick. This is handled in <a class="reference internal" href="#class_manager_1adc5c66704fd1b0a9b9d38de8fdcb3748"><span class="std std-ref">Manager::refresh</span></a>. </p>
+<dd><p>A name to identify the entity Used to decide whether to delete an entity or not at each game tick. This is handled in <a class="reference internal" href="#class_manager_1adc5c66704fd1b0a9b9d38de8fdcb3748"><span class="std std-ref">Manager::refresh</span></a>. </p>
 </dd></dl>
 
 <dl class="cpp var">
@@ -559,6 +611,14 @@ updated in the order that the components were added to the entity. For example:<
 </dd></dl>
 
 </div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-protected-attributes">Protected Attributes</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6Entity6activeE">
+<span class="target" id="class_entity_1a939da33e8b67b1d2ee227930aa72da3b"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">active</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">true</span></span><a class="headerlink" href="#_CPPv4N6Entity6activeE" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+</div>
 </dd></dl>
 
 <dl class="cpp class">
@@ -572,20 +632,25 @@ updated in the order that the components were added to the entity. For example:<
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N7Manager9addEntityENSt6stringE">
-<span class="target" id="class_manager_1a83a0cd9af751c0c689ba6aa691dd53ad"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv46Entity" title="Entity"><span class="n"><span class="pre">Entity</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">addEntity</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mName</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;None&quot;</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7Manager9addEntityENSt6stringE" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Function for adding an entity to the <a class="reference internal" href="#class_manager_1ae8d5bafb0dbb0e8c6e78ce15a4e465af"><span class="std std-ref">entity_vector</span></a> by creating a new pointer. </p>
+<span class="target" id="class_manager_1ae5714017158c6bfc6fcafb9bf231e7a9"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv46Entity" title="Entity"><span class="n"><span class="pre">Entity</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">addEntity</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mName</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;None&quot;</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7Manager9addEntityENSt6stringE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Function for adding an entity to the <a class="reference internal" href="#class_manager_1a6b3491e814e0157885181b2e4bb71e34"><span class="std std-ref">entity_vector</span></a> by creating a new pointer. </p>
 </dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N7Manager9addEntityEP6Entity">
-<span class="target" id="class_manager_1a3fd5f1d7aa8fab2e53d34f58e5262f82"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv46Entity" title="Entity"><span class="n"><span class="pre">Entity</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">addEntity</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv46Entity" title="Entity"><span class="n"><span class="pre">Entity</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">e</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7Manager9addEntityEP6Entity" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Instead, add an existing entity to the <a class="reference internal" href="#class_manager_1ae8d5bafb0dbb0e8c6e78ce15a4e465af"><span class="std std-ref">entity_vector</span></a>. </p>
+<span class="target" id="class_manager_1a5778ea8ab0e0ace5197717fcb446f7c2"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv46Entity" title="Entity"><span class="n"><span class="pre">Entity</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">addEntity</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv46Entity" title="Entity"><span class="n"><span class="pre">Entity</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">e</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7Manager9addEntityEP6Entity" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Instead, add an existing entity to the <a class="reference internal" href="#class_manager_1a6b3491e814e0157885181b2e4bb71e34"><span class="std std-ref">entity_vector</span></a>. </p>
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N7Manager12add_to_groupEP6Entity5Group">
-<span class="target" id="class_manager_1a630103c77c24b00bc8145bcd912cbe91"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add_to_group</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv46Entity" title="Entity"><span class="n"><span class="pre">Entity</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">entity</span></span>, <a class="reference internal" href="#_CPPv45Group" title="Group"><span class="n"><span class="pre">Group</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">group</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7Manager12add_to_groupEP6Entity5Group" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Add an entity to a group. This is called by <a class="reference internal" href="#class_entity"><span class="std std-ref">Entity</span></a>’s <a class="reference internal" href="#class_entity_1af787dec6fc2e84db4890788610a407cc"><span class="std std-ref">Entity::add_group</span></a>. It shouldn’t be called directly. </p>
+<dt class="sig sig-object cpp" id="_CPPv4N7Manager9addEntityEKNSt10shared_ptrI6EntityEE">
+<span class="target" id="class_manager_1a33732cb9f8a43b5e36a99e6523c86e54"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv46Entity" title="Entity"><span class="n"><span class="pre">Entity</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">addEntity</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv46Entity" title="Entity"><span class="n"><span class="pre">Entity</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">sh_ptr</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7Manager9addEntityEKNSt10shared_ptrI6EntityEE" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7Manager12add_to_groupEP6EntityNSt6size_tE">
+<span class="target" id="class_manager_1adee768b5ebb139e34bf77dc090824ed2"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add_to_group</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv46Entity" title="Entity"><span class="n"><span class="pre">Entity</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">entity</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">group</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7Manager12add_to_groupEP6EntityNSt6size_tE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Add an entity to a group. This is called by <a class="reference internal" href="#class_entity"><span class="std std-ref">Entity</span></a>’s <a class="reference internal" href="#class_entity_1a5456d5f9ff72ebae941dc58f947f45d5"><span class="std std-ref">Entity::add_group</span></a>. It shouldn’t be called directly. </p>
 </dd></dl>
 
 <dl class="cpp function">
@@ -597,13 +662,13 @@ updated in the order that the components were added to the entity. For example:<
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N7Manager6updateEv">
 <span class="target" id="class_manager_1af43da42550bd9746c5ea61a6aeee80de"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">update</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7Manager6updateEv" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Function for updating every entity in the <a class="reference internal" href="#class_manager_1ae8d5bafb0dbb0e8c6e78ce15a4e465af"><span class="std std-ref">Manager::entity_vector</span></a>. </p>
+<dd><p>Function for updating every entity in the <a class="reference internal" href="#class_manager_1a6b3491e814e0157885181b2e4bb71e34"><span class="std std-ref">Manager::entity_vector</span></a>. </p>
 </dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N7Manager6renderEv">
 <span class="target" id="class_manager_1a789d377e023a5c47fdc07a0bef11efbf"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">render</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7Manager6renderEv" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Function for rendering every entity in the <a class="reference internal" href="#class_manager_1ae8d5bafb0dbb0e8c6e78ce15a4e465af"><span class="std std-ref">entity_vector</span></a>. This is done group by group, in the order defined in the group_labels enum. </p>
+<dd><p>Function for rendering every entity in the <a class="reference internal" href="#class_manager_1a6b3491e814e0157885181b2e4bb71e34"><span class="std std-ref">entity_vector</span></a>. This is done group by group, in the order defined in the group_labels enum. </p>
 </dd></dl>
 
 <dl class="cpp function">
@@ -612,13 +677,18 @@ updated in the order that the components were added to the entity. For example:<
 <dd><p>Checks for inactive <a class="reference internal" href="#class_entity"><span class="std std-ref">Entity</span></a>’s and delete them. Defined in ECS.cpp because it is long. </p>
 </dd></dl>
 
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N7ManagerD0Ev">
+<span class="target" id="class_manager_1a3dbc694b640c70009c5e0dec515d692c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~Manager</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7ManagerD0Ev" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
 </div>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N7Manager13entity_vectorE">
-<span class="target" id="class_manager_1ae8d5bafb0dbb0e8c6e78ce15a4e465af"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unique_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv46Entity" title="Entity"><span class="n"><span class="pre">Entity</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">entity_vector</span></span></span><a class="headerlink" href="#_CPPv4N7Manager13entity_vectorE" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Vector of entities. </p>
+<span class="target" id="class_manager_1a6b3491e814e0157885181b2e4bb71e34"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv46Entity" title="Entity"><span class="n"><span class="pre">Entity</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">entity_vector</span></span></span><a class="headerlink" href="#_CPPv4N7Manager13entity_vectorE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Vector of entities. We define it as a shared pointer because we want Game::camera_ref_entity to be a weak pointer of a given entity, which requires it to be a shared_ptr. We don’t want to share its ownership, though. </p>
 </dd></dl>
 
 <dl class="cpp var">

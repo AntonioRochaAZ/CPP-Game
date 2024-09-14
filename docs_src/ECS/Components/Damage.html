@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="Player (entity)" href="Player.html" /><link rel="prev" title="Entities" href="../Entities.html" />
+<link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="Entities" href="../Entities.html" /><link rel="prev" title="Health (component)" href="Health.html" />
 
     <link rel="shortcut icon" href="../../../_static/favicon.ico"/><!-- Generated with Sphinx 6.2.1 and Furo 2024.01.29 -->
-        <title>Projectile (entity) - CPP Game</title>
+        <title>Damage (component) - CPP Game</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=369552022d0b975c8e74270ce6eabe0fb7978f24" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -157,27 +157,27 @@
   <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1 current has-children"><a class="reference internal" href="../ECS.html">Entity Component System (ECS)</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Entity Component System (ECS)</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2 has-children"><a class="reference internal" href="../Components.html">Components</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Components</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../Components/Transform.html">Transform</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../Components/Sprite.html">Sprite</a></li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../Components/KeyboardController.html">KeyboardController</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of KeyboardController</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l4"><a class="reference internal" href="../Components/CustomControllers/KeyboardPlayer.html">KeyboardPlayer</a></li>
+<li class="toctree-l2 current has-children"><a class="reference internal" href="../Components.html">Components</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Components</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="Transform.html">Transform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Sprite.html">Sprite</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="KeyboardController.html">KeyboardController</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of KeyboardController</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="CustomControllers/KeyboardPlayer.html">KeyboardPlayer</a></li>
 </ul>
 </li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../Components/MouseController.html">MouseController</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of MouseController</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l4"><a class="reference internal" href="../Components/CustomControllers/MouseTest.html">MouseTest</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="MouseController.html">MouseController</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of MouseController</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="CustomControllers/MouseTest.html">MouseTest</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../Components/Collider.html">Collider</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../Components/UILabel.html">UILabel</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../Components/Health.html">Health</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../Components/Damage.html">Damage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Collider.html">Collider</a></li>
+<li class="toctree-l3"><a class="reference internal" href="UILabel.html">UILabel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Health.html">Health</a></li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">Damage</a></li>
 </ul>
 </li>
-<li class="toctree-l2 current has-children"><a class="reference internal" href="../Entities.html">Entities</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Entities</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">Projectile</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Player.html">Player</a></li>
-<li class="toctree-l3"><a class="reference internal" href="TempEntity.html">TempEntity</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Entities.html">Entities</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Entities</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Entities/Projectile.html">Projectile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Entities/Player.html">Player</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Entities/TempEntity.html">TempEntity</a></li>
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../States.html">States</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of States</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -232,64 +232,33 @@
           </label>
         </div>
         <article role="main">
-          <section id="projectile-entity">
-<h1>Projectile (entity)<a class="headerlink" href="#projectile-entity" title="Permalink to this heading">#</a></h1>
-<p>This class defines a Projectile Entity. Currently, it is only instantiated
-in the <a class="reference internal" href="../Components/KeyboardController.html#_CPPv418KeyboardController" title="KeyboardController"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">KeyboardController</span></code></a> component, in a not very generic call.</p>
-<p>As of now, not very generic. Eventually, it would be ideal to be able to have multiple
-animations per projectile (beginning, flying and ending, though the beginning one might
-be included in the Player/Enemy entity shooting animation instead).</p>
-<p>As of now, all projectiles have the <code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">collision_handle::CollisionHandle::DESTROY</span></code>
-collider tag.</p>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-typedefs">Typedefs</p>
-<dl class="cpp type">
-<dt class="sig sig-object cpp" id="_CPPv43vec">
-<span class="target" id="_projectile_8hpp_1a8eef6d9f3318172ff1eeeb36a0ec9b70"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">vec</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">Eigen</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Vector2f</span></span><br /></dt>
-<dd></dd></dl>
-
-</div>
+          <section id="damage-component">
+<h1>Damage (component)<a class="headerlink" href="#damage-component" title="Permalink to this heading">#</a></h1>
+<p>A component given to an entity to make it damage other entities
+that have the <a class="reference internal" href="Health.html#_CPPv46Health" title="Health"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">Health</span></code></a> component.</p>
 <dl class="cpp struct">
-<dt class="sig sig-object cpp" id="_CPPv410Projectile">
-<span class="target" id="struct_projectile"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Projectile</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><a class="reference internal" href="../ECS.html#_CPPv46Entity" title="Entity"><span class="n"><span class="pre">Entity</span></span></a><a class="headerlink" href="#_CPPv410Projectile" title="Permalink to this definition">#</a><br /></dt>
-<dd><div class="docutils container">
-<em>#include &lt;Projectile.hpp&gt;</em></div>
-<p><a class="reference internal" href="#struct_projectile"><span class="std std-ref">Projectile</span></a> <a class="reference internal" href="../ECS.html#class_entity"><span class="std std-ref">Entity</span></a>. </p>
-<div class="breathe-sectiondef docutils container">
+<dt class="sig sig-object cpp" id="_CPPv46Damage">
+<span class="target" id="struct_damage"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Damage</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><a class="reference internal" href="../ECS.html#_CPPv49Component" title="Component"><span class="n"><span class="pre">Component</span></span></a><a class="headerlink" href="#_CPPv46Damage" title="Permalink to this definition">#</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N10Projectile10ProjectileER7ManagerNSt6stringE3vecf3vecNSt6stringEffiP6Entity">
-<span class="target" id="struct_projectile_1a7eee98f9dce6f27998906d29ea118d59"></span><span class="sig-name descname"><span class="n"><span class="pre">Projectile</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="../ECS.html#_CPPv47Manager" title="Manager"><span class="n"><span class="pre">Manager</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">man</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">name</span></span>, <a class="reference internal" href="../Components/KeyboardController.html#_CPPv43vec" title="vec"><span class="n"><span class="pre">vec</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">position</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">speed</span></span>, <a class="reference internal" href="../Components/KeyboardController.html#_CPPv43vec" title="vec"><span class="n"><span class="pre">vec</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">velocity</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">sprite_name</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">sprite_scale</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">damage</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rng</span></span>, <a class="reference internal" href="../ECS.html#_CPPv46Entity" title="Entity"><span class="n"><span class="pre">Entity</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">owner</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">nullptr</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10Projectile10ProjectileER7ManagerNSt6stringE3vecf3vecNSt6stringEffiP6Entity" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Constructor </p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>rng</strong> – The range of the projectile before it is destroyed (in pixels). </p></li>
-<li><p><strong>owner</strong> – The <a class="reference internal" href="../ECS.html#class_entity"><span class="std std-ref">Entity</span></a> that has shot the projectile. This is passed to the <a class="reference internal" href="../Components/Damage.html#struct_damage"><span class="std std-ref">Damage</span></a> component’s immune vector (so that entity cannot hit itself). </p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N10Projectile6updateEv">
-<span class="target" id="struct_projectile_1ac41ad56034b53e739619fabbd5e49652"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">update</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N10Projectile6updateEv" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Default update function: updates each component. </p>
-</dd></dl>
+<dt class="sig sig-object cpp" id="_CPPv4N6Damage6DamageEf">
+<span class="target" id="struct_damage_1aba1437e6e0a0929891743f2ae3b14c04"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Damage</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mDamage</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Damage6DamageEf" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
 
 </div>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
 <dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N10Projectile5rangeE">
-<span class="target" id="struct_projectile_1acce119ca47db626cd972e1b84b2d5493"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">range</span></span></span><a class="headerlink" href="#_CPPv4N10Projectile5rangeE" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>How far it the projectile will go before being deleted. </p>
+<dt class="sig sig-object cpp" id="_CPPv4N6Damage6damageE">
+<span class="target" id="struct_damage_1aec89e5ca3372eb57c76f44dab68330c4"></span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">damage</span></span></span><a class="headerlink" href="#_CPPv4N6Damage6damageE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>The damage it does (in health points). </p>
 </dd></dl>
 
 <dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N10Projectile8distanceE">
-<span class="target" id="struct_projectile_1a76b2d32805996f9de38543871434ee62"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">distance</span></span></span><a class="headerlink" href="#_CPPv4N10Projectile8distanceE" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>How far the projectile has travelled so far. </p>
+<dt class="sig sig-object cpp" id="_CPPv4N6Damage6immuneE">
+<span class="target" id="struct_damage_1a5afd9a99cae713210df5eb1fd1b36f94"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="../ECS.html#_CPPv46Entity" title="Entity"><span class="n"><span class="pre">Entity</span></span></a><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">immune</span></span></span><a class="headerlink" href="#_CPPv4N6Damage6immuneE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Entities that should not be hurt by this attack. This can be used for having teams, or avoiding the original entity to get hurt from its own attack. </p>
 </dd></dl>
 
 </div>
@@ -302,23 +271,23 @@ collider tag.</p>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="Player.html">
+          <a class="next-page" href="../Entities.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Player (entity)</div>
+                <div class="title">Entities</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../Entities.html">
+          <a class="prev-page" href="Health.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Entities</div>
+                <div class="title">Health (component)</div>
                 
               </div>
             </a>

@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="Entities" href="../Entities.html" /><link rel="prev" title="Collider" href="Collider.html" />
+<link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="Health (component)" href="Health.html" /><link rel="prev" title="Collider (component)" href="Collider.html" />
 
     <link rel="shortcut icon" href="../../../_static/favicon.ico"/><!-- Generated with Sphinx 6.2.1 and Furo 2024.01.29 -->
-        <title>UILabel - CPP Game</title>
+        <title>UILabel (component) - CPP Game</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=369552022d0b975c8e74270ce6eabe0fb7978f24" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -160,16 +160,38 @@
 <li class="toctree-l2 current has-children"><a class="reference internal" href="../Components.html">Components</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Components</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="Transform.html">Transform</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Sprite.html">Sprite</a></li>
-<li class="toctree-l3"><a class="reference internal" href="KeyboardController.html">KeyboardController</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="KeyboardController.html">KeyboardController</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of KeyboardController</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="CustomControllers/KeyboardPlayer.html">KeyboardPlayer</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="MouseController.html">MouseController</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of MouseController</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="CustomControllers/MouseTest.html">MouseTest</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="Collider.html">Collider</a></li>
 <li class="toctree-l3 current current-page"><a class="current reference internal" href="#">UILabel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Health.html">Health</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Damage.html">Damage</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../Entities.html">Entities</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Entities</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Entities.html">Entities</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Entities</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../Entities/Projectile.html">Projectile</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../Entities/Player.html">Player</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Entities/TempEntity.html">TempEntity</a></li>
 </ul>
 </li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../States.html">States</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of States</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../States/Cooldown.html">Cooldown</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Cooldown</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../States/Hurting.html">Hurting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../States/Shooting.html">Shooting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../States/Spawning.html">Spawning</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../CustomControllers.html">Custom Controllers</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of Custom Controllers</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../Collision.html">Collision</a></li>
@@ -210,8 +232,8 @@
           </label>
         </div>
         <article role="main">
-          <section id="uilabel">
-<h1>UILabel<a class="headerlink" href="#uilabel" title="Permalink to this heading">#</a></h1>
+          <section id="uilabel-component">
+<h1>UILabel (component)<a class="headerlink" href="#uilabel-component" title="Permalink to this heading">#</a></h1>
 <p>This component renders text on screen. It depends on the <a class="reference internal" href="Transform.html#_CPPv49Transform" title="Transform"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">Transform</span></code></a> component
 of the <a class="reference internal" href="../ECS.html#_CPPv46Entity" title="Entity"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">Entity</span></code></a>. The <a class="reference internal" href="Transform.html#_CPPv49Transform" title="Transform"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">Transform</span></code></a> component must update before
 this, so it must be added to the <a class="reference internal" href="../ECS.html#_CPPv46Entity" title="Entity"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">Entity</span></code></a> first.</p>
@@ -260,7 +282,7 @@ the text, which is not done all the time.</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N7UILabel8set_textENSt6stringENSt6stringE">
 <span class="target" id="struct_u_i_label_1a054fb446f223887f81eee2d65c347bd1"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_text</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mText</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mFont_id</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7UILabel8set_textENSt6stringENSt6stringE" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Sets the text to be displayed. Called in the constructor. </p>
+<dd><p>Sets the text to be displayed. Called in the constructor. TODO: separate changing the font ID and colour and size in other functions. </p>
 </dd></dl>
 
 <dl class="cpp function">
@@ -342,12 +364,12 @@ the text, which is not done all the time.</p>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../Entities.html">
+          <a class="next-page" href="Health.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Entities</div>
+                <div class="title">Health (component)</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -358,7 +380,7 @@ the text, which is not done all the time.</p>
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Collider</div>
+                <div class="title">Collider (component)</div>
                 
               </div>
             </a>

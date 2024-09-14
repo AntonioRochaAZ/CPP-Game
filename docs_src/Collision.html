@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Game class" href="Game.html" /><link rel="prev" title="Projectile" href="ECS/Entities/Player.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Game class" href="Game.html" /><link rel="prev" title="Custom Controllers" href="CustomControllers.html" />
 
     <link rel="shortcut icon" href="../_static/favicon.ico"/><!-- Generated with Sphinx 6.2.1 and Furo 2024.01.29 -->
         <title>Collision class - CPP Game</title>
@@ -160,16 +160,38 @@
 <li class="toctree-l2 has-children"><a class="reference internal" href="ECS/Components.html">Components</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Components</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="ECS/Components/Transform.html">Transform</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ECS/Components/Sprite.html">Sprite</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ECS/Components/KeyboardController.html">KeyboardController</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="ECS/Components/KeyboardController.html">KeyboardController</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of KeyboardController</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="ECS/Components/CustomControllers/KeyboardPlayer.html">KeyboardPlayer</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="ECS/Components/MouseController.html">MouseController</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of MouseController</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="ECS/Components/CustomControllers/MouseTest.html">MouseTest</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="ECS/Components/Collider.html">Collider</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ECS/Components/UILabel.html">UILabel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ECS/Components/Health.html">Health</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ECS/Components/Damage.html">Damage</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="ECS/Entities.html">Entities</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Entities</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="ECS/Entities.html">Entities</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Entities</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="ECS/Entities/Projectile.html">Projectile</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ECS/Entities/Player.html">Player</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ECS/Entities/TempEntity.html">TempEntity</a></li>
 </ul>
 </li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="ECS/States.html">States</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of States</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="ECS/States/Cooldown.html">Cooldown</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Cooldown</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="ECS/States/Hurting.html">Hurting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ECS/States/Shooting.html">Shooting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ECS/States/Spawning.html">Spawning</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="CustomControllers.html">Custom Controllers</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of Custom Controllers</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Collision</a></li>
@@ -249,7 +271,7 @@ A quick solution to this could be to define a quicker game cycle, but where only
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N9Collision18get_collision_timeEffffffffffffff">
 <span class="target" id="struct_collision_1adeabea3107053e8d0cae978b03c58d80"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">tuple</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">float</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_collision_time</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">xa</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">xb</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ya</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">yb</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">speed_a</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">speed_b</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">vxa</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">vxb</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">vya</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">vyb</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">wa</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">wb</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ha</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">hb</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N9Collision18get_collision_timeEffffffffffffff" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Function called when certain types of collision happens, inside of the <a class="reference internal" href="#struct_collision_1a8c89f7e55c87bfbb200db0a7ae40fa13"><span class="std std-ref">Collision::handle_collisions</span></a> function. Specifically, this function is called when an object’s position must be set back in order to avoid intersecting objects. This can happend between an immovable object and a player (or another entity that cannot cross such objects), or between two MOVABLE_OBJECTS etc.</p>
+<dd><p>Function called when certain types of collision happens, inside of the <a class="reference internal" href="#struct_collision_1a8c89f7e55c87bfbb200db0a7ae40fa13"><span class="std std-ref">Collision::handle_collisions</span></a> function. Specifically, this function is called when an object’s position must be set back in order to avoid intersecting objects. This can happend between an immovable object and a player (or another entity that cannot cross such objects), or between two CollisionHandle::MOVABLES etc.</p>
 <p>In those cases, to solve the collision, one or both of the objects must be moved back in the opposite direction of their velocity, until at least one of the collision conditions defined in collider_AABB is no longer met. This is done by calculating the amount of time we must rollback so that one of the conditions is no longer met. Than, we can use this time to update the objects’ positions (r = r_collision - speed * v * calculated time).</p>
 <p>For more thorough information, check source code comments.</p>
 <p>This function returns:<ol class="lowerroman simple">
@@ -257,7 +279,7 @@ A quick solution to this could be to define a quicker game cycle, but where only
 <li><p>An integer indicating the index (starting at zero) of the condition which is not met. This is useful to knowing in which axis we have to reset the player’s position. This is useful because, if we only return the object’s position in time, it will end up getting stuck in the contact point. By taking the axis of the collision into account, we’ll make the object slide on the surface of the object it is colliding with.</p></li>
 </ol>
 </p>
-<p>Why not pass the Colliders directly? In the case of IMMOVABLE objects, we’ll pass an artifical value of speed = 0, even if they are moving, so that we can update the colliding MOVABLE_OBJECT correctly. Despite being much more verbose, this function definition gives us more flexibility. </p>
+<p>Why not pass the Colliders directly? In the case of IMMOVABLE objects, we’ll pass an artifical value of speed = 0, even if they are moving, so that we can update the colliding CollisionHandle::MOVABLE correctly. Despite being much more verbose, this function definition gives us more flexibility. </p>
 </dd></dl>
 
 <dl class="cpp function">
@@ -285,14 +307,14 @@ A quick solution to this could be to define a quicker game cycle, but where only
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="ECS/Entities/Player.html">
+          <a class="prev-page" href="CustomControllers.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Projectile</div>
+                <div class="title">Custom Controllers</div>
                 
               </div>
             </a>

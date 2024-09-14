@@ -1,5 +1,5 @@
-Transform
-=========
+Transform (component)
+=====================
 
 Component defining the position of an Entity on screen. Other components
 may depend on this one for getting the position of the entity on the screen.

@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="KeyboardController" href="KeyboardController.html" /><link rel="prev" title="Transform" href="Transform.html" />
+<link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="KeyboardController (component)" href="KeyboardController.html" /><link rel="prev" title="Transform (component)" href="Transform.html" />
 
     <link rel="shortcut icon" href="../../../_static/favicon.ico"/><!-- Generated with Sphinx 6.2.1 and Furo 2024.01.29 -->
-        <title>Sprite - CPP Game</title>
+        <title>Sprite (component) - CPP Game</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=369552022d0b975c8e74270ce6eabe0fb7978f24" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -160,16 +160,38 @@
 <li class="toctree-l2 current has-children"><a class="reference internal" href="../Components.html">Components</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Components</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="Transform.html">Transform</a></li>
 <li class="toctree-l3 current current-page"><a class="current reference internal" href="#">Sprite</a></li>
-<li class="toctree-l3"><a class="reference internal" href="KeyboardController.html">KeyboardController</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="KeyboardController.html">KeyboardController</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of KeyboardController</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="CustomControllers/KeyboardPlayer.html">KeyboardPlayer</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="MouseController.html">MouseController</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of MouseController</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="CustomControllers/MouseTest.html">MouseTest</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="Collider.html">Collider</a></li>
 <li class="toctree-l3"><a class="reference internal" href="UILabel.html">UILabel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Health.html">Health</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Damage.html">Damage</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../Entities.html">Entities</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Entities</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Entities.html">Entities</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Entities</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../Entities/Projectile.html">Projectile</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../Entities/Player.html">Player</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Entities/TempEntity.html">TempEntity</a></li>
 </ul>
 </li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../States.html">States</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of States</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../States/Cooldown.html">Cooldown</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Cooldown</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../States/Hurting.html">Hurting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../States/Shooting.html">Shooting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../States/Spawning.html">Spawning</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../CustomControllers.html">Custom Controllers</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of Custom Controllers</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../Collision.html">Collision</a></li>
@@ -210,8 +232,8 @@
           </label>
         </div>
         <article role="main">
-          <section id="sprite">
-<h1>Sprite<a class="headerlink" href="#sprite" title="Permalink to this heading">#</a></h1>
+          <section id="sprite-component">
+<h1>Sprite (component)<a class="headerlink" href="#sprite-component" title="Permalink to this heading">#</a></h1>
 <p>Component used for handling Entity’s sprites (textures and animations). Although
 texture loading and their memory management are now completely handled by the
 <a class="reference internal" href="../../Game.html#_CPPv4N4Game6assetsE" title="Game::assets"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">Game::assets</span></code></a> (class of type
@@ -328,8 +350,18 @@ at once. This would allow better control of some animations.</p>
 <dd></dd></dl>
 
 <dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite10get_xscaleEv">
+<span class="target" id="class_sprite_1a51748b600e3d3d3ddbcb63853998ca66"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_xscale</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite10get_xscaleEv" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv4N6Sprite10set_yscaleEf">
 <span class="target" id="class_sprite_1acacdbb7bffcfd768e7c4feeba233daee"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_yscale</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">scly</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite10set_yscaleEf" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite10get_yscaleEv">
+<span class="target" id="class_sprite_1ab6164dd7c2f1ab98c46e309311a9f7c8"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_yscale</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6Sprite10get_yscaleEv" title="Permalink to this definition">#</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
@@ -364,6 +396,12 @@ at once. This would allow better control of some animations.</p>
 </dd></dl>
 
 <dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite12m_texture_idE">
+<span class="target" id="class_sprite_1a23456e98459ea5538ddaeb30cc4d1e34"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">m_texture_id</span></span></span><a class="headerlink" href="#_CPPv4N6Sprite12m_texture_idE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>The texture ID. </p>
+</dd></dl>
+
+<dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N6Sprite7textureE">
 <span class="target" id="class_sprite_1a531ed274733d916261f49e1a2cbb6ba9"></span><span class="n"><span class="pre">SDL_Texture</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">texture</span></span></span><a class="headerlink" href="#_CPPv4N6Sprite7textureE" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>(<code class="docutils literal notranslate"><span class="pre">scale_x</span> <span class="pre">=</span> <span class="pre">dst_rect.w/src_rect.w</span></code> and <code class="docutils literal notranslate"><span class="pre">scale_y</span> <span class="pre">=</span> <span class="pre">dst_rect.h/src_rect.h</span></code>). </p>
@@ -379,7 +417,13 @@ at once. This would allow better control of some animations.</p>
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N6Sprite11sprite_flipE">
 <span class="target" id="class_sprite_1a2989301662ce292a08e38f18202a57a9"></span><span class="n"><span class="pre">SDL_RendererFlip</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sprite_flip</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">SDL_FLIP_NONE</span></span><a class="headerlink" href="#_CPPv4N6Sprite11sprite_flipE" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Whether to flip the texture. Will be dealt with by the <a class="reference internal" href="KeyboardController.html#struct_keyboard_controller"><span class="std std-ref">KeyboardController</span></a> <a class="reference internal" href="../ECS.html#class_component"><span class="std std-ref">Component</span></a>, when the player turns around, for example. </p>
+<dd><p>Whether to flip the texture. Will be dealt with by the <a class="reference internal" href="CustomControllers/KeyboardPlayer.html#struct_keyboard_player"><span class="std std-ref">KeyboardPlayer</span></a> <a class="reference internal" href="../ECS.html#class_component"><span class="std std-ref">Component</span></a>, when the player turns around, for example. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite5shiftE">
+<span class="target" id="class_sprite_1a3a36b08ae9eff14c428d9f1906f464eb"></span><a class="reference internal" href="KeyboardController.html#_CPPv43vec" title="vec"><span class="n"><span class="pre">vec</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">shift</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="KeyboardController.html#_CPPv43vec" title="vec"><span class="n"><span class="pre">vec</span></span></a><span class="p"><span class="pre">(</span></span><span class="m"><span class="pre">0</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#_CPPv4N6Sprite5shiftE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>A possible shift to add to the position of the transform for rendering the object on screen. </p>
 </dd></dl>
 
 <dl class="cpp var">
@@ -424,6 +468,12 @@ at once. This would allow better control of some animations.</p>
 <dd><p>The frame of the animation we are at (starts at 0). </p>
 </dd></dl>
 
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N6Sprite16m_reference_timeE">
+<span class="target" id="class_sprite_1a2af46b687374317dd6bf7e4814128043"></span><span class="n"><span class="pre">Uint64</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">m_reference_time</span></span></span><a class="headerlink" href="#_CPPv4N6Sprite16m_reference_timeE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Reference time for calculating which frame to show. </p>
+</dd></dl>
+
 </div>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
@@ -459,7 +509,7 @@ at once. This would allow better control of some animations.</p>
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">KeyboardController</div>
+                <div class="title">KeyboardController (component)</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -470,7 +520,7 @@ at once. This would allow better control of some animations.</p>
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Transform</div>
+                <div class="title">Transform (component)</div>
                 
               </div>
             </a>

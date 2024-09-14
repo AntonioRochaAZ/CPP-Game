@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="UILabel" href="UILabel.html" /><link rel="prev" title="KeyboardController" href="KeyboardController.html" />
+<link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="UILabel (component)" href="UILabel.html" /><link rel="prev" title="MouseTest (component)" href="CustomControllers/MouseTest.html" />
 
     <link rel="shortcut icon" href="../../../_static/favicon.ico"/><!-- Generated with Sphinx 6.2.1 and Furo 2024.01.29 -->
-        <title>Collider - CPP Game</title>
+        <title>Collider (component) - CPP Game</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=369552022d0b975c8e74270ce6eabe0fb7978f24" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -160,16 +160,38 @@
 <li class="toctree-l2 current has-children"><a class="reference internal" href="../Components.html">Components</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Components</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="Transform.html">Transform</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Sprite.html">Sprite</a></li>
-<li class="toctree-l3"><a class="reference internal" href="KeyboardController.html">KeyboardController</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="KeyboardController.html">KeyboardController</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of KeyboardController</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="CustomControllers/KeyboardPlayer.html">KeyboardPlayer</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="MouseController.html">MouseController</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of MouseController</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="CustomControllers/MouseTest.html">MouseTest</a></li>
+</ul>
+</li>
 <li class="toctree-l3 current current-page"><a class="current reference internal" href="#">Collider</a></li>
 <li class="toctree-l3"><a class="reference internal" href="UILabel.html">UILabel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Health.html">Health</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Damage.html">Damage</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../Entities.html">Entities</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Entities</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Entities.html">Entities</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Entities</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../Entities/Projectile.html">Projectile</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../Entities/Player.html">Player</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Entities/TempEntity.html">TempEntity</a></li>
 </ul>
 </li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../States.html">States</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of States</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../States/Cooldown.html">Cooldown</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Cooldown</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../States/Hurting.html">Hurting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../States/Shooting.html">Shooting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../States/Spawning.html">Spawning</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../CustomControllers.html">Custom Controllers</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of Custom Controllers</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../Collision.html">Collision</a></li>
@@ -210,8 +232,8 @@
           </label>
         </div>
         <article role="main">
-          <section id="collider">
-<h1>Collider<a class="headerlink" href="#collider" title="Permalink to this heading">#</a></h1>
+          <section id="collider-component">
+<h1>Collider (component)<a class="headerlink" href="#collider-component" title="Permalink to this heading">#</a></h1>
 <p>Component for defining Entity’s collision information, such as its bounding boxes and collision
 attributes defined by the collision_handle enumerator.</p>
 <p>The shape of the collider can be dynamically updated according to the shape of the <a class="reference internal" href="Sprite.html#_CPPv46Sprite" title="Sprite"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">Sprite</span></code></a> component,
@@ -219,35 +241,41 @@ which must be enabled by calling <a class="reference internal" href="#_CPPv4N8Co
 <p>For checking how the collision is actually handled, see <a class="reference internal" href="../../Collision.html#_CPPv49Collision" title="Collision"><code class="xref cpp cpp-struct docutils literal notranslate"><span class="pre">Collision</span></code></a>.</p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-enums">Enums</p>
-<dl class="cpp enum">
-<dt class="sig sig-object cpp" id="_CPPv416collision_handle">
-<span class="target" id="_collider_8hpp_1af38ffb259b47a9640947ffc03ee0f670"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">collision_handle</span></span></span><a class="headerlink" href="#_CPPv416collision_handle" title="Permalink to this definition">#</a><br /></dt>
+<dl class="cpp enum-class">
+<dt class="sig sig-object cpp" id="_CPPv415CollisionHandle">
+<span class="target" id="_collider_8hpp_1a9f29c507f9131be000c1c12abc35b9e2"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">CollisionHandle</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><a class="headerlink" href="#_CPPv415CollisionHandle" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Options for collision handling:<ul class="simple">
-<li><p>IMMOVABLE_ON_COLLISION: Cannot move the object.</p></li>
-<li><p>MOVABLE_OBJECT: The object can move by itself.</p></li>
-<li><p>PUSH_ON_COLLISION: The object can be pushed.</p></li>
-<li><p>DESTROY_ON_COLLISION: Destroy the object when any collision happpens (e.g. a projectile that hits a wall). </p></li>
+<li><p>CollisionHandle::IMMOVABLE: Cannot move the object.</p></li>
+<li><p>CollisionHandle::MOVABLE: The object can move by itself.</p></li>
+<li><p>CollisionHandle::PUSH: The object can be pushed.</p></li>
+<li><p>CollisionHandle::PHASE: <a class="reference internal" href="../../Collision.html#struct_collision"><span class="std std-ref">Collision</span></a> is identified but it is not moved nor does it stops other objects from moving.</p></li>
+<li><p>CollisionHandle::DESTROY: Destroy the object when any collision happpens (e.g. a projectile that hits a wall). </p></li>
 </ul>
 </p>
 <p><em>Values:</em></p>
 <dl class="cpp enumerator">
-<dt class="sig sig-object cpp" id="_CPPv4N16collision_handle22IMMOVABLE_ON_COLLISIONE">
-<span class="target" id="_collider_8hpp_1af38ffb259b47a9640947ffc03ee0f670a46507320f9f2e679e85c508c29f1583f"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">IMMOVABLE_ON_COLLISION</span></span></span><a class="headerlink" href="#_CPPv4N16collision_handle22IMMOVABLE_ON_COLLISIONE" title="Permalink to this definition">#</a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N15CollisionHandle9IMMOVABLEE">
+<span class="target" id="_collider_8hpp_1a9f29c507f9131be000c1c12abc35b9e2a1258464a5e4f46377fb9de77ee2b0ec2"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">IMMOVABLE</span></span></span><a class="headerlink" href="#_CPPv4N15CollisionHandle9IMMOVABLEE" title="Permalink to this definition">#</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp enumerator">
-<dt class="sig sig-object cpp" id="_CPPv4N16collision_handle14MOVABLE_OBJECTE">
-<span class="target" id="_collider_8hpp_1af38ffb259b47a9640947ffc03ee0f670a2838c0a8e2a0578e86bcb657caa282b9"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MOVABLE_OBJECT</span></span></span><a class="headerlink" href="#_CPPv4N16collision_handle14MOVABLE_OBJECTE" title="Permalink to this definition">#</a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N15CollisionHandle7MOVABLEE">
+<span class="target" id="_collider_8hpp_1a9f29c507f9131be000c1c12abc35b9e2a8b4ed667c4c4cfec1e5bf403f1b5b089"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MOVABLE</span></span></span><a class="headerlink" href="#_CPPv4N15CollisionHandle7MOVABLEE" title="Permalink to this definition">#</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp enumerator">
-<dt class="sig sig-object cpp" id="_CPPv4N16collision_handle17PUSH_ON_COLLISIONE">
-<span class="target" id="_collider_8hpp_1af38ffb259b47a9640947ffc03ee0f670ad37456330c35bbac999effe375f7128d"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PUSH_ON_COLLISION</span></span></span><a class="headerlink" href="#_CPPv4N16collision_handle17PUSH_ON_COLLISIONE" title="Permalink to this definition">#</a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N15CollisionHandle4PUSHE">
+<span class="target" id="_collider_8hpp_1a9f29c507f9131be000c1c12abc35b9e2a73dabe4437725eedc05a1824a2c31550"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PUSH</span></span></span><a class="headerlink" href="#_CPPv4N15CollisionHandle4PUSHE" title="Permalink to this definition">#</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp enumerator">
-<dt class="sig sig-object cpp" id="_CPPv4N16collision_handle20DESTROY_ON_COLLISIONE">
-<span class="target" id="_collider_8hpp_1af38ffb259b47a9640947ffc03ee0f670a2a77f083adb9e02c2af95523da45e182"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">DESTROY_ON_COLLISION</span></span></span><a class="headerlink" href="#_CPPv4N16collision_handle20DESTROY_ON_COLLISIONE" title="Permalink to this definition">#</a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N15CollisionHandle5PHASEE">
+<span class="target" id="_collider_8hpp_1a9f29c507f9131be000c1c12abc35b9e2a097c7a540c48aec0a058b4e30fb165dd"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PHASE</span></span></span><a class="headerlink" href="#_CPPv4N15CollisionHandle5PHASEE" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N15CollisionHandle7DESTROYE">
+<span class="target" id="_collider_8hpp_1a9f29c507f9131be000c1c12abc35b9e2ac39aa6dbe619bb8ef8187b00b686df6a"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">DESTROY</span></span></span><a class="headerlink" href="#_CPPv4N15CollisionHandle7DESTROYE" title="Permalink to this definition">#</a><br /></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -290,8 +318,8 @@ which must be enabled by calling <a class="reference internal" href="#_CPPv4N8Co
 <dd></dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N8Collider8ColliderENSt6stringEiiNSt6size_tE">
-<span class="target" id="struct_collider_1a280e1ef68a68ab9fe1c433a9fd5274bd"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Collider</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">user_tag</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">w</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">h</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mHandling</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Collider8ColliderENSt6stringEiiNSt6size_tE" title="Permalink to this definition">#</a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv4N8Collider8ColliderENSt6stringE15CollisionHandleii">
+<span class="target" id="struct_collider_1ad327bc8dab92151f2858ce1a8e7fda56"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Collider</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">user_tag</span></span>, <a class="reference internal" href="#_CPPv415CollisionHandle" title="CollisionHandle"><span class="n"><span class="pre">CollisionHandle</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">mHandling</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">w</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">h</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="m"><span class="pre">0</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Collider8ColliderENSt6stringE15CollisionHandleii" title="Permalink to this definition">#</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
@@ -303,6 +331,12 @@ which must be enabled by calling <a class="reference internal" href="#_CPPv4N8Co
 <dt class="sig sig-object cpp" id="_CPPv4N8Collider4initEv">
 <span class="target" id="struct_collider_1aed04ad82be15bcba1d3dc6a09f76dae6"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">init</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N8Collider4initEv" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Remove collider from <a class="reference internal" href="../../Game.html#class_game"><span class="std std-ref">Game</span></a> collider vector. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N8Collider6renderEv">
+<span class="target" id="struct_collider_1a7927fa6e7c3f4cb7adc20473514b0469"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">render</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N8Collider6renderEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Update function (called every game tick). </p>
 </dd></dl>
 
 <dl class="cpp function">
@@ -321,33 +355,6 @@ which must be enabled by calling <a class="reference internal" href="#_CPPv4N8Co
 <dd><p>For getting shape from the <a class="reference internal" href="Sprite.html#class_sprite"><span class="std std-ref">Sprite</span></a> component. </p>
 </dd></dl>
 
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N8Collider17set_proj_handlingENSt6size_tE">
-<span class="target" id="struct_collider_1a591d46924ff1056ed4d8a2caf9f91e14"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_proj_handling</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mProjHandling</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Collider17set_proj_handlingENSt6size_tE" title="Permalink to this definition">#</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N8Collider16set_col_handlingENSt6size_tE">
-<span class="target" id="struct_collider_1a50a9682be97e4d21d659923bfbbd381e"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_col_handling</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">mHandling</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Collider16set_col_handlingENSt6size_tE" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Setter function for projectile_handling_option. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N8Collider9set_widthEi">
-<span class="target" id="struct_collider_1abe43fb036fe5d2f0bedf3636231e2c8a"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_width</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">w</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Collider9set_widthEi" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Setter function for handling_option. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N8Collider10set_heightEi">
-<span class="target" id="struct_collider_1a6a911408d8da3974e37d2f257ff44efd"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_height</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">h</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Collider10set_heightEi" title="Permalink to this definition">#</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4NK8Collider7get_tagEv">
-<span class="target" id="struct_collider_1a21c62bd4ebc48f247d6b62cc1c33170f"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_tag</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK8Collider7get_tagEv" title="Permalink to this definition">#</a><br /></dt>
-<dd></dd></dl>
-
 </div>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
@@ -358,6 +365,11 @@ which must be enabled by calling <a class="reference internal" href="#_CPPv4N8Co
 </dd></dl>
 
 <dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N8Collider18visualize_colliderE">
+<span class="target" id="struct_collider_1a9c18692f7d502f746a25facc9362fad1"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">visualize_collider</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span><a class="headerlink" href="#_CPPv4N8Collider18visualize_colliderE" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N8Collider13dynamic_shapeE">
 <span class="target" id="struct_collider_1a1a24d13aef085886140112436cf72918"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dynamic_shape</span></span></span><a class="headerlink" href="#_CPPv4N8Collider13dynamic_shapeE" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>This is only used for debugging. The actual handling is done in the <a class="reference internal" href="Sprite.html#class_sprite"><span class="std std-ref">Sprite</span></a> component with the set_collider attribute. To set it on or off, use the enable_dynamic_shape and disable_dynamic_shape functions. They’ll ensure that dynamic_shape and the <a class="reference internal" href="Sprite.html#class_sprite"><span class="std std-ref">Sprite</span></a>’s set_collider members are in sync. </p>
@@ -365,7 +377,7 @@ which must be enabled by calling <a class="reference internal" href="#_CPPv4N8Co
 
 <dl class="cpp var">
 <dt class="sig sig-object cpp" id="_CPPv4N8Collider15handling_optionE">
-<span class="target" id="struct_collider_1ad6db54a6d682dabf54e9f6300bb88000"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">handling_option</span></span></span><a class="headerlink" href="#_CPPv4N8Collider15handling_optionE" title="Permalink to this definition">#</a><br /></dt>
+<span class="target" id="struct_collider_1a14057c81b9d321cb5d661a2104012764"></span><a class="reference internal" href="#_CPPv415CollisionHandle" title="CollisionHandle"><span class="n"><span class="pre">CollisionHandle</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">handling_option</span></span></span><a class="headerlink" href="#_CPPv4N8Collider15handling_optionE" title="Permalink to this definition">#</a><br /></dt>
 <dd><p>Information about if the object can move/be moved or not. It should be an entry of the collision_handle enum. </p>
 </dd></dl>
 
@@ -401,18 +413,18 @@ which must be enabled by calling <a class="reference internal" href="#_CPPv4N8Co
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">UILabel</div>
+                <div class="title">UILabel (component)</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="KeyboardController.html">
+          <a class="prev-page" href="CustomControllers/MouseTest.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">KeyboardController</div>
+                <div class="title">MouseTest (component)</div>
                 
               </div>
             </a>

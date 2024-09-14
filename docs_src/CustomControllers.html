@@ -3,13 +3,13 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="Transform (component)" href="Components/Transform.html" /><link rel="prev" title="Entity Component System (ECS)" href="ECS.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Collision class" href="Collision.html" /><link rel="prev" title="Spawning (state)" href="ECS/States/Spawning.html" />
 
-    <link rel="shortcut icon" href="../../_static/favicon.ico"/><!-- Generated with Sphinx 6.2.1 and Furo 2024.01.29 -->
-        <title>Components - CPP Game</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=369552022d0b975c8e74270ce6eabe0fb7978f24" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/><!-- Generated with Sphinx 6.2.1 and Furo 2024.01.29 -->
+        <title>Custom Controllers - CPP Game</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=369552022d0b975c8e74270ce6eabe0fb7978f24" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
     
 
@@ -123,7 +123,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../index.html"><div class="brand">CPP Game</div></a>
+      <a href="../index.html"><div class="brand">CPP Game</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -143,12 +143,12 @@
   <aside class="sidebar-drawer">
     <div class="sidebar-container">
       
-      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
   
   <span class="sidebar-brand-text">CPP Game</span>
   
-</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
@@ -156,48 +156,48 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current has-children"><a class="reference internal" href="ECS.html">Entity Component System (ECS)</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Entity Component System (ECS)</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2 current has-children current-page"><a class="current reference internal" href="#">Components</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Components</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="Components/Transform.html">Transform</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Components/Sprite.html">Sprite</a></li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="Components/KeyboardController.html">KeyboardController</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of KeyboardController</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l4"><a class="reference internal" href="Components/CustomControllers/KeyboardPlayer.html">KeyboardPlayer</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="ECS/ECS.html">Entity Component System (ECS)</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Entity Component System (ECS)</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="ECS/Components.html">Components</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Components</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="ECS/Components/Transform.html">Transform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ECS/Components/Sprite.html">Sprite</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="ECS/Components/KeyboardController.html">KeyboardController</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of KeyboardController</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="ECS/Components/CustomControllers/KeyboardPlayer.html">KeyboardPlayer</a></li>
 </ul>
 </li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="Components/MouseController.html">MouseController</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of MouseController</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l4"><a class="reference internal" href="Components/CustomControllers/MouseTest.html">MouseTest</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="ECS/Components/MouseController.html">MouseController</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of MouseController</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="ECS/Components/CustomControllers/MouseTest.html">MouseTest</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="Components/Collider.html">Collider</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Components/UILabel.html">UILabel</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Components/Health.html">Health</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Components/Damage.html">Damage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ECS/Components/Collider.html">Collider</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ECS/Components/UILabel.html">UILabel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ECS/Components/Health.html">Health</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ECS/Components/Damage.html">Damage</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="Entities.html">Entities</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Entities</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="Entities/Projectile.html">Projectile</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Entities/Player.html">Player</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Entities/TempEntity.html">TempEntity</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="ECS/Entities.html">Entities</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Entities</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="ECS/Entities/Projectile.html">Projectile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ECS/Entities/Player.html">Player</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ECS/Entities/TempEntity.html">TempEntity</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="States.html">States</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of States</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3 has-children"><a class="reference internal" href="States/Cooldown.html">Cooldown</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Cooldown</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l4"><a class="reference internal" href="States/Hurting.html">Hurting</a></li>
-<li class="toctree-l4"><a class="reference internal" href="States/Shooting.html">Shooting</a></li>
-<li class="toctree-l4"><a class="reference internal" href="States/Spawning.html">Spawning</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="ECS/States.html">States</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of States</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="ECS/States/Cooldown.html">Cooldown</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Cooldown</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="ECS/States/Hurting.html">Hurting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ECS/States/Shooting.html">Shooting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ECS/States/Spawning.html">Spawning</a></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../CustomControllers.html">Custom Controllers</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of Custom Controllers</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+<li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">Custom Controllers</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of Custom Controllers</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../Collision.html">Collision</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Game.html">Game class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../TileMap.html">TileMap class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../utils.html">Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Collision.html">Collision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Game.html">Game class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TileMap.html">TileMap class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">Utils</a></li>
 </ul>
 
 </div>
@@ -232,26 +232,20 @@
           </label>
         </div>
         <article role="main">
-          <section id="components">
-<h1>Components<a class="headerlink" href="#components" title="Permalink to this heading">#</a></h1>
+          <section id="custom-controllers">
+<h1>Custom Controllers<a class="headerlink" href="#custom-controllers" title="Permalink to this heading">#</a></h1>
+<p>Files CustomControllers.hpp and CustomControllers.cpp contain functions
+and definitions that are dependent on the specific game being made, and
+are thus outside from the ECS folder for the user to edit it as necessary.</p>
+<p>These files serve to import all custom controllers define with one import,
+but also to define the list of custom MouseControllers defined. This is
+because <a class="reference internal" href="Collision.html#_CPPv4N9Collision17handle_collisionsEv" title="Collision::handle_collisions"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">Collision::handle_collisions</span></code></a> needs to know all of
+the MouseController type components when checking if the cursor is hovering
+over an entity containing one of these components. The
+<code class="docutils literal notranslate"><span class="pre">number_of_mice_controllers</span></code> can be changed in the header, and the list of
+MouseController type components (<code class="docutils literal notranslate"><span class="pre">controller_array</span></code>) can be changed in the
+.cpp file (it is actually a list of their component IDs).</p>
 <div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="Components/Transform.html">Transform</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Components/Sprite.html">Sprite</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Components/KeyboardController.html">KeyboardController</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Components/CustomControllers/KeyboardPlayer.html">KeyboardPlayer</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="Components/MouseController.html">MouseController</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Components/CustomControllers/MouseTest.html">MouseTest</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="Components/Collider.html">Collider</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Components/UILabel.html">UILabel</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Components/Health.html">Health</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Components/Damage.html">Damage</a></li>
-</ul>
 </div>
 </section>
 
@@ -260,23 +254,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="Components/Transform.html">
+          <a class="next-page" href="Collision.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Transform (component)</div>
+                <div class="title">Collision class</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="ECS.html">
+          <a class="prev-page" href="ECS/States/Spawning.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Entity Component System (ECS)</div>
+                <div class="title">Spawning (state)</div>
                 
               </div>
             </a>
@@ -304,10 +298,10 @@
       
     </aside>
   </div>
-</div><script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/sphinx_highlight.js"></script>
-    <script src="../../_static/scripts/furo.js"></script>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/scripts/furo.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     </body>
 </html>

@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="Player (entity)" href="Player.html" /><link rel="prev" title="Entities" href="../Entities.html" />
+<link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="Spawning (state)" href="Spawning.html" /><link rel="prev" title="Hurting (state)" href="Hurting.html" />
 
     <link rel="shortcut icon" href="../../../_static/favicon.ico"/><!-- Generated with Sphinx 6.2.1 and Furo 2024.01.29 -->
-        <title>Projectile (entity) - CPP Game</title>
+        <title>Shooting (state) - CPP Game</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=369552022d0b975c8e74270ce6eabe0fb7978f24" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -174,17 +174,17 @@
 <li class="toctree-l3"><a class="reference internal" href="../Components/Damage.html">Damage</a></li>
 </ul>
 </li>
-<li class="toctree-l2 current has-children"><a class="reference internal" href="../Entities.html">Entities</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Entities</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">Projectile</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Player.html">Player</a></li>
-<li class="toctree-l3"><a class="reference internal" href="TempEntity.html">TempEntity</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Entities.html">Entities</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Entities</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Entities/Projectile.html">Projectile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Entities/Player.html">Player</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Entities/TempEntity.html">TempEntity</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../States.html">States</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of States</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../States/Cooldown.html">Cooldown</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Cooldown</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l4"><a class="reference internal" href="../States/Hurting.html">Hurting</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../States/Shooting.html">Shooting</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../States/Spawning.html">Spawning</a></li>
+<li class="toctree-l2 current has-children"><a class="reference internal" href="../States.html">States</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of States</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l3 current has-children"><a class="reference internal" href="Cooldown.html">Cooldown</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Cooldown</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="Hurting.html">Hurting</a></li>
+<li class="toctree-l4 current current-page"><a class="current reference internal" href="#">Shooting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Spawning.html">Spawning</a></li>
 </ul>
 </li>
 </ul>
@@ -232,65 +232,25 @@
           </label>
         </div>
         <article role="main">
-          <section id="projectile-entity">
-<h1>Projectile (entity)<a class="headerlink" href="#projectile-entity" title="Permalink to this heading">#</a></h1>
-<p>This class defines a Projectile Entity. Currently, it is only instantiated
-in the <a class="reference internal" href="../Components/KeyboardController.html#_CPPv418KeyboardController" title="KeyboardController"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">KeyboardController</span></code></a> component, in a not very generic call.</p>
-<p>As of now, not very generic. Eventually, it would be ideal to be able to have multiple
-animations per projectile (beginning, flying and ending, though the beginning one might
-be included in the Player/Enemy entity shooting animation instead).</p>
-<p>As of now, all projectiles have the <code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">collision_handle::CollisionHandle::DESTROY</span></code>
-collider tag.</p>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-typedefs">Typedefs</p>
-<dl class="cpp type">
-<dt class="sig sig-object cpp" id="_CPPv43vec">
-<span class="target" id="_projectile_8hpp_1a8eef6d9f3318172ff1eeeb36a0ec9b70"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">vec</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">Eigen</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Vector2f</span></span><br /></dt>
-<dd></dd></dl>
-
+          <section id="shooting-state">
+<h1>Shooting (state)<a class="headerlink" href="#shooting-state" title="Permalink to this heading">#</a></h1>
+<p>Cooldown state for when an entity has recently shot a projectile. It serves
+to avoid the entity from spamming projectiles. It is created in
+<a class="reference internal" href="../Components/CustomControllers/KeyboardPlayer.html#_CPPv414KeyboardPlayer" title="KeyboardPlayer"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">KeyboardPlayer</span></code></a> (currently for a fixed cooldown of 250ms), and it
+is also checked there to avoid the creation of new projectiles.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Maybe add a gif of it in effect, though there is no visual indication.</p>
 </div>
 <dl class="cpp struct">
-<dt class="sig sig-object cpp" id="_CPPv410Projectile">
-<span class="target" id="struct_projectile"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Projectile</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><a class="reference internal" href="../ECS.html#_CPPv46Entity" title="Entity"><span class="n"><span class="pre">Entity</span></span></a><a class="headerlink" href="#_CPPv410Projectile" title="Permalink to this definition">#</a><br /></dt>
-<dd><div class="docutils container">
-<em>#include &lt;Projectile.hpp&gt;</em></div>
-<p><a class="reference internal" href="#struct_projectile"><span class="std std-ref">Projectile</span></a> <a class="reference internal" href="../ECS.html#class_entity"><span class="std std-ref">Entity</span></a>. </p>
-<div class="breathe-sectiondef docutils container">
+<dt class="sig sig-object cpp" id="_CPPv48Shooting">
+<span class="target" id="struct_shooting"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Shooting</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><a class="reference internal" href="Cooldown.html#_CPPv48Cooldown" title="Cooldown"><span class="n"><span class="pre">Cooldown</span></span></a><a class="headerlink" href="#_CPPv48Shooting" title="Permalink to this definition">#</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N10Projectile10ProjectileER7ManagerNSt6stringE3vecf3vecNSt6stringEffiP6Entity">
-<span class="target" id="struct_projectile_1a7eee98f9dce6f27998906d29ea118d59"></span><span class="sig-name descname"><span class="n"><span class="pre">Projectile</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="../ECS.html#_CPPv47Manager" title="Manager"><span class="n"><span class="pre">Manager</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">man</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">name</span></span>, <a class="reference internal" href="../Components/KeyboardController.html#_CPPv43vec" title="vec"><span class="n"><span class="pre">vec</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">position</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">speed</span></span>, <a class="reference internal" href="../Components/KeyboardController.html#_CPPv43vec" title="vec"><span class="n"><span class="pre">vec</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">velocity</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">sprite_name</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">sprite_scale</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">damage</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">rng</span></span>, <a class="reference internal" href="../ECS.html#_CPPv46Entity" title="Entity"><span class="n"><span class="pre">Entity</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">owner</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">nullptr</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N10Projectile10ProjectileER7ManagerNSt6stringE3vecf3vecNSt6stringEffiP6Entity" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Constructor </p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>rng</strong> – The range of the projectile before it is destroyed (in pixels). </p></li>
-<li><p><strong>owner</strong> – The <a class="reference internal" href="../ECS.html#class_entity"><span class="std std-ref">Entity</span></a> that has shot the projectile. This is passed to the <a class="reference internal" href="../Components/Damage.html#struct_damage"><span class="std std-ref">Damage</span></a> component’s immune vector (so that entity cannot hit itself). </p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv4N10Projectile6updateEv">
-<span class="target" id="struct_projectile_1ac41ad56034b53e739619fabbd5e49652"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">update</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4N10Projectile6updateEv" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>Default update function: updates each component. </p>
-</dd></dl>
-
-</div>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N10Projectile5rangeE">
-<span class="target" id="struct_projectile_1acce119ca47db626cd972e1b84b2d5493"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">range</span></span></span><a class="headerlink" href="#_CPPv4N10Projectile5rangeE" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>How far it the projectile will go before being deleted. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N10Projectile8distanceE">
-<span class="target" id="struct_projectile_1a76b2d32805996f9de38543871434ee62"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">distance</span></span></span><a class="headerlink" href="#_CPPv4N10Projectile8distanceE" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>How far the projectile has travelled so far. </p>
-</dd></dl>
+<dt class="sig sig-object cpp" id="_CPPv4N8Shooting8ShootingE6Uint64">
+<span class="target" id="struct_shooting_1af0051a0abe7504f7a894671cb957618b"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Shooting</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">Uint64</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">cool_down</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N8Shooting8ShootingE6Uint64" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
 
 </div>
 </dd></dl>
@@ -302,23 +262,23 @@ collider tag.</p>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="Player.html">
+          <a class="next-page" href="Spawning.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Player (entity)</div>
+                <div class="title">Spawning (state)</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../Entities.html">
+          <a class="prev-page" href="Hurting.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Entities</div>
+                <div class="title">Hurting (state)</div>
                 
               </div>
             </a>

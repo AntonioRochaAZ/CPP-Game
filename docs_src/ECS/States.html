@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="Transform (component)" href="Components/Transform.html" /><link rel="prev" title="Entity Component System (ECS)" href="ECS.html" />
+<link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="Cooldown (state)" href="States/Cooldown.html" /><link rel="prev" title="TempEntity (entity)" href="Entities/TempEntity.html" />
 
     <link rel="shortcut icon" href="../../_static/favicon.ico"/><!-- Generated with Sphinx 6.2.1 and Furo 2024.01.29 -->
-        <title>Components - CPP Game</title>
+        <title>States - CPP Game</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=369552022d0b975c8e74270ce6eabe0fb7978f24" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -157,7 +157,7 @@
   <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1 current has-children"><a class="reference internal" href="ECS.html">Entity Component System (ECS)</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Entity Component System (ECS)</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2 current has-children current-page"><a class="current reference internal" href="#">Components</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Components</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="Components.html">Components</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Components</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="Components/Transform.html">Transform</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Components/Sprite.html">Sprite</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="Components/KeyboardController.html">KeyboardController</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of KeyboardController</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -180,7 +180,7 @@
 <li class="toctree-l3"><a class="reference internal" href="Entities/TempEntity.html">TempEntity</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="States.html">States</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of States</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 current has-children current-page"><a class="current reference internal" href="#">States</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of States</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3 has-children"><a class="reference internal" href="States/Cooldown.html">Cooldown</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Cooldown</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="States/Hurting.html">Hurting</a></li>
 <li class="toctree-l4"><a class="reference internal" href="States/Shooting.html">Shooting</a></li>
@@ -232,25 +232,26 @@
           </label>
         </div>
         <article role="main">
-          <section id="components">
-<h1>Components<a class="headerlink" href="#components" title="Permalink to this heading">#</a></h1>
+          <section id="states">
+<h1>States<a class="headerlink" href="#states" title="Permalink to this heading">#</a></h1>
+<p>States are, as of now, temporary components (<a class="reference internal" href="ECS.html#_CPPv49Component" title="Component"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">Component</span></code></a> class),
+although this may be changed in the future. They are used to communicate
+to other components and parts of the code if the entity is in a given state
+which has special properties.</p>
+<p>For example, the <a class="reference internal" href="States/Hurting.html#_CPPv47Hurting" title="Hurting"><code class="xref cpp cpp-struct docutils literal notranslate"><span class="pre">Hurting</span></code></a>
+state indicates to the <a class="reference internal" href="Components/Sprite.html#_CPPv46Sprite" title="Sprite"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">Sprite</span></code></a> component that a red filter
+should be applied to the entity’s render to indicate it is hurting. It
+also indicates to the <a class="reference internal" href="Components/Health.html#_CPPv46Health" title="Health"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">Health</span></code></a> component that the entity it
+temporarily invulnerable.</p>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="Components/Transform.html">Transform</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Components/Sprite.html">Sprite</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Components/KeyboardController.html">KeyboardController</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Components/CustomControllers/KeyboardPlayer.html">KeyboardPlayer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="States/Cooldown.html">Cooldown</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="States/Hurting.html">Hurting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="States/Shooting.html">Shooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="States/Spawning.html">Spawning</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="Components/MouseController.html">MouseController</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Components/CustomControllers/MouseTest.html">MouseTest</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="Components/Collider.html">Collider</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Components/UILabel.html">UILabel</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Components/Health.html">Health</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Components/Damage.html">Damage</a></li>
 </ul>
 </div>
 </section>
@@ -260,23 +261,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="Components/Transform.html">
+          <a class="next-page" href="States/Cooldown.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Transform (component)</div>
+                <div class="title">Cooldown (state)</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="ECS.html">
+          <a class="prev-page" href="Entities/TempEntity.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Entity Component System (ECS)</div>
+                <div class="title">TempEntity (entity)</div>
                 
               </div>
             </a>
