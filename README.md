@@ -67,20 +67,20 @@ command ``make documentation``, defined in the Makefile.
 
 In no specific order.
 
-- Improve the mouse controller handling in collision handling, try to make it as generic as possible... so that we don't have to list all MouseController types of components.
-
-- Replace TempEntity entity by a State. Will be much more logical.
-- Apply color filters to projectiles to change their colour.
-- Make the texture pointer in Game::AssetManager shared pointers that can be owned by Sprite and UILabel components.
-- Learn how to properly center the text on the screen
-- Separate States from Components in ECS.hpp (?).
+- Study the use of "const" and passing arguments by reference (check when it is possible/should be done).
+- Switch to const char instead of std::string whenever possible.
+- Add options to windown size etc.
 - Work into compiling for Windows and Linux.
+- Long comment under "case (IMMOVABLE_BIT + PUSH_BIT)" inside of Collision::handle_collisions.
+- Make updating independent of FPS. (actually not really sure if really necessary, but sure.)
+- Learn how to properly center the text on the screen
+- Create gifs and a diagram of how the collision handling works (and gifs for showing the states working).
+- Adding music and sound effects.
 
 - Optimize rendering: Have different renderers per managers. Only clear background's renderer if needed (if the background moves perhaps, when the player moves, although it may not even be necessary, must check). (Also stop rendering objects off-screen) (Must think if this really is necessary, and if so, when).
-- Make updating independent of FPS. (actually not really sure if really necessary, but sure.)
-- Add options to windown size etc.
+- Replace TempEntity entity by a State. Will be much more logical.
+- Apply color filters to projectiles to change their colour.
+- Improve the mouse controller handling in collision handling, try to make it as generic as possible... so that we don't have to list all MouseController types of components.
+- Separate States from Components in ECS.hpp (?).
+- Make the texture pointer in Game::AssetManager shared pointers that can be owned by Sprite and UILabel components.
 - Create function for changing order of component updates (?) (currently a mess).
-- Create function for deleting components?
-- Study the use of "const" and passing arguments by reference (check when it is possible/should be done).
-- Long comment under "case (IMMOVABLE_BIT + PUSH_BIT)" inside of Collision::handle_collisions.
-- Create gifs and a diagram of how the collision handling works.
