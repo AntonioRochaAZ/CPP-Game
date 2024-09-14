@@ -19,3 +19,14 @@ void Collider::get_shape(){
     width  = entity->getComponent<Sprite>().get_dst_width();
     height = entity->getComponent<Sprite>().get_dst_height();
 }
+
+void Collider::render(){
+    if (visualize_collider){
+        SDL_Rect rect;
+        rect.x = entity->getComponent<Transform>().x;
+        rect.y = entity->getComponent<Transform>().y;
+        rect.w = width;
+        rect.h = height;
+        SDL_RenderDrawRect(Game::renderer, &rect);
+    }
+}

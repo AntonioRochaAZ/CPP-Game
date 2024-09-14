@@ -3,7 +3,7 @@
 This small project follows the footsteps of [Let's make games' "How to make a
 game"
 tutorial](https://www.youtube.com/watch?v=QQzAHcojEKg&list=PLhfAbcv9cehhkG7ZQK0nfIGJC_C-wSLrx),
-as a means of learning a little bit of C++. The idea is **not**
+as a means of learning C++. The idea is **not**
 to stick to the tutorial, but to give my own touches along the
 way. For a repository exactly as the tutorial's, see [the tutorial's
 repository](https://github.com/carlbirch/BirchEngine).
@@ -14,7 +14,10 @@ repository are original and are made in [Aseprite](https://www.aseprite.org/).
 ## Current state of development
 > You can move the first player with the W, A, S, D keys, and shoot with R.
 > For the second player, it can be moved with the I, J, K, L keys, and it shoots with P.
-> Finally, you can still toggle the camera to follow Player 1 by pressing M.
+> Finally, you can still toggle the camera to follow Player 1 (or Player 2, if the first one is gone) by pressing M.
+> You can always press 1 to reset the game.
+> You can now also drag players around with the mouse (holding left click).
+> Finally, you can close the game by pressing ESC.
 
 ![Current state of development](assets/current.gif)
 
@@ -57,27 +60,24 @@ command ``make documentation``, defined in the Makefile.
     other platforms (changes to the Makefile might be necessary).
 
 > **KNOWN BUGS:**
-    - Segmentation fault when launching the executable by double clicking (instead of using the command line).
-      It comes from Game::init, but must still be debugged.
     - Graphical bug when players die while facing left (easy to solve: add a shift to the generated temporary entity when there's a sprite flip).
+    - Game crashes (intended) when objects collide at the same speed.
  
 ### TODOs
 
 In no specific order.
 
-- Apply color filters to players when they get hit, and to projectiles to change their colour.
+- Improve the mouse controller handling in collision handling, try to make it as generic as possible... so that we don't have to list all MouseController types of components.
+
+- Replace TempEntity entity by a State. Will be much more logical.
+- Apply color filters to projectiles to change their colour.
 - Make the texture pointer in Game::AssetManager shared pointers that can be owned by Sprite and UILabel components.
-- Think of how to generalize KeyboardController's calls, as well as Health's (how to have a temporary animation when the entity is hurt). Perhaps use virtual functions and/or state machines, and/or function pointers.
 - Learn how to properly center the text on the screen
-- Separate States from Components in ECS.hpp.
+- Separate States from Components in ECS.hpp (?).
 - Work into compiling for Windows and Linux.
 
-- Perhaps generalize the KeyboardController component later, by allowing different
-  actions to be triggered by the attack buttons according to the Entity. Perhaps create
-  a sort of attack component.
-- Optimize rendering (stop rendering objects off-screen) (Must think if this really is necessary,
-  and if so, when).
-- Make updating independent of FPS.
+- Optimize rendering: Have different renderers per managers. Only clear background's renderer if needed (if the background moves perhaps, when the player moves, although it may not even be necessary, must check). (Also stop rendering objects off-screen) (Must think if this really is necessary, and if so, when).
+- Make updating independent of FPS. (actually not really sure if really necessary, but sure.)
 - Add options to windown size etc.
 - Create function for changing order of component updates (?) (currently a mess).
 - Create function for deleting components?

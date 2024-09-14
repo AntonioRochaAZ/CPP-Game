@@ -6,7 +6,7 @@
 #include "ECS/Components/KeyboardController.hpp"
 #include "utils.hpp"
 #include "ECS/Entities/Player.hpp"
-#include "ECS/Components/CustomControllers.hpp"
+#include "CustomControllers.hpp"
 
 // From KeyboardController.hpp:
 std::map<int, KeyBind> global_key_bind_map;
@@ -24,7 +24,8 @@ Game::AssetManager Game::assets = Game::AssetManager();
 vec Game::camera_position = vec(0.0, 0.0);
 
 std::shared_ptr<Entity> message = manager.addEntity("Message");
-std::shared_ptr<Entity> cursor = manager.addEntity("CURSOR"); // DO NOT CHANGE THIS NAME OR DELETE THIS ENTITY
+std::shared_ptr<Entity> Game::cursor = manager.addEntity("CURSOR"); // DO NOT CHANGE THIS NAME OR DELETE THIS ENTITY
+std::shared_ptr<Entity>& cursor = Game::cursor;
 
 // Constructor and destructor:
 Game::Game(){};
@@ -134,6 +135,7 @@ int Game::init(const char* title, int x, int y, int width, int height, bool full
     cursor->add_group(COLLIDER_GROUP);
     cursor->addComponent<Transform>();
     cursor->addComponent<Collider>("Cursor", CollisionHandle::PHASE, 10, 10);
+    cursor->getComponent<Collider>().visualize_collider = true;
 
     // Ok, it is running now:
     is_running = true;

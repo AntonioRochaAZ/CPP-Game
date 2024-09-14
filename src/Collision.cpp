@@ -1,5 +1,6 @@
 #include "Collision.hpp"
 #include "ECS/Components/Collider.hpp"
+#include "CustomControllers.hpp"
 
 bool Collision::collider_AABB(const Collider *CA, const Collider *CB){
     Transform& TA = CA->entity->getComponent<Transform>();  // Just to simplify.
@@ -102,13 +103,16 @@ void Collision::handle_collisions(){
         // Let's check the special cases:
         Entity*& EA = CA->entity; Entity*& EB = CB->entity;
         // 1. where we have a cursor:
-        bool condition1 = EA->name=="CURSOR" && EB->has_component<MouseController>();
-        bool condition2 = EB->name=="CURSOR" && EA->has_component<MouseController>();
+        // must check
+        ComponentID id_A = has_mouse_controller(*EA);
+        ComponentID id_B = has_mouse_controller(*EB);
+        bool condition1 = EA->name=="CURSOR" && id_B != max_components + 1;
+        bool condition2 = EB->name=="CURSOR" && id_A != max_components + 1;
         if (condition1 || condition2){
             if (condition1){
-                EB->getComponent<MouseController>().handle_events();
+                get_custom_mouse_controller(*EB, id_B)->handle_events();
             }else{
-                EA->getComponent<MouseController>().handle_events();
+                get_custom_mouse_controller(*EA, id_A)->handle_events();
             }
         }
 

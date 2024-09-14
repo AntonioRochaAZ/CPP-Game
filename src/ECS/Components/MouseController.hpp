@@ -4,8 +4,6 @@
 #include "../Components.hpp"
 #include "../States.hpp"
 
-using vec = Eigen::Vector2f;
-
 /* Component for allowing controlling entities through the mouse. */
 struct MouseController : public Component{
 
@@ -31,4 +29,6 @@ struct MouseController : public Component{
     virtual void on_hover(){};
     virtual void on_left_click(){};
     virtual void on_right_click(){};
+    virtual void on_left_click_end(){};
+    virtual void on_right_click_end(){};
 };

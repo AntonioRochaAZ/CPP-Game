@@ -1,5 +1,5 @@
-Projectile
-==========
+Projectile (entity)
+===================
 
 This class defines a Projectile Entity. Currently, it is only instantiated
 in the :cpp:class:`KeyboardController` component, in a not very generic call.

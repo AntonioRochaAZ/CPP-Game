@@ -1,5 +1,5 @@
-Sprite
-======
+Sprite (component)
+==================
 
 Component used for handling Entity's sprites (textures and animations). Although
 texture loading and their memory management are now completely handled by the 

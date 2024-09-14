@@ -47,7 +47,10 @@ class TileMap : public Manager{
             ///< Load the tile IDs or collision information from an array of ints. We use double pointer
             ///< to avoid having to declare the shape before-hand.
         void set_position(int x, int y);    ///< This can be used to change where the grid starts.
-        
+        int get_x0(){return x0;}
+        int get_y0(){return y0;}
+        int get_tile_width(){return tile_width;}
+        int get_tile_height(){return tile_height;}
         // TODO: add possibility to update other map variables and optimize rendering. 
 };
 

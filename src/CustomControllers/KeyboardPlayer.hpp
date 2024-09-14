@@ -1,5 +1,5 @@
 #pragma once
-#include "../KeyboardController.hpp"
+#include "../ECS/Components/KeyboardController.hpp"
 
 /* Component for allowing controlling entities through the keyboard. */
 struct KeyboardPlayer : public KeyboardController{

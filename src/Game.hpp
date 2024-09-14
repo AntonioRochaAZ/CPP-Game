@@ -55,6 +55,7 @@ public:
     static bool tracking_player;    ///< Whether the camera should follow the player or not.
     static vec camera_position;        
         ///< Where the camera is positioned (top-left of the screen).
+    static std::shared_ptr<Entity> cursor;
 
 
     /** Definition of the AssetManager class, which manages textures and fonts.

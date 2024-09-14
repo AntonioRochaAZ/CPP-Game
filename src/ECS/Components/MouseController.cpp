@@ -15,6 +15,17 @@ void MouseController::handle_events(){
             default:
                 break;
         }
+    } else if (Game::event.type == SDL_MOUSEBUTTONUP){
+        switch (Game::event.button.button){
+            case SDL_BUTTON_LEFT:
+                on_left_click_end();
+                break;
+            case SDL_BUTTON_RIGHT:
+                on_right_click_end();
+                break;
+            default:
+                break;
+        }
     }
 }
 

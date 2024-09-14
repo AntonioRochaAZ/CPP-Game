@@ -1,5 +1,5 @@
-Projectile
-==========
+Player (entity)
+===============
 
 This class defines a Player Entity.
 

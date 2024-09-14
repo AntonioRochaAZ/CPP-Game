@@ -1,7 +1,8 @@
 #include "Player.hpp"
 #include "TempEntity.hpp"
 #include <algorithm>
-#include "../Components/CustomControllers/KeyboardPlayer.hpp"
+#include "../../CustomControllers/KeyboardPlayer.hpp"
+#include "../../CustomControllers/MouseTest.hpp"
 
 std::unordered_map<int, SDL_Color> Player::player_colour = {
     {1, {255, 0  , 0  , 255}},  // red
@@ -24,9 +25,12 @@ Player::Player(
     addComponent<KeyboardPlayer>();
     addComponent<Collider>(get_name(), CollisionHandle::MOVABLE);  // width and height will be updated later with the Sprite component.
     addComponent<Transform>();
+    // #ifdef DEBUG_MODE
+        addComponent<MouseTest>();
+    // #endif
     addComponent<Sprite>(sprite_name);
     addComponent<Health>(3, 3);         // starting_hp = 3, max_hp = 3
-    
+
     // Setting things up:
     getComponent<Transform>().speed = speed;
     getComponent<Collider>().enable_dynamic_shape();  // Will allow us to get the shape from the Sprite component
@@ -35,7 +39,9 @@ Player::Player(
 
     // Now let's get Transform and Sprite information into earlier components:
     getComponent<KeyboardPlayer>().get_components();   // Force it to get the Transform and Sprite pointers.
-    
+    // #ifdef DEBUG_MODE
+        getComponent<MouseTest>().get_components();
+    // #endif
     // Dealing with manager:
     // manager.addEntity(this);  // Add entity to Manager's entity vector.
     add_group(PLAYER_GROUP);   // Add it to the PLAYER_GROUP.

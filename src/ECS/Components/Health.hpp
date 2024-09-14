@@ -14,9 +14,9 @@ public:
     float m_rate;       ///< Rate of updating. 
     
     Health(float starter_hp, float max_hp, float rate = 0): 
-        m_invincible(false), m_max_hp(max_hp), m_hp(starter_hp), m_rate(rate) {}; ///< Constructor
+        m_invincible(false), m_max_hp(max_hp), m_hp(starter_hp), m_rate(rate) {};
     
-    void update() override; ///< Calls update_hp if rate != 0.
+    void update() override; ///< Calls update_hp if m_rate != 0.
     void update_hp(float damage = 0);       ///< Updates hp according to rate, deletes entity if hp <= 0.
     void set_invincibility(bool value);     ///< Updating invincibility value.
 };

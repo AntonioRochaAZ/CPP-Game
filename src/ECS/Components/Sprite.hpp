@@ -43,6 +43,8 @@ public:
             ///< Whether to flip the texture. Will be dealt with by the 
             ///< \ref KeyboardPlayer Component, when the player turns
             ///< around, for example.
+        vec shift = vec(0,0);  
+            ///< A possible shift to add to the position of the transform for rendering the object on screen.
     
     // Animation related:
         bool animated;                      ///< Whether the sprite is is animated.

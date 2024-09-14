@@ -73,6 +73,8 @@ void Sprite::update(){
 void Sprite::render(){
     dst_rect.x -= Game::camera_position[0]; // Updating position according to camera.
     dst_rect.y -= Game::camera_position[1];
+    dst_rect.x += shift[0]; // Updating position according to shift.
+    dst_rect.y += shift[1];
 
     #define SPAWNING_BIT (1 << 0)   // 01
     #define HURTING_BIT (1 << 1)    // 10

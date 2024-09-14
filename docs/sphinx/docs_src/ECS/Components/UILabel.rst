@@ -1,5 +1,5 @@
-UILabel
-=======
+UILabel (component)
+===================
 
 This component renders text on screen. It depends on the :cpp:class:`Transform` component
 of the :cpp:class:`Entity`. The :cpp:class:`Transform` component must update before 

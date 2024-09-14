@@ -33,10 +33,11 @@ and animations, how they handle keyboard inputs etc.
         player.add_group(PLAYER_GROUP);
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :caption: Contents:
 
    Components   <Components.rst>
    Entities     <Entities.rst>
+   States       <States.rst>
 
 .. doxygenfile :: ECS.hpp

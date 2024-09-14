@@ -38,6 +38,7 @@ struct Collider : public Component{
         /**< This tag could eventually be useful for deciding whether to take 
         the collision into account. */
 
+    bool visualize_collider = false;
     bool dynamic_shape;
         /**< This is only used for debugging. The actual handling is done in
         the \ref ::Sprite component with the set_collider attribute. To set
@@ -67,6 +68,7 @@ struct Collider : public Component{
 
     // Base class methods: ----------------------------------------------------
     void init() override;
+    void render() override;
     //void update() override;
     
     // Getting transform: -----------------------------------------------------
