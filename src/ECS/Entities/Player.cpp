@@ -1,8 +1,8 @@
 #include "Player.hpp"
 #include "TempEntity.hpp"
 #include <algorithm>
-#include "../../CustomControllers/KeyboardPlayer.hpp"
-#include "../../CustomControllers/MouseTest.hpp"
+#include "../Components/CustomControllers/KeyboardPlayer.hpp"
+#include "../Components/CustomControllers/MouseTest.hpp"
 
 std::unordered_map<int, SDL_Color> Player::player_colour = {
     {1, {255, 0  , 0  , 255}},  // red

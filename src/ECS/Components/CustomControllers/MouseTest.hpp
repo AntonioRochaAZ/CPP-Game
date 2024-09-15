@@ -1,5 +1,5 @@
 #pragma once
-#include "../ECS/Components/MouseController.hpp"
+#include "../MouseController.hpp"
 
 struct MouseTest : public MouseController{
     bool m_clicked;

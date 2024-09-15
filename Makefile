@@ -1,29 +1,28 @@
+### Path definitions:
 SRC_DIR = src
 BUILD_DIR = build
-CC = g++
-SRC_FILES = $(shell find $(SRC_DIR) -name "*.cpp")	# So we don't have to specify all subdirectories
+OBJ_DIR = objs
+DEBUG_DIR = debug
+RELEASE_DIR = release
 EXE_NAME = game
+LOG_FILE = build.log
+# (Documentation related):
+DOC_DIR = docs
+MAKEFILE_DIR = $(CURDIR)
+DOXYGEN_FOLDER = $(DOC_DIR)/doxygen
+SPHINX_FOLDER = $(DOC_DIR)/sphinx
+
+### Compiler options:
+CC = g++
+DEBUG_COMPILER_FLAGS = -std=c++17 -Wall -O0 -g -DDEBUG_MODE -c
+RELEASE_COMPILER_FLAGS = -std=c++17 -Wall -O3 -c
+DEFINITIONS = -DWORK_DIR=\"${PWD}\"	# Definition of the working directory (so we can call the executable from anywhere)
 INCLUDE_PATHS = -I include #-I/usr/local/include
 LIBRARY_PATHS = -L lib
 LINKER_FLAGS = -l SDL2 -l SDL2_image -l SDL2_ttf
-OBJ_DIR = objs
-
-# Version (debug/release):
-DEBUG_DIR = debug
-RELEASE_DIR = release
-# Definition of the working directory:
-# Eventually we should integrate assets etc. into the executable so this isn't necessary.
-DEFINITIONS = -DWORK_DIR=\"${PWD}\"	
-DEBUG_COMPILER_FLAGS = -std=c++17 -Wall -O0 -g -DDEBUG_MODE -c
-RELEASE_COMPILER_FLAGS = -std=c++17 -Wall -O3 -c
-LOG_FILE = build.log
-
-# Documentation related:
-MAKEFILE_DIR = $(CURDIR)
-DOXYGEN_FOLDER = docs/doxygen
-SPHINX_FOLDER = docs/sphinx
 
 # ----- ACTUAL COMPILATION AND LINKING ----- #
+SRC_FILES = $(shell find $(SRC_DIR) -name "*.cpp")	# So we don't have to specify all subdirectories
 OBJS_RELEASE = $(patsubst $(SRC_DIR)/%.cpp, $(BUILD_DIR)/$(RELEASE_DIR)/$(OBJ_DIR)/%.o, $(SRC_FILES))
 OBJS_DEBUG   = $(patsubst $(SRC_DIR)/%.cpp, $(BUILD_DIR)/$(DEBUG_DIR)/$(OBJ_DIR)/%.o, $(SRC_FILES))
 

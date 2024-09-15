@@ -1,6 +1,6 @@
 #include "Collision.hpp"
 #include "ECS/Components/Collider.hpp"
-#include "CustomControllers.hpp"
+#include "ECS/Components/CustomControllers.hpp"
 
 bool Collision::collider_AABB(const Collider *CA, const Collider *CB){
     Transform& TA = CA->entity->getComponent<Transform>();  // Just to simplify.

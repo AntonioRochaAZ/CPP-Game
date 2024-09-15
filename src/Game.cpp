@@ -6,7 +6,7 @@
 #include "ECS/Components/KeyboardController.hpp"
 #include "utils.hpp"
 #include "ECS/Entities/Player.hpp"
-#include "CustomControllers.hpp"
+#include "ECS/Components/CustomControllers.hpp"
 
 // From KeyboardController.hpp:
 std::map<int, KeyBind> global_key_bind_map;
