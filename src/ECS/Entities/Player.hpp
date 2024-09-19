@@ -1,6 +1,6 @@
 #pragma once
 #include "../ECS.hpp"
-#include <eigen3/Eigen/Dense>
+#include <Eigen/Dense>
 #include "../Components.hpp"
 
 using vec = Eigen::Vector2f;

@@ -1,6 +1,7 @@
 # Project related:
 lib
 include
+out/*
 .vscode
 .idea
 build

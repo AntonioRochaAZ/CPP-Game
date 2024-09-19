@@ -1,6 +1,6 @@
 #pragma once
-#include "SDL2/SDL.h"
-#include <eigen3/Eigen/Dense>
+#include "SDL.h"
+#include <Eigen/Dense>
 #include <tuple>
 
 using vec = Eigen::Vector2f;

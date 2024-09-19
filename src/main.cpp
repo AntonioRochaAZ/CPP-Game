@@ -8,7 +8,6 @@ int main(int argc, const char* argv[]) {
 
     // Correction for allowing running the executable by double clicking:    
     #ifndef WORK_DIR
-        #define WORK_DIR "";
         // The name of the executable, which should be defined during compilation
         throw std::runtime_error("Work directory is not defined.");
     #endif

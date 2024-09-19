@@ -1,5 +1,7 @@
 ### Path definitions:
 SRC_DIR = src
+INCLUDE_DIR = include
+LIBRARY_DIR = lib
 BUILD_DIR = build
 OBJ_DIR = objs
 DEBUG_DIR = debug
@@ -17,11 +19,12 @@ CC = g++
 DEBUG_COMPILER_FLAGS = -std=c++17 -Wall -O0 -g -DDEBUG_MODE -c
 RELEASE_COMPILER_FLAGS = -std=c++17 -Wall -O3 -c
 DEFINITIONS = -DWORK_DIR=\"${PWD}\"	# Definition of the working directory (so we can call the executable from anywhere)
-INCLUDE_PATHS = -I include #-I/usr/local/include
-LIBRARY_PATHS = -L lib
-LINKER_FLAGS = -l SDL2 -l SDL2_image -l SDL2_ttf
 
 # ----- ACTUAL COMPILATION AND LINKING ----- #
+INCLUDE_FOLDERS := $(wildcard ${INCLUDE_DIR}/*)
+INCLUDE_FLAGS := $(patsubst %, -I%, $(INCLUDE_FOLDERS))
+LIBRARY_FOLDERS := $(wildcard ${LIBRARY_DIR}/*)
+LINKER_FLAGS := -L$(LIBRARY_DIR) $(patsubst lib/%, -l%, $(LIBRARY_FOLDERS))
 SRC_FILES = $(shell find $(SRC_DIR) -name "*.cpp")	# So we don't have to specify all subdirectories
 OBJS_RELEASE = $(patsubst $(SRC_DIR)/%.cpp, $(BUILD_DIR)/$(RELEASE_DIR)/$(OBJ_DIR)/%.o, $(SRC_FILES))
 OBJS_DEBUG   = $(patsubst $(SRC_DIR)/%.cpp, $(BUILD_DIR)/$(DEBUG_DIR)/$(OBJ_DIR)/%.o, $(SRC_FILES))
@@ -58,13 +61,13 @@ $(BUILD_DIR)/$(DEBUG_DIR)/$(EXE_NAME): $(OBJS_DEBUG)
 
 $(BUILD_DIR)/$(RELEASE_DIR)/$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@mkdir -p $(dir $@)
-	@echo $(CC) $(INCLUDE_PATHS) $(RELEASE_COMPILER_FLAGS) $(DEFINITIONS) $< -o $@ >> $(BUILD_DIR)/$(RELEASE_DIR)/$(LOG_FILE) 2>&1
-	$(CC) $(INCLUDE_PATHS) $(RELEASE_COMPILER_FLAGS) $(DEFINITIONS) $< -o $@ >> $(BUILD_DIR)/$(RELEASE_DIR)/$(LOG_FILE) 2>&1
+	@echo $(CC) $(INCLUDE_FLAGS) $(RELEASE_COMPILER_FLAGS) $(DEFINITIONS) $< -o $@ >> $(BUILD_DIR)/$(RELEASE_DIR)/$(LOG_FILE) 2>&1
+	$(CC) $(INCLUDE_FLAGS) $(RELEASE_COMPILER_FLAGS) $(DEFINITIONS) $< -o $@ >> $(BUILD_DIR)/$(RELEASE_DIR)/$(LOG_FILE) 2>&1
 
 $(BUILD_DIR)/$(DEBUG_DIR)/$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@mkdir -p $(dir $@)
-	@echo $(CC) $(INCLUDE_PATHS) $(DEBUG_COMPILER_FLAGS) $(DEFINITIONS) $< -o $@ >> $(BUILD_DIR)/$(DEBUG_DIR)/$(LOG_FILE) 2>&1
-	$(CC) $(INCLUDE_PATHS) $(DEBUG_COMPILER_FLAGS) $(DEFINITIONS) $< -o $@ >> $(BUILD_DIR)/$(DEBUG_DIR)/$(LOG_FILE) 2>&1
+	@echo $(CC) $(INCLUDE_FLAGS) $(DEBUG_COMPILER_FLAGS) $(DEFINITIONS) $< -o $@ >> $(BUILD_DIR)/$(DEBUG_DIR)/$(LOG_FILE) 2>&1
+	$(CC) $(INCLUDE_FLAGS) $(DEBUG_COMPILER_FLAGS) $(DEFINITIONS) $< -o $@ >> $(BUILD_DIR)/$(DEBUG_DIR)/$(LOG_FILE) 2>&1
 
 clean_log_release:
 	@mkdir -p $(BUILD_DIR)/$(RELEASE_DIR)/

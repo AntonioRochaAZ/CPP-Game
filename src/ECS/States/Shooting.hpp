@@ -1,5 +1,5 @@
 #pragma once
-#include "SDL2/SDL.h"
+#include "SDL.h"
 #include "Cooldown.hpp"
 
 struct Shooting : public Cooldown{

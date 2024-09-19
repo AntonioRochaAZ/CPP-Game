@@ -1,0 +1,32 @@
+cmake_minimum_required(VERSION 3.29.2)
+
+project(CPP-Game)                       # Defining the project
+set(CMAKE_CXX_STANDARD 17)              # Setting C++ standard to C++17
+
+# SOURCE FILES:
+file(GLOB_RECURSE SOURCES "src/*.cpp")
+add_executable(${PROJECT_NAME} ${SOURCES})
+
+# SEARCHING FOR LIBRARIES:
+set(CMAKE_PREFIX_PATH "/usr/local")     # Setting path for searching for libraries  
+set(BUILD_SHARED_LIBS OFF)              # Ensure static libraries are preferred
+
+find_package(SDL2 REQUIRED)
+find_package(SDL2_image REQUIRED)
+find_package(SDL2_ttf REQUIRED)
+find_package(Eigen3 REQUIRED)
+target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2 SDL2_image::SDL2_image SDL2_ttf::SDL2_ttf)
+
+# INCLUDES:
+include_directories(${EIGEN3_INCLUDE_DIRS})     # Eigen does not have .cmake files that allow us to use target_link_libraries directly
+include_directories(${CMAKE_SOURCE_DIR}/src)    # Including our project's headers
+
+# DEFINITIIONS:
+target_compile_definitions(${PROJECT_NAME} PRIVATE WORK_DIR="${CMAKE_SOURCE_DIR}")
+
+# LOGGING:
+message(STATUS "Using compiler: ${CMAKE_CXX_COMPILER}")
+message(STATUS "TTF dirs: ${SDL2_IMAGE_INCLUDE_DIRS}, libs: ${SDL2_IMAGE_LIBRARIES}")
+
+# set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreadedDebug$<$<CONFIG:Debug>:Debug>")
+# set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreadedDebug$<$<CONFIG:Release>:Release>")

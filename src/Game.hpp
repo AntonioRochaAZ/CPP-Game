@@ -1,13 +1,13 @@
 #pragma once
 
 #include <iostream>
-#include "SDL2/SDL.h"
+#include "SDL.h"
 #include <vector>
 #include <map>
 #include <string>
-#include <eigen3/Eigen/Dense>
+#include <Eigen/Dense>
 #include "ECS/ECS.hpp"
-#include "SDL2/SDL_ttf.h"
+#include "SDL_ttf.h"
 
 /** This tuple is the return type of AssetManager::load_texture. It consists of the
 SDL_Texture pointer, the texture's width and its height, respectively. */

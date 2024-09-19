@@ -2,7 +2,7 @@
 // #include "Components.hpp"
 #include "../ECS.hpp"
 #include "Transform.hpp"
-#include "SDL2/SDL.h"
+#include "SDL.h"
 #include <cstdlib> // So we can halt execution
 #include <map>
 #include "../../Game.hpp"

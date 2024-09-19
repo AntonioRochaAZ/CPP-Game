@@ -2,7 +2,7 @@
 #include "ECS/ECS.hpp"
 #include "ECS/Components.hpp"
 #include "Game.hpp"
-#include "SDL2/SDL.h"
+#include "SDL.h"
 #include <vector>
 #include <stdexcept>    // Exception throwing
 
