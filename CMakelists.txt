@@ -26,7 +26,7 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
 # set(CMAKE_PREFIX_PATH "/usr/local")     # Setting path for searching for libraries  
 # set(BUILD_SHARED_LIBS OFF)              # Ensure static libraries are preferred
 find_package(SDL2 REQUIRED)
-find_package(SDL2_image REQUIRED)
+find_package(SDL2_image OPTIONAL)
 find_package(SDL2_ttf REQUIRED)
 find_package(Eigen3 REQUIRED)
 target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2 SDL2_image::SDL2_image SDL2_ttf::SDL2_ttf)

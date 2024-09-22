@@ -29,7 +29,7 @@ SRC_FILES = $(shell find $(SRC_DIR) -name "*.cpp")	# So we don't have to specify
 OBJS_RELEASE = $(patsubst $(SRC_DIR)/%.cpp, $(BUILD_DIR)/$(RELEASE_DIR)/$(OBJ_DIR)/%.o, $(SRC_FILES))
 OBJS_DEBUG   = $(patsubst $(SRC_DIR)/%.cpp, $(BUILD_DIR)/$(DEBUG_DIR)/$(OBJ_DIR)/%.o, $(SRC_FILES))
 
-all: clean_log_release release
+all: release
 release: clean_log_release $(BUILD_DIR)/$(RELEASE_DIR)/$(EXE_NAME)
 debug: clean_log_debug $(BUILD_DIR)/$(DEBUG_DIR)/$(EXE_NAME)
 clean_release:
