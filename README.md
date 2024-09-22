@@ -11,7 +11,7 @@ repository](https://github.com/carlbirch/BirchEngine).
 The game is 2D and has an "8-bit" style. The assets in this
 repository are original and are made in [Aseprite](https://www.aseprite.org/).
 
-Finally, the code can be found [in this project's GitHub.io](https://antoniorochaaz.github.io/CPP-Game/).
+Finally, the code documentation can be found [in this project's GitHub.io](https://antoniorochaaz.github.io/CPP-Game/).
 
 In this README, you will find:
 - How to play!
