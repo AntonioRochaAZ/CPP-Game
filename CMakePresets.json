@@ -1,0 +1,15 @@
+{
+    "version": 8,
+    "configurePresets": [
+        {
+            "name": "g++",
+            "displayName": "g++",
+            "description": "Default build options for g++",
+            "binaryDir": "${sourceDir}/cmake",
+            "cacheVariables": {
+                "CMAKE_CXX_COMPILER": "g++",
+                "CMAKE_CXX_FLAGS": "-Wall"
+            }
+        }
+    ]
+}

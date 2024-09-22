@@ -1,7 +1,7 @@
 # Project related:
 lib
 include
-out/*
+cmake
 .vscode
 .idea
 build
