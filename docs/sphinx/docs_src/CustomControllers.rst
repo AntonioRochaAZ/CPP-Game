@@ -1,3 +1,5 @@
+.. _custom_controllers_doc::
+
 Custom Controllers
 ==================
 
@@ -18,5 +20,5 @@ MouseController type components (``controller_array``) can be changed in the
    :maxdepth: 2
    :caption: Contents:
 
-   KeyboardPlayer   <ECS/Components/CustomControllers/Transform.rst>
-   MouseTest        <Components/MouseTest.rst>
+   KeyboardPlayer   <ECS/Components/CustomControllers/KeyboardPlayer.rst>
+   MouseTest        <ECS/Components/CustomControllers/MouseTest.rst>

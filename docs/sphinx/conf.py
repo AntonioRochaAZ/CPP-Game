@@ -29,6 +29,21 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
 html_title = 'CPP Game'
 html_theme = 'furo'
+
+html_theme_options = {
+    "light_css_variables": {
+        # "color-brand-primary": "red",                 # Links in the side-bar
+        # "color-brand-content": "#CC3333",             # function names etc.
+        # "color-admonition-background": "00FF00",
+    },
+    "dark_css_variables": {
+        "color-brand-primary": "#C9FFEE",
+        "color-brand-content": "#00FF6A",
+        # "color-admonition-background": "00FF00",
+    },
+    "announcement": "Welcome to CPP Game's documentation!"
+}
+
 html_static_path = ['_static']
 html_favicon = 'docs_assets/favicon.ico'
 
