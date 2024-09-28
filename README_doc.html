@@ -1,0 +1,464 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="How does the game run?" href="how_the_game_runs.html" /><link rel="prev" title="Welcome to CPP Game’s documentation!" href="index.html" />
+
+    <link rel="shortcut icon" href="_static/favicon.ico"/><!-- Generated with Sphinx 6.2.1 and Furo 2024.01.29 -->
+        <title>C++ Game - CPP Game</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=369552022d0b975c8e74270ce6eabe0fb7978f24" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #C9FFEE;
+  --color-brand-content: #00FF6A;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #C9FFEE;
+  --color-brand-content: #00FF6A;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<div class="announcement">
+  <aside class="announcement-content">
+     Welcome to CPP Game's documentation! 
+  </aside>
+</div>
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">CPP Game</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  
+  <span class="sidebar-brand-text">CPP Game</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">READ ME</a></li>
+<li class="toctree-l1"><a class="reference internal" href="how_the_game_runs.html">How does the game run?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="how_the_game_runs.html#making-your-game">Making YOUR game!</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="documentation.html">Documentation</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Documentation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="docs_src/ECS/ECS.html">Entity Component System (ECS)</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Entity Component System (ECS)</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="docs_src/ECS/Components.html">Components</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Components</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="docs_src/ECS/Components/Transform.html">Transform</a></li>
+<li class="toctree-l4"><a class="reference internal" href="docs_src/ECS/Components/Sprite.html">Sprite</a></li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="docs_src/ECS/Components/KeyboardController.html">KeyboardController</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of KeyboardController</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="docs_src/ECS/Components/CustomControllers/KeyboardPlayer.html">KeyboardPlayer</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="docs_src/ECS/Components/MouseController.html">MouseController</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of MouseController</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="docs_src/ECS/Components/CustomControllers/MouseTest.html">MouseTest</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="docs_src/ECS/Components/Collider.html">Collider</a></li>
+<li class="toctree-l4"><a class="reference internal" href="docs_src/ECS/Components/UILabel.html">UILabel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="docs_src/ECS/Components/Health.html">Health</a></li>
+<li class="toctree-l4"><a class="reference internal" href="docs_src/ECS/Components/Damage.html">Damage</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="docs_src/ECS/Entities.html">Entities</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Entities</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="docs_src/ECS/Entities/Projectile.html">Projectile</a></li>
+<li class="toctree-l4"><a class="reference internal" href="docs_src/ECS/Entities/Player.html">Player</a></li>
+<li class="toctree-l4"><a class="reference internal" href="docs_src/ECS/Entities/TempEntity.html">TempEntity</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="docs_src/ECS/States.html">States</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of States</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4 has-children"><a class="reference internal" href="docs_src/ECS/States/Cooldown.html">Cooldown</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of Cooldown</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="docs_src/ECS/States/Hurting.html">Hurting</a></li>
+<li class="toctree-l5"><a class="reference internal" href="docs_src/ECS/States/Shooting.html">Shooting</a></li>
+<li class="toctree-l5"><a class="reference internal" href="docs_src/ECS/States/Spawning.html">Spawning</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="docs_src/CustomControllers.html">Custom Controllers</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of Custom Controllers</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="docs_src/ECS/Components/CustomControllers/KeyboardPlayer.html">KeyboardPlayer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docs_src/ECS/Components/CustomControllers/MouseTest.html">MouseTest</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="docs_src/Collision.html">Collision</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs_src/Game.html">Game class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs_src/TileMap.html">TileMap class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docs_src/utils.html">Utils</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="c-game">
+<h1>C++ Game<a class="headerlink" href="#c-game" title="Permalink to this heading">#</a></h1>
+<p>This small project follows the footsteps of <a class="reference external" href="https://www.youtube.com/watch?v=QQzAHcojEKg&amp;list=PLhfAbcv9cehhkG7ZQK0nfIGJC_C-wSLrx">Let’s make games’ “How to make a
+game
+tutorial</a>,
+as a means of learning C++. The idea is <strong>not</strong>
+to stick to the tutorial, but to give my own touches along the
+way. For a repository exactly as the tutorial’s, see <a class="reference external" href="https://github.com/carlbirch/BirchEngine">the tutorial’s
+repository</a>.</p>
+<p>The game is 2D and has an “8-bit” style. The assets in this
+repository are original and are made in <a class="reference external" href="https://www.aseprite.org/">Aseprite</a>.</p>
+<p>Finally, the code documentation can be found <a class="reference external" href="https://antoniorochaaz.github.io/CPP-Game/">in this project’s GitHub.io</a>.</p>
+<p>In this README, you will find:
+- How to play!
+- Compilation instructions
+- Libraries/Requirements
+- Documentation (information on how it is generated)
+- Notes and to-do’s</p>
+<section id="how-to-play">
+<h2>How to play!<a class="headerlink" href="#how-to-play" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>You can move the first player with the W, A, S, D keys, and shoot with R.</p></li>
+<li><p>For the second player, it can be moved with the I, J, K, L keys, and it shoots with P.</p></li>
+<li><p>Finally, you can toggle the camera to follow Player 1 (or Player 2, if the first one is gone) by pressing M.</p></li>
+<li><p>You can press 1 at any point to reset the game.</p></li>
+<li><p>You can now also drag players around with the mouse (holding left click).</p></li>
+<li><p>Finally, you can close the game by pressing ESC.</p></li>
+</ul>
+<a class="reference internal image-reference" href="_images/current.gif"><img alt="_images/current.gif" src="_images/current.gif" style="width: 600px;" /></a>
+</section>
+<section id="compilation-instructions">
+<h2>Compilation instructions<a class="headerlink" href="#compilation-instructions" title="Permalink to this heading">#</a></h2>
+<p>A Makefile is provided, but CMake can also be used to compile this project.</p>
+<p>The debug configurations defines the <code class="docutils literal notranslate"><span class="pre">DEBUG_MODE</span></code> macro, which
+prints more information to the terminal during runtime.</p>
+<section id="makefile">
+<h3>Makefile<a class="headerlink" href="#makefile" title="Permalink to this heading">#</a></h3>
+<p>The Makefile uses the g++ compiler and assumes the file structure defined in
+<a class="reference external" href="https://youtu.be/Dyz9O7s7B8w?si=E45KSeGEoCbQo0OK">this tutorial</a> I’ve used to install the required libraries (see
+Libraries/Requirements below). Of course, if can be modified to suit your preferences.</p>
+<p>The make file will create a <code class="docutils literal notranslate"><span class="pre">build</span></code> directory, with <code class="docutils literal notranslate"><span class="pre">debug</span></code> and <code class="docutils literal notranslate"><span class="pre">release</span></code> folders
+and even make a <code class="docutils literal notranslate"><span class="pre">build.log</span></code>! You can build the release version with <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">all</span></code> and
+<code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">release</span></code>, while you can build the debug version with <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">debug</span></code>. Finally, it
+can also be used to generate the documentation by running <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">documentation</span></code>.</p>
+</section>
+<section id="cmake">
+<h3>CMake<a class="headerlink" href="#cmake" title="Permalink to this heading">#</a></h3>
+<p>In the main directory:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cmake -S . -B cmake     # Making the build files
+cmake --build cmake     # Building the project
+</pre></div>
+</div>
+<p>If using g++, my <code class="docutils literal notranslate"><span class="pre">g++</span></code> preset is available, which also adds warnings. In that case,
+you may simply run:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cmake --preset=g++
+cmake --build cmake
+</pre></div>
+</div>
+<p>The additional option <code class="docutils literal notranslate"><span class="pre">-DCMAKE_BUILD_TYPE=Debug</span></code> can be specified in the first
+command (in both cases) for compiling the debug version.</p>
+</section>
+</section>
+<section id="libraries-requirements">
+<h2>Libraries/Requirements<a class="headerlink" href="#libraries-requirements" title="Permalink to this heading">#</a></h2>
+<p>This project is developed on MacOS, but should be easily used on Linux. A
+cmake configuration for Windows is currently being worked on.</p>
+<p>The <a class="reference external" href="https://eigen.tuxfamily.org/index.php?title=Main_Page">Eigen3 library</a> is
+used for handling vectors.</p>
+<p>As in the tutorial, the <a class="reference external" href="https://www.libsdl.org/">SDL2 library</a> and the SDL2_ttf
+libraries are used. The tutorial also uses SDL_image, but I have circumvented this
+need by only using bitmap (.bmp) files. This may change in the future.</p>
+<p>On MacOS, these libraries can easily be installed with <a class="reference external" href="https://brew.sh/">homebrew package manager</a>,
+which is also available for linux.</p>
+<p>I’ve used <a class="reference external" href="https://youtu.be/Dyz9O7s7B8w?si=E45KSeGEoCbQo0OK">this tutorial</a>
+for setting up the lib, include folders and the original makefile (though it has
+been significantly changed since). Something similar can be done without the use of
+brew, if you must manually download and extract the files for those libraries.</p>
+</section>
+<section id="documentation">
+<h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this heading">#</a></h2>
+<p>I try to extensively document (and comment) what I learn along the
+way in this repository. <a class="reference external" href="https://antoniorochaaz.github.io/CPP-Game/">Documentation can be found here</a>.</p>
+<p>I use <a class="reference external" href="https://www.doxygen.nl/">Doxygen</a> to document the code (generating xml files), and then <a class="reference external" href="https://www.sphinx-doc.org/en/master/">Sphinx</a>
+to generate the HTML files from the xml files. To connect the two, Sphinx’s extension <a class="reference external" href="https://breathe.readthedocs.io/en/latest/">Breathe</a> is used.
+I was inspired by <a class="reference external" href="https://devblogs.microsoft.com/cppblog/clear-functional-c-documentation-with-sphinx-breathe-doxygen-cmake/">this article</a> for
+this integration. However, the use of CMake seemed too complex and generated too many redundant files. To generate my documentation I use the
+command <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">documentation</span></code>, defined in the Makefile.</p>
+</section>
+<section id="notes-and-to-do-s">
+<h2>Notes and to-do’s<a class="headerlink" href="#notes-and-to-do-s" title="Permalink to this heading">#</a></h2>
+<dl class="simple">
+<dt>&gt; Note:</dt><dd><p>This is a <em>work in progress</em>. I’ve finished watching the referenced tutorial, but will likely study SDL2 more in-depth to better understand how it works.</p>
+</dd>
+<dt>&gt; Note:</dt><dd><p>This project is developed on a Mac, though the source code should work on
+other platforms (changes to the Makefile might be necessary).</p>
+</dd>
+<dt>&gt; <strong>KNOWN BUGS:</strong></dt><dd><ul class="simple">
+<li><p>Graphical bug when players die while facing left (easy to solve: add a shift to the generated temporary entity when there’s a sprite flip).</p></li>
+<li><p>Game crashes (intended) when objects collide at the same speed.</p></li>
+</ul>
+</dd>
+</dl>
+<section id="to-do">
+<h3>To-do<a class="headerlink" href="#to-do" title="Permalink to this heading">#</a></h3>
+<p>In no specific order.</p>
+<ul class="simple">
+<li><p>Add a NO GROUP default EntityGroup. Also, in the manager add_to_group method, make sure that the entity only has one group.</p></li>
+<li><p>Study the use of “const” and passing arguments by reference (check when it is possible/should be done).</p></li>
+<li><p>Switch to const char instead of std::string whenever possible.</p></li>
+<li><p>Add options to windown size etc.</p></li>
+<li><p>Work into compiling for Windows and Linux.</p></li>
+<li><p>Long comment under “case (IMMOVABLE_BIT + PUSH_BIT)” inside of Collision::handle_collisions.</p></li>
+<li><p>Make updating independent of FPS. (actually not really sure if really necessary, but sure.)</p></li>
+<li><p>Learn how to properly center the text on the screen</p></li>
+<li><p>Create gifs and a diagram of how the collision handling works (and gifs for showing the states working).</p></li>
+<li><p>Adding music and sound effects.</p></li>
+<li><p>Optimize rendering: Have different renderers per managers. Only clear background’s renderer if needed (if the background moves perhaps, when the player moves, although it may not even be necessary, must check). (Also stop rendering objects off-screen) (Must think if this really is necessary, and if so, when).</p></li>
+<li><p>Replace TempEntity entity by a State. Will be much more logical.</p></li>
+<li><p>Apply color filters to projectiles to change their colour.</p></li>
+<li><p>Improve the mouse controller handling in collision handling, try to make it as generic as possible… so that we don’t have to list all MouseController types of components.</p></li>
+<li><p>Separate States from Components in ECS.hpp (?).</p></li>
+<li><p>Make the texture pointer in Game::AssetManager shared pointers that can be owned by Sprite and UILabel components.</p></li>
+<li><p>Create function for changing order of component updates (?) (currently a mess).</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="how_the_game_runs.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">How does the game run?</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="index.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Home</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, Antonio ROCHA
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">C++ Game</a><ul>
+<li><a class="reference internal" href="#how-to-play">How to play!</a></li>
+<li><a class="reference internal" href="#compilation-instructions">Compilation instructions</a><ul>
+<li><a class="reference internal" href="#makefile">Makefile</a></li>
+<li><a class="reference internal" href="#cmake">CMake</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#libraries-requirements">Libraries/Requirements</a></li>
+<li><a class="reference internal" href="#documentation">Documentation</a></li>
+<li><a class="reference internal" href="#notes-and-to-do-s">Notes and to-do’s</a><ul>
+<li><a class="reference internal" href="#to-do">To-do</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/scripts/furo.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    </body>
+</html>

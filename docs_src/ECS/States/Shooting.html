@@ -24,12 +24,16 @@
     body[data-theme="dark"] {
       --color-code-background: #202020;
   --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #C9FFEE;
+  --color-brand-content: #00FF6A;
   
     }
     @media (prefers-color-scheme: dark) {
       body:not([data-theme="light"]) {
         --color-code-background: #202020;
   --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #C9FFEE;
+  --color-brand-content: #00FF6A;
   
       }
     }
@@ -112,7 +116,11 @@
   <div class="visually-hidden">Hide table of contents sidebar</div>
 </label>
 
-
+<div class="announcement">
+  <aside class="announcement-content">
+     Welcome to CPP Game's documentation! 
+  </aside>
+</div>
 
 <div class="page">
   <header class="mobile-header">
@@ -156,48 +164,56 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current has-children"><a class="reference internal" href="../ECS.html">Entity Component System (ECS)</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Entity Component System (ECS)</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2 has-children"><a class="reference internal" href="../Components.html">Components</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Components</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../Components/Transform.html">Transform</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../Components/Sprite.html">Sprite</a></li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../Components/KeyboardController.html">KeyboardController</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of KeyboardController</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l4"><a class="reference internal" href="../Components/CustomControllers/KeyboardPlayer.html">KeyboardPlayer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../README_doc.html">READ ME</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../how_the_game_runs.html">How does the game run?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../how_the_game_runs.html#making-your-game">Making YOUR game!</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../../../documentation.html">Documentation</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Documentation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current has-children"><a class="reference internal" href="../ECS.html">Entity Component System (ECS)</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Entity Component System (ECS)</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l3 has-children"><a class="reference internal" href="../Components.html">Components</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Components</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Components/Transform.html">Transform</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Components/Sprite.html">Sprite</a></li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../Components/KeyboardController.html">KeyboardController</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of KeyboardController</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../Components/CustomControllers/KeyboardPlayer.html">KeyboardPlayer</a></li>
 </ul>
 </li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../Components/MouseController.html">MouseController</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of MouseController</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l4"><a class="reference internal" href="../Components/CustomControllers/MouseTest.html">MouseTest</a></li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../Components/MouseController.html">MouseController</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of MouseController</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../Components/CustomControllers/MouseTest.html">MouseTest</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../Components/Collider.html">Collider</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../Components/UILabel.html">UILabel</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../Components/Health.html">Health</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../Components/Damage.html">Damage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Components/Collider.html">Collider</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Components/UILabel.html">UILabel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Components/Health.html">Health</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Components/Damage.html">Damage</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../Entities.html">Entities</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Entities</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../Entities/Projectile.html">Projectile</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../Entities/Player.html">Player</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../Entities/TempEntity.html">TempEntity</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../Entities.html">Entities</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Entities</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../Entities/Projectile.html">Projectile</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Entities/Player.html">Player</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Entities/TempEntity.html">TempEntity</a></li>
 </ul>
 </li>
-<li class="toctree-l2 current has-children"><a class="reference internal" href="../States.html">States</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of States</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l3 current has-children"><a class="reference internal" href="Cooldown.html">Cooldown</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Cooldown</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="Hurting.html">Hurting</a></li>
-<li class="toctree-l4 current current-page"><a class="current reference internal" href="#">Shooting</a></li>
-<li class="toctree-l4"><a class="reference internal" href="Spawning.html">Spawning</a></li>
+<li class="toctree-l3 current has-children"><a class="reference internal" href="../States.html">States</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of States</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l4 current has-children"><a class="reference internal" href="Cooldown.html">Cooldown</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of Cooldown</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l5"><a class="reference internal" href="Hurting.html">Hurting</a></li>
+<li class="toctree-l5 current current-page"><a class="current reference internal" href="#">Shooting</a></li>
+<li class="toctree-l5"><a class="reference internal" href="Spawning.html">Spawning</a></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../CustomControllers.html">Custom Controllers</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of Custom Controllers</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../CustomControllers.html">Custom Controllers</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of Custom Controllers</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Components/CustomControllers/KeyboardPlayer.html">KeyboardPlayer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Components/CustomControllers/MouseTest.html">MouseTest</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../Collision.html">Collision</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../Game.html">Game class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../TileMap.html">TileMap class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../utils.html">Utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Collision.html">Collision</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Game.html">Game class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../TileMap.html">TileMap class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../utils.html">Utils</a></li>
+</ul>
+</li>
 </ul>
 
 </div>

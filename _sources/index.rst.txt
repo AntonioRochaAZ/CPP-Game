@@ -3,20 +3,21 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+====================================
 Welcome to CPP Game's documentation!
 ====================================
+
+`Click here for the repository <https://github.com/AntonioRochaAZ/CPP-Game>`_
+
+`Click here for my .io page <https://antoniorochaaz.github.io/>`_
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
-   Entity Component System (ECS) <docs_src/ECS/ECS.rst>
-   Custom Controllers            <docs_src/CustomControllers.rst>
-   Collision                     <docs_src/Collision.rst>
-   Game class                    <docs_src/Game.rst>
-   TileMap class                 <docs_src/TileMap.rst>
-   Utils                         <docs_src/utils.rst>
-
+   READ ME                       <README_doc.rst>
+   How does the game run?        <how_the_game_runs.rst>
+   Documentation                 <documentation.rst>
 
 Indices and tables
 ==================
