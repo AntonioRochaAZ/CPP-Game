@@ -53,7 +53,7 @@ void Game::AssetManager::add_texture(std::string id, std::string path){
         std::string line;               ///< Lines we'll parse.
         std::string token;              ///< The values we'll read from the line, as a string
         std::string animation_name;     ///< The animation name we'll read from the line.
-        std::array<int, 4> animation_data;  ///< Storage for the numerical values, which will be used to create the animation objects.
+        std::array<int, NB_ANIM_DATA> animation_data;  ///< Storage for the numerical values, which will be used to create the animation objects.
         std::map< std::string, Animation > temporary_map;   ///< Map storing all animations.
         int animation_index = 0;        ///< A counter which will be used to set the Animation objects up.
         int animation_y = 0;            ///< The value of y where the animation's texture starts (will be incremented).
@@ -70,7 +70,7 @@ void Game::AssetManager::add_texture(std::string id, std::string path){
             std::stringstream ss(line); // A variable we can tokenize
             //-----------------------------------------------------------------------------------------------
 
-            for (int i = 0; i < 5; i ++){   // Looping through data in the line
+            for (int i = 0; i < NB_ANIM_DATA + 1; i ++){   // Looping through data in the line
                 if (!ss.good()){
                     throw std::runtime_error(
                         "Error in Game::AssetManager::add_texture: trying to read more values than there tokens/line in the text file.");
@@ -88,7 +88,7 @@ void Game::AssetManager::add_texture(std::string id, std::string path){
                 }
             }
             // Create animation object and store it to animation map
-            Animation animation_object(animation_data[0], animation_data[1], animation_data[2], animation_data[3], animation_index);
+            Animation animation_object(animation_data[0], animation_data[1], animation_data[2], animation_data[3], animation_data[4], animation_index);
             animation_object.src_y = animation_y;           // Setting the source's y value up.
             
             animation_index++;                              // Increment animation index.

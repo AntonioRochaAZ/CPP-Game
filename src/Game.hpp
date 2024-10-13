@@ -17,6 +17,8 @@ using vec = Eigen::Vector2f;
 
 struct Collider; // Forward declaration of the Collider class (otherwise, circular import).
 
+constexpr int NB_ANIM_DATA = 5; // Number of numeric animation data (thus excluding animation name) stored in _animation.txt files 
+
 /** Game class definition, used for running the game and handling events. Most functions are
 defined in Game.cpp. */
 class Game {
@@ -71,6 +73,7 @@ public:
             int animation_period;   ///< Period of each frame in miliseconds
             int sprite_width;       
             int sprite_height;
+            int m_flip_shift;       ///< By how many pixels to shift (to the left) the sprite when when Sprite's sprite_flip is SDL_FLIP_HORIZONTAL.
             int index;              ///< The animation index (for when the Entity has multiple animations).
 
             // Members set up when loading the animations:
@@ -85,11 +88,12 @@ public:
                 @param t: animation_period member (ms/frame).
                 @param w: sprite_width member (pixels).
                 @param h: sprite_height member (pixels).
+                @param flip_shift: The number of pixels to shift the sprite to the left when its sprite_flip member is SDL_FLIP_HORIZONTAL (pixels).
                 @param i: the index of the animation.
             */
-            Animation(int f, int t, int w, int h, int i):
+            Animation(int f, int t, int w, int h, int flip_shift, int i):
                 frames(f), animation_period(t), sprite_width(w), sprite_height(h),
-                index(i), src_y(0){}
+                m_flip_shift(flip_shift), index(i), src_y(0){}
         };
 
         // I would like to use a shared pointer instead of a regular pointer here,

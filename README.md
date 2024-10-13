@@ -118,6 +118,7 @@ command ``make documentation``, defined in the Makefile.
 In no specific order.
 
 - Add a NO GROUP default EntityGroup. Also, in the manager add_to_group method, make sure that the entity only has one group.
+- Generalize the use of the Animation object for all textures, instead of having multiple metadata scattered everywhere.
 
 - Study the use of "const" and passing arguments by reference (check when it is possible/should be done).
 - Switch to const char instead of std::string whenever possible.

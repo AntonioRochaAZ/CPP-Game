@@ -73,8 +73,13 @@ void Sprite::update(){
 void Sprite::render(){
     dst_rect.x -= Game::camera_position[0]; // Updating position according to camera.
     dst_rect.y -= Game::camera_position[1];
-    dst_rect.x += shift[0]; // Updating position according to shift.
-    dst_rect.y += shift[1];
+    if (sprite_flip == SDL_FLIP_HORIZONTAL && animated){   // In this case we must fix the starting position
+        dst_rect.x += (shift[0] - get_xscale()*animation_map.find(current_animation)->second.m_flip_shift); // Updating position according to shift.
+        dst_rect.y += shift[1];
+    }else{
+        dst_rect.x += shift[0]; // Updating position according to shift.
+        dst_rect.y += shift[1];
+    }
 
     #define SPAWNING_BIT (1 << 0)   // 01
     #define HURTING_BIT (1 << 1)    // 10
