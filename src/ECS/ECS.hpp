@@ -7,6 +7,8 @@
 #include <array>
 #include <cmath>
 
+#include "SDL.h"
+
 // Type definitions: ==============================================================================
 using ComponentID = std::size_t;    // TODO: rename to ComponentIdType
 using Group = std::size_t;          // TODO: rename to GroupType
@@ -197,6 +199,7 @@ class Manager{
             return grouped_entities[group]; }
 
         // MAIN LOOP FUNCTIONS:----------------------------------------------------------
+        void handle_events(SDL_Event *event);
         /// Function for updating every entity in the Manager::entity_vector.
         void update(){
             int end = entity_vector.size(); // Necessary to avoid problems with entity_vector size changes during loop.

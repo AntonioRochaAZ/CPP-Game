@@ -144,77 +144,81 @@ int Game::init(const char* title, int x, int y, int width, int height, bool full
 
 // Handle events:
 void Game::handle_events(){
-    
-    SDL_PollEvent(&event);
     bool key_is_bound;
-    switch (event.type){
-    case SDL_KEYDOWN:
-        // Check if the key is bound: DO NOT WRAP DEBUG_MODE AROUND THIS
-        key_is_bound = check_map_id<int, KeyBind>(
-                global_key_bind_map, event.key.keysym.sym, "", false);    // Message unnecessary since we'll not halt execution
-        if (key_is_bound){  // If so, go to switch statement:
-        KeyBind pressed_key = global_key_bind_map[event.key.keysym.sym];
-        switch (pressed_key){
-        case KeyBind::CAMERA_TOGGLE:
-            if (Game::tracking_player){
-                // This condition must be met, otherwise
-                // will have a bug where neither the map not
-                // the player doesn't move
-                Game::tracking_player = false;
-            }else{
-                Game::tracking_player = true;
-                // Get current reference camera and entity positions (will be update next):
-                previous_camera_position = camera_position;
+    
+    while (SDL_PollEvent(&event) != 0){
+        
+        manager.handle_events(&event);
 
-                // Deal with camera_ref_entity if the reference entity has died:
-                if (camera_ref_entity.expired()){
-                    update_camera_ref_entity();
+        switch (event.type){
+        case SDL_KEYDOWN:
+            // Check if the key is bound: DO NOT WRAP DEBUG_MODE AROUND THIS
+            key_is_bound = check_map_id<int, KeyBind>(
+                    global_key_bind_map, event.key.keysym.sym, "", false);    // Message unnecessary since we'll not halt execution
+            if (key_is_bound){  // If so, go to switch statement:
+            KeyBind pressed_key = global_key_bind_map[event.key.keysym.sym];
+            switch (pressed_key){
+            case KeyBind::CAMERA_TOGGLE:
+                if (Game::tracking_player){
+                    // This condition must be met, otherwise
+                    // will have a bug where neither the map not
+                    // the player doesn't move
+                    Game::tracking_player = false;
+                }else{
+                    Game::tracking_player = true;
+                    // Get current reference camera and entity positions (will be update next):
+                    previous_camera_position = camera_position;
+
+                    // Deal with camera_ref_entity if the reference entity has died:
+                    if (camera_ref_entity.expired()){
+                        update_camera_ref_entity();
+                    }
+                    // If it isn't anymore, update position.
+                    if (!camera_ref_entity.expired()){ 
+                        previous_ref_entity_position = camera_ref_entity.lock()->getComponent<Transform>().position;
+                    }
                 }
-                // If it isn't anymore, update position.
-                if (!camera_ref_entity.expired()){ 
-                    previous_ref_entity_position = camera_ref_entity.lock()->getComponent<Transform>().position;
+                break;
+            case KeyBind::RESET:
+                // Reset players:
+                for (Entity* e_ptr : manager.grouped_entities[PLAYER_GROUP]){
+                    // Case object from Entity to Player so we can call custom 
+                    // destroy method, which allow destruction without the death
+                    // animation:
+                    Player* p_ptr = dynamic_cast<Player*>(e_ptr);
+                    p_ptr->destroy(false); 
                 }
-            }
+                manager.refresh();
+                init_players();
+                // Reset camera position:
+                camera_position = vec(0,0);
+                message->getComponent<UILabel>().set_text("", "custom_font1px");
+                break;
+            case KeyBind::QUIT:
+                is_running = false;
+                break;
+            default:
+                break;
+            }}
             break;
-        case KeyBind::RESET:
-            // Reset players:
-            for (Entity* e_ptr : manager.grouped_entities[PLAYER_GROUP]){
-                // Case object from Entity to Player so we can call custom 
-                // destroy method, which allow destruction without the death
-                // animation:
-                Player* p_ptr = dynamic_cast<Player*>(e_ptr);
-                p_ptr->destroy(false); 
-            }
-            manager.refresh();
-            init_players();
-            // Reset camera position:
-            camera_position = vec(0,0);
-            message->getComponent<UILabel>().set_text("", "custom_font1px");
+        case SDL_MOUSEMOTION:
+            cursor->getComponent<Transform>().position = vec(event.motion.x, event.motion.y);
+            // Collider *cursor_collider = cursor->getComponent<Collider>();
+            // // Check if it collides with an entity that has the MouseController component:
+            // for (Collider *c : Game::collider_vector){
+            //     if (Collision::collider_AABB(c, )){
+
+            //     }
+
+            // }
+
             break;
-        case KeyBind::QUIT:
+        case SDL_QUIT:
             is_running = false;
             break;
         default:
             break;
-        }}
-        break;
-    case SDL_MOUSEMOTION:
-        cursor->getComponent<Transform>().position = vec(event.motion.x, event.motion.y);
-        // Collider *cursor_collider = cursor->getComponent<Collider>();
-        // // Check if it collides with an entity that has the MouseController component:
-        // for (Collider *c : Game::collider_vector){
-        //     if (Collision::collider_AABB(c, )){
-
-        //     }
-
-        // }
-
-        break;
-    case SDL_QUIT:
-        is_running = false;
-        break;
-    default:
-        break;
+        }
     }
 };
 

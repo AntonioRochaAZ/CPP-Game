@@ -28,7 +28,7 @@ struct KeyboardController : public Component{
     KeyboardController(){};
     void init() override{ local_key_bind_map = global_key_bind_map; }
 
-    void update() override; ///< Defined in KeyboardController.cpp file.
+    virtual void handle_events(SDL_Event *event); ///< Defined in KeyboardController.cpp file.
     virtual void on_up(){};
     virtual void on_down(){};
     virtual void on_left(){};

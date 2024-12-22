@@ -110,9 +110,9 @@ void Collision::handle_collisions(){
         bool condition2 = EB->name=="CURSOR" && id_A != max_components + 1;
         if (condition1 || condition2){
             if (condition1){
-                get_custom_mouse_controller(*EB, id_B)->handle_events();
+                get_custom_mouse_controller(*EB, id_B)->handle_hover_click();
             }else{
-                get_custom_mouse_controller(*EA, id_A)->handle_events();
+                get_custom_mouse_controller(*EA, id_A)->handle_hover_click();
             }
         }
 

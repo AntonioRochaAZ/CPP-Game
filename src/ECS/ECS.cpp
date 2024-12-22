@@ -1,4 +1,5 @@
-#include "ECS.hpp"
+#include "ECS.hpp"  // Now unnecessary because next include implicitly includes it.
+#include "Components/CustomControllers.hpp"
 
 Entity::Entity(Manager& user_manager, std::string mName): manager(user_manager), name(mName){
     // manager.addEntity(this);
@@ -65,5 +66,29 @@ void Entity::refresh(){
             }
         );
         components.erase(beginning,  end);
+    }
+}
+
+void Manager::handle_events(SDL_Event *event){
+    
+    ComponentID controller_id = 0;
+    int end = entity_vector.size(); // Shouldn't be necessary here but just in case.
+    
+    // Looping through entities:
+    for (int i = 0; i < end; i++){
+        // Checking for mouse events:
+        if (event->type == SDL_MOUSEBUTTONDOWN || event->type == SDL_MOUSEBUTTONUP){
+            controller_id = has_mouse_controller(*entity_vector[i]);
+            if (controller_id != max_components + 1){
+                get_custom_mouse_controller(*entity_vector[i], controller_id)->handle_events(event);
+            }
+        }
+        // Checking for keyboard events:
+        if (event->type == SDL_KEYDOWN || event->type == SDL_KEYUP){
+            controller_id = has_keyboard_controller(*entity_vector[i]);
+            if (controller_id != max_components + 1){
+                get_custom_keyboard_controller(*entity_vector[i], controller_id)->handle_events(event);
+            }
+        }
     }
 }
