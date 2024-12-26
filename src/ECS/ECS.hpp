@@ -22,6 +22,7 @@ using GroupBitSet = std::bitset<max_groups>;            ///< Used for checking i
 /// Enumerator for groups of entities (cannot be an enum class because its values are used in std::size_t
 /// dependant functions):
 enum EntityGroup : std::size_t{
+    NO_GROUP,
     MAP_GROUP,
     COLLIDER_GROUP,
     TEMPORARY_GROUP,
@@ -191,14 +192,13 @@ class Manager{
 
         // GROUP HANDLING:---------------------------------------------------------------
         /// Add an entity to a group. This is called by Entity's Entity::add_group.
-        /// It shouldn't be called directly.
-        void add_to_group(Entity* entity, std::size_t group){
-            grouped_entities[group].emplace_back(entity); }
+        /// It shouldn't be called directly. Defined in ECS.cpp.
+        void add_to_group(Entity* entity, std::size_t group);
         /// Function for getting the vector of entities in a group.
-        std::vector<Entity*>& get_group(Group group){
-            return grouped_entities[group]; }
+        std::vector<Entity*>& get_group(Group group){ return grouped_entities[group]; };
 
         // MAIN LOOP FUNCTIONS:----------------------------------------------------------
+        /// Function for handling keyboard and mouse click events.
         void handle_events(SDL_Event *event);
         /// Function for updating every entity in the Manager::entity_vector.
         void update(){
@@ -222,7 +222,8 @@ class Manager{
                 }   
             }
         }
-        /// Checks for inactive Entity's and delete them. Defined in ECS.cpp because it is long.
+        /// Checks for inactive Entity's and delete them. Also removes entities from groups that
+        /// they don't belong. Defined in ECS.cpp.
         void refresh();
         
         virtual ~Manager(){};

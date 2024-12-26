@@ -2,6 +2,7 @@
 #include "Components/CustomControllers.hpp"
 
 Entity::Entity(Manager& user_manager, std::string mName): manager(user_manager), name(mName){
+    add_group(NO_GROUP);
     // manager.addEntity(this);
 }
 
@@ -40,6 +41,19 @@ void Manager::refresh(){
         }
     );
     entity_vector.erase(beginning,  end);
+}
+
+void Manager::add_to_group(Entity* entity, std::size_t group){
+    grouped_entities[group].emplace_back(entity);
+    // Must remove the entity from other groups if it is present:
+    for(std::size_t i = 0; i < max_groups; i++){
+        if (entity->has_group(i) && i != group){ // Entity has group i which is different from current group.
+            entity->del_group(i);   // Delete group stored in entity
+        }
+    }
+    // Entities will be removed from the wrong grouped_entities when
+    // refresh() is called. It isn't called here so that we don't remove
+    // them before the correct point in the loop (would cause issues).
 }
 
 void Entity::refresh(){

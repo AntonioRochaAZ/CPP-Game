@@ -110,14 +110,12 @@ command ``make documentation``, defined in the Makefile.
     other platforms (changes to the Makefile might be necessary).
 
 > **KNOWN BUGS:**
-    - Graphical bug when players die while facing left (easy to solve: add a shift to the generated temporary entity when there's a sprite flip).
     - Game crashes (intended) when objects collide at the same speed.
  
 ### To-do
 
 In no specific order.
 
-- Add a NO GROUP default EntityGroup. Also, in the manager add_to_group method, make sure that the entity only has one group.
 - Generalize the use of the Animation object for all textures, instead of having multiple metadata scattered everywhere.
 
 - Study the use of "const" and passing arguments by reference (check when it is possible/should be done).
