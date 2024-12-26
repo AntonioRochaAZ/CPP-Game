@@ -124,12 +124,10 @@ In no specific order.
 - Work into compiling for Windows and Linux.
 - Long comment under "case (IMMOVABLE_BIT + PUSH_BIT)" inside of Collision::handle_collisions.
 - Make updating independent of FPS. (actually not really sure if really necessary, but sure.)
-- Learn how to properly center the text on the screen
 - Create gifs and a diagram of how the collision handling works (and gifs for showing the states working).
 - Adding music and sound effects.
 
 - Optimize rendering: Have different renderers per managers. Only clear background's renderer if needed (if the background moves perhaps, when the player moves, although it may not even be necessary, must check). (Also stop rendering objects off-screen) (Must think if this really is necessary, and if so, when).
-- Replace TempEntity entity by a State. Will be much more logical.
 - Apply color filters to projectiles to change their colour.
 - Improve the mouse controller handling in collision handling, try to make it as generic as possible... so that we don't have to list all MouseController types of components.
 - Separate States from Components in ECS.hpp (?).

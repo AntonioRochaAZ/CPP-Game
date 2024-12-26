@@ -141,3 +141,17 @@ void Game::AssetManager::destroy_font(std::string id){
         check_map_id<std::string, TTF_Font*>(font_map, id, "destroy_font, font_map");
     #endif
     TTF_CloseFont(font_map[id]); font_map.erase(id); }
+
+int Game::AssetManager::get_text_center_position(
+    std::string id, const char *text, int *w, int *h, int w0, int h0)
+{
+    #ifdef DEBUG_MODE
+        check_map_id<std::string, TTF_Font*>(font_map, id, "get_text_size, font_map");
+    #endif
+    TTF_Font *font = get_font(id);
+    int ret_val = TTF_SizeUTF8(font, text, w, h);
+    std::cout << *w << " " << *h << std::endl;
+    *w = (window_width  + w0 - *w)/2;
+    *h = (window_height + h0 - *h)/2;
+    return ret_val;
+}

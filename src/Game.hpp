@@ -19,6 +19,9 @@ struct Collider; // Forward declaration of the Collider class (otherwise, circul
 
 constexpr int NB_ANIM_DATA = 5; // Number of numeric animation data (thus excluding animation name) stored in _animation.txt files 
 
+constexpr int window_width = 1200, window_height = 1000;
+constexpr bool fullscreen = false;
+
 /** Game class definition, used for running the game and handling events. Most functions are
 defined in Game.cpp. */
 class Game {
@@ -136,6 +139,8 @@ public:
             ///< Close a font based on its ID. This can be called when a given font is
             ///< no longer used. This will also remove the map entry (necessary to avoid issues in
             ///< the destructor).
+        int get_text_center_position(std::string id, const char *text, int *w, int *h, int w0=0, int h0=0);
+
     };
 
     static AssetManager assets;   

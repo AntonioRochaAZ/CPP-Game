@@ -124,13 +124,25 @@ int Game::init(const char* title, int x, int y, int width, int height, bool full
     label->add_group(MAP_GROUP);
     label->addComponent<Transform>();
     label->addComponent<UILabel>(0, 0.0, 40, 20, "FIGHT!", "custom_font1px", purple, 600);
+    // I prefered this manual spot rather than the centered one:
     label->getComponent<Transform>().position = vec(250, 200);
-    
+
     SDL_Color ocean_blue = { 52, 143, 235, 255 };
     message->add_group(MAP_GROUP);
     message->addComponent<Transform>();
     message->addComponent<UILabel>(0, 0.0, 40, 20, "", "custom_font1px", ocean_blue, 96);
-    message->getComponent<Transform>().position = vec(400, 200);
+    int text_w, text_h;
+    int text_ret = Game::assets.get_text_center_position(
+        "custom_font1px",
+        "Press 1 to reset!",
+        &text_w, &text_h
+    );
+    if (text_ret == 0){
+        message->getComponent<Transform>().position[0] = text_w;
+        message->getComponent<Transform>().position[1] = 200;
+    }else{
+        message->getComponent<Transform>().position = vec(400, 200);
+    }
 
     cursor->add_group(COLLIDER_GROUP);
     cursor->addComponent<Transform>();

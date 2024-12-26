@@ -1,8 +1,6 @@
 #include <filesystem>
 #include "Game.hpp"
 
-constexpr int window_width = 1200, window_height = 1000;
-constexpr bool fullscreen = false;
 
 int main(int argc, const char* argv[]) {
 
