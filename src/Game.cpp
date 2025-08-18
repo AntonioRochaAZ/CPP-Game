@@ -149,6 +149,29 @@ int Game::init(const char* title, int x, int y, int width, int height, bool full
     cursor->addComponent<Collider>("Cursor", CollisionHandle::PHASE, 10, 10);
     cursor->getComponent<Collider>().visualize_collider = true;
 
+    // Load audio:
+    // Following lines suggested by ChatGPT : -->
+    SDL_AudioSpec desired;
+    SDL_zero(desired);
+    desired.freq = 48000;                     // 48 kHz is a safe modern default
+    desired.format = AUDIO_F32;               // 32-bit float samples
+    desired.channels = 2;                     // stereo
+    desired.samples = 4096;                   // buffer size (tweak if needed)
+    desired.callback = nullptr;               // we’ll use SDL_QueueAudio
+    //<-- ChatGPT
+    Game::assets.m_audio_device = SDL_OpenAudioDevice(
+        nullptr, 0, &desired, &Game::assets.m_obtained_audio_spec,
+        SDL_AUDIO_ALLOW_ANY_CHANGE
+    );
+    if (Game::assets.m_audio_device == 0){
+        // Error: could not open audio device:
+        std::cout << SDL_GetError() << std::endl;
+        throw std::runtime_error("");
+    }
+    SDL_PauseAudioDevice(Game::assets.m_audio_device, 0);
+
+    Game::assets.add_audio("laser", "./assets/audio/515733__lilmati__retro-laser-shot-07.wav");
+    
     // Ok, it is running now:
     is_running = true;
     return 0;
@@ -297,6 +320,7 @@ void Game::render(){
 void Game::clean(){
     SDL_DestroyWindow(window);
     SDL_DestroyRenderer(renderer);
+    SDL_CloseAudioDevice(Game::assets.m_audio_device);
     SDL_Quit();
     is_running = false; //Just in case
     //delete tile_map;

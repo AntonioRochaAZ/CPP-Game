@@ -22,6 +22,15 @@ constexpr int NB_ANIM_DATA = 5; // Number of numeric animation data (thus exclud
 constexpr int window_width = 1200, window_height = 1000;
 constexpr bool fullscreen = false;
 
+struct Audio{
+    Uint8* buffer = nullptr;
+    Uint32 length = 0;
+    // Deallocation of the buffer is done by the asset manager
+    // TODO: eventuallly define a move constructor here so that the
+    // deallocation can also be done in the ~ Audio destructor
+};
+
+
 /** Game class definition, used for running the game and handling events. Most functions are
 defined in Game.cpp. */
 class Game {
@@ -110,6 +119,7 @@ public:
         std::map< std::string, int > width_map;  ///< A map from strings (an ID) to the associated texture's width.
         std::map< std::string, int > height_map; ///< A map from strings (an ID) to the associated texture's height.
         std::map< std::string, TTF_Font* > font_map; ///< A map from strings (an ID) to font objects.
+        std::map< std::string, Audio > audio_map; ///< A map from strings (an ID) to Audio structs.
 
         AssetManager(){};
         ~AssetManager();    ///< Destroys all texture and font pointers. Defined in AssetManager.cpp.
@@ -140,6 +150,12 @@ public:
             ///< no longer used. This will also remove the map entry (necessary to avoid issues in
             ///< the destructor).
         int get_text_center_position(std::string id, const char *text, int *w, int *h, int w0=0, int h0=0);
+
+        // AUDIO MANAGEMENT ------------------------------------------------------------------
+        SDL_AudioDeviceID m_audio_device;
+        SDL_AudioSpec m_obtained_audio_spec;
+        void add_audio(std::string id, std::string path);
+        Audio get_audio(std::string id);
 
     };
 
