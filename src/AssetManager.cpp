@@ -24,9 +24,14 @@ Game::AssetManager::~AssetManager(){
         TTF_CloseFont(f.second);
     }
 
-    // Destroys all Audio buffer pointers:
+    // Destroys all Mix_Chunk pointers:
     for (auto& audio : audio_map){
-        SDL_free(audio.second.buffer);
+        Mix_FreeChunk(audio.second);
+    }
+
+    // Destroys all Mix_Music pointers:
+    for (auto& music : music_map){
+        Mix_FreeMusic(music.second);
     }
 
 }
@@ -162,67 +167,29 @@ int Game::AssetManager::get_text_center_position(
     return ret_val;
 }
 
-
 // Audio Management: ------------------------------------------------------------------------------
 void Game::AssetManager::add_audio(std::string id, std::string path){
-    SDL_AudioSpec local_spec;
-    Uint8* local_buffer;
-    Audio audio;
-
-    if (SDL_LoadWAV(path.c_str(), &local_spec, &local_buffer, &audio.length) == nullptr){
-        //error
-        std::cout << SDL_GetError() << std::endl;
-        std::cout << "Could not load audio file: " << std::endl;
-        throw std::runtime_error(path);
-    }
-    SDL_AudioSpec& device_spec = Game::assets.m_obtained_audio_spec;
-    if ((device_spec.freq != local_spec.freq)
-    ||  (device_spec.format != local_spec.format)
-    ||  (device_spec.channels != local_spec.channels)
-    ){
-        // conversion needed:
-        SDL_AudioCVT audio_conversion;
-        int conversion_status = SDL_BuildAudioCVT(
-            &audio_conversion, 
-            local_spec.format, local_spec.channels, local_spec.freq, 
-            device_spec.format, device_spec.channels, device_spec.freq
-        );
-
-        if (conversion_status < 0){
-            // Error during conversion calculation
-            std::cout << SDL_GetError() << std::endl;
-            std::cout << "Could not convert audio." << std::endl;
-            throw std::runtime_error(path);
-
-        }
-        if (audio_conversion.needed){
-            audio_conversion.len = audio.length; // Original length of the audio (bytes)
-            audio_conversion.buf = (Uint8*) SDL_malloc(audio_conversion.len * audio_conversion.len_mult); // https://wiki.libsdl.org/SDL2/SDL_AudioCVT
-            memcpy(audio_conversion.buf, local_buffer, audio.length);
-            SDL_ConvertAudio(&audio_conversion);
-
-            audio.buffer = audio_conversion.buf;        // Must be deallocated later (destructor of asset manager)
-            audio.length = audio_conversion.len_cvt;
-            
-        }else{
-            // audio.length stored in SDL_LoadWAV call.
-            // We need the following lines just to make sure deallocation
-            // will be consistent. While local_buffer must be deallocated 
-            // with SDL_FreeWAV, we want audio.buffer to be deallocated
-            // with SDL_free (as that will be necessaryr in case
-            // audio_conversion.needed == true).
-            audio.buffer = (Uint8*) SDL_malloc(audio.length);
-            memcpy(audio.buffer, local_buffer, audio.length);    // Must be deallocated later (destructor of asset manager)    
-        }
-    }
-
-    SDL_FreeWAV(local_buffer);
-    audio_map.emplace(id, std::move(audio));
-
+    Mix_Chunk* audio;
+    audio = Mix_LoadWAV(path.c_str());
+    if (audio == nullptr){ std::cout << "Error loading sound: " << path << std::endl; throw std::runtime_error(""); }
+    audio_map.emplace(id, audio);
 }
 
-Audio Game::AssetManager::get_audio(std::string id){
+void Game::AssetManager::add_music(std::string id, std::string path){
+    Mix_Music* music;
+    music = Mix_LoadMUS(path.c_str());
+    if (music == nullptr){ std::cout << "Error loading music: " << path << std::endl; throw std::runtime_error(""); }
+    music_map.emplace(id, music);
+}
+
+Mix_Chunk* Game::AssetManager::get_audio(std::string id){
     #ifdef DEBUG_MODE
-        check_map_id<std::string, Audio>(audio_map, id, "get_audio, audio_map");
+        check_map_id<std::string, Mix_Chunk*>(audio_map, id, "get_audio, audio_map");
     #endif
     return audio_map[id]; }
+
+Mix_Music* Game::AssetManager::get_music(std::string id){
+    #ifdef DEBUG_MODE
+        check_map_id<std::string, Mix_Music*>(music_map, id, "get_music, music_map");
+    #endif
+    return music_map[id]; }

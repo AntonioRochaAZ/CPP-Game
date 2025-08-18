@@ -8,6 +8,7 @@
 #include <Eigen/Dense>
 #include "ECS/ECS.hpp"
 #include "SDL_ttf.h"
+#include "SDL_mixer.h"
 
 /** This tuple is the return type of AssetManager::load_texture. It consists of the
 SDL_Texture pointer, the texture's width and its height, respectively. */
@@ -21,14 +22,6 @@ constexpr int NB_ANIM_DATA = 5; // Number of numeric animation data (thus exclud
 
 constexpr int window_width = 1200, window_height = 1000;
 constexpr bool fullscreen = false;
-
-struct Audio{
-    Uint8* buffer = nullptr;
-    Uint32 length = 0;
-    // Deallocation of the buffer is done by the asset manager
-    // TODO: eventuallly define a move constructor here so that the
-    // deallocation can also be done in the ~ Audio destructor
-};
 
 
 /** Game class definition, used for running the game and handling events. Most functions are
@@ -119,7 +112,8 @@ public:
         std::map< std::string, int > width_map;  ///< A map from strings (an ID) to the associated texture's width.
         std::map< std::string, int > height_map; ///< A map from strings (an ID) to the associated texture's height.
         std::map< std::string, TTF_Font* > font_map; ///< A map from strings (an ID) to font objects.
-        std::map< std::string, Audio > audio_map; ///< A map from strings (an ID) to Audio structs.
+        std::map< std::string, Mix_Chunk* > audio_map; ///< A map from strings (an ID) to SDL_Mixer Mix_Chunk pointers.
+        std::map< std::string, Mix_Music* > music_map; ///< A map from strings (an ID) to SDL_MIxer Mix_Music pointersr.
 
         AssetManager(){};
         ~AssetManager();    ///< Destroys all texture and font pointers. Defined in AssetManager.cpp.
@@ -155,12 +149,17 @@ public:
         SDL_AudioDeviceID m_audio_device;
         SDL_AudioSpec m_obtained_audio_spec;
         void add_audio(std::string id, std::string path);
-        Audio get_audio(std::string id);
+        void add_music(std::string id, std::string path);
+        Mix_Chunk* get_audio(std::string id);
+        Mix_Music* get_music(std::string id);
 
     };
 
     static AssetManager assets;   
         ///< The game's AssetManager instance, which handles textures and fonts.
+
+    static int audio_volume;
+    static int music_volume;
 };
 
 using Animation = Game::AssetManager::Animation;

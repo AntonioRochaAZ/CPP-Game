@@ -9,7 +9,7 @@ TempEntity::TempEntity(
     // Adding Components:
     addComponent<Transform>(position[0], position[1]);
     addComponent<Sprite>(sprite_name);
-
+    
     getComponent<Sprite>().set_animation(animation_name);
     getComponent<Sprite>().set_xscale(x_scale);
     getComponent<Sprite>().set_yscale(y_scale);

@@ -75,5 +75,7 @@ void Player::destroy(bool create_temp_entity){
             getComponent<Sprite>().get_xscale(), getComponent<Sprite>().get_yscale(),  
             getComponent<Sprite>().sprite_flip
         ));
+        // Play death audio:
+        Mix_PlayChannel(-1, Game::assets.get_audio("death"), 0);
     }
 }

@@ -66,7 +66,7 @@ void KeyboardPlayer::on_attack_b(){
             1, 
             1000, entity
         ));
-        const Audio& laser_sound = Game::assets.get_audio("laser");
-        int status = SDL_QueueAudio( Game::assets.m_audio_device, laser_sound.buffer, laser_sound.length );
+        // Play audio:
+        int status = Mix_PlayChannel( -1, Game::assets.get_audio("laser"), 0 );
     }
 }
