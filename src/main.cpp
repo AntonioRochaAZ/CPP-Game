@@ -23,6 +23,7 @@ int main(int argc, const char* argv[]) {
     Uint64 frame_start;                 //
     int frame_time;                     //
 
+
     /* Trying parallelism.
     #pragma omp parallel for
     for(int i = 0; i < 10; i++){
@@ -30,8 +31,7 @@ int main(int argc, const char* argv[]) {
     }*/
     
     Game game;
-    // TODO: Segmentation fault when clicking the executable comes from game->init instruction below:
-    game.init("Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, window_width, window_height, fullscreen);
+    game.init("Game");
     while (game.running()){
 
         frame_start = SDL_GetTicks64(); // How much time (in ms) since we started SDL.

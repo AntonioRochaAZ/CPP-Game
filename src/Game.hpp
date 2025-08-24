@@ -20,9 +20,11 @@ struct Collider; // Forward declaration of the Collider class (otherwise, circul
 
 constexpr int NB_ANIM_DATA = 5; // Number of numeric animation data (thus excluding animation name) stored in _animation.txt files 
 
-constexpr int window_width = 1200, window_height = 1000;
-constexpr bool fullscreen = false;
-
+// The following window information is defined in Game.cpp
+extern const float window_aspect_ratio;
+extern const int  initial_window_height;
+extern const int  initial_window_width;
+extern const bool fullscreen;
 
 /** Game class definition, used for running the game and handling events. Most functions are
 defined in Game.cpp. */
@@ -30,7 +32,6 @@ class Game {
 private:
     bool is_running;            ///< Whether the game is still running or it can be closed.
     int update_counter = 0;     ///< A tick counter (I believe it is deprecated TODO: REMOVE?)
-    SDL_Window* window;         ///< The SDL window where the game is displayed.
     vec previous_camera_position = vec(0.0,0.0);    
         ///< Previous camera position (for updating).    
     std::weak_ptr<Entity> camera_ref_entity; 
@@ -44,7 +45,7 @@ public:
     Game();
     ~Game();
 
-    int init(const char* title, int x, int y, int width, int height, bool fullscreen);
+    int init(const char* title);
         ///< Initialization of SDL, the game screen and initial renderings.
     void handle_events();   ///< Handling inputs and events.
     void update();          ///< Go through our game objects and update them.
@@ -55,6 +56,7 @@ public:
         ///< each tick, to determine whether to finish execution or not.
 
     // static void add_tile(int x, int y, int w, int h, int id, std::string name);
+    static SDL_Window* m_window;         ///< The SDL window where the game is displayed.
     static SDL_Renderer* renderer;  ///< Renderer object responsible for rendering objects.
     static SDL_Event event;         ///< Event object used in event handling. 
     static std::vector<Collider*> collider_vector;  ///< Vector of collider objects for checking collision.
