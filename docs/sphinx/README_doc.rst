@@ -82,8 +82,10 @@ cmake configuration for Windows is currently being worked on.
 The `Eigen3 library <https://eigen.tuxfamily.org/index.php?title=Main_Page>`_ is
 used for handling vectors.
 
-As in the tutorial, the `SDL2 library <https://www.libsdl.org/>`_ and the SDL2_ttf
-libraries are used. The tutorial also uses SDL_image, but I have circumvented this
+The `SDL2 library <https://www.libsdl.org/>`_ is used for rendering. On top of it,
+SDL_ttf and SDL_Mixer libraries are used for handling fonts and audio files, respectively.
+
+The tutorial mentioned prior also uses SDL_image, but I have circumvented this
 need by only using bitmap (.bmp) files. This may change in the future.
 
 On MacOS, these libraries can easily be installed with `homebrew package manager <https://brew.sh/>`_,
