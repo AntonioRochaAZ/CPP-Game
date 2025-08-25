@@ -162,10 +162,10 @@ int Game::AssetManager::get_text_center_position(
     TTF_Font *font = get_font(id);
     int ret_val = TTF_SizeUTF8(font, text, w, h);
     std::cout << *w << " " << *h << std::endl;
-    int window_width, window_height;
-    SDL_GetWindowSize(Game::m_window, &window_width, &window_height);
-    *w = (window_width  + w0 - *w)/2;
-    *h = (window_height + h0 - *h)/2;
+    // int window_width, window_height;
+    // SDL_GetWindowSize(Game::m_window, &window_width, &window_height);
+    *w = (MAX_WIDTH  + w0 - *w)/2;
+    *h = (MAX_HEIGHT + h0 - *h)/2;
     return ret_val;
 }
 

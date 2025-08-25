@@ -9,10 +9,17 @@
 #include "ECS/Components/CustomControllers.hpp"
 
 // Definition of window options:
-constexpr float window_aspect_ratio = 16.0/9.0;
-constexpr int  initial_window_height = 400;
-constexpr int  initial_window_width = window_aspect_ratio * initial_window_height;
 constexpr bool fullscreen = false;
+// constexpr float WINDOW_ASPECT_RATIO = 16.0/9.0;
+constexpr float WINDOW_ASPECT_RATIO = 12.0/10.0;
+constexpr int   INITIAL_WINDOW_HEIGHT = 1200;
+constexpr int   INITIAL_WINDOW_WIDTH = WINDOW_ASPECT_RATIO * INITIAL_WINDOW_HEIGHT;
+constexpr int MAX_HEIGHT = 10 * 100; ///< Max. height in render units.
+constexpr int MAX_WIDTH  = WINDOW_ASPECT_RATIO * MAX_HEIGHT; ///< Max. width in render units.
+int m_real_w_height = INITIAL_WINDOW_HEIGHT;
+int m_real_w_width = INITIAL_WINDOW_WIDTH;
+float m_y_pos_shift = 0;
+float m_x_pos_shift = 0;
 
 // From KeyboardController.hpp:
 std::map<int, KeyBind> global_key_bind_map;
@@ -26,9 +33,8 @@ SDL_Window* Game::m_window = nullptr;
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
 std::vector<Collider*> Game::collider_vector;
-bool Game::tracking_player = false;
 Game::AssetManager Game::assets = Game::AssetManager();
-vec Game::camera_position = vec(0.0, 0.0);
+Camera Game::m_camera;
 
 std::shared_ptr<Entity> message = manager.addEntity("Message");
 std::shared_ptr<Entity> Game::cursor = manager.addEntity("CURSOR"); // DO NOT CHANGE THIS NAME OR DELETE THIS ENTITY
@@ -100,7 +106,7 @@ int Game::init(const char* title){
 
     // Define m_window pointer: Title, x, y, width, height, window_flags
     m_window = SDL_CreateWindow(
-        title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, initial_window_width, initial_window_height,
+        title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, INITIAL_WINDOW_WIDTH, INITIAL_WINDOW_HEIGHT,
         window_flags
     );
 
@@ -232,25 +238,7 @@ void Game::handle_events(){
             KeyBind pressed_key = global_key_bind_map[event.key.keysym.sym];
             switch (pressed_key){
                 case KeyBind::CAMERA_TOGGLE:
-                    if (Game::tracking_player){
-                        // This condition must be met, otherwise
-                        // will have a bug where neither the map not
-                        // the player doesn't move
-                        Game::tracking_player = false;
-                    }else{
-                        Game::tracking_player = true;
-                        // Get current reference camera and entity positions (will be update next):
-                        previous_camera_position = camera_position;
-
-                        // Deal with camera_ref_entity if the reference entity has died:
-                        if (camera_ref_entity.expired()){
-                            update_camera_ref_entity();
-                        }
-                        // If it isn't anymore, update position.
-                        if (!camera_ref_entity.expired()){ 
-                            previous_ref_entity_position = camera_ref_entity.lock()->getComponent<Transform>().position;
-                        }
-                    }
+                    Game::m_camera.toggle_follow_player();
                     break;
                 case KeyBind::RESET:
                     // Reset players:
@@ -264,7 +252,7 @@ void Game::handle_events(){
                     manager.refresh();
                     init_players();
                     // Reset camera position:
-                    camera_position = vec(0,0);
+                    Game::m_camera.m_pos = vec(0,0);
                     message->getComponent<UILabel>().set_text("", "custom_font1px");
                     break;
                 case KeyBind::QUIT:
@@ -293,12 +281,7 @@ void Game::handle_events(){
         case SDL_WINDOWEVENT:
             switch (event.window.event){
             case SDL_WINDOWEVENT_SIZE_CHANGED:
-                int w_width, w_height;
-                SDL_GetWindowSize(m_window, &w_width, &w_height);
-                #ifdef DEBUG_MODE
-                    Mix_PlayChannel(-1, Game::assets.get_audio("death"), 0);
-                    std::cout << "New window size: " << w_width << " " << w_height << std::endl;
-                #endif
+                Game::m_camera.window_update();
                 break;
             default:
                 #ifdef DEBUG_MODE
@@ -325,24 +308,8 @@ void Game::update(){
     manager.refresh();
         //< In case entities have died after collisions and we don't want
         //< to render them etc.
-
-    // Updating camera position:
-    if (tracking_player){ 
-        if (camera_ref_entity.expired()){ update_camera_ref_entity(); }
-        // If it isn't nullptr:
-        if (!camera_ref_entity.expired()){
-            // Getting new position:
-            vec new_ref_entity_position = camera_ref_entity.lock()->getComponent<Transform>().position;
-            // Updating camera position:
-            camera_position = previous_camera_position + \
-                (new_ref_entity_position - previous_ref_entity_position);
-
-            // Updating previous camera position:
-            previous_camera_position = camera_position;
-            // Updating ref_entity_position:k
-            previous_ref_entity_position = new_ref_entity_position;
-        }
-    }
+    
+    m_camera.update_pos();
 
     if (manager.grouped_entities[PLAYER_GROUP].size() == 1){
         // Only one player left: add a message telling the players to reset.
@@ -386,24 +353,3 @@ void Game::clean(){
     is_running = false; //Just in case
     //delete tile_map;
 };
-
-
-void Game::update_camera_ref_entity(){
-    // Try to get a new player as the reference entity:
-    if (manager.grouped_entities[PLAYER_GROUP].size() != 0){
-        // I think here this won't work: we would need to reach out for the
-        // regular shared pointer in the manager's entity vector.
-        Entity*& player_ptr =  manager.grouped_entities[PLAYER_GROUP][0];
-        std::shared_ptr<Entity> found_ptr;
-        for (std::shared_ptr<Entity> sh_ptr : manager.entity_vector){
-            if (sh_ptr.get() == player_ptr){
-                found_ptr = sh_ptr;
-                break;
-            }
-        }
-        camera_ref_entity = found_ptr;
-
-    }else{
-        Game::tracking_player = false;
-    }
-}
