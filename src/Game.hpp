@@ -20,9 +20,38 @@ struct Collider; // Forward declaration of the Collider class (otherwise, circul
 
 constexpr int NB_ANIM_DATA = 5; // Number of numeric animation data (thus excluding animation name) stored in _animation.txt files 
 
-constexpr int window_width = 1200, window_height = 1000;
-constexpr bool fullscreen = false;
+// The following window information is defined in Game.cpp
+extern const float WINDOW_ASPECT_RATIO;
+extern const int  INITIAL_WINDOW_HEIGHT;
+extern const int  INITIAL_WINDOW_WIDTH;
+extern const bool fullscreen;
+extern const int MAX_HEIGHT;
+extern const int MAX_WIDTH;
 
+extern Manager manager;
+
+/// Could eventually be an entity with Transform and Collider components, so we could change its position, speed, etc. and also check when things are inside the camera's scope or not.
+struct Camera {
+    
+    // Basic position info:
+    vec m_pos = vec(0.0, 0.0);     ///< Where the camera is positioned (top-left of the screen).
+    vec m_previous_pos = vec(0.0, 0.0); ///< Previous camera position (for updating).    
+    void update_pos();
+
+    // Scaling information:
+    float m_scale_factor = 1;           ///< For scaling textures up and down when window size changes.
+    vec   m_pos_shift = vec(0.0, 0.0);  ///< For shifting textures when window size changes (when trying to keeping something centred)
+    void window_update(); // Documentation in Camera.cpp.
+    SDL_Rect get_render_rect(SDL_Rect dst_rect); // Documentation in Camera.cpp
+
+    // Player tracking related:
+    bool m_tracking_player = false;            ///< Whether the camera should follow the player or not.
+    std::weak_ptr<Entity> m_ref_entity;               ///< The entity we are following with the camera.
+    vec m_previous_ref_entity_pos = vec(0.0, 0.0);    ///< Previous position of the reference entity (for updating). 
+    void toggle_follow_player();                ///< Goes from not following player to following player and vice-versa.
+    void update_ref_entity();                   ///< For dealing with the camera reference entity if it is destroyed.
+
+};
 
 /** Game class definition, used for running the game and handling events. Most functions are
 defined in Game.cpp. */
@@ -30,21 +59,12 @@ class Game {
 private:
     bool is_running;            ///< Whether the game is still running or it can be closed.
     int update_counter = 0;     ///< A tick counter (I believe it is deprecated TODO: REMOVE?)
-    SDL_Window* window;         ///< The SDL window where the game is displayed.
-    vec previous_camera_position = vec(0.0,0.0);    
-        ///< Previous camera position (for updating).    
-    std::weak_ptr<Entity> camera_ref_entity; 
-        ///< The entity we are following with the camera.  
-    vec previous_ref_entity_position = vec(0.0,0.0);    
-        ///< Previous position of the reference entity (for updating).  
-    void update_camera_ref_entity();
-        ///< For dealing with the camera reference entity if it is destroyed.
 
 public:
     Game();
     ~Game();
 
-    int init(const char* title, int x, int y, int width, int height, bool fullscreen);
+    int init(const char* title);
         ///< Initialization of SDL, the game screen and initial renderings.
     void handle_events();   ///< Handling inputs and events.
     void update();          ///< Go through our game objects and update them.
@@ -55,13 +75,10 @@ public:
         ///< each tick, to determine whether to finish execution or not.
 
     // static void add_tile(int x, int y, int w, int h, int id, std::string name);
+    static SDL_Window* m_window;         ///< The SDL window where the game is displayed.
     static SDL_Renderer* renderer;  ///< Renderer object responsible for rendering objects.
     static SDL_Event event;         ///< Event object used in event handling. 
     static std::vector<Collider*> collider_vector;  ///< Vector of collider objects for checking collision.
-    
-    static bool tracking_player;    ///< Whether the camera should follow the player or not.
-    static vec camera_position;        
-        ///< Where the camera is positioned (top-left of the screen).
     static std::shared_ptr<Entity> cursor;
 
 
@@ -160,6 +177,7 @@ public:
 
     static int audio_volume;
     static int music_volume;
+    static Camera m_camera;
 };
 
 using Animation = Game::AssetManager::Animation;

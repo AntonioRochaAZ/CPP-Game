@@ -9,7 +9,6 @@
     // This last include is necessary to use the TexTup typedef,
     // and will be used in Sprite.cpp when we call Game::renderer.
 
-
 /** 
     NOTE: dst_rect's position is SET in the update method,
     according to the Transform object. To change it,

@@ -71,8 +71,6 @@ void Sprite::update(){
 }
 
 void Sprite::render(){
-    dst_rect.x -= Game::camera_position[0]; // Updating position according to camera.
-    dst_rect.y -= Game::camera_position[1];
     if (sprite_flip == SDL_FLIP_HORIZONTAL && animated){   // In this case we must fix the starting position
         dst_rect.x += (shift[0] - get_xscale()*animation_map.find(current_animation)->second.m_flip_shift); // Updating position according to shift.
         dst_rect.y += shift[1];
@@ -89,6 +87,10 @@ void Sprite::render(){
         |   (entity->has_component<Hurting>()  ? HURTING_BIT: 0);
 
     Cooldown *state; std::array<int, 3> colour_mask; int alpha_mask;
+
+    // Correcting rendering position and size:
+    SDL_Rect render_rect = Game::m_camera.get_render_rect(dst_rect);
+    
     switch(bit_result){
     case (SPAWNING_BIT):
     case (SPAWNING_BIT + HURTING_BIT): // Spawning prioritized over hurting.
@@ -104,7 +106,7 @@ void Sprite::render(){
         SDL_SetTextureColorMod(texture, colour_mask[0], colour_mask[1], colour_mask[2]);
         SDL_SetTextureAlphaMod(texture, alpha_mask);
         // Actual rendering:
-        SDL_RenderCopyEx(Game::renderer, texture, &src_rect, &dst_rect, 0.0, NULL, sprite_flip);
+        SDL_RenderCopyEx(Game::renderer, texture, &src_rect, &render_rect, 0.0, NULL, sprite_flip);
         // Resetting masks:
         SDL_SetTextureColorMod(texture, 255, 255, 255);    // Getting texture back to original colour.
         SDL_SetTextureAlphaMod(texture, 255);
@@ -112,7 +114,7 @@ void Sprite::render(){
     default:   // 00: None of the others:
     render_default:
         // Actual rendering:
-        SDL_RenderCopyEx(Game::renderer, texture, &src_rect, &dst_rect, 0.0, NULL, sprite_flip);
+        SDL_RenderCopyEx(Game::renderer, texture, &src_rect, &render_rect, 0.0, NULL, sprite_flip);
         break;
     }
 }
