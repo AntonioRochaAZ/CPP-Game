@@ -8,6 +8,7 @@ DEBUG_DIR = debug
 RELEASE_DIR = release
 EXE_NAME = game
 LOG_FILE = build.log
+SPHINX_PATH = /opt/miniconda3/envs/documentation/bin/sphinx-build	# Change this to your liking. In doubt, just use "sphinx-build".
 # (Documentation related):
 DOC_DIR = docs
 MAKEFILE_DIR = $(CURDIR)
@@ -43,7 +44,7 @@ clean:
 
 documentation:
 	cd $(DOXYGEN_FOLDER); Doxygen; cd $(MAKEFILE_DIR)	# For some reason, it would not work properly without moving into the correct folder
-	sphinx-build -b html $(SPHINX_FOLDER) $(SPHINX_FOLDER)/_build/html
+	$(SPHINX_PATH) -b html $(SPHINX_FOLDER) $(SPHINX_FOLDER)/_build/html
 
 $(BUILD_DIR)/$(RELEASE_DIR)/$(EXE_NAME): $(OBJS_RELEASE)
 	@echo "" >> $(BUILD_DIR)/$(RELEASE_DIR)/$(LOG_FILE)

@@ -6,6 +6,10 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
+import sys, os
+import breathe
+sys.path.append(os.path.dirname(breathe.__file__))
+
 project = 'CPP Game'
 copyright = '2024, Antonio ROCHA'
 author = 'Antonio ROCHA'
@@ -16,7 +20,7 @@ release = '2024'
 
 extensions = [
     "breathe", 'sphinx.ext.autodoc', 'sphinx.ext.napoleon', 'sphinx.ext.autosectionlabel', 
-    'nbsphinx', 'sphinx.ext.viewcode', 'nbsphinx_link', "sphinx.ext.imgmath"
+    'sphinx.ext.viewcode', "sphinx.ext.imgmath"
 ]
 
 templates_path = ['_templates']
