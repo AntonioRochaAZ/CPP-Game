@@ -172,7 +172,7 @@ class Manager{
             ///< ownership, though.
         std::array< std::vector<Entity*>, max_groups > grouped_entities; 
             ///< Array of vectors for each group.
-    
+        
         // ENTITY ADDITION:--------------------------------------------------------------
         /// Function for adding an entity to the \ref Manager::entity_vector "entity_vector"
         /// by creating a new pointer.

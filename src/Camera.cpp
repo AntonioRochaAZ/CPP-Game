@@ -2,6 +2,9 @@
 #include "ECS/Components.hpp"
     
 
+// The following window information is defined in Game.cpp
+extern Manager manager;
+
 /**
  *   Update scaling and shifting information when window size changes.
  */

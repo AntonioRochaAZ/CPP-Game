@@ -28,7 +28,7 @@ extern const bool fullscreen;
 extern const int MAX_HEIGHT;
 extern const int MAX_WIDTH;
 
-extern Manager manager;
+// extern Manager manager;
 
 /// Could eventually be an entity with Transform and Collider components, so we could change its position, speed, etc. and also check when things are inside the camera's scope or not.
 struct Camera {
